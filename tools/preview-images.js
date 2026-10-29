@@ -53,8 +53,8 @@ const CARDS = {
     figure: () => document.getElementById('ob_sch').outerHTML + document.getElementById('ob_fig').outerHTML
   },
   'prandtl-meyer-expansion': {
-    dir: 'calculators', eyebrow: 'MAE 3293 · Calculator', title: 'Prandtl–Meyer Expansion Calculator',
-    blurb: 'M₂ and the pressure, density and temperature ratios across an expansion fan, and ν and μ in place of Appendix C.',
+    dir: 'calculators', eyebrow: 'MAE 3293 · Calculator', title: 'Prandtl–Meyer Function Calculator',
+    blurb: 'ν and μ in place of Appendix C, and M₂ with the pressure, density and temperature ratios for an expansion or an isentropic compression.',
     cols: '420px 1fr',
     setup: async p => {},
     figure: () => document.getElementById('pm_sch').outerHTML

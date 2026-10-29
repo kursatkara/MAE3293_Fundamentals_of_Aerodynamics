@@ -42,9 +42,10 @@
   "calculators": [
     {
       "slug": "isentropic-flow",
+      "eyebrow": "Appendix A · Isentropic flow",
       "title": "Isentropic Flow",
       "scripts": ["core.js", "quasi1d.js", "helpers.js", "kit.js"],
-      "summary": "Mach number, the total-to-static ratios p<sub>0</sub>/p, ρ<sub>0</sub>/ρ and T<sub>0</sub>/T, and the area ratio A/A*, from any one of them (Appendix A).",
+      "summary": "Mach number, the total-to-static ratios p<sub>0</sub>/p, ρ<sub>0</sub>/ρ and T<sub>0</sub>/T, and the area ratio A/A*, from any one of them.",
       "description": "Isentropic-flow calculator for a calorically perfect gas: enter the Mach number, a total-to-static pressure, density or temperature ratio, or the area ratio A/A* (subsonic or supersonic branch) and read the rest, in place of Anderson's Appendix A. MAE 3293, Oklahoma State University.",
       "image_alt": "Isentropic-flow ratios p/p0, rho/rho0, T/T0 and A*/A versus Mach number, with the selected Mach number marked",
       "lessons": [
@@ -55,9 +56,10 @@
     },
     {
       "slug": "normal-shock",
+      "eyebrow": "Appendix B · Normal shock",
       "title": "Normal Shock",
       "scripts": ["core.js", "quasi1d.js", "helpers.js", "kit.js"],
-      "summary": "Downstream Mach number and the pressure, density, temperature and total-pressure ratios across a normal shock, including the Pitot ratio (Appendix B).",
+      "summary": "Downstream Mach number and the pressure, density, temperature and total-pressure ratios across a normal shock, including the Pitot ratio.",
       "description": "Normal-shock calculator for a calorically perfect gas: enter the upstream or downstream Mach number, the pressure, density, temperature or total-pressure ratio, or the Pitot ratio and read the rest, in place of Anderson's Appendix B. MAE 3293, Oklahoma State University.",
       "image_alt": "Stationary normal shock with the upstream and downstream Mach numbers and velocity arrows scaled by the density ratio",
       "lessons": [
@@ -68,6 +70,7 @@
     },
     {
       "slug": "oblique-shock",
+      "eyebrow": "Chapter 9 · Oblique shocks",
       "title": "Oblique Shock",
       "scripts": ["core.js", "helpers.js", "kit.js"],
       "summary": "The θ–β–M relation: any two of Mach number, deflection angle and wave angle give the third, with the property ratios across the shock.",
@@ -81,10 +84,11 @@
     },
     {
       "slug": "prandtl-meyer-expansion",
-      "title": "Prandtl–Meyer Expansion",
+      "eyebrow": "Appendix C · Prandtl–Meyer function",
+      "title": "Prandtl–Meyer Function",
       "scripts": ["core.js", "helpers.js", "kit.js"],
-      "summary": "Prandtl–Meyer function, Mach angle, and the flow downstream of an expansion fan turning through a given angle (Appendix C).",
-      "description": "Prandtl-Meyer expansion calculator for a calorically perfect gas: the downstream Mach number and pressure, density and temperature ratios for a turn through a given angle, the turn needed to reach a given Mach number, and the Prandtl-Meyer function and Mach angle for one Mach number, in place of Anderson's Appendix C. MAE 3293, Oklahoma State University.",
+      "summary": "The Prandtl–Meyer function and Mach angle for one Mach number, and the flow after an expansion around a convex corner or a gradual isentropic compression.",
+      "description": "Prandtl-Meyer function calculator for a calorically perfect gas: the Prandtl-Meyer function and Mach angle for one Mach number in place of Anderson's Appendix C, and the downstream Mach number and pressure, density and temperature ratios for an expansion around a convex corner or a gradual isentropic compression through a given angle. MAE 3293, Oklahoma State University.",
       "image_alt": "Convex corner drawn to scale with a centered Prandtl-Meyer expansion fan and a streamline turning through it",
       "lessons": [
         ["oblique-shock-expansion-waves", "prandtl-meyer", "Chapter 9, Prandtl–Meyer expansion waves"],
@@ -93,6 +97,7 @@
     },
     {
       "slug": "supersonic-airfoils",
+      "eyebrow": "Chapter 9 · Shock-expansion theory",
       "title": "Supersonic Airfoils",
       "scripts": ["core.js", "helpers.js"],
       "summary": "Shock-expansion theory for flat-plate, wedge and diamond airfoils, compared with linear theory: surface pressures, lift, wave drag and moment.",

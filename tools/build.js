@@ -119,7 +119,7 @@ function homePage() {
                    home: 'https://www.kursatkara.com/#teaching', home_label: 'Course instructor' });
   // Calculators: one card per tool, each with its own sketch (src/thumbs/<slug>.svg)
   const calculators = course.calculators.map(C => fill(rd('src/templates/calc-card.html'),
-    { slug: C.slug, title: C.title, summary: C.summary, url: calcURL(C).replace(course.base, ''),
+    { slug: C.slug, title: C.title, summary: C.summary, eyebrow: C.eyebrow, url: calcURL(C).replace(course.base, ''),
       thumb: rd('src/thumbs/' + C.slug + '.svg').trim() }).trimEnd()).join('\n');
   html += fill(rd('src/templates/home.html'), { chapters, calculators, repo: course.repo }) + footer();
   return html + pageScript(rd('src/shared/theme.js'));
