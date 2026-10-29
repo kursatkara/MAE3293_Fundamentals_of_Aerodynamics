@@ -52,6 +52,13 @@ const CARDS = {
     setup: async p => {},
     figure: () => document.getElementById('ob_sch').outerHTML + document.getElementById('ob_fig').outerHTML
   },
+  'prandtl-meyer-expansion': {
+    dir: 'calculators', eyebrow: 'MAE 3293 · Calculator', title: 'Prandtl–Meyer Expansion Calculator',
+    blurb: 'M₂ and the pressure, density and temperature ratios across an expansion fan, and ν and μ in place of Appendix C.',
+    cols: '420px 1fr',
+    setup: async p => {},
+    figure: () => document.getElementById('pm_sch').outerHTML
+  },
   'nozzles-diffusers-wind-tunnels': {
     blurb: 'Area–Mach relation, choked flow, and normal shocks in a converging-diverging nozzle, computed live.',
     cols: '400px 1fr',
