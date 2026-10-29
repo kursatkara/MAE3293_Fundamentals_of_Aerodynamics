@@ -70,8 +70,15 @@
     {
       "slug": "oblique-shock",
       "title": "Oblique Shock",
-      "legacy": "https://kursatkara.github.io/MAE3293-Compressible-Aerodynamics-Calculator/#oblique-shock",
-      "summary": "The θ–β–M relation: any two of Mach number, deflection angle and wave angle give the third, with the property ratios across the shock."
+      "scripts": ["core.js", "helpers.js", "kit.js"],
+      "summary": "The θ–β–M relation: any two of Mach number, deflection angle and wave angle give the third, with the property ratios across the shock.",
+      "description": "Oblique-shock calculator for a calorically perfect gas: any two of the upstream Mach number, the deflection angle and the wave angle give the third from the theta-beta-M relation, weak or strong solution, with the normal Mach numbers, M2, the pressure, density, temperature and total-pressure ratios, and theta-max. MAE 3293, Oklahoma State University.",
+      "image_alt": "Compression corner drawn to scale with the oblique shock at the wave angle beta, and the theta-beta curve for the upstream Mach number",
+      "lessons": [
+        ["oblique-shock-expansion-waves", "relations", "Chapter 9, oblique shock relations"],
+        ["oblique-shock-expansion-waves", "theta-beta-m", "Chapter 9, the θ–β–M relation"],
+        ["oblique-shock-expansion-waves", "shock-examples", "Chapter 9, worked examples 9.2–9.5"]
+      ]
     },
     {
       "slug": "prandtl-meyer-expansion",

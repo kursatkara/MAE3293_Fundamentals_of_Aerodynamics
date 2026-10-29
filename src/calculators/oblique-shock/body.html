@@ -1,0 +1,48 @@
+  <p class="lede">Oblique shock in a calorically perfect gas. The θ–β–M relation ties the upstream Mach number, the flow deflection angle θ and the wave angle β: give any two and the third follows, together with the property ratios across the shock, which depend only on the normal Mach number M<sub>n,1</sub> = M<sub>1</sub> sin β. The γ in the top bar applies to every value on the page.</p>
+
+      <section class="sec" id="calc" aria-labelledby="h-calc">
+        <div class="sechead"><p class="eyebrow">Section 9.2 · Oblique shock relations</p><h2 id="h-calc">Calculator</h2></div>
+        <div class="lab" id="ob">
+          <div class="labhead"><span class="eyebrow">Enter two of M<sub>1</sub>, θ and β</span><span class="note" id="ob_short"></span></div>
+          <aside class="rail" aria-label="Oblique-shock inputs">
+            <div class="ctl"><label for="ob_mode">Solve for</label><select id="ob_mode">
+              <option value="b">β, from M₁ and θ</option>
+              <option value="t">θ, from M₁ and β</option>
+              <option value="M">M₁, from θ and β</option></select></div>
+            <div class="ctl"><label for="ob_M">Upstream Mach number, M₁</label><div class="row"><input type="number" id="ob_M" step="any" value="2" style="width:100%"></div></div>
+            <div class="ctl"><label for="ob_th">Deflection angle, θ <small>deg</small></label><div class="row"><input type="number" id="ob_th" step="any" value="10" style="width:100%"></div></div>
+            <div class="ctl"><label for="ob_b">Wave angle, β <small>deg</small></label><div class="row"><input type="number" id="ob_b" step="any" value="" style="width:100%"></div></div>
+            <div class="ctl" id="ob_brbox"><label for="ob_br">Shock solution</label><select id="ob_br"><option value="weak">Weak (the one usually seen)</option><option value="strong">Strong</option></select></div>
+            <p class="note" id="ob_note"></p>
+            <div class="sep"></div>
+            <span class="lbl">Try</span>
+            <div class="presets" id="ob_pre" style="flex-direction:column"></div>
+          </aside>
+          <div class="labmain">
+            <div id="ob_msg"></div>
+            <div class="fig"><svg id="ob_sch" viewBox="0 0 760 250" role="img" aria-label="Compression corner drawn to scale: the wall turns through the deflection angle theta and the oblique shock leaves the corner at the wave angle beta"></svg></div>
+            <div class="tblwrap"><table id="ob_tab"></table></div>
+            <div class="fig"><svg id="ob_fig" viewBox="0 0 760 330" role="img" aria-label="Wave angle beta versus deflection angle theta for the current upstream Mach number, weak branch solid and strong branch dashed, with the maximum deflection and the current solution marked"></svg></div>
+            <div class="legend"><span><i class="sw" style="border-color:var(--comp)"></i>weak branch</span><span><i class="sw" style="border-color:var(--comp);border-top-style:dashed"></i>strong branch</span><span><i class="sw" style="border-color:var(--mach);border-top-style:dashed"></i>θ<sub>max</sub></span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec" id="relations" aria-labelledby="h-rel">
+        <div class="sechead"><p class="eyebrow">Reference</p><h2 id="h-rel">Relations used</h2></div>
+        <div class="cols2">
+          <div class="prose">
+            <h3>The θ–β–M relation</h3>
+            <div class="eq">\[ \tan\theta = 2\cot\beta\;\frac{M_1^2\sin^2\beta-1}{M_1^2\left(\gamma+\cos2\beta\right)+2} \tag{9.23} \]</div>
+            <p>For a given M<sub>1</sub>, θ rises from 0 at the Mach angle μ = sin<sup>−1</sup>(1/M<sub>1</sub>) to a maximum θ<sub>max</sub> and falls back to 0 at β = 90°, the normal shock. Every θ &lt; θ<sub>max</sub> therefore has two solutions: the weak one (smaller β, usually observed on wedges and corners) and the strong one. For θ &gt; θ<sub>max</sub> no attached shock exists and the shock detaches. The calculator finds β, or M<sub>1</sub>, by bisection on (9.23).</p>
+          </div>
+          <div class="prose">
+            <h3>Across the shock</h3>
+            <div class="eq">\[ M_{n,1}=M_1\sin\beta \tag{9.13} \]</div>
+            <div class="eq">\[ M_{n,2}^2=\frac{1+\frac{\gamma-1}{2}M_{n,1}^2}{\gamma M_{n,1}^2-\frac{\gamma-1}{2}} \tag{9.14} \]</div>
+            <div class="eq">\[ \frac{\rho_2}{\rho_1}=\frac{(\gamma+1)M_{n,1}^2}{2+(\gamma-1)M_{n,1}^2},\qquad \frac{p_2}{p_1}=1+\frac{2\gamma}{\gamma+1}\left(M_{n,1}^2-1\right) \]</div>
+            <div class="eq">\[ \frac{T_2}{T_1}=\frac{p_2}{p_1}\,\frac{\rho_1}{\rho_2},\qquad M_2=\frac{M_{n,2}}{\sin(\beta-\theta)} \tag{9.18} \]</div>
+            <p>These are the normal-shock relations (9.15)–(9.17) applied to M<sub>n,1</sub>; the tangential velocity is unchanged across the shock.</p>
+          </div>
+        </div>
+      </section>
