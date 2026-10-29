@@ -4,10 +4,19 @@
   "calculator": "https://kursatkara.github.io/MAE3293-Compressible-Aerodynamics-Calculator/",
   "lessons": [
     {
+      "slug": "compressible-flow-preliminaries",
+      "chapter": 7,
+      "title": "Compressible Flow: Preliminary Aspects",
+      "scripts": ["core.js", "quasi1d.js", "atmosphere.js", "helpers.js", "kit.js"],
+      "summary": "The thermodynamics of a calorically perfect gas, the first and second laws, entropy and the isentropic relations, compressibility and when a flow must be treated as compressible, the governing equations, and total (stagnation) conditions.",
+      "description": "Interactive lesson on the preliminaries of compressible flow: perfect-gas thermodynamics, the first and second laws, entropy and isentropic relations on a T-s diagram, compressibility, the governing equations for inviscid compressible flow, and total conditions, with why Bernoulli's equation fails at high speed. MAE 3293, Oklahoma State University.",
+      "image_alt": "Total-to-static pressure ratio versus Mach number from the isentropic relation and from Bernoulli's equation, with the total enthalpy split into static enthalpy and kinetic energy"
+    },
+    {
       "slug": "normal-shock-waves",
       "chapter": 8,
       "title": "Normal Shock Waves",
-      "scripts": ["core.js", "quasi1d.js", "atmosphere.js", "helpers.js"],
+      "scripts": ["core.js", "quasi1d.js", "atmosphere.js", "helpers.js", "kit.js"],
       "summary": "The speed of sound, total and sonic reference conditions, and the characteristic Mach number; the normal-shock relations, the entropy rise and total-pressure loss across a shock, and the Pitot tube in subsonic and supersonic flow.",
       "description": "Interactive lesson on normal shock waves: the speed of sound, total and sonic conditions, the characteristic Mach number, the normal-shock relations and Prandtl relation, entropy and total-pressure loss across a shock, and Pitot-tube measurements in subsonic and supersonic flow. MAE 3293, Oklahoma State University.",
       "image_alt": "Normal-shock property ratios versus upstream Mach number, with a stationary normal shock and the velocities ahead of and behind it"

@@ -12,6 +12,12 @@ const ROOT = path.resolve(__dirname, '..');
 const course = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/course.json'), 'utf8'));
 
 const CARDS = {
+  'compressible-flow-preliminaries': {
+    blurb: 'Perfect-gas thermodynamics, entropy, compressibility, and total conditions, computed live.',
+    cols: '420px 1fr',
+    setup: async p => {},
+    figure: () => document.getElementById('tc_fig').outerHTML
+  },
   'normal-shock-waves': {
     blurb: 'Speed of sound, total and sonic conditions, the normal-shock relations, entropy, and the Pitot tube, computed live.',
     cols: '400px 1fr',
