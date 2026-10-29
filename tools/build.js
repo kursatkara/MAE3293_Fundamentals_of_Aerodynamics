@@ -85,7 +85,7 @@ function calcPage(C) {
                     image: course.base + 'assets/' + C.slug + '-preview.png', image_alt: C.image_alt,
                     // optional page-only styles, appended after the shared stylesheet
                     style: fs.existsSync(path.join(ROOT, dir, 'style.css')) ? STYLE + '\n' + rd(dir + 'style.css').trimEnd() : STYLE });
-  html += header({ eyebrow: 'MAE 3293 · Fundamentals of Aerodynamics · Calculator', h1: C.title + ' Calculator',
+  html += header({ eyebrow: 'MAE 3293 · Fundamentals of Aerodynamics · Calculator', h1: C.title,   /* the eyebrow already says Calculator; a short h1 keeps the controls on one row */
                    gamma: GAMMA, home: course.base });
   html += calcNav(C) + rd(dir + 'body.html');
   if (C.lessons && C.lessons.length) {
