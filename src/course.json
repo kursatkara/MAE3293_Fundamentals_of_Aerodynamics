@@ -1,7 +1,6 @@
 {
   "base": "https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/",
   "repo": "https://github.com/kursatkara/MAE3293_Fundamentals_of_Aerodynamics",
-  "calculator": "https://kursatkara.github.io/MAE3293-Compressible-Aerodynamics-Calculator/",
   "lessons": [
     {
       "slug": "compressible-flow-preliminaries",
