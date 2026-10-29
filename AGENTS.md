@@ -36,7 +36,10 @@ Instructions for people and AI agents (Claude Code, Codex) editing this reposito
    (Appendix tables)", which `src/shared/lesson.js` adds above every table with a hand column; pass `def` true only for
    the original inputs. Set `differs` on rows where the notes and the result disagree, and explain why in the
    `.exnote` under the table (the row then carries a †).
-5. Add a card to `CARDS` in `tools/preview-images.js`, then `npm run build && npm run previews && npm run check`.
+5. Add a card to `CARDS` in `tools/preview-images.js` (the link-preview image), and draw the course-home thumbnail
+   `src/thumbs/<slug>.svg`: one simple sketch of the chapter's central idea, `viewBox="0 0 400 210"`, no title text,
+   colors from the figure tokens, `aria-hidden="true"`, and marker ids unique on the page. Then
+   `npm run build && npm run previews && npm run check`.
 6. The previous and next links, the course home list, and the canonical and Open Graph URLs come from the manifest.
 
 ## Content

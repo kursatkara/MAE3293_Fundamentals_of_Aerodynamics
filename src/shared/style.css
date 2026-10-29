@@ -237,7 +237,7 @@ footer.site a{color:var(--accent)}
 .chapter{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:28px;padding:22px 0;border-bottom:1px solid var(--line);align-items:start}
 .chapter:first-child{padding-top:6px}
 .chapter .thumb{display:block;border:1px solid var(--line)}
-.chapter .thumb img{display:block;width:100%;height:auto;aspect-ratio:1200/630}
+.chapter .thumb svg{display:block;width:100%;height:auto;aspect-ratio:400/210;background:var(--bg)}
 .chapter .txt{display:flex;flex-direction:column;gap:8px;min-width:0}
 .chapter .eyebrow{margin:0}
 .chapter h3{font-size:23px}
