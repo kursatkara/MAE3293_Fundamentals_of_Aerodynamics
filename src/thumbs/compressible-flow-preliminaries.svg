@@ -1,0 +1,14 @@
+<svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <defs><marker id="th7a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 1L9 5L0 9Z" style="fill:var(--stream)"/></marker></defs>
+  <g style="stroke:var(--stream);stroke-width:1.8;fill:none">
+    <path d="M20 24 L110 24 C180 24 220 12 300 11 L400 11"/><path d="M20 186 L110 186 C180 186 220 198 300 199 L400 199"/>
+    <path d="M20 66 L110 66 C165 66 200 34 280 33 L400 33"/><path d="M20 144 L110 144 C165 144 200 176 280 177 L400 177"/>
+    <path d="M20 105 L228 105"/>
+  </g>
+  <g style="stroke:var(--stream);stroke-width:1.8;fill:none"><path d="M60 105 L100 105" marker-end="url(#th7a)"/><path d="M60 66 L96 66" marker-end="url(#th7a)"/><path d="M60 144 L96 144" marker-end="url(#th7a)"/><path d="M60 24 L96 24" marker-end="url(#th7a)"/><path d="M60 186 L96 186" marker-end="url(#th7a)"/></g>
+  <path d="M410 50 L285 50 A55 55 0 0 0 285 160 L410 160 Z" style="fill:var(--soft);stroke:var(--body);stroke-width:2"/>
+  <circle cx="230" cy="105" r="4.5" style="fill:var(--accent)"/>
+  <text x="44" y="96" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">V</tspan>, <tspan font-style="italic">p</tspan>, <tspan font-style="italic">T</tspan></text>
+  <text x="250" y="101" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">p</tspan>₀, <tspan font-style="italic">T</tspan>₀</text>
+  <text x="250" y="122" style="font-family:var(--f-num);font-size:15px;fill:var(--muted)"><tspan font-style="italic">V</tspan> = 0</text>
+</svg>

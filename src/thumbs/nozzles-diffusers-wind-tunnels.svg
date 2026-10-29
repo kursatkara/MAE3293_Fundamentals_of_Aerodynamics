@@ -1,0 +1,10 @@
+<svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <defs><marker id="th10a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 1L9 5L0 9Z" style="fill:var(--ink)"/></marker></defs>
+  <path d="M30 28 C90 28 112 82 152 82 C205 82 300 48 372 42 L372 168 C300 162 205 128 152 128 C112 128 90 182 30 182 Z" style="fill:var(--soft)"/>
+  <g style="fill:none;stroke:var(--body);stroke-width:2.2"><path d="M30 28 C90 28 112 82 152 82 C205 82 300 48 372 42"/><path d="M30 182 C90 182 112 128 152 128 C205 128 300 162 372 168"/></g>
+  <line x1="152" y1="70" x2="152" y2="140" style="stroke:var(--mach);stroke-width:1.2;stroke-dasharray:4 3"/>
+  <text x="44" y="111" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">M</tspan> &lt; 1</text>
+  <text x="124" y="60" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">M</tspan> = 1</text>
+  <text x="250" y="111" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">M</tspan> &gt; 1</text>
+  <line x1="320" y1="105" x2="392" y2="105" style="stroke:var(--ink);stroke-width:2.2" marker-end="url(#th10a)"/>
+</svg>

@@ -265,7 +265,7 @@ footer.site a{color:var(--accent)}
 .chapter{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:28px;padding:22px 0;border-bottom:1px solid var(--line);align-items:start}
 .chapter:first-child{padding-top:6px}
 .chapter .thumb{display:block;border:1px solid var(--line)}
-.chapter .thumb img{display:block;width:100%;height:auto;aspect-ratio:1200/630}
+.chapter .thumb svg{display:block;width:100%;height:auto;aspect-ratio:400/210;background:var(--bg)}
 .chapter .txt{display:flex;flex-direction:column;gap:8px;min-width:0}
 .chapter .eyebrow{margin:0}
 .chapter h3{font-size:23px}
@@ -338,7 +338,20 @@ td.hand .mk{font-family:var(--f-body)}
       <div class="sechead"><p class="eyebrow">Compressible flow</p><h2 id="h-lessons">Lessons</h2></div>
       <ol class="chapters">
         <li class="chapter">
-          <a class="thumb" href="lessons/compressible-flow-preliminaries.html" tabindex="-1" aria-hidden="true"><img src="assets/compressible-flow-preliminaries-preview.png" alt="" width="1200" height="630" loading="lazy"></a>
+          <a class="thumb" href="lessons/compressible-flow-preliminaries.html" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <defs><marker id="th7a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 1L9 5L0 9Z" style="fill:var(--stream)"/></marker></defs>
+  <g style="stroke:var(--stream);stroke-width:1.8;fill:none">
+    <path d="M20 24 L110 24 C180 24 220 12 300 11 L400 11"/><path d="M20 186 L110 186 C180 186 220 198 300 199 L400 199"/>
+    <path d="M20 66 L110 66 C165 66 200 34 280 33 L400 33"/><path d="M20 144 L110 144 C165 144 200 176 280 177 L400 177"/>
+    <path d="M20 105 L228 105"/>
+  </g>
+  <g style="stroke:var(--stream);stroke-width:1.8;fill:none"><path d="M60 105 L100 105" marker-end="url(#th7a)"/><path d="M60 66 L96 66" marker-end="url(#th7a)"/><path d="M60 144 L96 144" marker-end="url(#th7a)"/><path d="M60 24 L96 24" marker-end="url(#th7a)"/><path d="M60 186 L96 186" marker-end="url(#th7a)"/></g>
+  <path d="M410 50 L285 50 A55 55 0 0 0 285 160 L410 160 Z" style="fill:var(--soft);stroke:var(--body);stroke-width:2"/>
+  <circle cx="230" cy="105" r="4.5" style="fill:var(--accent)"/>
+  <text x="44" y="96" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">V</tspan>, <tspan font-style="italic">p</tspan>, <tspan font-style="italic">T</tspan></text>
+  <text x="250" y="101" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">p</tspan>₀, <tspan font-style="italic">T</tspan>₀</text>
+  <text x="250" y="122" style="font-family:var(--f-num);font-size:15px;fill:var(--muted)"><tspan font-style="italic">V</tspan> = 0</text>
+</svg></a>
           <div class="txt">
             <p class="eyebrow">Chapter 7</p>
             <h3><a href="lessons/compressible-flow-preliminaries.html">Compressible Flow: Preliminary Aspects</a></h3>
@@ -346,7 +359,17 @@ td.hand .mk{font-family:var(--f-body)}
           </div>
         </li>
         <li class="chapter">
-          <a class="thumb" href="lessons/normal-shock-waves.html" tabindex="-1" aria-hidden="true"><img src="assets/normal-shock-waves-preview.png" alt="" width="1200" height="630" loading="lazy"></a>
+          <a class="thumb" href="lessons/normal-shock-waves.html" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <defs><marker id="th8a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 1L9 5L0 9Z" style="fill:var(--ink)"/></marker></defs>
+  <g style="stroke:var(--ink);stroke-width:2.2" marker-end="url(#th8a)">
+    <line x1="40" y1="85" x2="176" y2="85"/><line x1="40" y1="120" x2="176" y2="120"/><line x1="40" y1="155" x2="176" y2="155"/>
+    <line x1="226" y1="85" x2="270" y2="85"/><line x1="226" y1="120" x2="270" y2="120"/><line x1="226" y1="155" x2="270" y2="155"/>
+  </g>
+  <line x1="200" y1="22" x2="200" y2="192" style="stroke:var(--comp);stroke-width:4.5"/>
+  <text x="70" y="52" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">M</tspan>₁ &gt; 1</text>
+  <text x="248" y="52" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">M</tspan>₂ &lt; 1</text>
+  <text x="290" y="125" style="font-family:var(--f-num);font-size:15px;fill:var(--muted)"><tspan font-style="italic">p</tspan>, <tspan font-style="italic">ρ</tspan>, <tspan font-style="italic">T</tspan>, <tspan font-style="italic">s</tspan> ↑</text>
+</svg></a>
           <div class="txt">
             <p class="eyebrow">Chapter 8</p>
             <h3><a href="lessons/normal-shock-waves.html">Normal Shock Waves</a></h3>
@@ -354,7 +377,15 @@ td.hand .mk{font-family:var(--f-body)}
           </div>
         </li>
         <li class="chapter">
-          <a class="thumb" href="lessons/oblique-shock-expansion-waves.html" tabindex="-1" aria-hidden="true"><img src="assets/oblique-shock-expansion-waves-preview.png" alt="" width="1200" height="630" loading="lazy"></a>
+          <a class="thumb" href="lessons/oblique-shock-expansion-waves.html" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <defs><marker id="th9a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 1L9 5L0 9Z" style="fill:var(--ink)"/></marker></defs>
+  <line x1="290" y1="105" x2="400" y2="105" style="stroke:var(--mach);stroke-width:1.2;stroke-dasharray:5 4"/>
+  <g style="stroke:var(--comp);stroke-width:2.2;fill:none"><line x1="110" y1="105" x2="278.7" y2="17.6"/><line x1="110" y1="105" x2="278.7" y2="192.4"/><line x1="290" y1="105" x2="385.9" y2="62.3"/><line x1="290" y1="105" x2="385.9" y2="147.7"/></g>
+  <g style="stroke:var(--exp);stroke-width:1.2"><line x1="200" y1="89.1" x2="293.4" y2="27.2"/><line x1="200" y1="120.9" x2="293.4" y2="182.8"/><line x1="200" y1="89.1" x2="298.8" y2="36.4"/><line x1="200" y1="120.9" x2="298.8" y2="173.6"/><line x1="200" y1="89.1" x2="303.4" y2="46.0"/><line x1="200" y1="120.9" x2="303.4" y2="164.0"/><line x1="200" y1="89.1" x2="307.0" y2="56.0"/><line x1="200" y1="120.9" x2="307.0" y2="154.0"/><line x1="200" y1="89.1" x2="309.7" y2="66.3"/><line x1="200" y1="120.9" x2="309.7" y2="143.7"/><line x1="200" y1="89.1" x2="311.3" y2="76.8"/><line x1="200" y1="120.9" x2="311.3" y2="133.2"/></g>
+  <path d="M110 105 L200 89.1 L290 105 L200 120.9 Z" style="fill:var(--soft);stroke:var(--body);stroke-width:2;stroke-linejoin:round"/>
+  <line x1="14" y1="105" x2="84" y2="105" style="stroke:var(--ink);stroke-width:2.2" marker-end="url(#th9a)"/>
+  <text x="14" y="90" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">M</tspan><tspan font-size="12" dy="4">∞</tspan><tspan dy="-4"> &gt; 1</tspan></text>
+</svg></a>
           <div class="txt">
             <p class="eyebrow">Chapter 9</p>
             <h3><a href="lessons/oblique-shock-expansion-waves.html">Oblique Shock and Expansion Waves</a></h3>
@@ -362,7 +393,16 @@ td.hand .mk{font-family:var(--f-body)}
           </div>
         </li>
         <li class="chapter">
-          <a class="thumb" href="lessons/nozzles-diffusers-wind-tunnels.html" tabindex="-1" aria-hidden="true"><img src="assets/nozzles-diffusers-wind-tunnels-preview.png" alt="" width="1200" height="630" loading="lazy"></a>
+          <a class="thumb" href="lessons/nozzles-diffusers-wind-tunnels.html" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <defs><marker id="th10a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 1L9 5L0 9Z" style="fill:var(--ink)"/></marker></defs>
+  <path d="M30 28 C90 28 112 82 152 82 C205 82 300 48 372 42 L372 168 C300 162 205 128 152 128 C112 128 90 182 30 182 Z" style="fill:var(--soft)"/>
+  <g style="fill:none;stroke:var(--body);stroke-width:2.2"><path d="M30 28 C90 28 112 82 152 82 C205 82 300 48 372 42"/><path d="M30 182 C90 182 112 128 152 128 C205 128 300 162 372 168"/></g>
+  <line x1="152" y1="70" x2="152" y2="140" style="stroke:var(--mach);stroke-width:1.2;stroke-dasharray:4 3"/>
+  <text x="44" y="111" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">M</tspan> &lt; 1</text>
+  <text x="124" y="60" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">M</tspan> = 1</text>
+  <text x="250" y="111" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">M</tspan> &gt; 1</text>
+  <line x1="320" y1="105" x2="392" y2="105" style="stroke:var(--ink);stroke-width:2.2" marker-end="url(#th10a)"/>
+</svg></a>
           <div class="txt">
             <p class="eyebrow">Chapter 10</p>
             <h3><a href="lessons/nozzles-diffusers-wind-tunnels.html">Nozzles, Diffusers, and Wind Tunnels</a></h3>

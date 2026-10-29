@@ -1,0 +1,11 @@
+<svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <defs><marker id="th8a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 1L9 5L0 9Z" style="fill:var(--ink)"/></marker></defs>
+  <g style="stroke:var(--ink);stroke-width:2.2" marker-end="url(#th8a)">
+    <line x1="40" y1="85" x2="176" y2="85"/><line x1="40" y1="120" x2="176" y2="120"/><line x1="40" y1="155" x2="176" y2="155"/>
+    <line x1="226" y1="85" x2="270" y2="85"/><line x1="226" y1="120" x2="270" y2="120"/><line x1="226" y1="155" x2="270" y2="155"/>
+  </g>
+  <line x1="200" y1="22" x2="200" y2="192" style="stroke:var(--comp);stroke-width:4.5"/>
+  <text x="70" y="52" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">M</tspan>₁ &gt; 1</text>
+  <text x="248" y="52" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">M</tspan>₂ &lt; 1</text>
+  <text x="290" y="125" style="font-family:var(--f-num);font-size:15px;fill:var(--muted)"><tspan font-style="italic">p</tspan>, <tspan font-style="italic">ρ</tspan>, <tspan font-style="italic">T</tspan>, <tspan font-style="italic">s</tspan> ↑</text>
+</svg>
