@@ -4,6 +4,15 @@
   "calculator": "https://kursatkara.github.io/MAE3293-Compressible-Aerodynamics-Calculator/",
   "lessons": [
     {
+      "slug": "normal-shock-waves",
+      "chapter": 8,
+      "title": "Normal Shock Waves",
+      "scripts": ["core.js", "quasi1d.js", "atmosphere.js", "helpers.js"],
+      "summary": "The speed of sound, total and sonic reference conditions, and the characteristic Mach number; the normal-shock relations, the entropy rise and total-pressure loss across a shock, and the Pitot tube in subsonic and supersonic flow.",
+      "description": "Interactive lesson on normal shock waves: the speed of sound, total and sonic conditions, the characteristic Mach number, the normal-shock relations and Prandtl relation, entropy and total-pressure loss across a shock, and Pitot-tube measurements in subsonic and supersonic flow. MAE 3293, Oklahoma State University.",
+      "image_alt": "Normal-shock property ratios versus upstream Mach number, with a stationary normal shock and the velocities ahead of and behind it"
+    },
+    {
       "slug": "oblique-shock-expansion-waves",
       "chapter": 9,
       "title": "Oblique Shock and Expansion Waves",

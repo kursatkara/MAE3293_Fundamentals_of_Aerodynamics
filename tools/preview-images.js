@@ -12,6 +12,12 @@ const ROOT = path.resolve(__dirname, '..');
 const course = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/course.json'), 'utf8'));
 
 const CARDS = {
+  'normal-shock-waves': {
+    blurb: 'Speed of sound, total and sonic conditions, the normal-shock relations, entropy, and the Pitot tube, computed live.',
+    cols: '400px 1fr',
+    setup: async p => { await p.fill('#ns_M', '2.5'); await p.dispatchEvent('#ns_M', 'input'); },
+    figure: () => document.getElementById('ns_sch').outerHTML + document.getElementById('ns_fig').outerHTML
+  },
   'oblique-shock-expansion-waves': {
     blurb: 'Mach waves, θ–β–M, Prandtl–Meyer fans, and shock-expansion theory for supersonic airfoils, computed live.',
     cols: '430px 1fr',
