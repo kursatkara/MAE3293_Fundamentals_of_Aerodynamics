@@ -1,0 +1,349 @@
+  <p class="lede">At high speed the density of a gas changes as it flows, and its kinetic energy becomes comparable to its internal energy. Two things that low-speed aerodynamics could ignore now matter: compressibility and thermodynamics. This chapter collects the tools for the rest of compressible flow: the perfect-gas relations, the first and second laws, entropy and the isentropic relations, the compressibility of a fluid, the governing equations, and total (stagnation) conditions. It ends with a first look at shock waves. Every figure is computed live.</p>
+
+  <div class="lesson">
+    <nav class="toc" id="toc" aria-label="Lesson contents">
+      <span class="eyebrow">Contents</span>
+      <a href="#perfect-gas"><span class="n">7.2</span><span>Perfect gas, energy and enthalpy</span></a>
+      <a href="#laws"><span class="n">7.2</span><span>First and second laws, entropy</span></a>
+      <a href="#isentropic"><span class="n">7.2</span><span>Isentropic relations</span></a>
+      <a href="#compressibility"><span class="n">7.3</span><span>Compressibility</span></a>
+      <a href="#governing"><span class="n">7.4</span><span>Governing equations</span></a>
+      <a href="#total"><span class="n">7.5</span><span>Total (stagnation) conditions</span></a>
+      <a href="#shocks"><span class="n">7.6</span><span>A first look at shock waves</span></a>
+      <a href="#check"><span class="n">?</span><span>Check your understanding</span></a>
+      <a href="#equations"><span class="n">Σ</span><span>Key equations</span></a>
+    </nav>
+
+    <div class="content">
+
+<!-- ================= 7.2 PERFECT GAS ================= -->
+      <section class="sec" id="perfect-gas" aria-labelledby="h-pg">
+        <div class="sechead"><p class="eyebrow">Section 7.2 · A brief review of thermodynamics</p><h2 id="h-pg">Perfect gas, internal energy and enthalpy</h2></div>
+        <div class="cols2">
+          <div class="prose">
+            <p>A <b>perfect gas</b> is one in which intermolecular forces are neglected. In compressible-flow applications the molecules are on average more than ten molecular diameters apart, far enough to justify the assumption. Pressure, density and temperature are then related by the equation of state</p>
+            <div class="eq">\[ p=\rho RT \tag{7.1} \]</div>
+            <div class="eq">\[ pv=RT,\qquad v=\frac{1}{\rho} \tag{7.2} \]</div>
+            <p>where R is the specific gas constant (R = 287 J/(kg·K) for air) and v is the specific volume, the volume per unit mass. The symbol v also denotes the y component of velocity; the meaning is always clear from context.</p>
+          </div>
+          <div class="prose">
+            <p>The energy of a molecule is the sum of its translational, rotational, vibrational and electronic energies. Summed over all molecules in a volume of gas and divided by its mass, it is the <b>specific internal energy</b> e. The <b>specific enthalpy</b> is</p>
+            <div class="eq">\[ h=e+pv \tag{7.3} \]</div>
+            <p>For a perfect gas both depend on temperature only, e = e(T) and h = h(T) (7.4), with de = c<sub>v</sub>dT and dh = c<sub>p</sub>dT (7.5). For air below about 1000 K the specific heats are nearly constant; a perfect gas with constant c<sub>v</sub> and c<sub>p</sub> is <b>calorically perfect</b>, and this course always treats the gas as such:</p>
+            <div class="eq">\[ e=c_vT,\qquad h=c_pT \tag{7.6} \]</div>
+          </div>
+        </div>
+        <div class="cols2">
+          <div class="prose">
+            <p>e and h are <b>state variables</b>: they depend only on the state of the gas, not on the process that brought it there. Although c<sub>v</sub> and c<sub>p</sub> appear in (7.6), the relations are not restricted to constant-volume or constant-pressure processes.</p>
+            <p>For a given gas, c<sub>p</sub> − c<sub>v</sub> = R (7.7). Dividing by c<sub>p</sub> and by c<sub>v</sub>, with γ = c<sub>p</sub>/c<sub>v</sub> (1.4 for air at standard conditions):</p>
+          </div>
+          <div class="prose">
+            <div class="eq">\[ c_p=\frac{\gamma R}{\gamma-1} \tag{7.9} \]</div>
+            <div class="eq">\[ c_v=\frac{R}{\gamma-1} \tag{7.10} \]</div>
+            <p class="note" id="pg_cp"></p>
+          </div>
+        </div>
+
+        <h3>Worked examples 7.1–7.3</h3>
+        <div id="exA">
+          <div class="tabs" role="tablist" aria-label="Perfect-gas example">
+            <button role="tab" aria-selected="true" data-ex="a1">Ex 7.1 · Energy of the air in a room</button>
+            <button role="tab" aria-selected="false" data-ex="a2">Ex 7.2–7.3 · Charging a reservoir</button>
+          </div>
+          <div data-expanel="a1" class="prose" style="max-width:none">
+            <p class="problem">A room has a rectangular floor <input type="number" id="a1_L" value="5" min="0.1" step="0.5" aria-label="Floor length in m"> m by <input type="number" id="a1_W" value="7" min="0.1" step="0.5" aria-label="Floor width in m"> m and a ceiling <input type="number" id="a1_H" value="3.3" min="0.1" step="0.1" aria-label="Ceiling height in m"> m high. The air pressure and temperature in the room are <input type="number" id="a1_p" value="1" min="0.01" step="0.1" aria-label="Pressure in atm"> atm and <input type="number" id="a1_T" value="25" min="-100" step="1" aria-label="Temperature in degrees Celsius"> °C. Calculate (a) the internal energy and (b) the enthalpy of the air in the room.</p>
+            <div class="tblwrap"><table id="a1_tab"></table></div>
+            <p class="exnote">The energy and enthalpy per unit mass follow directly from the temperature; the mass follows from the equation of state. The check H/E = h/e = c<sub>p</sub>/c<sub>v</sub> = γ holds for any calorically perfect gas. The notes use 1 atm = 1.01 × 10<sup>5</sup> N/m² and 25 °C = 298 K; the exact column uses 101 325 N/m² and 298.15 K, a 0.3% difference in E and H. Use consistent units throughout.</p>
+          </div>
+          <div data-expanel="a2" class="prose" style="max-width:none" hidden>
+            <p class="problem">(7.2) A blow-down wind-tunnel reservoir has an internal volume of <input type="number" id="a2_V" value="30" min="0.1" step="1" aria-label="Reservoir volume in cubic meters"> m³. Air is pumped in at <input type="number" id="a2_m" value="1" min="0.001" step="0.1" aria-label="Pumping rate in kg per second"> kg/s, and heat exchangers hold the air at <input type="number" id="a2_T" value="300" min="1" step="10" aria-label="Reservoir temperature in K"> K. Calculate the rate of increase of pressure at the instant the pressure is 10 atm. (7.3) At this constant pumping rate, how long does it take to raise the pressure from <input type="number" id="a2_p1" value="10" min="0" step="1" aria-label="Initial pressure in atm"> to <input type="number" id="a2_p2" value="20" min="0" step="1" aria-label="Final pressure in atm"> atm?</p>
+            <div class="tblwrap"><table id="a2_tab"></table></div>
+            <p class="exnote">With ρ = M/V and p = ρRT at constant T, dp/dt = (RT/V) dM/dt, independent of the pressure itself: the pressure rises linearly in time. With R = 287 J/(kg·K), RT/V = 287 × 300/30 = 2870 exactly; the notes write 2867.13 N/(m²·s) and, with 1 atm = 1.01 × 10<sup>5</sup> N/m², find 352.3 s. The exact values are 2870 N/(m²·s) and 353.0 s.</p>
+          </div>
+        </div>
+      </section>
+
+<!-- ================= 7.2 LAWS AND ENTROPY ================= -->
+      <section class="sec" id="laws" aria-labelledby="h-law">
+        <div class="sechead"><p class="eyebrow">Section 7.2 · A brief review of thermodynamics</p><h2 id="h-law">First and second laws, and the entropy change</h2></div>
+        <div class="cols2">
+          <div class="prose">
+            <p><b>First law.</b> For a system of fixed mass, an increment of heat δq added to the system and work δw done on it by the surroundings change its internal energy:</p>
+            <div class="eq">\[ \delta q+\delta w=de \tag{7.11} \]</div>
+            <p>e is a state variable, so de is an exact differential that depends only on the end states. δq and δw depend on the process. Three kinds of process matter here:</p>
+            <ol>
+              <li><b>Adiabatic:</b> no heat is added to or taken from the system.</li>
+              <li><b>Reversible:</b> no dissipative phenomena occur: no viscosity, thermal conduction or mass diffusion.</li>
+              <li><b>Isentropic:</b> both adiabatic and reversible.</li>
+            </ol>
+            <p>For a reversible process δw = −p dv, so \(\delta q-p\,dv=de\) (7.12).</p>
+          </div>
+          <div class="fig narrow"><svg id="sys_fig" viewBox="0 0 420 230" role="img" aria-label="A thermodynamic system of fixed mass inside its boundary, with heat delta q added and work delta w done on it by the surroundings."></svg></div>
+        </div>
+        <div class="cols2">
+          <div class="prose">
+            <p><b>Second law.</b> The first law says nothing about the direction of a process, for example whether heat flows from a hot plate to a cold one or the reverse. The entropy, a new state variable, decides it:</p>
+            <div class="eq">\[ ds=\frac{\delta q_{\text{rev}}}{T} \tag{7.13} \]</div>
+            <div class="eq">\[ ds=\frac{\delta q}{T}+ds_{\text{irrev}},\qquad ds_{\text{irrev}}\ge0 \tag{7.14–7.15} \]</div>
+            <p>Here δq is the actual heat added and ds<sub>irrev</sub> the entropy generated by viscosity, thermal conduction and mass diffusion inside the system. Hence</p>
+            <div class="eq">\[ ds\ge\frac{\delta q}{T}\qquad\text{and, if adiabatic,}\qquad ds\ge0 \tag{7.16–7.17} \]</div>
+            <p>A process proceeds in the direction in which the entropy of the system plus its surroundings increases or, at best, stays the same.</p>
+          </div>
+          <div class="prose">
+            <p><b>Calculating the entropy change.</b> With heat added reversibly, δq<sub>rev</sub> = T ds in (7.12), and with dh = de + p dv + v dp:</p>
+            <div class="eq">\[ T\,ds=de+p\,dv \tag{7.18} \]</div>
+            <div class="eq">\[ T\,ds=dh-v\,dp \tag{7.20} \]</div>
+            <p>These are the first law written in terms of entropy. With dh = c<sub>p</sub>dT, de = c<sub>v</sub>dT and the equation of state, integrating between states 1 and 2 of a calorically perfect gas gives</p>
+            <div class="eq">\[ s_2-s_1=c_p\ln\frac{T_2}{T_1}-R\ln\frac{p_2}{p_1} \tag{7.25} \]</div>
+            <div class="eq">\[ s_2-s_1=c_v\ln\frac{T_2}{T_1}+R\ln\frac{v_2}{v_1} \tag{7.26} \]</div>
+            <p>Entropy is a function of two state variables, s = s(p, T) or s = s(v, T).</p>
+          </div>
+        </div>
+      </section>
+
+<!-- ================= 7.2 ISENTROPIC RELATIONS ================= -->
+      <section class="sec" id="isentropic" aria-labelledby="h-is">
+        <div class="sechead"><p class="eyebrow">Section 7.2 · A brief review of thermodynamics</p><h2 id="h-is">Isentropic relations</h2></div>
+        <div class="cols2">
+          <div class="prose">
+            <p>In an isentropic process δq = 0 and ds<sub>irrev</sub> = 0, so ds = 0. Setting s<sub>2</sub> − s<sub>1</sub> = 0 in (7.25), with c<sub>p</sub>/R = γ/(γ − 1):</p>
+            <div class="eq">\[ \frac{p_2}{p_1}=\left(\frac{T_2}{T_1}\right)^{\frac{\gamma}{\gamma-1}} \tag{7.28} \]</div>
+            <p>and in (7.26), with c<sub>v</sub>/R = 1/(γ − 1) and v<sub>2</sub>/v<sub>1</sub> = ρ<sub>1</sub>/ρ<sub>2</sub>:</p>
+            <div class="eq">\[ \frac{\rho_2}{\rho_1}=\left(\frac{T_2}{T_1}\right)^{\frac{1}{\gamma-1}} \tag{7.31} \]</div>
+          </div>
+          <div class="prose">
+            <p>Together:</p>
+            <div class="eq">\[ \frac{p_2}{p_1}=\left(\frac{\rho_2}{\rho_1}\right)^{\gamma}=\left(\frac{T_2}{T_1}\right)^{\frac{\gamma}{\gamma-1}} \tag{7.32} \]</div>
+            <div class="key"><b>Eq. (7.32)</b> relates pressure, density and temperature in any isentropic process. It comes from the first law and the definition of entropy, so it is in essence an <b>energy relation</b> for an isentropic process.</div>
+          </div>
+        </div>
+
+        <div class="lab" id="tsx">
+          <div class="labhead"><span class="eyebrow">Interactive 1 · Isentropic and nonisentropic changes of state</span><span class="note" id="tsx_short"></span></div>
+          <aside class="rail" aria-label="Change of state inputs">
+            <div id="tsx_ctl" style="display:flex;flex-direction:column;gap:14px"></div>
+            <div class="sep"></div>
+            <span class="lbl">Try</span>
+            <div class="presets" id="tsx_pre" style="flex-direction:column"></div>
+          </aside>
+          <div class="labmain">
+            <div id="tsx_msg"></div>
+            <div class="fig"><svg id="tsx_fig" viewBox="0 0 760 330" role="img" aria-label="Temperature-entropy diagram with the isobars through states 1 and 2, the isentropic end state 2s and the actual end state 2"></svg></div>
+            <div class="legend"><span><i class="sw" style="border-color:var(--exp)"></i>Isobar p<sub>1</sub></span><span><i class="sw" style="border-color:var(--comp)"></i>Isobar p<sub>2</sub></span><span><i class="sw" style="border-color:var(--mach);border-top-style:dashed"></i>Isentropic path, 1 → 2s</span><span><i class="sw" style="border-color:var(--ink)"></i>Actual path, 1 → 2</span></div>
+            <div class="tiles" id="tsx_tiles"></div>
+            <div class="readout" id="tsx_out"></div>
+          </div>
+        </div>
+
+        <h3>Worked examples 7.4–7.5</h3>
+        <div id="exB">
+          <div class="tabs" role="tablist" aria-label="Isentropic-relation example">
+            <button role="tab" aria-selected="true" data-ex="b4">Ex 7.4 · Temperature on a wing</button>
+            <button role="tab" aria-selected="false" data-ex="b5">Ex 7.5 · Expansion from a reservoir</button>
+          </div>
+          <div data-expanel="b4" class="prose" style="max-width:none">
+            <p class="problem">A Boeing 747 flies at a standard altitude of 10.8 km, where Appendix D gives p<sub>∞</sub> = <input type="number" id="b4_pi" value="23422" min="1" step="100" aria-label="Freestream pressure in N per square meter"> N/m² and T<sub>∞</sub> = <input type="number" id="b4_Ti" value="218.08" min="1" step="1" aria-label="Freestream temperature in K"> K. The pressure at a point on the wing is <input type="number" id="b4_p" value="19160" min="1" step="100" aria-label="Pressure on the wing in N per square meter"> N/m². Assuming isentropic flow over the wing, calculate the temperature at this point.</p>
+            <div class="tblwrap"><table id="b4_tab"></table></div>
+            <p class="exnote">The notes state p = 1.916 × 10<sup>4</sup> N/m² but evaluate the ratio with 1.914 × 10<sup>4</sup>, and report T = 207.3 K. Either pressure gives T ≈ 205.9 K: (1.916/2.3422)<sup>0.2857</sup> = 0.9442.</p>
+          </div>
+          <div data-expanel="b5" class="prose" style="max-width:none" hidden>
+            <p class="problem">Air in the reservoir of Examples 7.2–7.3 is at <input type="number" id="b5_p1" value="20" min="0.001" step="1" aria-label="Reservoir pressure in atm"> atm and <input type="number" id="b5_T1" value="300" min="1" step="10" aria-label="Reservoir temperature in K"> K. It expands through the tunnel duct to a location where the pressure is <input type="number" id="b5_p2" value="1" min="0.001" step="0.1" aria-label="Duct pressure in atm"> atm. Calculate the temperature there if (a) the expansion is isentropic and (b) the expansion is nonisentropic, with an entropy increase of <input type="number" id="b5_ds" value="320" step="10" aria-label="Entropy increase in J per kg K"> J/(kg·K).</p>
+            <div class="tblwrap"><table id="b5_tab"></table></div>
+            <div class="row" style="flex-wrap:wrap;gap:6px"><button type="button" class="mini" id="b5_go">Show this expansion in Interactive 1</button></div>
+            <p class="exnote">The dissipation in the nonisentropic expansion leaves the gas hotter, 175.3 K instead of 127.5 K, at the same pressure: part of the energy that would have gone into kinetic energy stays as internal energy.</p>
+          </div>
+        </div>
+      </section>
+
+<!-- ================= 7.3 COMPRESSIBILITY ================= -->
+      <section class="sec" id="compressibility" aria-labelledby="h-cp">
+        <div class="sechead"><p class="eyebrow">Section 7.3</p><h2 id="h-cp">Definition of compressibility</h2></div>
+        <div class="cols2">
+          <div class="prose">
+            <p>All real substances are compressible to some extent. Squeeze an element of fluid of specific volume v with a pressure increase dp; its volume changes by dv. The <b>compressibility</b> is the fractional change in volume per unit change in pressure:</p>
+            <div class="eq">\[ \tau=-\frac{1}{v}\frac{dv}{dp} \tag{7.33} \]</div>
+            <p>The value depends on the process. If heat transfer holds the temperature constant, τ is the <b>isothermal compressibility</b>; if there is no heat transfer and friction is ignored, the compression is isentropic and τ is the <b>isentropic compressibility</b>:</p>
+            <div class="eq">\[ \tau_T=-\frac{1}{v}\left(\frac{\partial v}{\partial p}\right)_T,\qquad \tau_s=-\frac{1}{v}\left(\frac{\partial v}{\partial p}\right)_s \tag{7.34–7.35} \]</div>
+          </div>
+          <div class="prose">
+            <div class="fig narrow"><svg id="cmp_fig" viewBox="0 0 420 170" role="img" aria-label="A fluid element of specific volume v under pressure p, and the same element compressed to v plus dv under pressure p plus dp."></svg></div>
+            <p>With v = 1/ρ, dv = −dρ/ρ², so</p>
+            <div class="eq">\[ \tau=\frac{1}{\rho}\frac{d\rho}{dp} \tag{7.36} \]</div>
+            <div class="eq">\[ d\rho=\rho\,\tau\,dp \tag{7.37} \]</div>
+            <p>Whenever the fluid experiences a pressure change dp, its density changes by ρτ dp.</p>
+          </div>
+        </div>
+        <div class="cols2">
+          <div class="prose">
+            <p><b>Typical values at 1 atm.</b> For a perfect gas, τ<sub>T</sub> = 1/p and τ<sub>s</sub> = 1/(γp) (Section 8.3), so air is roughly 20 000 times more compressible than water:</p>
+          </div>
+          <div class="tblwrap"><table>
+            <thead><tr><th class="l">Fluid at 1 atm</th><th>ρ (kg/m³)</th><th>τ<sub>T</sub> (m²/N)</th><th>τ<sub>s</sub> (m²/N)</th></tr></thead>
+            <tbody>
+              <tr><td class="l">Air, 288 K</td><td>1.225</td><td>9.87 × 10<sup>−6</sup></td><td>7.05 × 10<sup>−6</sup></td></tr>
+              <tr><td class="l">Water, 20 °C</td><td>998</td><td>4.6 × 10<sup>−10</sup></td><td>≈ 4.6 × 10<sup>−10</sup></td></tr>
+            </tbody>
+          </table></div>
+        </div>
+        <div class="prose">
+          <p><b>Why low-speed flow can be treated as incompressible.</b> In a flow, pressure changes are of the order of the dynamic pressure, dp ≈ ½ρV². For a gas, (7.37) then gives dρ/ρ ≈ τ<sub>s</sub>·½ρV² = ½ρV²/(γp) = M²/2. The density change is small only while the Mach number is small: about 5% at M ≈ 0.3, the usual limit of incompressible aerodynamics. In water the same speeds change the density by a negligible amount.</p>
+        </div>
+
+        <div class="lab" id="cv">
+          <div class="labhead"><span class="eyebrow">Interactive 2 · When does a flow become compressible?</span><span class="note" id="cv_short"></span></div>
+          <aside class="rail" aria-label="Compressibility inputs">
+            <div id="cv_ctl" style="display:flex;flex-direction:column;gap:14px"></div>
+            <div class="sep"></div>
+            <span class="lbl">Try</span>
+            <div class="presets" id="cv_pre" style="flex-direction:column"></div>
+          </aside>
+          <div class="labmain">
+            <div class="fig"><svg id="cv_fig" viewBox="0 0 760 320" role="img" aria-label="Percentage density change versus flow speed for air and water at sea level on a logarithmic scale, with the 5 percent line and the selected speed marked" style="touch-action:none;cursor:crosshair"></svg></div>
+            <div class="legend"><span><i class="sw" style="border-color:var(--comp)"></i>Air, isentropic stagnation (exact)</span><span><i class="sw" style="border-color:var(--comp);border-top-style:dashed"></i>Air, estimate τ<sub>s</sub>·½ρV² = M²/2</span><span><i class="sw" style="border-color:var(--exp)"></i>Water, τ·½ρV²</span><span><i class="sw" style="border-color:var(--mach);border-top-style:dashed"></i>5% change</span></div>
+            <div class="tiles" id="cv_tiles"></div>
+            <p class="note">Sea-level air, p = 101 325 N/m², T = 288.16 K; water ρ = 998 kg/m³, τ = 4.6 × 10<sup>−10</sup> m²/N. The exact air curve is the density rise from the moving gas to its stagnation state, ρ<sub>0</sub>/ρ − 1 (Section 7.5).</p>
+          </div>
+        </div>
+      </section>
+
+<!-- ================= 7.4 GOVERNING EQUATIONS ================= -->
+      <section class="sec" id="governing" aria-labelledby="h-ge">
+        <div class="sechead"><p class="eyebrow">Section 7.4</p><h2 id="h-ge">Governing equations for inviscid, compressible flow</h2></div>
+        <div class="tblwrap" style="max-width:820px"><table>
+          <thead><tr><th class="l">Flow type</th><th class="l">Primary dependent variables</th><th class="l">Equations to solve</th></tr></thead>
+          <tbody>
+            <tr><td class="l">Inviscid, incompressible (low-speed aerodynamics)</td><td class="l">p, \(\vec V\): 4 unknowns</td><td class="l">continuity (1), momentum (3): 4 equations</td></tr>
+            <tr><td class="l">Inviscid, compressible (high-speed aerodynamics)</td><td class="l">p, \(\vec V\), ρ, e, T: 7 unknowns</td><td class="l">continuity (1), momentum (3), energy (1), equation of state (1), internal energy (1): 7 equations</td></tr>
+          </tbody>
+        </table></div>
+        <div class="cols2">
+          <div class="prose">
+            <p><b>Continuity</b>, integral and differential form:</p>
+            <div class="eq">\[ \frac{\partial}{\partial t}\iiint_V\rho\,dV+\oint_S\rho\vec V\cdot d\vec S=0 \tag{7.39} \]</div>
+            <div class="eq">\[ \frac{\partial\rho}{\partial t}+\nabla\cdot(\rho\vec V)=0 \tag{7.40} \]</div>
+            <p><b>Momentum:</b></p>
+            <div class="eq">\[ \frac{\partial}{\partial t}\iiint_V\rho\vec V\,dV+\oint_S(\rho\vec V\cdot d\vec S)\vec V=-\oint_S p\,d\vec S+\iiint_V\rho\vec f\,dV \tag{7.41} \]</div>
+            <div class="eq">\[ \rho\frac{Du}{Dt}=-\frac{\partial p}{\partial x}+\rho f_x,\quad \rho\frac{Dv}{Dt}=-\frac{\partial p}{\partial y}+\rho f_y,\quad \rho\frac{Dw}{Dt}=-\frac{\partial p}{\partial z}+\rho f_z \tag{7.42} \]</div>
+          </div>
+          <div class="prose">
+            <p><b>Energy:</b></p>
+            <div class="eq">\[ \frac{\partial}{\partial t}\iiint_V\rho\left(e+\frac{V^2}{2}\right)dV+\oint_S\rho\left(e+\frac{V^2}{2}\right)\vec V\cdot d\vec S=\iiint_V\dot q\rho\,dV-\oint_S p\vec V\cdot d\vec S+\iiint_V\rho(\vec f\cdot\vec V)\,dV \tag{7.43} \]</div>
+            <div class="eq">\[ \rho\frac{D}{Dt}\left(e+\frac{V^2}{2}\right)=\rho\dot q-\nabla\cdot(p\vec V)+\rho(\vec f\cdot\vec V) \tag{7.44} \]</div>
+            <p><b>Equation of state</b> p = ρRT (7.1) and <b>internal energy</b> e = c<sub>v</sub>T (7.6) close the system.</p>
+            <div class="key"><b>No Bernoulli.</b> Bernoulli’s equation, p<sub>1</sub> + ½ρV<sub>1</sub>² = p<sub>2</sub> + ½ρV<sub>2</sub>², assumes constant density. It does not hold in compressible flow.</div>
+          </div>
+        </div>
+      </section>
+
+<!-- ================= 7.5 TOTAL CONDITIONS ================= -->
+      <section class="sec" id="total" aria-labelledby="h-tc">
+        <div class="sechead"><p class="eyebrow">Section 7.5</p><h2 id="h-tc">Definition of total (stagnation) conditions</h2></div>
+        <div class="cols2">
+          <div class="prose">
+            <p>The static pressure p, temperature T and density ρ are the values you would feel riding along with the gas at the local flow velocity; static pressure measures the purely random motion of the molecules. Now imagine taking a fluid element passing through a point and slowing it <b>adiabatically</b> to zero velocity. The temperature it reaches is the <b>total temperature</b> T<sub>0</sub>, and the corresponding enthalpy is the <b>total enthalpy</b> h<sub>0</sub> = c<sub>p</sub>T<sub>0</sub>. These are defined quantities: every point of a flow has a T<sub>0</sub> and h<sub>0</sub>, whether or not the gas is actually brought to rest there.</p>
+            <p>For adiabatic flow (\(\dot q=0\)) without body forces, (7.44) becomes \(\rho\,D(e+V^2/2)/Dt=-\nabla\cdot(p\vec V)\) (7.45). Using the identity ∇·(p<b>V</b>) = p∇·<b>V</b> + <b>V</b>·∇p and continuity, this becomes</p>
+            <div class="eq">\[ \rho\frac{D}{Dt}\left(h+\frac{V^2}{2}\right)=\frac{\partial p}{\partial t} \tag{7.51} \]</div>
+            <details class="deriv"><summary>Derivation of (7.51) <span>(four steps)</span></summary><div class="inner">
+              <div class="dstep"><span class="k">1</span><div class="eq">\[ \rho\frac{D}{Dt}\left(\frac{p}{\rho}\right)=\frac{Dp}{Dt}-\frac{p}{\rho}\frac{D\rho}{Dt} \]</div></div>
+              <div class="dstep"><span class="k">2</span><div class="eq">\[ \frac{D\rho}{Dt}+\rho\nabla\cdot\vec V=0\;\Rightarrow\;\rho\frac{D}{Dt}\left(\frac{p}{\rho}\right)=\frac{Dp}{Dt}+p\nabla\cdot\vec V=\frac{\partial p}{\partial t}+\vec V\cdot\nabla p+p\nabla\cdot\vec V \]</div></div>
+              <div class="dstep"><span class="k">3</span><div class="eq">\[ \nabla\cdot(p\vec V)=\vec V\cdot\nabla p+p\nabla\cdot\vec V=\rho\frac{D}{Dt}\left(\frac{p}{\rho}\right)-\frac{\partial p}{\partial t} \]</div></div>
+              <div class="dstep"><span class="k">4</span><div class="eq">\[ \rho\frac{D}{Dt}\left(e+\frac{p}{\rho}+\frac{V^2}{2}\right)=\frac{\partial p}{\partial t},\qquad e+\frac{p}{\rho}=h \]</div></div>
+            </div></details>
+            <p>In steady flow the right side vanishes, so for steady, adiabatic, inviscid flow</p>
+            <div class="eq">\[ h+\frac{V^2}{2}=\text{const along a streamline} \tag{7.53} \]</div>
+            <div class="eq">\[ h+\frac{V^2}{2}=h_0 \tag{7.54} \]</div>
+          </div>
+          <div class="prose">
+            <p>At any point the total enthalpy is the static enthalpy plus the kinetic energy, both per unit mass. If all streamlines come from a common uniform freestream, h<sub>0</sub> is the same on every streamline, and in a steady adiabatic flow</p>
+            <div class="eq">\[ h_0=\text{const},\qquad T_0=\text{const} \tag{7.55–7.56} \]</div>
+            <p>throughout the flow, the latter for a calorically perfect gas. This simple statement is a powerful tool.</p>
+            <p><b>Total pressure and density.</b> Now slow the element to rest both adiabatically <i>and</i> reversibly, that is isentropically. The pressure and density it reaches are the <b>total pressure</b> p<sub>0</sub> and <b>total density</b> ρ<sub>0</sub>; its temperature is the same T<sub>0</sub>, since an isentropic process is also adiabatic. The isentropic assumption enters only the definition: p<sub>0</sub> and ρ<sub>0</sub> can be assigned at every point of a general nonisentropic flow.</p>
+            <div class="fig narrow"><svg id="tot_fig" viewBox="0 0 420 210" role="img" aria-label="Two points 1 and 2 on a streamline. In isentropic flow the total pressure, density, temperature and enthalpy are the same at both points. In adiabatic but nonisentropic flow only the total temperature and enthalpy are the same; the total pressure and density differ."></svg></div>
+            <p><b>Sonic conditions.</b> Accelerating (or decelerating) the element adiabatically to sonic speed defines T* and a* = √(γRT*) in the same way.</p>
+          </div>
+        </div>
+
+        <div class="lab" id="tc">
+          <div class="labhead"><span class="eyebrow">Interactive 3 · Total conditions at a point, and why Bernoulli fails</span><span class="note" id="tc_short"></span></div>
+          <aside class="rail" aria-label="Total-condition inputs">
+            <div id="tc_ctl" style="display:flex;flex-direction:column;gap:14px"></div>
+            <div class="sep"></div>
+            <span class="lbl">Try</span>
+            <div class="presets" id="tc_pre" style="flex-direction:column"></div>
+          </aside>
+          <div class="labmain">
+            <div class="fig"><svg id="tc_fig" viewBox="0 0 760 320" role="img" aria-label="Total-to-static pressure ratio versus Mach number from the isentropic relation and from Bernoulli's equation, and a bar dividing the total enthalpy into static enthalpy and kinetic energy" style="touch-action:none;cursor:crosshair"></svg></div>
+            <div class="legend"><span><i class="sw" style="border-color:var(--comp)"></i>p<sub>0</sub>/p, isentropic (7.32)</span><span><i class="sw" style="border-color:var(--exp);border-top-style:dashed"></i>(p + ½ρV²)/p, Bernoulli</span><span><i class="sw" style="border-color:var(--warn)"></i>static enthalpy h</span><span><i class="sw" style="border-color:var(--stream)"></i>kinetic energy V²/2</span></div>
+            <div class="tiles" id="tc_tiles"></div>
+            <div class="readout" id="tc_out"></div>
+          </div>
+        </div>
+
+        <h3>Worked examples 7.6–7.7</h3>
+        <div id="exC">
+          <div class="tabs" role="tablist" aria-label="Total-condition example">
+            <button role="tab" aria-selected="true" data-ex="c6">Ex 7.6 · Total temperature and pressure</button>
+            <button role="tab" aria-selected="false" data-ex="c7">Ex 7.7 · Airspeed from a Pitot tube</button>
+          </div>
+          <div data-expanel="c6" class="prose" style="max-width:none">
+            <p class="problem">At a point in an airflow the pressure, temperature and velocity are <input type="number" id="c6_p" value="1" min="0.001" step="0.1" aria-label="Pressure in atm"> atm, <input type="number" id="c6_T" value="320" min="1" step="10" aria-label="Temperature in K"> K and <input type="number" id="c6_V" value="1000" min="0" step="50" aria-label="Velocity in m/s"> m/s. Calculate the total temperature and total pressure at this point.</p>
+            <div class="tblwrap"><table id="c6_tab"></table></div>
+            <p class="exnote">T<sub>0</sub> needs only an adiabatic deceleration, (7.54); p<sub>0</sub> needs an isentropic one, (7.32) with T<sub>0</sub>. Bernoulli’s equation, which assumes constant density, would give a total pressure of only a few atmospheres here (last row).</p>
+          </div>
+          <div data-expanel="c7" class="prose" style="max-width:none" hidden>
+            <p class="problem">An airplane flies at a standard altitude of 3 km, where Appendix D gives T<sub>∞</sub> = <input type="number" id="c7_T" value="268.67" min="1" step="1" aria-label="Freestream temperature in K"> K and p<sub>∞</sub> = <input type="number" id="c7_p" value="70121" min="1" step="100" aria-label="Freestream pressure in N per square meter"> N/m². A Pitot tube at the nose measures <input type="number" id="c7_p0" value="106338" min="1" step="100" aria-label="Pitot pressure in N per square meter"> N/m². The airplane flies at a high subsonic speed, faster than 480 km/h. Calculate its velocity.</p>
+            <div id="c7_ban"></div>
+            <div class="tblwrap"><table id="c7_tab"></table></div>
+            <p class="exnote">480 km/h = 133.3 m/s is already M ≈ 0.41, so the flow is compressible and Bernoulli’s equation does not apply. The Pitot tube compresses the flow isentropically to rest, so it reads p<sub>0</sub>; (7.32) gives T<sub>0</sub>, and the energy equation (7.54) the velocity. The last rows show the 8% error Bernoulli would make.</p>
+          </div>
+        </div>
+      </section>
+
+<!-- ================= 7.6 SHOCK WAVES ================= -->
+      <section class="sec" id="shocks" aria-labelledby="h-sh">
+        <div class="sechead"><p class="eyebrow">Section 7.6</p><h2 id="h-sh">Some aspects of supersonic flow: shock waves</h2></div>
+        <div class="cols2">
+          <div class="prose">
+            <p>Calculating the shape and strength of shock waves is an essential part of supersonic aerodynamics and the main thrust of Chapters 8 and 9. A shock wave is an extremely thin region, typically of the order of 10<sup>−5</sup> cm, across which the flow properties change drastically. Across it:</p>
+            <ul>
+              <li>pressure, density, temperature and entropy <b>increase</b>;</li>
+              <li>Mach number, velocity and total pressure <b>decrease</b>;</li>
+              <li>total enthalpy, and so total temperature, <b>stays the same</b>.</li>
+            </ul>
+            <p>Behind a <b>normal</b> shock the flow is always subsonic. Behind an <b>oblique</b> shock the Mach number falls but usually stays supersonic. Continue with <a href="https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/lessons/normal-shock-waves.html">Chapter 8, Normal Shock Waves</a>, and <a href="https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/lessons/oblique-shock-expansion-waves.html">Chapter 9, Oblique Shock and Expansion Waves</a>.</p>
+          </div>
+          <div class="fig narrow"><svg id="sh_fig" viewBox="0 0 420 250" role="img" aria-label="An oblique shock that turns a supersonic flow, and a normal shock behind which the flow is subsonic. Across both, pressure, density, temperature and entropy rise; Mach number, velocity and total pressure fall; total enthalpy is unchanged."></svg></div>
+        </div>
+      </section>
+
+<!-- ================= QUIZ ================= -->
+      <section class="sec" id="check" aria-labelledby="h-q">
+        <div class="sechead"><p class="eyebrow">Self-check</p><h2 id="h-q">Check your understanding</h2></div>
+        <p class="lede" style="font-size:15.5px">Pick an answer to see whether it is right and why. <span class="score" id="q_score"></span></p>
+        <div class="quiz" id="quiz"></div>
+      </section>
+
+<!-- ================= KEY EQUATIONS ================= -->
+      <section class="sec" id="equations" aria-labelledby="h-eqs">
+        <div class="sechead"><p class="eyebrow">Summary</p><h2 id="h-eqs">Key equations</h2></div>
+        <div class="cols2">
+          <div class="prose">
+            <h3>Thermodynamics of a calorically perfect gas</h3>
+            <div class="eq">\[ p=\rho RT,\qquad e=c_vT,\qquad h=c_pT=e+\frac{p}{\rho} \]</div>
+            <div class="eq">\[ c_p=\frac{\gamma R}{\gamma-1},\qquad c_v=\frac{R}{\gamma-1},\qquad c_p-c_v=R \]</div>
+            <div class="eq">\[ \delta q+\delta w=de,\qquad ds=\frac{\delta q}{T}+ds_{\text{irrev}},\qquad ds_{\text{irrev}}\ge0 \]</div>
+            <div class="eq">\[ s_2-s_1=c_p\ln\frac{T_2}{T_1}-R\ln\frac{p_2}{p_1}=c_v\ln\frac{T_2}{T_1}+R\ln\frac{v_2}{v_1} \]</div>
+          </div>
+          <div class="prose">
+            <h3>Isentropic flow, compressibility, total conditions</h3>
+            <div class="eq">\[ \frac{p_2}{p_1}=\left(\frac{\rho_2}{\rho_1}\right)^{\gamma}=\left(\frac{T_2}{T_1}\right)^{\frac{\gamma}{\gamma-1}} \]</div>
+            <div class="eq">\[ \tau=-\frac{1}{v}\frac{dv}{dp}=\frac{1}{\rho}\frac{d\rho}{dp},\qquad d\rho=\rho\,\tau\,dp \]</div>
+            <div class="eq">\[ h+\frac{V^2}{2}=h_0,\qquad c_pT+\frac{V^2}{2}=c_pT_0 \]</div>
+            <div class="eq">\[ \frac{p_0}{p}=\left(\frac{T_0}{T}\right)^{\frac{\gamma}{\gamma-1}},\qquad \frac{\rho_0}{\rho}=\left(\frac{T_0}{T}\right)^{\frac{1}{\gamma-1}} \]</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+

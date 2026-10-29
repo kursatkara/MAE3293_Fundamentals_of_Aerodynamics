@@ -137,6 +137,10 @@ async function main() {
       const body = html.slice(i, j).replace(/\\\[([\s\S]*?)\\\]/g, (m, t) => conv(t, true))
                                    .replace(/\\\(([\s\S]*?)\\\)/g, (m, t) => conv(t, false));
       html = html.slice(0, i) + body + html.slice(j);
+      // MathJax numbers equations with a counter shared by all pages; renumber per page so a
+      // page's output does not change when another lesson is added before it.
+      const ids = new Map();
+      html = html.replace(/MJX-(\d+)-/g, (m, n) => { if (!ids.has(n)) ids.set(n, ids.size + 1); return 'MJX-' + ids.get(n) + '-'; });
     }
     html = html.replace('</style>', `\n${FACES}\n` + (math ? `/* MathJax SVG output (pre-rendered) */\n${MJCSS}\nmjx-container[display="true"]{margin:.4em 0!important}\n` : '') + '</style>');
     fs.writeFileSync(path.join(ROOT, out), html);

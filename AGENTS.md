@@ -27,7 +27,8 @@ Instructions for people and AI agents (Claude Code, Codex) editing this reposito
    the structure of an existing lesson: sections are `<section class="sec" id=… aria-labelledby=…>` with a `.sechead`
    eyebrow naming the textbook section, and every interactive registers a draw function in `renderers` so the
    γ input redraws it.
-3. Put gas-dynamics functions used by more than one lesson in `src/shared/` and give them a check in
+3. Reuse `src/shared/kit.js` (plot frames, curves, drag-to-set, known-quantity inversion, example tabs and
+   Exact/Notes tables) for new interactives. Put gas-dynamics functions used by more than one lesson in `src/shared/` and give them a check in
    `tools/check-tables.js` against Anderson's appendix tables.
 4. Add a card to `CARDS` in `tools/preview-images.js`, then `npm run build && npm run previews && npm run check`.
 5. The previous and next links, the course home list, and the canonical and Open Graph URLs come from the manifest.
