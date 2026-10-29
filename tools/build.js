@@ -27,7 +27,7 @@ const STYLE = rd('src/shared/style.css').trimEnd();
 const FAVICON = 'data:image/svg+xml,' + encodeURIComponent(rd('src/shared/favicon.svg').trim()).replace(/%20/g, ' ');
 const head = o => fill(rd('src/templates/head.html'), {
   title: o.title, description: esc(o.description), url: o.url, image: o.image,
-  image_alt: esc(o.image_alt), favicon: FAVICON, style: STYLE });
+  image_alt: esc(o.image_alt), favicon: FAVICON, style: o.style || STYLE });
 const header = o => fill(rd('src/templates/header.html'), {
   calculators: course.base + '#calculators', gamma: '', home_label: 'Course home', ...o });
 const footer = () => fill(rd('src/templates/footer.html'), { repo: course.repo });
@@ -82,7 +82,9 @@ ${course.calculators.map(C => `    <a href="${calcURL(C)}"${C.slug === cur.slug 
 function calcPage(C) {
   const url = calcURL(C), dir = 'src/calculators/' + C.slug + '/';
   let html = head({ title: `${C.title} Calculator · MAE 3293`, description: C.description, url,
-                    image: course.base + 'assets/' + C.slug + '-preview.png', image_alt: C.image_alt });
+                    image: course.base + 'assets/' + C.slug + '-preview.png', image_alt: C.image_alt,
+                    // optional page-only styles, appended after the shared stylesheet
+                    style: fs.existsSync(path.join(ROOT, dir, 'style.css')) ? STYLE + '\n' + rd(dir + 'style.css').trimEnd() : STYLE });
   html += header({ eyebrow: 'MAE 3293 · Fundamentals of Aerodynamics · Calculator', h1: C.title + ' Calculator',
                    gamma: GAMMA, home: course.base });
   html += calcNav(C) + rd(dir + 'body.html');

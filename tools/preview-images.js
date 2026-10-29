@@ -59,6 +59,13 @@ const CARDS = {
     setup: async p => {},
     figure: () => document.getElementById('pm_sch').outerHTML
   },
+  'supersonic-airfoils': {
+    dir: 'calculators', eyebrow: 'MAE 3293 · Calculator', title: 'Supersonic Airfoils Calculator',
+    blurb: 'Shock-expansion theory for a flat plate, a wedge and a diamond airfoil, with linear theory for comparison.',
+    cols: '420px 1fr',
+    setup: async p => {},
+    figure: () => document.getElementById('fig').outerHTML
+  },
   'nozzles-diffusers-wind-tunnels': {
     blurb: 'Area–Mach relation, choked flow, and normal shocks in a converging-diverging nozzle, computed live.',
     cols: '400px 1fr',

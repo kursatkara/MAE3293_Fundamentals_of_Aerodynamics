@@ -95,8 +95,15 @@
     {
       "slug": "supersonic-airfoils",
       "title": "Supersonic Airfoils",
-      "legacy": "https://kursatkara.github.io/MAE3293-Compressible-Aerodynamics-Calculator/supersonic-airfoils.html",
-      "summary": "Shock-expansion theory for flat-plate, wedge and diamond airfoils, compared with linear theory: surface pressures, lift, wave drag and moment."
+      "scripts": ["core.js", "helpers.js"],
+      "summary": "Shock-expansion theory for flat-plate, wedge and diamond airfoils, compared with linear theory: surface pressures, lift, wave drag and moment.",
+      "description": "Supersonic airfoil calculator: shock-expansion theory for a flat plate, a wedge and a diamond airfoil at any Mach number and angle of attack, with the wave pattern drawn to scale, surface pressures, a step-by-step worked solution, lift, wave-drag and moment coefficients, and a comparison with linear (Ackeret) theory. MAE 3293, Oklahoma State University.",
+      "image_alt": "Flat plate at angle of attack in supersonic flow with oblique shocks, Prandtl-Meyer expansion fans and pressure arrows on each face",
+      "lessons": [
+        ["oblique-shock-expansion-waves", "airfoils", "Chapter 9, shock-expansion theory for supersonic airfoils"],
+        ["oblique-shock-expansion-waves", "relations", "Chapter 9, oblique shock relations"],
+        ["oblique-shock-expansion-waves", "prandtl-meyer", "Chapter 9, Prandtl–Meyer expansion waves"]
+      ]
     }
   ]
 }
