@@ -1,0 +1,25 @@
+{
+  "base": "https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/",
+  "repo": "https://github.com/kursatkara/MAE3293_Fundamentals_of_Aerodynamics",
+  "calculator": "https://kursatkara.github.io/MAE3293-Compressible-Aerodynamics-Calculator/",
+  "lessons": [
+    {
+      "slug": "oblique-shock-expansion-waves",
+      "chapter": 9,
+      "title": "Oblique Shock and Expansion Waves",
+      "scripts": ["core.js", "helpers.js"],
+      "summary": "Mach waves, the θ–β–M relation, shock reflection, Prandtl–Meyer expansion and isentropic compression, and shock-expansion theory for flat-plate, wedge, and diamond airfoils.",
+      "description": "Interactive lesson on oblique shocks, Mach waves, the θ–β–M relation, shock reflection, Prandtl–Meyer expansion and isentropic compression, and shock-expansion theory for flat-plate, wedge and diamond airfoils. MAE 3293, Oklahoma State University.",
+      "image_alt": "Diamond airfoil in supersonic flow with oblique shocks, expansion fans and surface pressure arrows"
+    },
+    {
+      "slug": "nozzles-diffusers-wind-tunnels",
+      "chapter": 10,
+      "title": "Nozzles, Diffusers, and Wind Tunnels",
+      "scripts": ["core.js", "quasi1d.js", "helpers.js"],
+      "summary": "Quasi-one-dimensional flow: the area–velocity and area–Mach relations, choked flow, converging-diverging nozzles with normal shocks inside or at the exit, rocket thrust, diffusers, and supersonic wind-tunnel start-up.",
+      "description": "Interactive lesson on quasi-one-dimensional compressible flow: the area–velocity and area–Mach relations, choked flow, converging-diverging nozzles with normal shocks inside or at the exit, overexpanded and underexpanded jets, rocket thrust, diffusers, and supersonic wind tunnels. MAE 3293, Oklahoma State University.",
+      "image_alt": "Converging-diverging nozzle with a normal shock in the diverging section, with the pressure and Mach number distributions along the nozzle"
+    }
+  ]
+}

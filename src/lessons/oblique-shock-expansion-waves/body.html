@@ -1,0 +1,451 @@
+  <p class="lede">A supersonic flow that is turned into itself forms an oblique shock; a flow turned away from itself forms an expansion fan. This lesson builds both from the conservation laws, then combines them into shock-expansion theory to find the lift and drag of the flat plate, the wedge, and the diamond-wedge airfoil. Every figure is computed live from the exact relations for a calorically perfect gas. Change the inputs and watch the waves move.</p>
+
+  <div class="lesson">
+    <nav class="toc" id="toc" aria-label="Lesson contents">
+      <span class="eyebrow">Contents</span>
+      <a href="#corner"><span class="n">9.1</span><span>Flow over a corner</span></a>
+      <a href="#mach-waves"><span class="n">9.1</span><span>Mach waves</span></a>
+      <a href="#relations"><span class="n">9.2</span><span>Oblique shock relations</span></a>
+      <a href="#theta-beta-m"><span class="n">9.2</span><span>The θ–β–M relation</span></a>
+      <a href="#shock-examples"><span class="n">Ex</span><span>Examples 9.2–9.5</span></a>
+      <a href="#interactions"><span class="n">9.4</span><span>Reflection and intersection</span></a>
+      <a href="#prandtl-meyer"><span class="n">9.6</span><span>Prandtl–Meyer expansion</span></a>
+      <a href="#compression"><span class="n">9.6</span><span>Isentropic compression</span></a>
+      <a href="#airfoils"><span class="n">9.7</span><span>Supersonic airfoils</span></a>
+      <a href="#check"><span class="n">?</span><span>Check your understanding</span></a>
+      <a href="#equations"><span class="n">Σ</span><span>Key equations</span></a>
+    </nav>
+
+    <div class="content">
+
+<!-- ================= 9.1 CORNER ================= -->
+      <section class="sec" id="corner" aria-labelledby="h-corner">
+        <div class="sechead"><p class="eyebrow">Section 9.1 · Introduction</p><h2 id="h-corner">Supersonic flow over a corner</h2></div>
+        <div class="prose">
+          <p>A normal shock makes a 90° angle with the upstream flow. In general a shock makes an oblique angle with the flow; these are <b>oblique shock waves</b>, and the normal shock is the special case where the wave angle is 90°. Supersonic flows also contain <b>expansion waves</b>, across which the pressure decreases continuously.</p>
+          <p>The flow at a wall must stay tangent to the wall. At a <b>concave corner</b> the wall turns up through the deflection angle θ, so every streamline turns up, <i>into</i> the main bulk of the flow. At a <b>convex corner</b> the wall turns down, and the streamlines turn <i>away</i> from the flow.</p>
+        </div>
+        <div class="key">Whenever a supersonic flow is <b>turned into itself</b>, an oblique shock wave forms: M drops discontinuously and p, ρ, T jump up. Whenever it is <b>turned away from itself</b>, a centered expansion fan forms at the corner: M rises and p, ρ, T fall continuously. The expansion wave is the direct antithesis of a shock.</div>
+
+        <div class="lab" id="cn">
+          <div class="labhead"><span class="eyebrow">Interactive 1 · Corner explorer</span><span class="note">Positive θ: concave (compression). Negative θ: convex (expansion).</span></div>
+          <aside class="rail" aria-label="Corner inputs">
+            <div id="cn_ctl" style="display:flex;flex-direction:column;gap:14px"></div>
+            <div class="sep"></div>
+            <span class="lbl">Try</span>
+            <div class="presets" id="cn_pre"></div>
+          </aside>
+          <div class="labmain">
+            <div id="cn_ban"></div>
+            <div class="fig"><svg id="cn_fig" viewBox="0 0 760 360" role="img" aria-label="Supersonic flow over a corner with streamlines and the resulting wave"></svg></div>
+            <div class="legend"><span><i class="sw" style="border-color:var(--comp)"></i>Oblique shock</span><span><i class="sw" style="border-color:var(--exp)"></i>Expansion fan</span><span><i class="sw" style="border-color:var(--mach);border-top-style:dashed"></i>Mach wave</span><span><i class="sw" style="border-color:var(--stream)"></i>Streamlines</span></div>
+            <div class="readout" id="cn_out"></div>
+          </div>
+        </div>
+      </section>
+
+<!-- ================= MACH WAVES ================= -->
+      <section class="sec" id="mach-waves" aria-labelledby="h-mw">
+        <div class="sechead"><p class="eyebrow">Section 9.1 · Source of the waves</p><h2 id="h-mw">Mach waves: why the waves are oblique</h2></div>
+        <div class="prose">
+          <p>Consider a small source of disturbance, a “beeper,” moving through a stagnant gas and emitting sound pulses. Each pulse spreads as a circle at the speed of sound <i>a</i>. When the beeper moves subsonically (V &lt; a), it always stays <i>inside</i> its family of circles and the waves run ahead of it. When it moves supersonically (V &gt; a), it outruns its own waves. The circles then pile up along a straight envelope BC, the <b>Mach wave</b>, tangent to every circle.</p>
+          <p>In time <i>t</i> the beeper travels <i>Vt</i> from A to B while the pulse emitted at A spreads to radius <i>at</i>. The right triangle ABC gives the <b>Mach angle</b> μ:</p>
+          <div class="eq">\[ \sin\mu = \frac{a\,t}{V\,t} = \frac{a}{V} = \frac{1}{M}, \qquad \mu = \sin^{-1}\!\left(\frac{1}{M}\right) \tag{9.1} \]</div>
+          <p>If the disturbances are stronger than sound waves, the envelope becomes an oblique shock at angle β &gt; μ. The physical mechanism is the same. A Mach wave is the limiting case of an oblique shock: an infinitely weak one.</p>
+        </div>
+        <div class="lab" id="mw">
+          <div class="labhead"><span class="eyebrow">Interactive 2 · The beeper</span><span class="note" id="mw_state"></span></div>
+          <aside class="rail" aria-label="Beeper inputs">
+            <div id="mw_ctl" style="display:flex;flex-direction:column;gap:14px"></div>
+            <div class="row"><button type="button" class="play" id="mw_play">Pause</button><button type="button" class="mini" id="mw_restart">Restart</button></div>
+            <label class="check"><input type="checkbox" id="mw_geo" checked> Show triangle ABC</label>
+            <div class="readout" id="mw_out"></div>
+          </aside>
+          <div class="labmain">
+            <div class="fig"><svg id="mw_fig" viewBox="0 0 760 330" role="img" aria-label="Sound pulses emitted by a moving source, forming a Mach cone when supersonic"></svg></div>
+            <p class="note">The source moves from right to left. B is its current position; A is where it emitted the oldest pulse shown; C is the tangent point of the Mach wave on that pulse.</p>
+          </div>
+        </div>
+
+        <div class="lab" id="sb">
+          <div class="labhead"><span class="eyebrow">Example 9.1 · Sonic boom</span></div>
+          <div class="labmain" style="grid-column:1/-1">
+            <p class="problem">A supersonic airplane flies at Mach <input type="number" id="sb_M" value="2" min="1.01" max="10" step="0.1" aria-label="Flight Mach number"> at an altitude of <input type="number" id="sb_z" value="16" min="0.1" max="40" step="0.5" aria-label="Altitude in km"> km. Assume the shock pattern quickly coalesces into a Mach wave that reaches the ground behind the airplane. At the instant a bystander hears the boom, how far ahead of the bystander is the airplane?</p>
+            <div class="cols2">
+              <div class="fig narrow"><svg id="sb_fig" viewBox="0 0 440 210" role="img" aria-label="Airplane, Mach wave and bystander"></svg></div>
+              <div class="readout" id="sb_out"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+<!-- ================= 9.2 RELATIONS ================= -->
+      <section class="sec" id="relations" aria-labelledby="h-rel">
+        <div class="sechead"><p class="eyebrow">Section 9.2</p><h2 id="h-rel">Oblique shock relations</h2></div>
+        <div class="prose">
+          <p>Split the upstream velocity V<sub>1</sub> into a component <i>u</i><sub>1</sub> normal to the shock and a component <i>w</i><sub>1</sub> tangential to it; do the same downstream. β is the shock (wave) angle and θ the deflection angle, both measured from the upstream flow direction. Apply the integral conservation laws to a control volume around the shock for steady, inviscid, adiabatic flow with no body forces. The faces parallel to the shock carry all the flux; on the other faces \(\vec V\cdot d\vec S=0\).</p>
+        </div>
+        <div class="cols2">
+          <div class="prose">
+            <div class="eq">\[ \rho_1 u_1 = \rho_2 u_2 \tag{9.2} \]</div>
+            <div class="eq">\[ w_1 = w_2 \tag{9.5} \]</div>
+            <div class="eq">\[ p_1 + \rho_1 u_1^2 = p_2 + \rho_2 u_2^2 \tag{9.7} \]</div>
+            <div class="eq">\[ h_1 + \frac{u_1^2}{2} = h_2 + \frac{u_2^2}{2} \tag{9.12} \]</div>
+          </div>
+          <div class="prose">
+            <p>Continuity, tangential momentum, normal momentum and energy. The tangential velocity does not change across the shock, and the tangential component <i>w</i> never appears in (9.2), (9.7) or (9.12).</p>
+            <div class="key">Changes across an oblique shock are governed <b>only by the component of velocity normal to the wave</b>. The normal-shock relations apply unchanged with M<sub>1</sub> replaced by M<sub>n,1</sub>.</div>
+          </div>
+        </div>
+        <details class="deriv">
+          <summary>Derivation from the integral conservation laws <span>(notes pp. 77–80)</span></summary>
+          <div class="inner">
+            <div class="dstep"><span class="k">1</span><div><p>Continuity: on face a, \(\vec V_1=-u_1\hat n+w_1\hat t\) and \(d\vec S=\hat n\,dS\), so \(\oint_a\rho\vec V\cdot d\vec S=-\rho_1u_1A\). On face d the flux is \(+\rho_2u_2A\). Faces b, c, e, f are parallel to the flow.</p><div class="eq">\[ \oint_S\rho\vec V\cdot d\vec S=-\rho_1u_1A+\rho_2u_2A=0\;\Rightarrow\;\rho_1u_1=\rho_2u_2 \]</div></div></div>
+            <div class="dstep"><span class="k">2</span><div><p>Momentum is a vector equation, \(\oint_S(\rho\vec V\cdot d\vec S)\vec V=-\oint_S p\,d\vec S\). Its tangential component has no pressure contribution, because the pressure forces on b and f (and on c and e) cancel:</p><div class="eq">\[ -(\rho_1u_1A)\,w_1+(\rho_2u_2A)\,w_2=0\;\xrightarrow{(9.2)}\;w_1=w_2 \]</div></div></div>
+            <div class="dstep"><span class="k">3</span><div><p>The normal component of momentum:</p><div class="eq">\[ -(\rho_1u_1A)\,u_1+(\rho_2u_2A)\,u_2=-(-p_1A+p_2A)\;\Rightarrow\;p_1+\rho_1u_1^2=p_2+\rho_2u_2^2 \]</div></div></div>
+            <div class="dstep"><span class="k">4</span><div><p>Energy, \(\oint_S\rho\left(e+\tfrac{V^2}{2}\right)\vec V\cdot d\vec S=-\oint_S p\vec V\cdot d\vec S\), with h = e + p/ρ and (9.2):</p><div class="eq">\[ h_1+\frac{V_1^2}{2}=h_2+\frac{V_2^2}{2}=h_0 \tag{9.11} \]</div><p>Total enthalpy, and for a calorically perfect gas total temperature T<sub>0</sub>, is constant across the shock. Since V² = u² + w² and w<sub>1</sub> = w<sub>2</sub>, \(V_1^2-V_2^2=u_1^2-u_2^2\), which gives (9.12).</p></div></div>
+          </div>
+        </details>
+        <div class="prose">
+          <p>Equations (9.2), (9.7) and (9.12) are exactly the normal-shock equations (8.2), (8.6) and (8.10). The same algebra therefore gives the oblique-shock jumps in terms of the normal Mach number:</p>
+        </div>
+        <div class="cols2">
+          <div class="prose">
+            <div class="eq">\[ M_{n,1}=M_1\sin\beta \tag{9.13} \]</div>
+            <div class="eq">\[ M_{n,2}^2=\frac{1+\frac{\gamma-1}{2}M_{n,1}^2}{\gamma M_{n,1}^2-\frac{\gamma-1}{2}} \tag{9.14} \]</div>
+            <div class="eq">\[ \frac{\rho_2}{\rho_1}=\frac{(\gamma+1)M_{n,1}^2}{2+(\gamma-1)M_{n,1}^2} \tag{9.15} \]</div>
+          </div>
+          <div class="prose">
+            <div class="eq">\[ \frac{p_2}{p_1}=1+\frac{2\gamma}{\gamma+1}\left(M_{n,1}^2-1\right) \tag{9.16} \]</div>
+            <div class="eq">\[ \frac{T_2}{T_1}=\frac{p_2}{p_1}\,\frac{\rho_1}{\rho_2} \tag{9.17} \]</div>
+            <div class="eq">\[ M_2=\frac{M_{n,2}}{\sin(\beta-\theta)} \tag{9.18} \]</div>
+          </div>
+        </div>
+
+        <div class="lab" id="vc">
+          <div class="labhead"><span class="eyebrow">Interactive 3 · Velocity components across the shock</span><span class="note">V<sub>1</sub> is drawn at a fixed length; every other vector is to scale relative to it.</span></div>
+          <aside class="rail" aria-label="Velocity triangle inputs">
+            <div class="ctl"><span class="lbl">Hold fixed</span>
+              <div class="seg" role="group" aria-label="Which angle to hold fixed"><button type="button" id="vc_mt" aria-pressed="true">Wall angle θ</button><button type="button" id="vc_mb" aria-pressed="false">Shock angle β</button></div></div>
+            <div id="vc_ctl" style="display:flex;flex-direction:column;gap:14px"></div>
+            <p class="note" id="vc_note"></p>
+            <div class="sep"></div>
+            <span class="lbl">Try</span>
+            <div class="presets" id="vc_pre"></div>
+          </aside>
+          <div class="labmain">
+            <div id="vc_ban"></div>
+            <div class="fig"><svg id="vc_fig" viewBox="0 0 760 380" role="img" aria-label="Normal and tangential velocity components across an oblique shock"></svg></div>
+            <div class="legend"><span><i class="sw" style="border-color:var(--ink)"></i>V<sub>1</sub>, V<sub>2</sub></span><span><i class="sw" style="border-color:var(--accent)"></i>tangential w (unchanged)</span><span><i class="sw" style="border-color:var(--exp)"></i>normal u (drops across the shock)</span></div>
+            <div class="readout" id="vc_out"></div>
+          </div>
+        </div>
+      </section>
+
+<!-- ================= θ–β–M ================= -->
+      <section class="sec" id="theta-beta-m" aria-labelledby="h-tbm">
+        <div class="sechead"><p class="eyebrow">Section 9.2 · The vital chart</p><h2 id="h-tbm">The θ–β–M relation</h2></div>
+        <div class="prose">
+          <p>Equation (9.18) needs θ, but θ is not a third independent parameter. From the shock geometry, \(\tan\beta=u_1/w_1\) and \(\tan(\beta-\theta)=u_2/w_2\) (9.19, 9.20). Dividing, and using w<sub>1</sub> = w<sub>2</sub> with continuity:</p>
+          <div class="eq">\[ \frac{\tan(\beta-\theta)}{\tan\beta}=\frac{u_2}{u_1}=\frac{\rho_1}{\rho_2}=\frac{2+(\gamma-1)M_1^2\sin^2\beta}{(\gamma+1)M_1^2\sin^2\beta} \tag{9.22} \]</div>
+          <p>Trigonometric rearrangement gives θ explicitly as a unique function of M<sub>1</sub> and β:</p>
+          <div class="eq">\[ \tan\theta = 2\cot\beta\;\frac{M_1^2\sin^2\beta-1}{M_1^2\left(\gamma+\cos2\beta\right)+2} \tag{9.23} \]</div>
+        </div>
+        <div class="lab" id="tb">
+          <div class="labhead"><span class="eyebrow">Interactive 4 · θ–β–M diagram</span><span class="note">Click or drag on the chart to set θ.</span></div>
+          <aside class="rail" aria-label="Theta-beta-M inputs">
+            <div id="tb_ctl" style="display:flex;flex-direction:column;gap:14px"></div>
+            <div class="sep"></div>
+            <span class="lbl">What the chart says</span>
+            <div class="presets" id="tb_pre" style="flex-direction:column"></div>
+          </aside>
+          <div class="labmain">
+            <div id="tb_ban"></div>
+            <div class="fig"><svg id="tb_fig" viewBox="0 0 760 460" role="img" aria-label="Shock angle versus deflection angle for several Mach numbers" style="touch-action:none;cursor:crosshair"></svg></div>
+            <div class="legend"><span><i class="sw" style="border-color:var(--accent)"></i>Your M<sub>1</sub></span><span><i class="sw" style="border-color:var(--mach)"></i>Other M<sub>1</sub></span><span><i class="sw" style="border-color:var(--comp);border-top-style:dashed"></i>θ<sub>max</sub> locus</span><span><i class="sw" style="border-color:var(--exp);border-top-style:dotted"></i>M<sub>2</sub> = 1</span><span>● weak &nbsp;○ strong</span></div>
+            <div class="tblwrap"><table id="tb_tab"></table></div>
+            <p class="note" id="tb_obs"></p>
+          </div>
+        </div>
+        <div class="prose">
+          <h3>Five things the chart tells you</h3>
+          <ol>
+            <li><b>Maximum deflection.</b> For each M<sub>1</sub> there is a θ<sub>max</sub>. If the geometry demands θ &gt; θ<sub>max</sub>, no straight attached shock exists; a curved shock detaches from the corner or the nose. θ<sub>max</sub> grows with M<sub>1</sub>, but only to sin<sup>−1</sup>(1/γ) = 45.58° as M<sub>1</sub> → ∞ (γ = 1.4).</li>
+            <li><b>Two solutions.</b> For θ &lt; θ<sub>max</sub> there are two straight shocks. The smaller β is the <i>weak</i> shock, the larger the <i>strong</i> shock. Nature usually picks the weak one; the strong solution needs a high downstream back pressure.</li>
+            <li><b>θ = 0.</b> Then β = 90° (a normal shock) or β = μ (a Mach wave). Neither deflects the streamlines.</li>
+            <li><b>Raise M<sub>1</sub> at fixed θ:</b> β decreases and the shock becomes stronger. Lower M<sub>1</sub> far enough and the shock detaches; for θ = 20° this happens below M<sub>1</sub> = 1.84.</li>
+            <li><b>Raise θ at fixed M<sub>1</sub>:</b> β increases and the shock becomes stronger, until θ &gt; θ<sub>max</sub> and the shock detaches; for M<sub>1</sub> = 2 that is θ &gt; 22.97°.</li>
+          </ol>
+          <p>The weak branch gives supersonic M<sub>2</sub> except in a thin band just below θ<sub>max</sub>, between the dotted M<sub>2</sub> = 1 line and the dashed θ<sub>max</sub> line. The strong branch is always subsonic.</p>
+        </div>
+      </section>
+
+<!-- ================= EXAMPLES 9.2–9.5 ================= -->
+      <section class="sec" id="shock-examples" aria-labelledby="h-ex">
+        <div class="sechead"><p class="eyebrow">Worked examples</p><h2 id="h-ex">Oblique shocks: Examples 9.2–9.5</h2></div>
+        <p class="lede" style="font-size:15.5px">Each example solves the problem from the notes. The <b>Exact</b> column comes from the relations above; the <b>Notes</b> column is the hand solution read from the θ–β–M chart and Appendices A and B. Change any given value and the exact solution updates. The notes column applies to the original values only.</p>
+        <div class="tabs" role="tablist" aria-label="Example" id="ex_tabs">
+          <button role="tab" aria-selected="true" data-ex="e2">Ex 9.2 · Compression corner</button>
+          <button role="tab" aria-selected="false" data-ex="e3">Ex 9.3 · Given β</button>
+          <button role="tab" aria-selected="false" data-ex="e4">Ex 9.4 · Given p<sub>2</sub>/p<sub>1</sub></button>
+          <button role="tab" aria-selected="false" data-ex="e5">Ex 9.5 · Inlets</button>
+        </div>
+        <div data-expanel="e2" class="prose" style="max-width:none">
+          <p class="problem">A supersonic flow with M<sub>1</sub> = <input type="number" id="e2_M" value="2" min="1.05" step="0.1" aria-label="M1">, p<sub>1</sub> = <input type="number" id="e2_p" value="1" min="0.001" step="0.1" aria-label="p1 in atm"> atm and T<sub>1</sub> = <input type="number" id="e2_T" value="288" min="1" step="1" aria-label="T1 in K"> K is deflected at a compression corner through θ = <input type="number" id="e2_th" value="20" min="0" max="50" step="0.5" aria-label="theta in degrees">°. Find M, p, T, p<sub>0</sub> and T<sub>0</sub> behind the oblique shock.</p>
+          <div id="e2_ban"></div>
+          <div class="tblwrap"><table id="e2_tab"></table></div>
+          <p class="exnote"><b>Caution.</b> The p<sub>0,2</sub>/p<sub>1</sub> column in Appendix B cannot be used for an oblique shock. It is computed from Eq. (8.80) with the actual downstream Mach number of a normal shock, not the normal component M<sub>n,2</sub>. Use p<sub>0,2</sub> = (p<sub>0,2</sub>/p<sub>0,1</sub>)(p<sub>0,1</sub>/p<sub>1</sub>)p<sub>1</sub>, as in the table.</p>
+        </div>
+        <div data-expanel="e3" class="prose" style="max-width:none" hidden>
+          <p class="problem">An oblique shock has a wave angle β = <input type="number" id="e3_b" value="30" min="1" max="90" step="0.5" aria-label="beta in degrees">°. The upstream Mach number is M<sub>1</sub> = <input type="number" id="e3_M" value="2.4" min="1.05" step="0.1" aria-label="M1">. Find the deflection angle, the pressure and temperature ratios, and M<sub>2</sub>.</p>
+          <div id="e3_ban"></div>
+          <div class="tblwrap"><table id="e3_tab"></table></div>
+          <p class="exnote">The chart reading θ ≈ 6.5° is the main source of the difference in M<sub>2</sub>: with the exact θ = 6.72°, sin(β − θ) is smaller and M<sub>2</sub> = 2.13.</p>
+        </div>
+        <div data-expanel="e4" class="prose" style="max-width:none" hidden>
+          <p class="problem">An oblique shock has β = <input type="number" id="e4_b" value="35" min="1" max="90" step="0.5" aria-label="beta in degrees">° and a pressure ratio p<sub>2</sub>/p<sub>1</sub> = <input type="number" id="e4_p" value="3" min="1.0001" step="0.1" aria-label="pressure ratio">. Find the upstream Mach number.</p>
+          <div id="e4_ban"></div>
+          <div class="tblwrap"><table id="e4_tab"></table></div>
+          <p class="exnote">Invert (9.16) directly: \(M_{n,1}^2 = 1+\frac{\gamma+1}{2\gamma}\left(\frac{p_2}{p_1}-1\right)\). No table interpolation is needed.</p>
+        </div>
+        <div data-expanel="e5" class="prose" style="max-width:none" hidden>
+          <p class="problem">A Mach <input type="number" id="e5_M" value="3" min="1.05" step="0.1" aria-label="M1"> flow must be slowed to subsonic speed. (1) Pass it through a single normal shock. (2) First pass it through an oblique shock with β = <input type="number" id="e5_b" value="40" min="1" max="90" step="0.5" aria-label="beta in degrees">°, then through a normal shock. Compare the final total pressures.</p>
+          <div id="e5_ban"></div>
+          <div class="tblwrap"><table id="e5_tab"></table></div>
+          <div class="cols2">
+            <div class="fig narrow"><svg id="e5_fig" viewBox="0 0 440 200" role="img" aria-label="Normal-shock inlet and oblique-shock inlet"></svg></div>
+            <div class="prose">
+              <p><b>Supersonic inlets.</b> A normal shock ahead of a pitot inlet causes a large total-pressure loss. In an oblique-shock inlet, a central cone or ramp creates an oblique shock, and the flow then passes through a relatively weak normal shock at the lip. For the same flight condition the total-pressure loss is smaller, so the engine produces more thrust. This is why most modern supersonic aircraft use oblique-shock inlets.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+<!-- ================= 9.4 INTERACTIONS ================= -->
+      <section class="sec" id="interactions" aria-labelledby="h-ix">
+        <div class="sechead"><p class="eyebrow">Section 9.4</p><h2 id="h-ix">Shock reflection and intersection</h2></div>
+        <div class="prose">
+          <p>A shock that hits a solid wall must reflect, because the flow behind it, deflected by θ, would otherwise pass through the wall. The reflected shock turns the flow back through θ so that it runs parallel to the upper wall. The reflected shock is weaker than the incident shock, because M<sub>2</sub> &lt; M<sub>1</sub>, and it makes a smaller angle Φ with the wall. If M<sub>2</sub> is too low for a straight attached shock to turn the flow by θ (θ &gt; θ<sub>max</sub>(M<sub>2</sub>)), regular reflection is impossible. A normal shock, the Mach stem, forms at the wall instead. This is <b>Mach reflection</b>; its wave pattern requires numerical solution.</p>
+          <p>When a right-running and a left-running shock intersect, each continues as a refracted shock. The two streams behind them must have the same pressure and the same direction, but they have crossed different shocks, so their entropy, density and speed differ. They are separated by a <b>slip line</b>: p<sub>4</sub> = p<sub>4′</sub> and the flow directions match, while ρ<sub>4</sub> ≠ ρ<sub>4′</sub> and V<sub>4</sub> ≠ V<sub>4′</sub>. When two left-running shocks intersect, they merge into a single stronger shock, and a weak reflected wave and a slip line adjust the flow so that both streams leave in the same direction.</p>
+        </div>
+        <div class="tabs" role="tablist" aria-label="Interaction type" id="ix_tabs">
+          <button role="tab" aria-selected="true" data-ix="refl">Regular reflection</button>
+          <button role="tab" aria-selected="false" data-ix="cross">Intersecting shocks</button>
+        </div>
+        <div class="lab" id="rf" data-ixpanel="refl">
+          <div class="labhead"><span class="eyebrow">Interactive 5 · Reflection from a wall</span></div>
+          <aside class="rail" aria-label="Reflection inputs">
+            <div id="rf_ctl" style="display:flex;flex-direction:column;gap:14px"></div>
+            <div class="sep"></div>
+            <span class="lbl">Try</span>
+            <div class="presets" id="rf_pre"></div>
+          </aside>
+          <div class="labmain">
+            <div id="rf_ban"></div>
+            <div class="fig"><svg id="rf_fig" viewBox="0 0 760 330" role="img" aria-label="Incident and reflected oblique shock in a channel"></svg></div>
+            <div class="readout" id="rf_out"></div>
+          </div>
+        </div>
+        <div class="lab" id="ix" data-ixpanel="cross" hidden>
+          <div class="labhead"><span class="eyebrow">Interactive 6 · Right- and left-running shocks</span></div>
+          <aside class="rail" aria-label="Intersection inputs">
+            <div id="ix_ctl" style="display:flex;flex-direction:column;gap:14px"></div>
+            <p class="note">Set θ<sub>1</sub> = θ<sub>2</sub> and the pattern becomes symmetric: the slip line vanishes.</p>
+          </aside>
+          <div class="labmain">
+            <div id="ix_ban"></div>
+            <div class="fig"><svg id="ix_fig" viewBox="0 0 760 350" role="img" aria-label="Intersection of two oblique shocks with refracted shocks and a slip line"></svg></div>
+            <div class="tblwrap"><table id="ix_tab"></table></div>
+          </div>
+        </div>
+      </section>
+
+<!-- ================= 9.6 PRANDTL–MEYER ================= -->
+      <section class="sec" id="prandtl-meyer" aria-labelledby="h-pm">
+        <div class="sechead"><p class="eyebrow">Section 9.6</p><h2 id="h-pm">Prandtl–Meyer expansion waves</h2></div>
+        <div class="prose">
+          <p>The expansion fan at a convex corner is a continuous region that can be visualized as an infinite number of Mach waves, each at the local Mach angle μ to the local flow direction. The fan is bounded by the <b>forward Mach line</b> at μ<sub>1</sub> to the upstream flow and the <b>rearward Mach line</b> at μ<sub>2</sub> to the downstream flow. Since ds = 0 across each Mach wave, the expansion is <b>isentropic</b>: p<sub>0</sub> and T<sub>0</sub> are constant through it, in direct contrast to the entropy rise across a shock.</p>
+          <p>The problem: given the upstream flow (region 1) and the deflection θ, find the downstream flow (region 2).</p>
+        </div>
+        <details class="deriv">
+          <summary>Derivation of the Prandtl–Meyer function <span>(notes pp. 94–97)</span></summary>
+          <div class="inner">
+            <div class="dstep"><span class="k">1</span><div><p>Consider one Mach wave that turns the flow by an infinitesimal dθ. Momentum across the wave keeps the tangential velocity: \(V_{t1}=V_{t2}\), while \(V_{n1}\neq V_{n2}\). With \(V_t=V\cos\mu\) upstream and \(V_t=(V+dV)\cos(\mu+d\theta)\) downstream:</p><div class="eq">\[ \frac{V+dV}{V}=\frac{\cos\mu}{\cos(\mu+d\theta)}=\frac{\cos\mu}{\cos\mu\cos d\theta-\sin\mu\sin d\theta}\approx\frac{1}{1-d\theta\tan\mu} \]</div></div></div>
+            <div class="dstep"><span class="k">2</span><div><p>The binomial expansion \((1-x)^{-1}\approx1+x\) for |x| ≪ 1 gives \(dV/V=d\theta\tan\mu\). With \(\tan\mu=1/\sqrt{M^2-1}\):</p><div class="eq">\[ d\theta=\sqrt{M^2-1}\,\frac{dV}{V} \]</div><p>This differential equation describes the flow inside the expansion wave exactly.</p></div></div>
+            <div class="dstep"><span class="k">3</span><div><p>Express dV/V in terms of M. With V = aM, \(dV/V=da/a+dM/M\). From \(a_0^2/a^2=T_0/T=1+\frac{\gamma-1}{2}M^2\):</p><div class="eq">\[ \frac{da}{a}=-\frac{\frac{\gamma-1}{2}M\,dM}{1+\frac{\gamma-1}{2}M^2}\quad\Rightarrow\quad\frac{dV}{V}=\frac{1}{1+\frac{\gamma-1}{2}M^2}\,\frac{dM}{M} \]</div></div></div>
+            <div class="dstep"><span class="k">4</span><div><p>Integrate from M<sub>1</sub> to M<sub>2</sub>:</p><div class="eq">\[ \theta=\int_{M_1}^{M_2}\frac{\sqrt{M^2-1}}{1+\frac{\gamma-1}{2}M^2}\,\frac{dM}{M}=\nu(M_2)-\nu(M_1) \]</div></div></div>
+          </div>
+        </details>
+        <div class="cols2">
+          <div class="prose">
+            <div class="eq">\[ \nu(M)=\sqrt{\frac{\gamma+1}{\gamma-1}}\tan^{-1}\!\sqrt{\frac{\gamma-1}{\gamma+1}\left(M^2-1\right)}-\tan^{-1}\!\sqrt{M^2-1} \]</div>
+            <div class="eq">\[ \theta=\nu(M_2)-\nu(M_1) \]</div>
+            <p>ν is the <b>Prandtl–Meyer function</b>; ν(1) = 0. Appendix C tabulates ν and μ against M.</p>
+          </div>
+          <div class="prose">
+            <ol>
+              <li>For the given M<sub>1</sub>, find ν(M<sub>1</sub>).</li>
+              <li>Compute ν(M<sub>2</sub>) = ν(M<sub>1</sub>) + θ.</li>
+              <li>Invert ν to find M<sub>2</sub>.</li>
+              <li>The wave is isentropic, so p<sub>0</sub> and T<sub>0</sub> are constant:</li>
+            </ol>
+            <div class="eq">\[ \frac{T_2}{T_1}=\frac{1+\frac{\gamma-1}{2}M_1^2}{1+\frac{\gamma-1}{2}M_2^2},\qquad \frac{p_2}{p_1}=\left(\frac{T_2}{T_1}\right)^{\frac{\gamma}{\gamma-1}} \]</div>
+          </div>
+        </div>
+        <div class="lab" id="pm">
+          <div class="labhead"><span class="eyebrow">Interactive 7 · Expansion fan</span><span class="note" id="pm_numax"></span></div>
+          <aside class="rail" aria-label="Expansion inputs">
+            <div id="pm_ctl" style="display:flex;flex-direction:column;gap:14px"></div>
+            <div class="readout" id="pm_out"></div>
+          </aside>
+          <div class="labmain">
+            <div id="pm_ban"></div>
+            <div class="fig"><svg id="pm_fig" viewBox="0 0 760 380" role="img" aria-label="Centered Prandtl-Meyer expansion fan with curved streamlines"></svg></div>
+            <div class="fig"><svg id="pm_chart" viewBox="0 0 760 230" role="img" aria-label="Prandtl-Meyer function versus Mach number"></svg></div>
+            <p class="note">Streamlines curve smoothly and continuously through the fan; the turn is spread between the forward and rearward Mach lines. Lower chart: θ is the vertical distance between ν(M<sub>1</sub>) and ν(M<sub>2</sub>).</p>
+          </div>
+        </div>
+        <div class="lab" id="e9">
+          <div class="labhead"><span class="eyebrow">Example 9.9 · Expansion around a sharp corner</span></div>
+          <div class="labmain" style="grid-column:1/-1">
+            <p class="problem">A flow with M<sub>1</sub> = <input type="number" id="e9_M" value="1.5" min="1" step="0.1" aria-label="M1">, p<sub>1</sub> = <input type="number" id="e9_p" value="1" min="0.001" step="0.1" aria-label="p1 in atm"> atm and T<sub>1</sub> = <input type="number" id="e9_T" value="288" min="1" step="1" aria-label="T1 in K"> K expands around a sharp corner through θ = <input type="number" id="e9_th" value="15" min="0" max="100" step="0.5" aria-label="theta in degrees">°. Find M<sub>2</sub>, p<sub>2</sub>, T<sub>2</sub>, p<sub>0,2</sub>, T<sub>0,2</sub>, and the angles of the forward and rearward Mach lines relative to the upstream flow.</p>
+            <div id="e9_ban"></div>
+            <div class="tblwrap"><table id="e9_tab"></table></div>
+            <p class="exnote">The rearward Mach line sits at μ<sub>2</sub> to the downstream flow, which is itself turned θ down, so it makes μ<sub>2</sub> − θ with the upstream direction. The notes list T<sub>0</sub> in atm; the unit is K.</p>
+          </div>
+        </div>
+      </section>
+
+<!-- ================= ISENTROPIC COMPRESSION ================= -->
+      <section class="sec" id="compression" aria-labelledby="h-cp">
+        <div class="sechead"><p class="eyebrow">Examples 9.10 and 9.11</p><h2 id="h-cp">Isentropic compression versus a sharp corner</h2></div>
+        <div class="prose">
+          <p>Turn a supersonic flow into itself gradually, along a smooth concave surface, and each small turn sends out a weak compression Mach wave. The waves are isentropic, so the same Prandtl–Meyer relation applies with the sign reversed:</p>
+          <div class="eq">\[ \text{expansion: } \theta=\nu(M_2)-\nu(M_1),\qquad \text{compression: } \theta=\nu(M_1)-\nu(M_2) \]</div>
+          <p>Downstream, the compression waves converge and coalesce into a shock away from the wall. Near the wall the compression stays isentropic. Turn the same flow through the same angle at a sharp corner and it crosses a single oblique shock instead.</p>
+        </div>
+        <div class="lab" id="cp">
+          <div class="labhead"><span class="eyebrow">Interactive 8 · Same turn, two ways</span></div>
+          <aside class="rail" aria-label="Compression inputs">
+            <div id="cp_ctl" style="display:flex;flex-direction:column;gap:14px"></div>
+            <div class="sep"></div>
+            <span class="lbl">Try</span>
+            <div class="presets" id="cp_pre"></div>
+          </aside>
+          <div class="labmain">
+            <div id="cp_ban"></div>
+            <div class="fig"><svg id="cp_fig" viewBox="0 0 760 300" role="img" aria-label="Isentropic compression surface compared with a sharp compression corner"></svg></div>
+            <div class="tblwrap"><table id="cp_tab"></table></div>
+            <p class="exnote" id="cp_note"></p>
+          </div>
+        </div>
+      </section>
+
+<!-- ================= 9.7 AIRFOILS ================= -->
+      <section class="sec" id="airfoils" aria-labelledby="h-af">
+        <div class="sechead"><p class="eyebrow">Section 9.7</p><h2 id="h-af">Shock-expansion theory: supersonic airfoils</h2></div>
+        <div class="prose">
+          <p>Every surface of a sharp-edged airfoil is flat, so the pressure on each face is uniform. March the flow from the leading edge: on each face, decide whether the flow is turned into itself (oblique shock) or away from itself (Prandtl–Meyer expansion), find the face pressure, and integrate the pressures into forces. Region 1 is the freestream, with M<sub>1</sub> and p<sub>1</sub>, and</p>
+          <div class="eq">\[ q_1=\tfrac12\rho_1V_1^2=\tfrac12\frac{\gamma p_1}{a_1^2}V_1^2=\tfrac{\gamma}{2}\,p_1M_1^2 \]</div>
+        </div>
+        <div class="key">In an inviscid supersonic flow over a two-dimensional body the drag is finite: <b>d’Alembert’s paradox does not hold</b>. Shock waves are always dissipative, drag-producing mechanisms. This drag is called <b>wave drag</b>, c<sub>d,w</sub>.</div>
+        <div class="cases" role="tablist" aria-label="Airfoil" id="af_cases">
+          <button class="case" role="tab" data-case="flat" aria-selected="true">
+            <svg viewBox="0 0 74 30" aria-hidden="true"><line x1="6" y1="10" x2="68" y2="22" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+            <span class="t"><b>A · Flat plate</b><small>Lift and drag due to lift</small></span>
+          </button>
+          <button class="case" role="tab" data-case="wedge" aria-selected="false">
+            <svg viewBox="0 0 74 30" aria-hidden="true"><polygon points="6,15 68,5 68,25" fill="currentColor" fill-opacity=".15" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+            <span class="t"><b>Wedge</b><small>Examples 9.6 and 9.13 (X-15 tail)</small></span>
+          </button>
+          <button class="case" role="tab" data-case="diamond" aria-selected="false">
+            <svg viewBox="0 0 74 30" aria-hidden="true"><polygon points="6,15 37,5 68,15 37,25" fill="currentColor" fill-opacity=".15" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+            <span class="t"><b>B · Diamond wedge</b><small>Shoulder expansions</small></span>
+          </button>
+        </div>
+        <div class="lab" id="af" style="border-top:0;padding-top:0">
+          <aside class="rail" aria-label="Airfoil inputs">
+            <div id="af_ctl" style="display:flex;flex-direction:column;gap:14px"></div>
+            <p class="note" id="af_geonote"></p>
+            <div class="sep"></div>
+            <span class="lbl">Examples from the notes</span>
+            <div class="presets" id="af_pre" style="flex-direction:column"></div>
+          </aside>
+          <div class="labmain">
+            <div id="af_ban"></div>
+            <div class="fig"><svg id="af_fig" viewBox="0 0 780 420" role="img" aria-label="Airfoil with shocks, expansion fans, slip line and surface pressure arrows"></svg></div>
+            <div class="legend"><span><i class="sw" style="border-color:var(--comp)"></i>Oblique shock</span><span><i class="sw" style="border-color:var(--exp)"></i>Expansion fan</span><span><i class="sw" style="border-color:var(--mach);border-top-style:dashed"></i>Slip line / Mach wave</span><span>Arrows: pressure on each face, length ∝ p/p<sub>1</sub>; red p &gt; p<sub>1</sub>, blue p &lt; p<sub>1</sub>. Circled numbers: flow regions.</span></div>
+            <div class="tiles" id="af_tiles"></div>
+          </div>
+        </div>
+        <div class="cols2">
+          <div class="prose" id="af_theory">
+            <div data-afcase="flat" class="prose">
+              <h3>Flat plate at angle of attack</h3>
+              <p>The upper surface turns the flow away from itself by α: an expansion fan at the leading edge, so p<sub>2</sub> &lt; p<sub>1</sub>. The lower surface turns the flow into itself by α: an oblique shock, so p<sub>3</sub> &gt; p<sub>1</sub>. Per unit span, the pressure difference acts normal to the plate:</p>
+              <div class="eq">\[ R'=(p_3-p_2)\,c,\qquad L'=R'\cos\alpha,\qquad D'=R'\sin\alpha \]</div>
+              <div class="eq">\[ c_l=\frac{2}{\gamma M_1^2}\left(\frac{p_3}{p_1}-\frac{p_2}{p_1}\right)\cos\alpha,\qquad c_d=\frac{2}{\gamma M_1^2}\left(\frac{p_3}{p_1}-\frac{p_2}{p_1}\right)\sin\alpha \]</div>
+              <p>Hence c<sub>d</sub>/c<sub>l</sub> = tan α. At the trailing edge the two streams meet again: the upper flow turns back through a shock, the lower flow through an expansion, and a slip line separates them.</p>
+            </div>
+            <div data-afcase="wedge" class="prose" hidden>
+              <h3>Wedge with a blunt base</h3>
+              <p>Half-angle δ, chord c, face length ℓ = c/cos δ, base height t = 2c tan δ. The upper face (region 2) turns the flow by δ − α and the lower face (region 3) by δ + α. The base sits in separated flow; take p<sub>b</sub> = p<sub>1</sub>, as in Example 9.6. In body axes, with N′ normal to the chord and A′ along it:</p>
+              <div class="eq">\[ N'=(p_3-p_2)\,c,\qquad A'=(p_2+p_3)\,\frac{t}{2}-p_b\,t \]</div>
+              <div class="eq">\[ L'=N'\cos\alpha-A'\sin\alpha,\qquad D'=N'\sin\alpha+A'\cos\alpha \]</div>
+              <p>At α = 0, p<sub>2</sub> = p<sub>3</sub> and the drag of Example 9.6 follows:</p>
+              <div class="eq">\[ D'=2c\tan\delta\,(p_2-p_1),\qquad c_{d,w}=\frac{4\tan\delta}{\gamma M_1^2}\left(\frac{p_2}{p_1}-1\right) \]</div>
+              <p>For a given geometry this inviscid wave-drag coefficient depends only on the Mach number.</p>
+            </div>
+            <div data-afcase="diamond" class="prose" hidden>
+              <h3>Symmetric diamond wedge</h3>
+              <p>Half-angle ε, side length ℓ, thickness t: sin ε = (t/2)/ℓ, and t/c = tan ε with c = 2√(ℓ² − t²/4). Regions 2 and 3 are the front and rear faces on top; 2′ and 3′ are the front and rear faces underneath. For |α| &lt; ε the front faces see shocks; the shoulders always expand the flow through 2ε.</p>
+              <p>At α = 0, symmetry gives L′ = 0 and</p>
+              <div class="eq">\[ D'=2\ell\sin\varepsilon\,(p_2-p_3)=(p_2-p_3)\,t \]</div>
+              <div class="eq">\[ c_l=0,\qquad c_d=\frac{2}{\gamma M_1^2}\left(\frac{p_2}{p_1}-\frac{p_3}{p_1}\right)\tan\varepsilon \]</div>
+              <p>At angle of attack, in body axes:</p>
+              <div class="eq">\[ N'=\left[(p_{2'}-p_2)+(p_{3'}-p_3)\right]\frac{c}{2} \]</div>
+              <div class="eq">\[ A'=\left[(p_2+p_{2'})-(p_3+p_{3'})\right]\frac{t}{2} \]</div>
+              <div class="eq">\[ L'=N'\cos\alpha-A'\sin\alpha,\qquad D'=N'\sin\alpha+A'\cos\alpha \]</div>
+            </div>
+          </div>
+          <div class="prose">
+            <h3>Region by region</h3>
+            <div class="tblwrap"><table id="af_tab"></table></div>
+            <div class="readout" id="af_force"></div>
+          </div>
+        </div>
+        <div id="af_exnote" class="exnote"></div>
+        <p class="note">Trailing-edge waves and the slip line are computed by matching pressure and flow direction behind the trailing edge. They do not change any surface pressure. For angle-of-attack sweeps, asymmetric diamonds, base-pressure studies and linear-theory comparisons, open the <a href="https://kursatkara.github.io/MAE3293-Compressible-Aerodynamics-Calculator/supersonic-airfoils.html" target="_blank" rel="noopener">Supersonic Airfoil Calculator</a>.</p>
+      </section>
+
+<!-- ================= QUIZ ================= -->
+      <section class="sec" id="check" aria-labelledby="h-q">
+        <div class="sechead"><p class="eyebrow">Self-check</p><h2 id="h-q">Check your understanding</h2></div>
+        <p class="lede" style="font-size:15.5px">Pick an answer to see whether it is right and why. Use the interactives above to test your reasoning. <span class="score" id="q_score"></span></p>
+        <div class="quiz" id="quiz"></div>
+      </section>
+
+<!-- ================= KEY EQUATIONS ================= -->
+      <section class="sec" id="equations" aria-labelledby="h-eqs">
+        <div class="sechead"><p class="eyebrow">Summary</p><h2 id="h-eqs">Key equations</h2></div>
+        <div class="cols2">
+          <div class="prose">
+            <h3>Mach wave and oblique shock</h3>
+            <div class="eq">\[ \mu=\sin^{-1}(1/M) \]</div>
+            <div class="eq">\[ \tan\theta = 2\cot\beta\,\frac{M_1^2\sin^2\beta-1}{M_1^2(\gamma+\cos2\beta)+2} \]</div>
+            <div class="eq">\[ M_{n,1}=M_1\sin\beta,\qquad M_2=\frac{M_{n,2}}{\sin(\beta-\theta)} \]</div>
+            <p>p<sub>2</sub>/p<sub>1</sub>, ρ<sub>2</sub>/ρ<sub>1</sub>, T<sub>2</sub>/T<sub>1</sub>, M<sub>n,2</sub> and p<sub>0,2</sub>/p<sub>0,1</sub>: normal-shock relations evaluated at M<sub>n,1</sub>. T<sub>0</sub> is constant; p<sub>0</sub> falls.</p>
+          </div>
+          <div class="prose">
+            <h3>Isentropic turning and airfoils</h3>
+            <div class="eq">\[ \theta=\pm\left[\nu(M_2)-\nu(M_1)\right]\quad(+\text{ expansion},\;-\text{ compression}) \]</div>
+            <div class="eq">\[ \frac{p_2}{p_1}=\left(\frac{1+\frac{\gamma-1}{2}M_1^2}{1+\frac{\gamma-1}{2}M_2^2}\right)^{\frac{\gamma}{\gamma-1}} \]</div>
+            <div class="eq">\[ \text{Flat plate: } c_l=\frac{2}{\gamma M_1^2}\left(\frac{p_3}{p_1}-\frac{p_2}{p_1}\right)\cos\alpha,\quad c_d=c_l\tan\alpha \]</div>
+            <div class="eq">\[ \text{Diamond, }\alpha=0:\; c_d=\frac{2}{\gamma M_1^2}\left(\frac{p_2}{p_1}-\frac{p_3}{p_1}\right)\tan\varepsilon \]</div>
+            <div class="eq">\[ \text{Wedge, }\alpha=0,\;p_b=p_1:\; c_d=\frac{4\tan\delta}{\gamma M_1^2}\left(\frac{p_2}{p_1}-1\right) \]</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
