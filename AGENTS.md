@@ -43,14 +43,14 @@ Instructions for people and AI agents (Claude Code, Codex) editing this reposito
 6. The previous and next links, the course home list, and the canonical and Open Graph URLs come from the manifest.
 
 ## Adding or porting a calculator
-The calculators are moving here from the old site (`MAE3293-Compressible-Aerodynamics-Calculator`) one at a time.
-1. In `src/course.json`, `calculators` lists every calculator in display order. An entry with `legacy` (a URL) is not
-   ported yet: the course home and the calculator menu link to the old page. Porting one means removing `legacy` and
-   adding `scripts`, `description`, `image_alt`, and `lessons` (`[lesson slug, section id, label]` for the
-   "Where these relations come from" list).
-2. Create `src/calculators/<slug>/body.html` (lede and sections) and `modules.js`. Use the shared, table-checked
-   functions in `src/shared/`; do not copy formulas from the old calculator.
-3. Before switching over, run the old and new calculators on the same inputs over several γ and compare every output
+All five calculators live here (they replace the old `MAE3293-Compressible-Aerodynamics-Calculator` site, whose pages forward
+here). To add one:
+1. In `src/course.json`, `calculators` lists every calculator in display order. Each entry needs `slug`, `title`, `summary`,
+   `scripts`, `description`, `image_alt`, and `lessons` (`[lesson slug, section id, label]` for the "Where these
+   relations come from" list). An entry with `legacy` (a URL) instead links to a page elsewhere.
+2. Create `src/calculators/<slug>/body.html` (lede and sections) and `modules.js`, plus an optional `style.css` for
+   page-only styles. Use the shared, table-checked functions in `src/shared/`; do not copy formulas.
+3. When a calculator replaces an existing one, run both on the same inputs over several γ and compare every output
    (they must agree to display rounding). Then draw `src/thumbs/<slug>.svg` (as for lessons; the sketch shows what
    the calculator takes as input) and add its `CARDS` entry (`dir: 'calculators'`) in `tools/preview-images.js`.
 
