@@ -262,9 +262,9 @@ const dsR=(M,g)=>{const n=NS(M,g);return g/(g-1)*Math.log(n.T21)-Math.log(n.p21)
       ['p<sub>2</sub> (atm)','(p<sub>2</sub>/p<sub>1</sub>) p<sub>1</sub>',f(p*n.p21,4),'4.5',1],['T<sub>2</sub> (K)','(T<sub>2</sub>/T<sub>1</sub>) T<sub>1</sub>',f(T2,2),'485.86',1],['a<sub>2</sub> (m/s)','√(γRT<sub>2</sub>)',f(a2,2),'441.84'],['u<sub>2</sub> (m/s)','M<sub>2</sub>a<sub>2</sub>',f(n.M2*a2,2),'255.1',1],['u<sub>2</sub> (m/s), check','u<sub>1</sub>/(ρ<sub>2</sub>/ρ<sub>1</sub>), continuity',f(u/n.r21,2),null]],def,'Appendix B');});
   watch(['c12_p','c12_Ma','c12_Mb'],()=>{const p=num('c12_p'),A=num('c12_Ma'),Bm=num('c12_Mb'),def=near(p,1)&&near(A,2)&&near(Bm,4);
     if(!(p>0&&A>=1&&Bm>=1)){$('c12_tab').innerHTML='';$('c12_note').innerHTML='';return;}
-    const part=(M,lab,N)=>{const p01=p/pp0(M,G),r=NS(M,G).p0r;return [{sect:`(${lab}) M<sub>1</sub> = ${f(M,2)}`},['p<sub>0,1</sub> (atm)','(p<sub>0</sub>/p)<sub>M₁</sub> p<sub>1</sub>, Appendix A',f(p01,3),N[0]],['p<sub>0,2</sub>/p<sub>0,1</sub>','Appendix B',f(r,4),N[1]],['p<sub>0,2</sub> (atm)','(p<sub>0,2</sub>/p<sub>0,1</sub>) p<sub>0,1</sub>',f(p01*r,3),N[2]],['p<sub>0,1</sub> − p<sub>0,2</sub> (atm)','loss of total pressure',f(p01*(1-r),3),N[3],1]];};
+    const part=(M,lab,N)=>{const p01=p/pp0(M,G),r=NS(M,G).p0r;return [{sect:`(${lab}) M<sub>1</sub> = ${f(M,2)}`},['p<sub>0,1</sub> (atm)','(p<sub>0</sub>/p)<sub>M₁</sub> p<sub>1</sub>, Appendix A',f(p01,3),N[0]],['p<sub>0,2</sub>/p<sub>0,1</sub>','Appendix B',f(r,4),N[1]],['p<sub>0,2</sub> (atm)','(p<sub>0,2</sub>/p<sub>0,1</sub>) p<sub>0,1</sub>',f(p01*r,3),N[2],0,N[4]],['p<sub>0,1</sub> − p<sub>0,2</sub> (atm)','loss of total pressure',f(p01*(1-r),3),N[3],1]];};
     const la=p/pp0(A,G)*(1-NS(A,G).p0r),lb=p/pp0(Bm,G)*(1-NS(Bm,G).p0r);
-    exTable('c12_tab',[...part(A,'a',['7.824','0.7209','5.64','2.184']),...part(Bm,'b',['151.8','0.1388','21.7','130.7'])],def,'Appendices A and B');
+    exTable('c12_tab',[...part(A,'a',['7.824','0.7209','5.64','2.184',0]),...part(Bm,'b',['151.8','0.1388','21.7','130.7',1])],def,'Appendices A and B');
     $('c12_note').innerHTML=`Raising M<sub>1</sub> from ${f(A,2)} to ${f(Bm,2)} multiplies the loss of total pressure by ${f(lb/la,1)}. If a normal shock must occur in a flow, everything else being equal, it should occur at the lowest possible upstream Mach number.`+(def?' The notes write p<sub>0,2</sub> = 21.7 atm in (b); 0.1388 × 151.8 = 21.07 atm, the value their loss of 130.7 atm uses.':'');});
   const set13=(M)=>{$('c13_M').value=M;$('c13_M').dispatchEvent(new Event('input'));};
   $('c13_m2').onclick=()=>set13(2);$('c13_m10').onclick=()=>set13(10);
@@ -280,8 +280,9 @@ const dsR=(M,g)=>{const n=NS(M,g);return g/(g-1)*Math.log(n.T21)-Math.log(n.p21)
   watch([],()=>{const C=[['8.15','p<sub>2</sub>/p<sub>1</sub> = 4.5',inv(M=>NS(M,G).p21,4.5,1,50),['2','0.5774','2.667','4.5 (given)','1.687']],
       ['8.16','T<sub>2</sub>/T<sub>1</sub> = 5.8',inv(M=>NS(M,G).T21,5.8,1,50),['5','0.4152','5','29','5.8 (given)']],
       ['8.17','M<sub>2</sub> = 0.4752',inv(M=>NS(M,G).M2,0.4752,1,50),['3','0.4752 (given)','3.857','10.33','2.679']]];
-    let h=`<thead><tr><th class="l">Example</th><th class="l">Given</th><th class="l"></th><th>M<sub>1</sub></th><th>M<sub>2</sub></th><th>ρ<sub>2</sub>/ρ<sub>1</sub></th><th>p<sub>2</sub>/p<sub>1</sub></th><th>T<sub>2</sub>/T<sub>1</sub></th></tr></thead><tbody>`;
-    C.forEach(([e,g,M,N])=>{const n=NS(M,G);h+=`<tr><td class="l" rowspan="2">${e}</td><td class="l" rowspan="2">${g}</td><td class="rel">Exact</td><td class="hl">${isFinite(M)?f(M,4):'—'}</td><td>${f(n.M2,4)}</td><td>${f(n.r21,4)}</td><td>${f(n.p21,4)}</td><td>${f(n.T21,4)}</td></tr><tr><td class="rel">Notes (App. B, γ = 1.4)</td>${N.map(x=>`<td>${Math.abs(G-1.4)<1e-9?x:'—'}</td>`).join('')}</tr>`;});
+    let h=`<thead><tr><th class="l">Example</th><th class="l">Given</th><th>M<sub>1</sub></th><th>M<sub>2</sub></th><th>ρ<sub>2</sub>/ρ<sub>1</sub></th><th>p<sub>2</sub>/p<sub>1</sub></th><th>T<sub>2</sub>/T<sub>1</sub></th></tr></thead><tbody>`;
+    const g14=Math.abs(G-1.4)<1e-9,hv=x=>`<span class="handv">tables: ${g14?x:'—'}</span>`;
+    C.forEach(([e,g,M,N])=>{const n=NS(M,G);h+=`<tr><td class="l">${e}</td><td class="l">${g}</td><td class="hl">${isFinite(M)?f(M,4):'—'}${hv(N[0])}</td><td>${f(n.M2,4)}${hv(N[1])}</td><td>${f(n.r21,4)}${hv(N[2])}</td><td>${f(n.p21,4)}${hv(N[3])}</td><td>${f(n.T21,4)}${hv(N[4])}</td></tr>`;});
     $('c15_tab').innerHTML=h+'</tbody>';});
   /* 8.18–8.20 */
   const ent=M=>Math.round(M*20)/20;  // Appendix B step of 0.05 for 2 < M1 < 5
@@ -373,9 +374,9 @@ const dsR=(M,g)=>{const n=NS(M,g);return g/(g-1)*Math.log(n.T21)-Math.log(n.p21)
   tabset('exD');
   const Mof=r=>r<=1/pp0(1,G)?Mfromp(1/r,G):inv(M=>pitot(M,G),r,1,50);
   watch(['d22_p','d22_a','d22_b','d22_c'],()=>{const p=num('d22_p'),R=[num('d22_a'),num('d22_b'),num('d22_c')],def=near(p,1)&&near(R[0],1.276)&&near(R[1],2.714)&&near(R[2],12.06)&&Math.abs(G-1.4)<1e-9,thr=1/pp0(1,G),N=['0.6','1.3','3'];
-    let h=`<thead><tr><th class="l">Reading</th><th>p<sub>Pitot</sub>/p<sub>1</sub></th><th class="l">Regime and formula</th><th>M<sub>1</sub>, exact</th><th>Notes</th><th>Isentropic formula</th></tr></thead><tbody>`;
+    let h=`<thead><tr><th class="l">Reading</th><th>p<sub>Pitot</sub>/p<sub>1</sub></th><th class="l">Regime and formula</th><th>M<sub>1</sub></th><th class="hand">Tables, γ = 1.4</th><th>Isentropic formula</th></tr></thead><tbody>`;
     R.forEach((x,i)=>{const r=x/p,ok=r>=1,sup=r>thr,M=ok?Mof(r):NaN,Mw=ok?Mfromp(1/r,G):NaN;
-      h+=`<tr><td class="l">(${'abc'[i]}) ${f(x,3)} atm</td><td>${f(r,4)}</td><td class="rel">${!ok?'reading below p₁: impossible':sup?'supersonic: Rayleigh Pitot formula (App. B)':'subsonic: isentropic (App. A)'}</td><td class="hl">${f(M,4)}</td><td>${def?N[i]:'—'}</td><td>${sup?`${f(Mw,4)} (wrong)`:f(Mw,4)}</td></tr>`;});
+      h+=`<tr><td class="l">(${'abc'[i]}) ${f(x,3)} atm</td><td>${f(r,4)}</td><td class="rel">${!ok?'reading below p₁: impossible':sup?'supersonic: Rayleigh Pitot formula (App. B)':'subsonic: isentropic (App. A)'}</td><td class="hl">${f(M,4)}</td>${handCell(def?N[i]:'—')}<td>${sup?`${f(Mw,4)} (wrong)`:f(Mw,4)}</td></tr>`;});
     $('d22_tab').innerHTML=h+`</tbody><tfoot><tr><td class="l" colspan="6" style="font-weight:400;font-family:var(--f-body)">Threshold: at M<sub>1</sub> = 1 the tube reads ${f(thr,4)} p<sub>1</sub> = ${f(thr*p,4)} atm.</td></tr></tfoot>`;});
   watch(['d23_M','d23_p'],()=>{const M=num('d23_M'),p=num('d23_p'),def=near(M,8)&&near(p,46620);
     if(!(M>1&&p>0)){$('d23_tab').innerHTML='';return;}

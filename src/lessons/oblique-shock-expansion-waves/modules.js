@@ -155,11 +155,11 @@
     s+=tx([P[0]+6,(P[1]+g)/2],'z','flab','style="fill:var(--accent)"');
     s+=tx([(P[0]+By[0])/2,g+32],'d','flab','text-anchor="middle" style="fill:var(--accent)"');
     $('sb_fig').innerHTML=s;
-    const isDef=Math.abs(M-2)<1e-9&&Math.abs(z-16)<1e-9;
+    const isDef=Math.abs(M-2)<1e-9&&Math.abs(z-16)<1e-9&&Math.abs(G-1.4)<1e-9;
     $('sb_out').innerHTML=readout([
-      ['μ = sin<sup>−1</sup>(1/M)',dg(mu)+(isDef?' <em class="muted">notes 30°</em>':'')],
+      ['μ = sin<sup>−1</sup>(1/M)',dg(mu)+(isDef?' <em class="muted handi">tables: 30°</em>':'')],
       ['tan μ = z/d',f(Math.tan(mu),4)],
-      ['d = z / tan μ',`${f(d,2)} km`+(isDef?' <em class="muted">notes 27.71 km</em>':''),'hl']]);
+      ['d = z / tan μ',`${f(d,2)} km`+(isDef?' <em class="muted handi">tables: 27.71 km</em>':''),'hl']]);
   }
   renderers.push(go); render();
 })();
@@ -325,9 +325,9 @@
   const num=id=>parseFloat($(id).value), near=(a,b)=>Math.abs(a-b)<1e-9;
   function table(id,rows,def){
     def=def&&Math.abs(G-1.4)<1e-9;  // the notes are hand solutions for gamma = 1.4
-    let h=`<thead><tr><th class="l">Quantity</th><th class="l">Relation used</th><th>Exact</th><th>Notes${def?' (tables, chart)':' <span style="font-weight:400">(original values, γ = 1.4)</span>'}</th></tr></thead><tbody>`;
+    let h=`<thead><tr><th class="l">Quantity</th><th class="l">Relation used</th><th>Result</th><th class="hand">Tables, γ = 1.4</th></tr></thead><tbody>`;
     rows.forEach(r=>{if(r.sect){h+=`<tr><td class="l" colspan="4" style="padding-top:14px;color:var(--ink);font-weight:600">${r.sect}</td></tr>`;return;}
-      h+=`<tr><td class="l">${r[0]}</td><td class="rel">${r[1]}</td><td class="${r[4]?'hl':''}">${r[2]}</td><td>${def&&r[3]!=null?r[3]:'—'}</td></tr>`;});
+      h+=`<tr><td class="l">${r[0]}</td><td class="rel">${r[1]}</td><td class="${r[4]?'hl':''}">${r[2]}</td>${handCell(def&&r[3]!=null?r[3]:'—',def&&r[5])}</tr>`;});
     $(id).innerHTML=h+'</tbody>';}
   function e2(){
     const M=num('e2_M'),p1=num('e2_p'),T1=num('e2_T'),thd=num('e2_th'),th=thd*D;
@@ -359,12 +359,12 @@
     const s=shockFromBeta(M,b,G);
     $('e3_ban').innerHTML=b>betaMax(M,G)?banner('warn','This β lies on the strong branch.',`β exceeds β<sub>max</sub> = ${dg(betaMax(M,G))}; M<sub>2</sub> is subsonic.`):'';
     table('e3_tab',[
-      ['Deflection θ','θ–β–M (9.23)',dg(s.theta),'6.5°',1],
+      ['Deflection θ','θ–β–M (9.23)',dg(s.theta),'6.5°',1,1],
       ['M<sub>n,1</sub>','M<sub>1</sub> sin β',f(s.Mn1),'1.2'],
       ['p<sub>2</sub>/p<sub>1</sub>','(9.16); App. B',f(s.p21),'1.513',1],
       ['T<sub>2</sub>/T<sub>1</sub>','(9.17); App. B',f(s.T21),'1.128',1],
       ['M<sub>n,2</sub>','(9.14); App. B',f(s.Mn2),'0.8422'],
-      ['M<sub>2</sub>','M<sub>n,2</sub>/sin(β − θ)',f(s.M2),'2.11',1]],def);
+      ['M<sub>2</sub>','M<sub>n,2</sub>/sin(β − θ)',f(s.M2),'2.11',1,1]],def);
   }
   function e4(){
     const bd=num('e4_b'),b=bd*D,pr=num('e4_p'),def=near(bd,35)&&near(pr,3);
@@ -618,11 +618,11 @@
       ['p<sub>2</sub> (atm)','(p<sub>2</sub>/p<sub>0,2</sub>)(p<sub>0,1</sub>/p<sub>1</sub>) p<sub>1</sub>, p<sub>0,2</sub> = p<sub>0,1</sub>',f(p1*p01/p02,4),'0.469',1],
       ['T<sub>0,1</sub>/T<sub>1</sub>','App. A at M<sub>1</sub>',f(T01),'1.45'],['T<sub>0,2</sub>/T<sub>2</sub>','App. A at M<sub>2</sub>',f(T02),'1.8'],
       ['T<sub>2</sub> (K)','(T<sub>2</sub>/T<sub>0,2</sub>)(T<sub>0,1</sub>/T<sub>1</sub>) T<sub>1</sub>',f(T1*T01/T02,1),'232',1],
-      ['p<sub>0,2</sub> = p<sub>0,1</sub> (atm)','isentropic',f(p01*p1,4),'3.671',1],['T<sub>0,2</sub> = T<sub>0,1</sub> (K)','isentropic',f(T01*T1,1),'417.6',1],
+      ['p<sub>0,2</sub> = p<sub>0,1</sub> (atm)','isentropic',f(p01*p1,4),'3.671',1],['T<sub>0,2</sub> = T<sub>0,1</sub> (K)','isentropic',f(T01*T1,1),'417.6',1,1],
       ['Forward Mach line, μ<sub>1</sub>','sin<sup>−1</sup>(1/M<sub>1</sub>)',dg(w.mu1),'41.81°',1],['μ<sub>2</sub>','sin<sup>−1</sup>(1/M<sub>2</sub>)',dg(w.mu2),'30°'],
       ['Rearward Mach line, μ<sub>2</sub> − θ','from upstream direction',dg(w.mu2-th),'15°',1]];
-    let h=`<thead><tr><th class="l">Quantity</th><th class="l">Relation used</th><th>Exact</th><th>Notes${def?' (tables)':' <span style="font-weight:400">(original values, γ = 1.4)</span>'}</th></tr></thead><tbody>`;
-    rows.forEach(r=>h+=`<tr><td class="l">${r[0]}</td><td class="rel">${r[1]}</td><td class="${r[4]?'hl':''}">${r[2]}</td><td>${def?r[3]:'—'}</td></tr>`);
+    let h=`<thead><tr><th class="l">Quantity</th><th class="l">Relation used</th><th>Result</th><th class="hand">Tables, γ = 1.4</th></tr></thead><tbody>`;
+    rows.forEach(r=>h+=`<tr><td class="l">${r[0]}</td><td class="rel">${r[1]}</td><td class="${r[4]?'hl':''}">${r[2]}</td>${handCell(def?r[3]:'—',def&&r[5])}</tr>`);
     $('e9_tab').innerHTML=h+'</tbody>';
   }
   render();
@@ -675,10 +675,10 @@
     s+=wall([[half+10,wy],Cr,ray(Cr,th,600)],1)+arc(Cr,46,0,th,'ink',1.2)+tx(ray(Cr,th/2,58),'θ','flab','dominant-baseline="middle"');
     s+='</g>';
     $('cp_fig').innerHTML=s;
-    const def=Math.abs(M-10)<1e-9&&Math.abs(S.th-15)<1e-9;
+    const def=Math.abs(M-10)<1e-9&&Math.abs(S.th-15)<1e-9&&Math.abs(G-1.4)<1e-9;
     const ok1=iso.type==='isen',ok2=sh.type==='shock';
-    const r=(lab,a,b,n1v,n2v)=>`<tr><td class="l">${lab}</td><td class="hl">${ok1?a:'—'}</td><td>${ok2?b:'—'}</td><td>${def&&n1v?n1v:'—'}</td><td>${def&&n2v?n2v:'—'}</td></tr>`;
-    $('cp_tab').innerHTML=`<thead><tr><th class="l">M<sub>1</sub> = ${f(M,2)}, θ = ${f(S.th,1)}°</th><th>Isentropic compression</th><th>Oblique shock</th><th>Notes Ex 9.10</th><th>Notes Ex 9.11</th></tr></thead><tbody>`+
+    const r=(lab,a,b,n1v,n2v)=>`<tr><td class="l">${lab}</td><td class="hl">${ok1?a:'—'}</td><td>${ok2?b:'—'}</td>${handCell(def&&n1v?n1v:'—')}${handCell(def&&n2v?n2v:'—')}</tr>`;
+    $('cp_tab').innerHTML=`<thead><tr><th class="l">M<sub>1</sub> = ${f(M,2)}, θ = ${f(S.th,1)}°</th><th>Isentropic compression</th><th>Oblique shock</th><th class="hand">Tables, Ex 9.10</th><th class="hand">Tables, Ex 9.11</th></tr></thead><tbody>`+
       r('Wave relation',ok1?`ν(M<sub>2</sub>) = ${dg(n1)} − θ = ${dg(iso.nu2)}`:'',ok2?`β = ${dg(sh.beta)}, M<sub>n,1</sub> = ${f(sh.Mn1,3)}`:'','ν<sub>2</sub> = 87.3°','β = 20°, M<sub>n,1</sub> = 3.42')+
       r('M<sub>2</sub>',ok1?f(iso.M2):'',ok2?f(sh.M2):'','6.4','5.22')+
       r('p<sub>2</sub>/p<sub>1</sub>',ok1?f(iso.p21):'',ok2?f(sh.p21):'','18.02','13.32')+
@@ -857,7 +857,8 @@
     // ---------- comparison with the notes ----------
     const nr=(x,y)=>Math.abs(x-y)<1e-9, M=S.M, al=S.al, e=S.e;
     let ex='';
-    const cmp=(title,rows,txt)=>`<h3 style="margin:6px 0 8px">${title}</h3><div class="tblwrap"><table><thead><tr><th class="l">Quantity</th><th>Exact</th><th>Notes</th></tr></thead><tbody>${rows.map(r=>`<tr><td class="l">${r[0]}</td><td class="hl">${r[1]}</td><td>${r[2]}</td></tr>`).join('')}</tbody></table></div>${txt?`<p class="exnote" style="margin-top:8px">${txt}</p>`:''}`;
+    const g14=Math.abs(G-1.4)<1e-9;
+    const cmp=(title,rows,txt)=>`<h3 style="margin:6px 0 8px">${title}</h3>${handSwitchHTML()}<div class="tblwrap"><table><thead><tr><th class="l">Quantity</th><th>Result</th><th class="hand">Tables, γ = 1.4</th></tr></thead><tbody>${rows.map(r=>`<tr><td class="l">${r[0]}</td><td class="hl">${r[1]}</td>${handCell(g14?r[2]:'—',g14&&r[3])}</tr>`).join('')}</tbody></table></div>${txt?`<p class="exnote" style="margin-top:8px">${txt}</p>`:''}`;
     const fa=id=>sol.faces.find(x=>x.id===id);
     if(sol.ok&&cs==='flat'&&nr(M,3)&&nr(al,5)) ex=cmp('Example 9.12 · Flat plate at α = 5° in Mach 3 flow',[
       ['ν(M<sub>2</sub>) = ν(M<sub>1</sub>) + α',dg(fa('2').w.nu2),'54.76°'],['M<sub>2</sub>',f(fa('2').M,3),'3.27'],['p<sub>2</sub>/p<sub>1</sub> (expansion)',f(fa('2').P,4),'0.668'],
@@ -865,7 +866,7 @@
       ['c<sub>l</sub>',f(sol.cl,4),'0.125'],['c<sub>d</sub>',f(sol.cd,4),'0.011']],'The notes read p<sub>3</sub>/p<sub>1</sub> at the nearest Appendix B entry; c<sub>d</sub> = c<sub>l</sub> tan α in both.');
     if(sol.ok&&cs==='flat'&&nr(M,7)&&nr(al,10)) ex=cmp('Example 9.13A · Flat plate at α = 10° in Mach 7 flow',[
       ['ν(M<sub>2</sub>)',dg(fa('2').w.nu2),'100.97°'],['M<sub>2</sub>',f(fa('2').M,3),'9.5'],['p<sub>2</sub>/p<sub>1</sub>',f(fa('2').P,4),'0.13'],
-      ['β (lower shock)',dg(fa('3').w.beta),'16.5° (book)'],['M<sub>n,1</sub>',f(fa('3').w.Mn1,4),'1.99 ≈ 2'],['p<sub>3</sub>/p<sub>1</sub>',f(fa('3').P,4),'4.5'],['c<sub>l</sub>',f(sol.cl,4),'0.1274']],
+      ['β (lower shock)',dg(fa('3').w.beta),'16.5° (book)'],['M<sub>n,1</sub>',f(fa('3').w.Mn1,4),'1.99 ≈ 2'],['p<sub>3</sub>/p<sub>1</sub>',f(fa('3').P,4),'4.5',1],['c<sub>l</sub>',f(sol.cl,4),'0.1274',1]],
       'Rounding M<sub>n,1</sub> = 1.99 up to 2 in Appendix B raises p<sub>3</sub>/p<sub>1</sub> from 4.38 to 4.5, which accounts for most of the 4% difference in c<sub>l</sub>.');
     if(sol.ok&&cs==='wedge'&&nr(M,5)&&nr(al,0)&&nr(e,15)) ex=cmp('Example 9.6 · 15° half-angle wedge in Mach 5 flow',[
       ['β',dg(fa('2').w.beta),'24.3°'],['M<sub>n,1</sub>',f(fa('2').w.Mn1,4),'2.0576'],['p<sub>2</sub>/p<sub>1</sub>',f(fa('2').P,4),'4.736 (App. B at 2.05)'],['c<sub>d,w</sub> = 4 tan δ (p<sub>2</sub>/p<sub>1</sub> − 1)/(γM<sub>1</sub><sup>2</sup>)',f(sol.cd,4),'0.1144']],
@@ -874,8 +875,8 @@
       const p2=fa('2'),p3=fa('3'),l=1/Math.cos(sol.e),Lnb=l*(p3.P*Math.cos(sol.e+sol.a)-p2.P*Math.cos(sol.e-sol.a));
       ex=cmp('Example 9.13B · X-15 wedge tail, δ = 5°, α = 10°, Mach 7',[
         ['Upper face: expansion of α − δ',dg(sol.a-sol.e),'5°'],['M<sub>2</sub>',f(p2.M,3),'≈ 8'],['p<sub>2</sub>/p<sub>1</sub>',f(p2.P,4),'0.424'],
-        ['Lower face: shock, θ = δ + α',dg(sol.e+sol.a),'15°'],['β',dg(p3.w.beta),'23.5°'],['M<sub>n,1</sub>',f(p3.w.Mn1,4),'2.79'],['p<sub>3</sub>/p<sub>1</sub>',f(p3.P,4),'8.98'],
-        ['L′/(p<sub>1</sub>c) from the two faces only',f(Lnb,4),'8.283'],['c<sub>l</sub>, faces only (as in the notes)',f(Lnb/sol.q,4),'0.2415'],['c<sub>l</sub> with the base at p<sub>b</sub> = p<sub>1</sub>',f(sol.cl,4),'—']],
+        ['Lower face: shock, θ = δ + α',dg(sol.e+sol.a),'15°'],['β',dg(p3.w.beta),'23.5°',1],['M<sub>n,1</sub>',f(p3.w.Mn1,4),'2.79',1],['p<sub>3</sub>/p<sub>1</sub>',f(p3.P,4),'8.98',1],
+        ['L′/(p<sub>1</sub>c) from the two faces only',f(Lnb,4),'8.283'],['c<sub>l</sub>, faces only (as in the notes)',f(Lnb/sol.q,4),'0.2415',1],['c<sub>l</sub> with the base at p<sub>b</sub> = p<sub>1</sub>',f(sol.cl,4),'—']],
         'For M<sub>1</sub> = 7 and θ = 15°, Eq. (9.23) gives β = 21.60°, not the 23.5° read from the chart in the notes; that reading raises M<sub>n,1</sub> to 2.79 and p<sub>3</sub>/p<sub>1</sub> to 8.98. With β = 21.60°, p<sub>3</sub>/p<sub>1</sub> = 7.58 and c<sub>l</sub> = 0.203. The notes also sum only the two inclined faces; the base pressure p<sub>1</sub> acting on the base of height t adds p<sub>1</sub>t sin α to L′, a 0.4% increase. The wedge still produces about 1.7 times the lift of the flat plate at the same α and M<sub>1</sub>.');
     }
     if(sol.ok&&cs==='diamond'&&nr(al,0)) ex=cmp(`Diamond at α = 0: check the closed-form result`,[
