@@ -1064,7 +1064,8 @@ function known(boxId,list,getM,setM){
 function tabset(id){const c=$(id),tabs=c.querySelectorAll('.tabs button');tabs.forEach(b=>b.onclick=()=>{tabs.forEach(x=>x.setAttribute('aria-selected',x===b?'true':'false'));c.querySelectorAll('[data-expanel]').forEach(p=>p.hidden=p.dataset.expanel!==b.dataset.ex);});}
 /* worked-example table: Quantity | Relation used | Exact | Notes */
 function exTable(id,rows,def,src){
-  let h=`<thead><tr><th class="l">Quantity</th><th class="l">Relation used</th><th>Exact</th><th>Notes${def?(src?` (${src})`:''):' <span style="font-weight:400">(original values only)</span>'}</th></tr></thead><tbody>`;
+  def=def&&Math.abs(G-1.4)<1e-9;  // the notes are hand solutions for gamma = 1.4
+  let h=`<thead><tr><th class="l">Quantity</th><th class="l">Relation used</th><th>Exact</th><th>Notes${def?(src?` (${src})`:''):' <span style="font-weight:400">(original values, γ = 1.4)</span>'}</th></tr></thead><tbody>`;
   rows.forEach(r=>{if(r.sect){h+=`<tr><td class="l" colspan="4" style="padding-top:14px;color:var(--ink);font-weight:600">${r.sect}</td></tr>`;return;}
     h+=`<tr><td class="l">${r[0]}</td><td class="rel">${r[1]}</td><td class="${r[4]?'hl':''}">${r[2]}</td><td>${def&&r[3]!=null?r[3]:'—'}</td></tr>`;});
   $(id).innerHTML=h+'</tbody>';}
@@ -1205,7 +1206,7 @@ const cpG=()=>G*RAIR/(G-1), cvG=()=>RAIR/(G-1);
     s+=ln([A.X(V),P.y0],[A.X(V),P.y0+P.h],'accent',1.6)+dot([A.X(V),A.Y(air(V))],'comp',5.5)+dot([A.X(V),A.Y(wat(V))],'exp',5.5);
     $('cv_fig').innerHTML=s;
     const q=0.5*rho*V*V;
-    $('cv_tiles').innerHTML=[['Mach number in air',f(M,3),regimeTxt(M)],['Dynamic pressure ½ρV², air',f(q/1000,2)+' kPa',`water: ${f(0.5*RW*V*V/1000,1)} kPa`],['Δρ/ρ, air',f(air(V),3)+' %',`estimate M²/2: ${f(est(V),3)} %`],['Δρ/ρ, water',f(wat(V),5)+' %',`air/water: ${f(air(V)/wat(V),0)}×`]].map(([k,v,d])=>`<div class="tile"><span class="k">${k}</span><span class="v">${v}</span><span class="s">${d}</span></div>`).join('');
+    $('cv_tiles').innerHTML=[['Mach number in air',f(M,3),regimeTxt(M)],['Dynamic pressure ½ρV², air',f(q/1000,2)+' kPa',`water: ${f(0.5*RW*V*V/1000,1)} kPa`],['Δρ/ρ, air',f(air(V),3)+' %',`estimate M²/2: ${f(est(V),3)} %`],['Δρ/ρ, water',f(wat(V),5)+' %',`${f(air(V)/wat(V),0)}× smaller than in air`]].map(([k,v,d])=>`<div class="tile"><span class="k">${k}</span><span class="v">${v}</span><span class="s">${d}</span></div>`).join('');
     $('cv_short').textContent=`M = ${f(M,2)}, Δρ/ρ = ${f(air(V),2)}% in air`;
   }
   function regimeTxt(M){return M<0.3?'incompressible is a good model':M<0.8?'compressible, subsonic':M<1.2?'transonic':'supersonic';}
@@ -1326,6 +1327,18 @@ const cpG=()=>G*RAIR/(G-1), cvG=()=>RAIR/(G-1);
 
 /* first paint of every interactive */
 renderers.forEach(r=>r());
+
+/* tabs: tabpanel roles and arrow-key navigation (WAI-ARIA tabs pattern) */
+document.querySelectorAll('[data-expanel]').forEach(p=>p.setAttribute('role','tabpanel'));
+document.querySelectorAll('[role=tablist]').forEach(tl=>{
+  const tabs=[...tl.querySelectorAll('[role=tab]')];
+  const sync=()=>tabs.forEach(t=>t.tabIndex=t.getAttribute('aria-selected')==='true'?0:-1);
+  tabs.forEach((t,i)=>{
+    t.addEventListener('click',()=>setTimeout(sync));
+    t.addEventListener('keydown',e=>{const k={ArrowRight:1,ArrowLeft:-1,Home:-i,End:tabs.length-1-i}[e.key];if(k===undefined)return;e.preventDefault();const n=tabs[(i+k+tabs.length)%tabs.length];n.click();n.focus();});
+  });
+  sync();
+});
 
 })();
 </script>

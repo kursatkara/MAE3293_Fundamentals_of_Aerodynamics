@@ -281,7 +281,7 @@ const dsR=(M,g)=>{const n=NS(M,g);return g/(g-1)*Math.log(n.T21)-Math.log(n.p21)
       ['8.16','T<sub>2</sub>/T<sub>1</sub> = 5.8',inv(M=>NS(M,G).T21,5.8,1,50),['5','0.4152','5','29','5.8 (given)']],
       ['8.17','M<sub>2</sub> = 0.4752',inv(M=>NS(M,G).M2,0.4752,1,50),['3','0.4752 (given)','3.857','10.33','2.679']]];
     let h=`<thead><tr><th class="l">Example</th><th class="l">Given</th><th class="l"></th><th>M<sub>1</sub></th><th>M<sub>2</sub></th><th>ρ<sub>2</sub>/ρ<sub>1</sub></th><th>p<sub>2</sub>/p<sub>1</sub></th><th>T<sub>2</sub>/T<sub>1</sub></th></tr></thead><tbody>`;
-    C.forEach(([e,g,M,N])=>{const n=NS(M,G);h+=`<tr><td class="l" rowspan="2">${e}</td><td class="l" rowspan="2">${g}</td><td class="rel">Exact</td><td class="hl">${isFinite(M)?f(M,4):'—'}</td><td>${f(n.M2,4)}</td><td>${f(n.r21,4)}</td><td>${f(n.p21,4)}</td><td>${f(n.T21,4)}</td></tr><tr><td class="rel">Notes (App. B, γ = 1.4)</td>${N.map(x=>`<td>${x}</td>`).join('')}</tr>`;});
+    C.forEach(([e,g,M,N])=>{const n=NS(M,G);h+=`<tr><td class="l" rowspan="2">${e}</td><td class="l" rowspan="2">${g}</td><td class="rel">Exact</td><td class="hl">${isFinite(M)?f(M,4):'—'}</td><td>${f(n.M2,4)}</td><td>${f(n.r21,4)}</td><td>${f(n.p21,4)}</td><td>${f(n.T21,4)}</td></tr><tr><td class="rel">Notes (App. B, γ = 1.4)</td>${N.map(x=>`<td>${Math.abs(G-1.4)<1e-9?x:'—'}</td>`).join('')}</tr>`;});
     $('c15_tab').innerHTML=h+'</tbody>';});
   /* 8.18–8.20 */
   const ent=M=>Math.round(M*20)/20;  // Appendix B step of 0.05 for 2 < M1 < 5
@@ -329,7 +329,7 @@ const dsR=(M,g)=>{const n=NS(M,g);return g/(g-1)*Math.log(n.T21)-Math.log(n.p21)
     s+=`<path d="M${mouth},${yc-R} L752,${yc-R} M${mouth},${yc+R} L752,${yc+R}" style="stroke:var(--body)" stroke-width="3" fill="none"/>`+`<path d="M${mouth},${yc-R} Q${mouth-6},${yc} ${mouth},${yc+R}" style="stroke:var(--body)" stroke-width="1.5" fill="none" stroke-dasharray="3 3"/>`;
     s+=tx([620,yc+4],'Pitot tube','axlab','text-anchor="middle"');
     if(sup){
-      const mu=Math.asin(1/M),Rb=R*3,del=Math.max(22,Rb*0.143*Math.exp(3.24/(M*M))),Rc=Rb*1.143*Math.exp(0.54/Math.pow(M-1,1.2)),c2=1/Math.pow(Math.tan(mu),2),xs=mouth-del;
+      const mu=Math.asin(1/M),Rb=R*3,del=Math.max(22,Rb*0.143*Math.exp(3.24/(M*M))),Rc=Rb*1.143*Math.exp(0.54/Math.pow(Math.max(M-1,0.05),1.2)),c2=1/Math.pow(Math.tan(mu),2),xs=mouth-del;
       const xsh=y=>xs+Rc*c2*(Math.sqrt(1+y*y*Math.tan(mu)*Math.tan(mu)/(Rc*Rc))-1);
       let d='';for(let y=-90;y<=90;y+=3){const x=xsh(y);d+=(d?'L':'M')+fx(Math.min(x,760))+','+fx(yc+y);}
       s+=`<path d="${d}" fill="none" style="stroke:var(--comp)" stroke-width="2.6"/>`;
@@ -372,7 +372,7 @@ const dsR=(M,g)=>{const n=NS(M,g);return g/(g-1)*Math.log(n.T21)-Math.log(n.p21)
 (function(){
   tabset('exD');
   const Mof=r=>r<=1/pp0(1,G)?Mfromp(1/r,G):inv(M=>pitot(M,G),r,1,50);
-  watch(['d22_p','d22_a','d22_b','d22_c'],()=>{const p=num('d22_p'),R=[num('d22_a'),num('d22_b'),num('d22_c')],def=near(p,1)&&near(R[0],1.276)&&near(R[1],2.714)&&near(R[2],12.06),thr=1/pp0(1,G),N=['0.6','1.3','3'];
+  watch(['d22_p','d22_a','d22_b','d22_c'],()=>{const p=num('d22_p'),R=[num('d22_a'),num('d22_b'),num('d22_c')],def=near(p,1)&&near(R[0],1.276)&&near(R[1],2.714)&&near(R[2],12.06)&&Math.abs(G-1.4)<1e-9,thr=1/pp0(1,G),N=['0.6','1.3','3'];
     let h=`<thead><tr><th class="l">Reading</th><th>p<sub>Pitot</sub>/p<sub>1</sub></th><th class="l">Regime and formula</th><th>M<sub>1</sub>, exact</th><th>Notes</th><th>Isentropic formula</th></tr></thead><tbody>`;
     R.forEach((x,i)=>{const r=x/p,ok=r>=1,sup=r>thr,M=ok?Mof(r):NaN,Mw=ok?Mfromp(1/r,G):NaN;
       h+=`<tr><td class="l">(${'abc'[i]}) ${f(x,3)} atm</td><td>${f(r,4)}</td><td class="rel">${!ok?'reading below p₁: impossible':sup?'supersonic: Rayleigh Pitot formula (App. B)':'subsonic: isentropic (App. A)'}</td><td class="hl">${f(M,4)}</td><td>${def?N[i]:'—'}</td><td>${sup?`${f(Mw,4)} (wrong)`:f(Mw,4)}</td></tr>`;});

@@ -324,7 +324,8 @@
   tabs.forEach(b=>b.onclick=()=>{tabs.forEach(x=>x.setAttribute('aria-selected',x===b?'true':'false'));document.querySelectorAll('[data-expanel]').forEach(p=>p.hidden=p.dataset.expanel!==b.dataset.ex);});
   const num=id=>parseFloat($(id).value), near=(a,b)=>Math.abs(a-b)<1e-9;
   function table(id,rows,def){
-    let h=`<thead><tr><th class="l">Quantity</th><th class="l">Relation used</th><th>Exact</th><th>Notes${def?' (tables, chart)':' <span style="font-weight:400">(original values only)</span>'}</th></tr></thead><tbody>`;
+    def=def&&Math.abs(G-1.4)<1e-9;  // the notes are hand solutions for gamma = 1.4
+    let h=`<thead><tr><th class="l">Quantity</th><th class="l">Relation used</th><th>Exact</th><th>Notes${def?' (tables, chart)':' <span style="font-weight:400">(original values, γ = 1.4)</span>'}</th></tr></thead><tbody>`;
     rows.forEach(r=>{if(r.sect){h+=`<tr><td class="l" colspan="4" style="padding-top:14px;color:var(--ink);font-weight:600">${r.sect}</td></tr>`;return;}
       h+=`<tr><td class="l">${r[0]}</td><td class="rel">${r[1]}</td><td class="${r[4]?'hl':''}">${r[2]}</td><td>${def&&r[3]!=null?r[3]:'—'}</td></tr>`;});
     $(id).innerHTML=h+'</tbody>';}
@@ -605,7 +606,7 @@
   ['e9_M','e9_p','e9_T','e9_th'].forEach(id=>$(id).addEventListener('input',go));
   renderers.push(go);
   function render(){
-    const M=num('e9_M'),p1=num('e9_p'),T1=num('e9_T'),thd=num('e9_th'),th=thd*D,def=near(M,1.5)&&near(p1,1)&&near(T1,288)&&near(thd,15);
+    const M=num('e9_M'),p1=num('e9_p'),T1=num('e9_T'),thd=num('e9_th'),th=thd*D,def=near(M,1.5)&&near(p1,1)&&near(T1,288)&&near(thd,15)&&Math.abs(G-1.4)<1e-9;
     if(!(M>=1)||!(p1>0)||!(T1>0)||!(thd>0)){$('e9_ban').innerHTML=banner('bad','Check the inputs.','M₁ ≥ 1, θ > 0, and positive p₁, T₁.');$('e9_tab').innerHTML='';return;}
     const w=pm(M,th,G);
     if(w.type!=='exp'){$('e9_ban').innerHTML=banner('bad','The flow cannot turn this far.',`Maximum turning from M<sub>1</sub> is ${dg(numax(G)-nu(M,G))}.`);$('e9_tab').innerHTML='';return;}
@@ -620,7 +621,7 @@
       ['p<sub>0,2</sub> = p<sub>0,1</sub> (atm)','isentropic',f(p01*p1,4),'3.671',1],['T<sub>0,2</sub> = T<sub>0,1</sub> (K)','isentropic',f(T01*T1,1),'417.6',1],
       ['Forward Mach line, μ<sub>1</sub>','sin<sup>−1</sup>(1/M<sub>1</sub>)',dg(w.mu1),'41.81°',1],['μ<sub>2</sub>','sin<sup>−1</sup>(1/M<sub>2</sub>)',dg(w.mu2),'30°'],
       ['Rearward Mach line, μ<sub>2</sub> − θ','from upstream direction',dg(w.mu2-th),'15°',1]];
-    let h=`<thead><tr><th class="l">Quantity</th><th class="l">Relation used</th><th>Exact</th><th>Notes${def?' (tables)':' <span style="font-weight:400">(original values only)</span>'}</th></tr></thead><tbody>`;
+    let h=`<thead><tr><th class="l">Quantity</th><th class="l">Relation used</th><th>Exact</th><th>Notes${def?' (tables)':' <span style="font-weight:400">(original values, γ = 1.4)</span>'}</th></tr></thead><tbody>`;
     rows.forEach(r=>h+=`<tr><td class="l">${r[0]}</td><td class="rel">${r[1]}</td><td class="${r[4]?'hl':''}">${r[2]}</td><td>${def?r[3]:'—'}</td></tr>`);
     $('e9_tab').innerHTML=h+'</tbody>';
   }

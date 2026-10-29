@@ -131,7 +131,7 @@ const cpG=()=>G*RAIR/(G-1), cvG=()=>RAIR/(G-1);
     s+=ln([A.X(V),P.y0],[A.X(V),P.y0+P.h],'accent',1.6)+dot([A.X(V),A.Y(air(V))],'comp',5.5)+dot([A.X(V),A.Y(wat(V))],'exp',5.5);
     $('cv_fig').innerHTML=s;
     const q=0.5*rho*V*V;
-    $('cv_tiles').innerHTML=[['Mach number in air',f(M,3),regimeTxt(M)],['Dynamic pressure ½ρV², air',f(q/1000,2)+' kPa',`water: ${f(0.5*RW*V*V/1000,1)} kPa`],['Δρ/ρ, air',f(air(V),3)+' %',`estimate M²/2: ${f(est(V),3)} %`],['Δρ/ρ, water',f(wat(V),5)+' %',`air/water: ${f(air(V)/wat(V),0)}×`]].map(([k,v,d])=>`<div class="tile"><span class="k">${k}</span><span class="v">${v}</span><span class="s">${d}</span></div>`).join('');
+    $('cv_tiles').innerHTML=[['Mach number in air',f(M,3),regimeTxt(M)],['Dynamic pressure ½ρV², air',f(q/1000,2)+' kPa',`water: ${f(0.5*RW*V*V/1000,1)} kPa`],['Δρ/ρ, air',f(air(V),3)+' %',`estimate M²/2: ${f(est(V),3)} %`],['Δρ/ρ, water',f(wat(V),5)+' %',`${f(air(V)/wat(V),0)}× smaller than in air`]].map(([k,v,d])=>`<div class="tile"><span class="k">${k}</span><span class="v">${v}</span><span class="s">${d}</span></div>`).join('');
     $('cv_short').textContent=`M = ${f(M,2)}, Δρ/ρ = ${f(air(V),2)}% in air`;
   }
   function regimeTxt(M){return M<0.3?'incompressible is a good model':M<0.8?'compressible, subsonic':M<1.2?'transonic':'supersonic';}

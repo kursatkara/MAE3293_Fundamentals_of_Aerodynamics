@@ -41,7 +41,8 @@ function known(boxId,list,getM,setM){
 function tabset(id){const c=$(id),tabs=c.querySelectorAll('.tabs button');tabs.forEach(b=>b.onclick=()=>{tabs.forEach(x=>x.setAttribute('aria-selected',x===b?'true':'false'));c.querySelectorAll('[data-expanel]').forEach(p=>p.hidden=p.dataset.expanel!==b.dataset.ex);});}
 /* worked-example table: Quantity | Relation used | Exact | Notes */
 function exTable(id,rows,def,src){
-  let h=`<thead><tr><th class="l">Quantity</th><th class="l">Relation used</th><th>Exact</th><th>Notes${def?(src?` (${src})`:''):' <span style="font-weight:400">(original values only)</span>'}</th></tr></thead><tbody>`;
+  def=def&&Math.abs(G-1.4)<1e-9;  // the notes are hand solutions for gamma = 1.4
+  let h=`<thead><tr><th class="l">Quantity</th><th class="l">Relation used</th><th>Exact</th><th>Notes${def?(src?` (${src})`:''):' <span style="font-weight:400">(original values, γ = 1.4)</span>'}</th></tr></thead><tbody>`;
   rows.forEach(r=>{if(r.sect){h+=`<tr><td class="l" colspan="4" style="padding-top:14px;color:var(--ink);font-weight:600">${r.sect}</td></tr>`;return;}
     h+=`<tr><td class="l">${r[0]}</td><td class="rel">${r[1]}</td><td class="${r[4]?'hl':''}">${r[2]}</td><td>${def&&r[3]!=null?r[3]:'—'}</td></tr>`;});
   $(id).innerHTML=h+'</tbody>';}

@@ -13,3 +13,15 @@
 
 /* first paint of every interactive */
 renderers.forEach(r=>r());
+
+/* tabs: tabpanel roles and arrow-key navigation (WAI-ARIA tabs pattern) */
+document.querySelectorAll('[data-expanel]').forEach(p=>p.setAttribute('role','tabpanel'));
+document.querySelectorAll('[role=tablist]').forEach(tl=>{
+  const tabs=[...tl.querySelectorAll('[role=tab]')];
+  const sync=()=>tabs.forEach(t=>t.tabIndex=t.getAttribute('aria-selected')==='true'?0:-1);
+  tabs.forEach((t,i)=>{
+    t.addEventListener('click',()=>setTimeout(sync));
+    t.addEventListener('keydown',e=>{const k={ArrowRight:1,ArrowLeft:-1,Home:-i,End:tabs.length-1-i}[e.key];if(k===undefined)return;e.preventDefault();const n=tabs[(i+k+tabs.length)%tabs.length];n.click();n.focus();});
+  });
+  sync();
+});
