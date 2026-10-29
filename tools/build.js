@@ -72,7 +72,11 @@ function lessonPage(L, i) {
 
 /* ---------- course home ---------- */
 function homePage() {
-  const chapters = course.lessons.map(L => fill(rd('src/templates/chapter.html'), L).trimEnd()).join('\n');
+  // sketch per lesson (src/thumbs/<slug>.svg, made by tools/thumbnails.js); falls back to the link-preview image
+  const thumb = L => fs.existsSync(path.join(ROOT, 'src/thumbs', L.slug + '.svg'))
+    ? rd('src/thumbs/' + L.slug + '.svg').trim().replace('<svg ', '<svg class="sketch" aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet" ')
+    : `<img src="assets/${L.slug}-preview.png" alt="" width="1200" height="630" loading="lazy">`;
+  const chapters = course.lessons.map(L => fill(rd('src/templates/chapter.html'), { ...L, thumb: thumb(L) }).trimEnd()).join('\n');
   let html = head({ title: 'MAE 3293 Fundamentals of Aerodynamics · Interactive Lessons',
     description: 'Interactive lessons for MAE 3293, Fundamentals of Aerodynamics, at Oklahoma State University: oblique shock and expansion waves, supersonic airfoils, and quasi-one-dimensional nozzle, diffuser, and wind-tunnel flows, with every figure computed live. By Kursat Kara.',
     url: course.base, image: course.base + 'assets/course-preview.png',

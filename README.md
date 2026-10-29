@@ -28,7 +28,8 @@ src/shared/                    style.css, theme.js, lesson.js, helpers.js (contr
                                nozzle regimes), atmosphere.js (standard atmosphere, App. D),
                                kit.js (plot frames, known-quantity inversion, example tabs)
 src/lessons/<slug>/            body.html (the lesson text) and modules.js (its interactives)
-tools/                         build, numerical checks, browser audit, preview images
+src/thumbs/                    course-home sketches, one SVG per lesson (made by tools/thumbnails.js)
+tools/                         build, numerical checks, browser audit, preview images, sketches
 ```
 
 ## Building
@@ -39,7 +40,7 @@ Requires Node.js 18 or later; the audit and preview scripts also need Playwright
 npm install            # MathJax and the two font packages
 npm run build          # writes index.html and lessons/*.html
 npm run check          # table and conservation checks, then the browser audit
-npm run previews       # regenerates assets/*-preview.png
+npm run previews       # regenerates the course-home sketches (src/thumbs) and assets/*-preview.png
 npm run dev            # quick build that loads MathJax and fonts from CDNs
 ```
 
