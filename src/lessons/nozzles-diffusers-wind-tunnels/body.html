@@ -1,0 +1,357 @@
+  <p class="lede">Quasi-one-dimensional flow explains how a nozzle accelerates gas to supersonic speed, why the mass flow chokes, and where a normal shock settles when the back pressure is too high to sustain the design expansion. Every figure is computed live from the exact relations for a calorically perfect gas. Change the area ratio and the back pressure and watch the shock move.</p>
+
+  <div class="lesson">
+    <nav class="toc" id="toc" aria-label="Lesson contents">
+      <span class="eyebrow">Contents</span>
+      <a href="#quasi-1d"><span class="n">10.2</span><span>Governing equations</span></a>
+      <a href="#area-velocity"><span class="n">10.2</span><span>Area–velocity relation</span></a>
+      <a href="#area-mach"><span class="n">10.3</span><span>Area–Mach relation</span></a>
+      <a href="#nozzle"><span class="n">10.3</span><span>Nozzle and back pressure</span></a>
+      <a href="#nozzle-examples"><span class="n">Ex</span><span>Examples and shock location</span></a>
+      <a href="#rocket"><span class="n">Ex</span><span>Rocket thrust, Ex 10.4</span></a>
+      <a href="#wind-tunnel"><span class="n">10.4</span><span>Diffusers and wind tunnels</span></a>
+      <a href="#tunnel-start"><span class="n">10.5</span><span>Starting a wind tunnel</span></a>
+      <a href="#viscous"><span class="n">10.6</span><span>Viscous effects in nozzles</span></a>
+      <a href="#check"><span class="n">?</span><span>Check your understanding</span></a>
+      <a href="#equations"><span class="n">Σ</span><span>Key equations</span></a>
+    </nav>
+
+    <div class="content">
+
+<!-- ================= 10.2 GOVERNING EQUATIONS ================= -->
+      <section class="sec" id="quasi-1d" aria-labelledby="h-q1d">
+        <div class="sechead"><p class="eyebrow">Section 10.2</p><h2 id="h-q1d">Governing equations for quasi-one-dimensional flow</h2></div>
+        <div class="prose">
+          <p>In truly one-dimensional flow the area is constant and p, ρ, T, u vary only with x. In <b>quasi-one-dimensional flow</b> the area also varies, A = A(x), but the flow properties are still assumed uniform over each cross section: p = p(x), ρ = ρ(x), T = T(x), u = u(x). This is an approximation; the real flow in a variable-area duct is three-dimensional. For slowly varying ducts it predicts nozzle performance remarkably well.</p>
+          <p>Apply the integral conservation laws to a control volume bounded by two cross sections, A<sub>1</sub> and A<sub>2</sub>, and the duct wall. The wall is a streamline surface, so \(\vec V\cdot d\vec S=0\) there. For steady, inviscid, adiabatic flow:</p>
+        </div>
+        <div class="cols2">
+          <div class="prose">
+            <div class="eq">\[ \rho_1u_1A_1=\rho_2u_2A_2 \tag{10.1} \]</div>
+            <div class="eq">\[ p_1A_1+\rho_1u_1^2A_1+\int_{A_1}^{A_2}p\,dA=p_2A_2+\rho_2u_2^2A_2 \tag{10.5} \]</div>
+            <div class="eq">\[ h_1+\frac{u_1^2}{2}=h_2+\frac{u_2^2}{2}\qquad\Rightarrow\qquad h_0=\text{const} \tag{10.9} \]</div>
+          </div>
+          <div class="prose">
+            <p>The \(\int p\,dA\) term is the pressure force of the duct wall on the gas. It is the only new term compared with the normal-shock equations, and it requires A(x).</p>
+            <p>Together with p = ρRT and h = c<sub>p</sub>T, these five equations determine the five unknowns ρ<sub>2</sub>, p<sub>2</sub>, u<sub>2</sub>, T<sub>2</sub>, h<sub>2</sub>. A direct solution takes substantial algebra. The differential forms below lead to the physical insight much faster.</p>
+          </div>
+        </div>
+        <details class="deriv">
+          <summary>Derivation of the integral forms <span>(notes pp. 1–3)</span></summary>
+          <div class="inner">
+            <div class="dstep"><span class="k">1</span><div><p>Continuity, \(\oint_S\rho\vec V\cdot d\vec S=0\) for steady flow. On face a, \(\vec V\cdot d\vec S=-u_1\,dS\); on face c, \(+u_2\,dS\); on face b (the wall) it is zero. With uniform properties over each face:</p><div class="eq">\[ -\rho_1u_1A_1+\rho_2u_2A_2=0 \]</div></div></div>
+            <div class="dstep"><span class="k">2</span><div><p>The x-component of momentum, \(\oint_S(\rho\vec V\cdot d\vec S)u=-\oint_S(p\,d\vec S)_x\). On the wall, \((d\vec S)_x=-dA\), so the wall contributes \(-\int_{A_1}^{A_2}p(-dA)\):</p><div class="eq">\[ -\rho_1u_1^2A_1+\rho_2u_2^2A_2=-\left[-p_1A_1-\int_{A_1}^{A_2}p\,dA+p_2A_2\right] \]</div></div></div>
+            <div class="dstep"><span class="k">3</span><div><p>Energy, \(\oint_S\rho\left(e+\tfrac{V^2}{2}\right)\vec V\cdot d\vec S=-\oint_S p\vec V\cdot d\vec S\). Divide by \(\rho_1u_1A_1=\rho_2u_2A_2\) and use h = e + p/ρ:</p><div class="eq">\[ \frac{p_1}{\rho_1}+e_1+\frac{u_1^2}{2}=\frac{p_2}{\rho_2}+e_2+\frac{u_2^2}{2} \]</div></div></div>
+          </div>
+        </details>
+        <div class="prose">
+          <p>Applied to an infinitesimal control volume of length dx, the same three laws give the differential forms:</p>
+        </div>
+        <div class="cols2">
+          <div class="prose">
+            <div class="eq">\[ d(\rho uA)=0 \tag{10.14} \]</div>
+            <div class="eq">\[ dp=-\rho u\,du \tag{10.18} \]</div>
+            <div class="eq">\[ dh+u\,du=0 \tag{10.19} \]</div>
+          </div>
+          <div class="prose">
+            <p>Equation (10.18) is the <b>Euler equation</b>: the momentum equation for steady, inviscid flow. It holds for quasi-one-dimensional flow even though A varies, because the area terms cancel against continuity.</p>
+          </div>
+        </div>
+        <details class="deriv">
+          <summary>Derivation of the Euler equation <span>(notes p. 4)</span></summary>
+          <div class="inner">
+            <div class="dstep"><span class="k">1</span><div><p>Momentum on the slab between x and x + dx, with \(\int p\,dA\approx p\,dA\):</p><div class="eq">\[ pA+\rho u^2A+p\,dA=(p+dp)(A+dA)+(\rho+d\rho)(u+du)^2(A+dA) \]</div><p>Drop products of differentials:</p><div class="eq">\[ A\,dp+Au^2d\rho+\rho u^2dA+2\rho uA\,du=0 \tag{10.16} \]</div></div></div>
+            <div class="dstep"><span class="k">2</span><div><p>Expand continuity and multiply by u:</p><div class="eq">\[ u^2A\,d\rho+\rho uA\,du+\rho u^2dA=0 \tag{10.17} \]</div></div></div>
+            <div class="dstep"><span class="k">3</span><div><p>Subtract (10.17) from (10.16): \(A\,dp+\rho uA\,du=0\), which is (10.18).</p></div></div>
+          </div>
+        </details>
+      </section>
+
+<!-- ================= AREA–VELOCITY ================= -->
+      <section class="sec" id="area-velocity" aria-labelledby="h-av">
+        <div class="sechead"><p class="eyebrow">Section 10.2 · Physical characteristics</p><h2 id="h-av">The area–velocity relation</h2></div>
+        <div class="prose">
+          <p>Divide continuity by ρuA: \(\frac{d\rho}{\rho}+\frac{du}{u}+\frac{dA}{A}=0\). For flow without shocks (isentropic flow), \(dp/d\rho=a^2\), so the Euler equation becomes \(\frac{d\rho}{\rho}=-M^2\frac{du}{u}\). Eliminating dρ/ρ:</p>
+          <div class="eq">\[ \frac{dA}{A}=\left(M^2-1\right)\frac{du}{u} \tag{10.25} \]</div>
+        </div>
+        <div class="key">The same area change does opposite things in subsonic and supersonic flow. <b>Subsonic:</b> a converging duct speeds the flow up and a diverging duct slows it down. <b>Supersonic:</b> a diverging duct speeds the flow up and a converging duct slows it down. <b>Sonic:</b> dA = 0, so M = 1 can occur only at a minimum area, the throat. As M → 0, Au = const, the incompressible continuity equation.</div>
+        <div class="lab" id="av">
+          <div class="labhead"><span class="eyebrow">Interactive 1 · Same duct, two Mach numbers</span><span class="note">Each duct changes its area by the same 5% over its length.</span></div>
+          <aside class="rail" aria-label="Area-velocity inputs">
+            <div id="av_ctl" style="display:flex;flex-direction:column;gap:14px"></div>
+            <div class="readout" id="av_out"></div>
+          </aside>
+          <div class="labmain">
+            <div class="fig"><svg id="av_fig" viewBox="0 0 760 300" role="img" aria-label="Converging and diverging ducts with velocity, pressure and density changes"></svg></div>
+            <p class="note">Bar lengths are proportional to the fractional changes du/u, dp/p and dρ/ρ from (10.25), (10.18) and continuity; the outlet arrow shows whether u rises or falls: \(\frac{du}{u}=\frac{1}{M^2-1}\frac{dA}{A}\), \(\frac{dp}{p}=-\gamma M^2\frac{du}{u}\), \(\frac{d\rho}{\rho}=-M^2\frac{du}{u}\). They grow without bound as M → 1.</p>
+          </div>
+        </div>
+      </section>
+
+<!-- ================= 10.3 AREA–MACH ================= -->
+      <section class="sec" id="area-mach" aria-labelledby="h-am">
+        <div class="sechead"><p class="eyebrow">Section 10.3 · Nozzle flows</p><h2 id="h-am">The area–Mach number relation</h2></div>
+        <div class="prose">
+          <p>Apply continuity between the sonic section A* (where M = 1 and u* = a*) and any other section A: \(\rho^*u^*A^*=\rho uA\). Using \(\rho_0/\rho=\left(1+\frac{\gamma-1}{2}M^2\right)^{1/(\gamma-1)}\), \(\rho^*/\rho_0=\left(\frac{2}{\gamma+1}\right)^{1/(\gamma-1)}\) and \(M^{*2}=(u/a^*)^2=\frac{(\gamma+1)M^2}{2+(\gamma-1)M^2}\):</p>
+          <div class="eq">\[ \left(\frac{A}{A^*}\right)^2=\frac{1}{M^2}\left[\frac{2}{\gamma+1}\left(1+\frac{\gamma-1}{2}M^2\right)\right]^{\frac{\gamma+1}{\gamma-1}} \tag{10.32} \]</div>
+          <p>The Mach number at any location in the duct depends only on the ratio of the local area to the sonic area. Every A/A* &gt; 1 has two solutions, one subsonic and one supersonic. Which one the flow takes depends on the pressures at the ends of the duct.</p>
+        </div>
+        <div class="lab" id="am">
+          <div class="labhead"><span class="eyebrow">Interactive 2 · Two Mach numbers for every area ratio</span></div>
+          <aside class="rail" aria-label="Area-Mach inputs">
+            <div id="am_ctl" style="display:flex;flex-direction:column;gap:14px"></div>
+          </aside>
+          <div class="labmain">
+            <div class="fig"><svg id="am_fig" viewBox="0 0 760 330" role="img" aria-label="Area ratio versus Mach number with the subsonic and supersonic solutions marked" style="touch-action:none;cursor:crosshair"></svg></div>
+            <div class="tblwrap"><table id="am_tab"></table></div>
+          </div>
+        </div>
+      </section>
+
+<!-- ================= NOZZLE ================= -->
+      <section class="sec" id="nozzle" aria-labelledby="h-nz">
+        <div class="sechead"><p class="eyebrow">Section 10.3 · Figures 10.12–10.16</p><h2 id="h-nz">A converging-diverging nozzle and its back pressure</h2></div>
+        <div class="prose">
+          <p>A reservoir at p<sub>0</sub>, T<sub>0</sub> feeds a nozzle with throat area A<sub>t</sub> and exit area A<sub>e</sub>; the nozzle exhausts into a back pressure p<sub>B</sub>. With p<sub>0</sub> fixed, lowering p<sub>B</sub> moves the flow through a sequence of regimes. Three back pressures divide them:</p>
+          <ul>
+            <li><b>p<sub>e1</sub></b>: the throat just reaches M = 1 and the flow returns to subsonic speed in the diverging section, from the subsonic root of (10.32) at A<sub>e</sub>/A<sub>t</sub>.</li>
+            <li><b>p<sub>e5</sub></b>: the supersonic flow ends in a normal shock standing exactly at the exit plane.</li>
+            <li><b>p<sub>e6</sub></b>: the design pressure, from the supersonic root of (10.32). The flow is isentropic and supersonic all the way to the exit.</li>
+          </ul>
+          <p>Once the throat is sonic, nothing downstream can change the flow upstream of it: the mass flow is <b>choked</b> at \(\dot m=\rho^*u^*A_t\). Lowering p<sub>B</sub> further changes only the flow downstream of the throat.</p>
+        </div>
+        <details class="deriv">
+          <summary>The choked mass flow in terms of reservoir conditions</summary>
+          <div class="inner">
+            <div class="dstep"><span class="k">1</span><div><p>At the sonic throat, \(\dot m=\rho^*u^*A_t=\rho^*a^*A_t\), with \(\rho^*=\rho_0\left(\frac{2}{\gamma+1}\right)^{\frac{1}{\gamma-1}}\), \(a^*=a_0\left(\frac{2}{\gamma+1}\right)^{\frac12}\), \(\rho_0=\frac{p_0}{RT_0}\) and \(a_0=\sqrt{\gamma RT_0}\).</p></div></div>
+            <div class="dstep"><span class="k">2</span><div><p>Combine:</p><div class="eq">\[ \dot m=\frac{p_0A_t}{\sqrt{T_0}}\sqrt{\frac{\gamma}{R}\left(\frac{2}{\gamma+1}\right)^{\frac{\gamma+1}{\gamma-1}}} \]</div><p>The mass flow of a choked nozzle is proportional to p<sub>0</sub>A<sub>t</sub> and inversely proportional to \(\sqrt{T_0}\). It does not depend on the back pressure or on the diverging section.</p></div></div>
+            <div class="dstep"><span class="k">3</span><div><p>Across a normal shock T<sub>0</sub> and \(\dot m\) are unchanged, so the same expression written at a sonic reference area on each side gives \(p_{0,1}A_1^*=p_{0,2}A_2^*\). The total-pressure loss enlarges the sonic area downstream of the shock.</p></div></div>
+          </div>
+        </details>
+        <div class="lab" id="nz">
+          <div class="labhead"><span class="eyebrow">Interactive 3 · Nozzle explorer</span><span class="note" id="nz_regime_short"></span></div>
+          <aside class="rail" aria-label="Nozzle inputs">
+            <div id="nz_ctl" style="display:flex;flex-direction:column;gap:14px"></div>
+            <div class="ctl"><span class="lbl">Diverging section</span>
+              <div class="seg" role="group" aria-label="Diverging section shape"><button type="button" id="nz_shape_c" aria-pressed="true">Contoured</button><button type="button" id="nz_shape_k" aria-pressed="false">Conical</button></div></div>
+            <div class="ctl"><span class="lbl">Color inside the nozzle</span>
+              <div class="seg" role="group" aria-label="Color map quantity"><button type="button" data-cq="T" aria-pressed="true">T/T₀</button><button type="button" data-cq="p" aria-pressed="false">p/p₀</button><button type="button" data-cq="M" aria-pressed="false">M</button><button type="button" data-cq="off" aria-pressed="false">Off</button></div></div>
+            <div class="row" style="flex-wrap:wrap"><button type="button" class="play" id="nz_auto">Auto run</button><button type="button" class="mini" id="nz_csv">Copy data (CSV)</button></div>
+            <p class="note" id="nz_csv_msg" hidden></p>
+            <textarea id="nz_csv_txt" aria-label="Nozzle data as CSV" rows="6" style="width:100%;font:12px var(--f-body);background:var(--soft);color:var(--ink);border:1px solid var(--line);border-radius:0" hidden readonly></textarea>
+            <details class="deriv" id="nz_dim">
+              <summary>Dimensional inputs <span>(for kg/s and N)</span></summary>
+              <div class="inner">
+                <div class="ctl"><label for="nz_p0">Reservoir pressure, p<sub>0</sub> <small>kPa</small></label><div class="row"><input type="number" id="nz_p0" value="500" min="1" step="10" style="width:100%"></div></div>
+                <div class="ctl"><label for="nz_T0">Reservoir temperature, T<sub>0</sub> <small>K</small></label><div class="row"><input type="number" id="nz_T0" value="300" min="10" step="10" style="width:100%"></div></div>
+                <div class="ctl"><label for="nz_At">Throat area, A<sub>t</sub> <small>cm²</small></label><div class="row"><input type="number" id="nz_At" value="10" min="0.01" step="1" style="width:100%"></div></div>
+                <div class="ctl"><label for="nz_R">Gas constant, R <small>J/(kg·K)</small></label><div class="row"><input type="number" id="nz_R" value="287" min="1" step="1" style="width:100%"></div></div>
+              </div>
+            </details>
+            <div class="sep"></div>
+            <span class="lbl">Step through the regimes</span>
+            <div class="presets" id="nz_pre" style="flex-direction:column"></div>
+          </aside>
+          <div class="labmain">
+            <div class="fig"><svg id="nz_ladder" viewBox="0 0 760 92" role="img" aria-label="Back-pressure scale with the critical pressures and the current back pressure"></svg></div>
+            <div id="nz_msg"></div>
+            <div class="fig"><svg id="nz_fig" viewBox="0 0 760 250" role="img" aria-label="Nozzle shape with the normal shock or exit waves"></svg></div>
+            <div class="fig"><svg id="nz_p" viewBox="0 0 760 250" role="img" aria-label="Pressure ratio along the nozzle"></svg></div>
+            <div class="fig"><svg id="nz_M" viewBox="0 0 760 220" role="img" aria-label="Mach number along the nozzle"></svg></div>
+            <div class="legend"><span><i class="sw" style="border-color:var(--accent)"></i>Current flow</span><span><i class="sw" style="border-color:var(--exp);border-top-style:dashed"></i>Design (supersonic isentropic) solution</span><span><i class="sw" style="border-color:var(--mach);border-top-style:dashed"></i>Critical subsonic solution (p<sub>e1</sub>)</span><span><i class="sw" style="border-color:var(--comp)"></i>Normal shock</span></div>
+            <div class="cols2">
+              <div class="fig narrow"><svg id="nz_mdot" viewBox="0 0 380 240" role="img" aria-label="Mass flow versus back pressure, showing choking"></svg></div>
+              <div class="readout" id="nz_out"></div>
+            </div>
+          </div>
+        </div>
+        <div class="prose">
+          <h3>Reading the pressure plot</h3>
+          <ul>
+            <li>Pressure falls wherever the flow accelerates, subsonic or supersonic: in the converging section, and in the diverging section once the flow is supersonic.</li>
+            <li>Pressure jumps across a normal shock, then rises further as the subsonic flow behind it decelerates in the diverging section.</li>
+            <li>A subsonic jet leaves at the back pressure, p<sub>e</sub> = p<sub>B</sub>. A supersonic jet can leave above or below p<sub>B</sub> and adjusts outside the nozzle through oblique shocks (p rises) or expansion fans (p falls).</li>
+            <li>Once the nozzle is choked, the pressure in the converging section, and the mass flow, no longer change with back pressure.</li>
+            <li>The Mach number, pressure and temperature at each section depend only on A/A* and on whether the flow there is subsonic or supersonic. The shape of the nozzle only decides <i>where</i> along x a given area, and so a given shock strength, occurs. Switch between the contoured and conical diverging sections to see this.</li>
+          </ul>
+        </div>
+      </section>
+
+<!-- ================= EXAMPLES ================= -->
+      <section class="sec" id="nozzle-examples" aria-labelledby="h-ex">
+        <div class="sechead"><p class="eyebrow">Worked examples</p><h2 id="h-ex">Nozzle flows: Examples 10.1–10.3</h2></div>
+        <p class="lede" style="font-size:15.5px">The <b>Exact</b> column comes from the relations above; the <b>Notes</b> column is the hand solution from Appendix A. Change any given value and the exact solution updates. The notes column applies to the original values only.</p>
+        <div class="tabs" role="tablist" aria-label="Example" id="ex_tabs">
+          <button role="tab" aria-selected="true" data-ex="e1">Ex 10.1 · Design exit state</button>
+          <button role="tab" aria-selected="false" data-ex="e2">Ex 10.2 · Throat and exit</button>
+          <button role="tab" aria-selected="false" data-ex="e3">Ex 10.3 · Unchoked nozzle</button>
+          <button role="tab" aria-selected="false" data-ex="e5">Where is the shock?</button>
+        </div>
+        <div data-expanel="e1" class="prose" style="max-width:none">
+          <p class="problem">Consider the isentropic supersonic flow through a convergent-divergent nozzle with an exit-to-throat area ratio of <input type="number" id="e1_A" value="10.25" min="1.001" step="0.25" aria-label="Exit-to-throat area ratio">. The reservoir pressure and temperature are <input type="number" id="e1_p" value="5" min="0.001" step="0.5" aria-label="Reservoir pressure in atm"> atm and <input type="number" id="e1_T" value="333" min="1" step="1" aria-label="Reservoir temperature in K"> K. Calculate M, p and T at the nozzle exit.</p>
+          <div id="e1_ban"></div>
+          <div class="tblwrap"><table id="e1_tab"></table></div>
+          <p class="exnote">Isentropic flow has no shock, so the throat is the sonic section: A<sub>t</sub> = A*, and A<sub>e</sub>/A* = A<sub>e</sub>/A<sub>t</sub>. Take the supersonic root of (10.32).</p>
+        </div>
+        <div data-expanel="e2" class="prose" style="max-width:none" hidden>
+          <p class="problem">Consider the isentropic flow through a convergent-divergent nozzle with an exit-to-throat area ratio of <input type="number" id="e2_A" value="2" min="1.001" step="0.1" aria-label="Exit-to-throat area ratio">. The reservoir pressure and temperature are <input type="number" id="e2_p" value="1" min="0.001" step="0.1" aria-label="Reservoir pressure in atm"> atm and <input type="number" id="e2_T" value="288" min="1" step="1" aria-label="Reservoir temperature in K"> K. Calculate M, p and T at the throat and the exit when (a) the flow is supersonic at the exit and (b) the flow is subsonic throughout except at the throat, where M = 1.</p>
+          <div class="tblwrap"><table id="e2_tab"></table></div>
+          <p class="exnote">The notes give p<sub>e</sub> in case (a) as “10.69 atm”; 10.69 is p<sub>0</sub>/p<sub>e</sub>, so p<sub>e</sub> = 1/10.69 = 0.0935 atm. Both cases share the same throat state because the throat is sonic in both.</p>
+        </div>
+        <div data-expanel="e3" class="prose" style="max-width:none" hidden>
+          <p class="problem">For the nozzle in Example 10.2 (A<sub>e</sub>/A<sub>t</sub> = <input type="number" id="e3_A" value="2" min="1.001" step="0.1" aria-label="Exit-to-throat area ratio">, p<sub>0</sub> = <input type="number" id="e3_p0" value="1" min="0.001" step="0.1" aria-label="Reservoir pressure in atm"> atm), the exit pressure is <input type="number" id="e3_pe" value="0.973" min="0.001" step="0.001" aria-label="Exit pressure in atm"> atm. Calculate the Mach numbers at the throat and the exit.</p>
+          <div id="e3_ban"></div>
+          <div class="tblwrap"><table id="e3_tab"></table></div>
+          <p class="exnote">With p<sub>e</sub> above p<sub>e1</sub>, the throat is not sonic. A* becomes a reference area smaller than the geometric throat A<sub>t</sub>, and both the throat and the exit use the subsonic root of (10.32). The notes read M<sub>e</sub> = 0.2 from the nearest Appendix A entry; the exact value is slightly lower, which lowers M<sub>t</sub> to 0.43.</p>
+        </div>
+        <div data-expanel="e5" class="prose" style="max-width:none" hidden>
+          <p class="problem">A convergent-divergent nozzle with A<sub>e</sub>/A<sub>t</sub> = <input type="number" id="e5_A" value="2" min="1.001" step="0.1" aria-label="Exit-to-throat area ratio"> is fed from a reservoir at p<sub>0</sub> = <input type="number" id="e5_p0" value="1" min="0.001" step="0.1" aria-label="Reservoir pressure in atm"> atm and exhausts at p<sub>e</sub> = <input type="number" id="e5_pe" value="0.8" min="0.001" step="0.01" aria-label="Exit pressure in atm"> atm. A normal shock stands in the diverging section. Find its location (A<sub>s</sub>/A<sub>t</sub>), the Mach number ahead of it, and the exit Mach number.</p>
+          <div id="e5_ban"></div>
+          <div class="cols2">
+            <div class="prose">
+              <p><b>The trick.</b> The shock location is unknown, so neither p<sub>0,2</sub> nor A<sub>2</sub>* is known. Their product is: the mass flow is the same on both sides, so p<sub>0,1</sub>A<sub>1</sub>* = p<sub>0,2</sub>A<sub>2</sub>*, with A<sub>1</sub>* = A<sub>t</sub>. Multiply the exit pressure by the exit area:</p>
+              <div class="eq">\[ \frac{p_eA_e}{p_{0,1}A_t}=\frac{p_e}{p_{0,2}}\,\frac{A_e}{A_2^*} \]</div>
+              <p>The right side depends only on M<sub>e</sub>, so it can be inverted in closed form:</p>
+              <div class="eq">\[ M_e^2=-\frac{1}{\gamma-1}+\sqrt{\frac{1}{(\gamma-1)^2}+\frac{2}{\gamma-1}\left(\frac{2}{\gamma+1}\right)^{\frac{\gamma+1}{\gamma-1}}\left(\frac{p_{0,1}A_t}{p_eA_e}\right)^2} \]</div>
+              <p>Then p<sub>0,2</sub>/p<sub>0,1</sub> follows from p<sub>e</sub>/p<sub>0,2</sub>, the normal-shock total-pressure ratio gives the Mach number ahead of the shock, and the area–Mach relation gives where that Mach number occurs.</p>
+            </div>
+            <div class="prose">
+              <div class="tblwrap"><table id="e5_tab"></table></div>
+              <div class="row" style="flex-wrap:wrap"><button type="button" class="play" id="e5_go">Show this case in the nozzle explorer</button></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+<!-- ================= ROCKET ================= -->
+      <section class="sec" id="rocket" aria-labelledby="h-rk">
+        <div class="sechead"><p class="eyebrow">Example 10.4</p><h2 id="h-rk">Rocket engine thrust</h2></div>
+        <div class="prose">
+          <p>Applying the integral momentum equation to a control volume wrapped around a rocket engine gives its thrust:</p>
+          <div class="eq">\[ T=\dot m\,u_e+(p_e-p_\infty)A_e \tag{E10.1} \]</div>
+          <p>where \(\dot m\) is the mass flow, u<sub>e</sub> the exit velocity, p<sub>e</sub> the exit pressure, p<sub>∞</sub> the ambient pressure and A<sub>e</sub> the exit area.</p>
+        </div>
+        <div class="lab" id="rk">
+          <div class="labmain" style="grid-column:1/-1">
+            <p class="problem">Liquid hydrogen and oxygen burn in the combustion chamber at <input type="number" id="rk_p0" value="30" min="0.1" step="1" aria-label="Chamber pressure in atm"> atm and <input type="number" id="rk_T0" value="3500" min="100" step="50" aria-label="Chamber temperature in K"> K. The throat area is <input type="number" id="rk_At" value="0.4" min="0.001" step="0.05" aria-label="Throat area in square meters"> m². The exit is designed so that the exit pressure equals the ambient pressure at a standard altitude of 20 km, p<sub>∞</sub> = <input type="number" id="rk_pinf" value="5529" min="1" step="10" aria-label="Ambient pressure in Pa"> Pa. Assume isentropic flow with γ = <input type="number" id="rk_g" value="1.22" min="1.05" max="1.67" step="0.01" aria-label="Ratio of specific heats"> and R = <input type="number" id="rk_R" value="520" min="50" step="10" aria-label="Gas constant in J per kg K"> J/(kg·K). (a) Calculate the thrust. (b) Calculate the exit area.</p>
+            <div class="row" style="gap:12px;flex-wrap:wrap"><button type="button" class="play" id="rk_show" aria-expanded="false">Show the solution</button><span class="note">Try it first. The rocket uses its own γ and R, not the γ in the page header.</span></div>
+            <div id="rk_sol" hidden>
+              <div id="rk_ban"></div>
+              <div class="tblwrap"><table id="rk_tab"></table></div>
+              <div class="fig narrow" style="max-width:640px"><svg id="rk_fig" viewBox="0 0 640 230" role="img" aria-label="Thrust versus ambient pressure for the fixed nozzle"></svg></div>
+              <p class="exnote">The plot holds the nozzle fixed (A<sub>e</sub> from part b) and varies the ambient pressure, as the rocket would see during ascent. Thrust is largest in vacuum; the pressure term (p<sub>e</sub> − p<sub>∞</sub>)A<sub>e</sub> is zero only at the design altitude.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+<!-- ================= WIND TUNNEL ================= -->
+      <section class="sec" id="wind-tunnel" aria-labelledby="h-wt">
+        <div class="sechead"><p class="eyebrow">Sections 10.4–10.5 · Figures 10.17–10.20</p><h2 id="h-wt">Diffusers and supersonic wind tunnels</h2></div>
+        <div class="prose">
+          <p>A <b>diffuser</b> slows a flow to low speed with as large a static-pressure rise, and as small a total-pressure loss, as possible. The ideal supersonic diffuser is a converging-diverging duct run in reverse: supersonic flow decelerates isentropically to M = 1 at the throat and then subsonically, with p<sub>0,2</sub> = p<sub>0,1</sub>. In practice the oblique waves and boundary layer make this impossible. A real diffuser decelerates the flow through a pattern of reflected oblique shocks and a weak normal shock near the throat, so p<sub>0,2</sub> &lt; p<sub>0,1</sub> and s<sub>2</sub> &gt; s<sub>1</sub>.</p>
+          <p>A supersonic wind tunnel must supply a reservoir pressure p<sub>0</sub> high enough to drive the test-section Mach number M<sub>e</sub> against the back pressure p<sub>B</sub>. The diffuser lowers that requirement. Compare three layouts:</p>
+          <ul>
+            <li><b>Nozzle exhausting directly to the atmosphere</b> (Figure 10.18): the exit must be at design, p<sub>e</sub> = p<sub>B</sub>, so p<sub>0</sub> = p<sub>B</sub>(p<sub>0</sub>/p<sub>e</sub>).</li>
+            <li><b>Constant-area duct with a normal shock at its exit</b> (Figure 10.19): the shock raises the pressure by p<sub>2</sub>/p<sub>1</sub>, so p<sub>0</sub> is lower by that factor.</li>
+            <li><b>Diffuser with a second throat</b> (Figure 10.20): during start-up a normal shock passes through the test section, so the second throat must swallow the reduced total pressure behind it: \(A_{t,2}/A_{t,1}=p_{0,1}/p_{0,2}\). Once started, the shock sits in the diffuser at a lower Mach number, and its loss is smaller.</li>
+          </ul>
+        </div>
+        <div class="lab" id="wt">
+          <div class="labhead"><span class="eyebrow">Interactive 4 · How much reservoir pressure does the tunnel need?</span></div>
+          <aside class="rail" aria-label="Wind tunnel inputs">
+            <div id="wt_ctl" style="display:flex;flex-direction:column;gap:14px"></div>
+            <div class="sep"></div>
+            <span class="lbl">Try</span>
+            <div class="presets" id="wt_pre"></div>
+          </aside>
+          <div class="labmain">
+            <div class="fig"><svg id="wt_fig" viewBox="0 0 760 210" role="img" aria-label="Supersonic wind tunnel with nozzle, test section and diffuser with second throat"></svg></div>
+            <div class="tblwrap"><table id="wt_tab"></table></div>
+            <div class="fig"><svg id="wt_chart" viewBox="0 0 760 280" role="img" aria-label="Required reservoir pressure versus test-section Mach number for three tunnel layouts"></svg></div>
+            <p class="note" id="wt_note"></p>
+          </div>
+        </div>
+      </section>
+
+<!-- ================= TUNNEL START-UP ================= -->
+      <section class="sec" id="tunnel-start" aria-labelledby="h-ts">
+        <div class="sechead"><p class="eyebrow">Section 10.5 · Supersonic wind tunnels</p><h2 id="h-ts">Starting a wind tunnel: swallowing the shock</h2></div>
+        <div class="prose">
+          <p>When the tunnel is switched on, p<sub>0</sub>/p<sub>B</sub> rises from 1. First the whole tunnel is subsonic. Once the nozzle throat chokes, a normal shock forms in the nozzle and moves downstream as p<sub>0</sub>/p<sub>B</sub> rises. The test section reaches its design Mach number only after this shock has passed through the test section and through the second throat into the diverging part of the diffuser. The shock has then been <b>swallowed</b> and the tunnel is <b>started</b>.</p>
+          <p>The strongest shock, and the largest total-pressure loss, occurs while the shock stands in the test section at M<sub>e</sub>. The second throat must pass the full mass flow at that reduced total pressure, so it must be at least</p>
+          <div class="eq">\[ \frac{A_{t,2}}{A_{t,1}}\ge\frac{p_{0,1}}{p_{0,2}}\bigg|_{\text{normal shock at }M_e} \]</div>
+          <p>If the second throat is smaller, it chokes first. The shock then stays in the nozzle, at the Mach number whose total-pressure ratio equals A<sub>t,1</sub>/A<sub>t,2</sub>, and raising p<sub>0</sub> cannot move it: the tunnel is <b>unstarted</b>. Once started, the shock sits in the diffuser at a lower Mach number, so the tunnel can run at a lower p<sub>0</sub>/p<sub>B</sub> than it needed to start. Lowering p<sub>0</sub>/p<sub>B</sub> below the running minimum makes the shock jump back upstream.</p>
+        </div>
+        <div class="lab" id="ts">
+          <div class="labhead"><span class="eyebrow">Interactive 5 · Start-up and shutdown</span><span class="note" id="ts_state_short"></span></div>
+          <aside class="rail" aria-label="Tunnel start-up inputs">
+            <div id="ts_ctl" style="display:flex;flex-direction:column;gap:14px"></div>
+            <div class="row" style="flex-wrap:wrap"><button type="button" class="play" id="ts_run">Run start-up, then shut down</button><button type="button" class="mini" id="ts_reset">Shut down</button></div>
+            <div class="sep"></div>
+            <span class="lbl">Try</span>
+            <div class="presets" id="ts_pre" style="flex-direction:column"></div>
+          </aside>
+          <div class="labmain">
+            <div id="ts_msg"></div>
+            <div class="fig"><svg id="ts_fig" viewBox="0 0 760 230" role="img" aria-label="Wind tunnel with nozzle, test section and diffuser, showing the shock position"></svg></div>
+            <div class="fig"><svg id="ts_Mx" viewBox="0 0 760 220" role="img" aria-label="Mach number along the wind tunnel"></svg></div>
+            <div class="readout" id="ts_out"></div>
+            <p class="note">Model: inviscid quasi-one-dimensional flow; the diffuser exit area is 1.5 times the test-section area, and the exit static pressure equals p<sub>B</sub>. Interactive 4 instead lets the flow behind the shock come to rest, so its running pressures are a little lower. Real tunnels need more, because of the viscous losses described in Section 10.6.</p>
+          </div>
+        </div>
+      </section>
+
+<!-- ================= VISCOUS ================= -->
+      <section class="sec" id="viscous" aria-labelledby="h-vs">
+        <div class="sechead"><p class="eyebrow">Section 10.6</p><h2 id="h-vs">Viscous flow: shock–boundary-layer interaction inside nozzles</h2></div>
+        <div class="cols2">
+          <div class="prose">
+            <p>The quasi-one-dimensional model puts a plane normal shock across the whole duct. In a real nozzle a boundary layer grows along the walls, and its inner part is subsonic. The pressure rise of the shock travels upstream through that subsonic layer, so the boundary layer thickens ahead of the shock and, for strong enough shocks, separates.</p>
+            <p>The thickened or separated layer turns the outer supersonic flow into itself, so an oblique shock, the front leg, forms ahead of the main shock. The front leg and a rear leg meet the nearly normal central shock at a triple point, and the pattern takes the shape of the Greek letter λ: a <b>lambda shock</b>. Behind it the flow near the wall is separated, the effective flow area shrinks, and the pressure recovers more gradually than the one-dimensional jump.</p>
+            <p>Consequences for practice:</p>
+            <ul>
+              <li>The shock position, and the wall pressure downstream of it, differ from the one-dimensional prediction. The interactives on this page are the inviscid limit.</li>
+              <li>In strongly overexpanded rocket nozzles, for example a large-expansion engine at sea level, the flow separates from the wall inside the nozzle. Unsteady separation can produce large side loads.</li>
+              <li>In wind-tunnel diffusers the same interaction replaces the single weak normal shock with a train of oblique and λ shocks, which is why a real diffuser recovers less total pressure than the ideal one.</li>
+            </ul>
+          </div>
+          <div class="prose">
+            <div class="fig narrow"><svg id="vs_fig" viewBox="0 0 380 300" role="img" aria-label="Lambda shock at the wall of a nozzle with boundary-layer separation"></svg></div>
+            <p class="note">Schematic of the upper half of a diverging nozzle. Supersonic core flow from the left; the boundary layer separates at S under the oblique front leg of the lambda shock, and reattaches downstream or leaves the nozzle separated.</p>
+          </div>
+        </div>
+      </section>
+
+<!-- ================= QUIZ ================= -->
+      <section class="sec" id="check" aria-labelledby="h-q">
+        <div class="sechead"><p class="eyebrow">Self-check</p><h2 id="h-q">Check your understanding</h2></div>
+        <p class="lede" style="font-size:15.5px">Pick an answer to see whether it is right and why. Use the nozzle explorer to test your reasoning. <span class="score" id="q_score"></span></p>
+        <div class="quiz" id="quiz"></div>
+      </section>
+
+<!-- ================= KEY EQUATIONS ================= -->
+      <section class="sec" id="equations" aria-labelledby="h-eqs">
+        <div class="sechead"><p class="eyebrow">Summary</p><h2 id="h-eqs">Key equations</h2></div>
+        <div class="cols2">
+          <div class="prose">
+            <h3>Quasi-one-dimensional flow</h3>
+            <div class="eq">\[ \rho uA=\text{const},\qquad dp=-\rho u\,du,\qquad h_0=\text{const} \]</div>
+            <div class="eq">\[ \frac{dA}{A}=\left(M^2-1\right)\frac{du}{u} \]</div>
+            <div class="eq">\[ \left(\frac{A}{A^*}\right)^2=\frac{1}{M^2}\left[\frac{2}{\gamma+1}\left(1+\frac{\gamma-1}{2}M^2\right)\right]^{\frac{\gamma+1}{\gamma-1}} \]</div>
+            <div class="eq">\[ \frac{p}{p_0}=\left(1+\frac{\gamma-1}{2}M^2\right)^{-\frac{\gamma}{\gamma-1}},\qquad \frac{T}{T_0}=\left(1+\frac{\gamma-1}{2}M^2\right)^{-1} \]</div>
+          </div>
+          <div class="prose">
+            <h3>Choking, shocks and thrust</h3>
+            <div class="eq">\[ \dot m=\frac{p_0A_t}{\sqrt{T_0}}\sqrt{\frac{\gamma}{R}\left(\frac{2}{\gamma+1}\right)^{\frac{\gamma+1}{\gamma-1}}}\quad(\text{choked}) \]</div>
+            <div class="eq">\[ \text{across a normal shock: }\;p_{0,1}A_1^*=p_{0,2}A_2^* \]</div>
+            <div class="eq">\[ T=\dot m\,u_e+(p_e-p_\infty)A_e \]</div>
+            <div class="eq">\[ \frac{A_{t,2}}{A_{t,1}}=\frac{p_{0,1}}{p_{0,2}}\quad(\text{minimum second throat for start-up}) \]</div>
+            <div class="eq">\[ \frac{p_eA_e}{p_{0,1}A_t}=\frac{p_e}{p_{0,2}}\frac{A_e}{A_2^*}\quad(\text{locates a shock in the nozzle}) \]</div>
+            <div class="eq">\[ C_F=\frac{F}{p_0A_t}=\frac{\dot m\,u_e}{p_0A_t}+\left(\frac{p_e}{p_0}-\frac{p_B}{p_0}\right)\frac{A_e}{A_t} \]</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+

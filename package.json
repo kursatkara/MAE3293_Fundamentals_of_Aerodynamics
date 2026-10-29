@@ -1,0 +1,17 @@
+{
+  "name": "mae3293-fundamentals-of-aerodynamics",
+  "private": true,
+  "description": "Interactive lessons for MAE 3293 Fundamentals of Aerodynamics (Oklahoma State University)",
+  "license": "MIT",
+  "scripts": {
+    "build": "node tools/build.js",
+    "dev": "node tools/build.js --dev",
+    "check": "node tools/check-tables.js && node tools/audit-pages.js",
+    "previews": "node tools/preview-images.js"
+  },
+  "devDependencies": {
+    "@fontsource-variable/source-sans-3": "5.1.0",
+    "@fontsource-variable/source-serif-4": "5.1.0",
+    "mathjax": "3.2.2"
+  }
+}
