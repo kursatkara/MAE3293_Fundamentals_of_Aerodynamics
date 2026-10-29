@@ -262,6 +262,7 @@ footer.site a{color:var(--accent)}
 .calcnav a{color:var(--muted);text-decoration:none;font-size:15.5px;font-weight:600}
 .calcnav a:hover{color:var(--ink)}
 .calcnav a[aria-current="page"]{color:var(--ink);box-shadow:inset 0 -2px 0 var(--accent)}
+.ctl input.solved{background:var(--soft);border-style:dashed;color:var(--accent);font-weight:600}
 .related{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
 .related li{display:flex;flex-direction:column;gap:2px}
 .related a{font-family:var(--f-display);font-size:17.5px;font-weight:600;color:var(--ink);text-decoration:none}
