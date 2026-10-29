@@ -23,6 +23,14 @@ chk('mdot const air',Math.sqrt(1.4/287*Math.pow(2/2.4,2.4/0.4)),0.04042,0.00005)
 // Fig 10.18/10.19
 chk('Me=2.5 Ae/A*',N.AoAs(2.5,g),2.637,0.001);chk('Me=2.5 p0/pe',1/N.pp0(2.5,g),17.09,0.01);chk('Me=2.5 p2/p1',N.NS(2.5,g).p21,7.125,0.001);
 chk('Fig 10.19 p0 (atm)',1/N.pp0(2.5,g)/N.NS(2.5,g).p21,2.40,0.005);
+// Chapter 8: characteristic Mach number, Rayleigh Pitot formula (App. B), sonic ratios, standard atmosphere (App. D)
+chk('M=3.5 M*',N.Mstar(3.5,g),2.064,0.001);chk('M->inf M*',N.Mstar(1e6,g),2.4495,0.0001);
+chk('Pitot M=1 p02/p1',N.pitot(1,g),1.893,0.001);chk('Pitot M=2 p02/p1',N.pitot(2,g),5.640,0.001);chk('Pitot M=3 p02/p1',N.pitot(3,g),12.06,0.01);chk('Pitot M=8 p02/p1',N.pitot(8,g),82.87,0.01);
+chk('NS M=5 T2/T1',N.NS(5,g).T21,5.800,0.001);chk('NS M=3 M2',N.NS(3,g).M2,0.4752,0.0001);chk('NS M=10 p02/p01',N.NS(10,g).p0r,0.003045,0.000002);
+chk('T*/T0',N.TT0(1,g),0.8333,0.0001);chk('rho*/rho0',N.rr0(1,g),0.6339,0.0001);
+const At=require('../src/shared/atmosphere.js');
+chk('App D 5 km T',At.atm(5000).T,255.69,0.02);chk('App D 10 km T',At.atm(10000).T,223.26,0.02);chk('App D 25 km T',At.atm(25000).T,216.66,0.01);
+chk('App D 5 km p/1e4',At.atm(5000).p/1e4,5.4048,0.003);chk('App D 25 km p/1e3',At.atm(25000).p/1e3,2.5273,0.006);chk('App D 10 km rho',At.atm(10000).rho,0.41351,0.0005);
 console.log(bad?bad+' table checks FAILED':'all table checks pass');
 // Momentum (Eq. 10.5) balance on nozzle profiles: mdot u_e + p_e A_e - mdot u_i - p_i A_i = int p dA
 function Ax(x,Ae){const XT=0.3,AI=3;return x<=XT?1+(AI-1)*(1-Math.cos(Math.PI*(XT-x)/XT))/2:1+(Ae-1)*(1-Math.cos(Math.PI*(x-XT)/(1-XT)))/2;}

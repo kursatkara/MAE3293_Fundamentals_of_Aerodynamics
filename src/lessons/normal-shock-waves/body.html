@@ -1,0 +1,466 @@
+  <p class="lede">A normal shock is a compression wave, perpendicular to the flow, a few mean free paths thick, across which a supersonic flow becomes subsonic. Its jump conditions follow from the integral conservation laws alone, and for a calorically perfect gas they depend on one number: the upstream Mach number. The chapter builds the tools first (the speed of sound, total and sonic reference conditions, the characteristic Mach number), then derives the normal-shock relations, uses the second law to rule out expansion shocks, and closes with the Pitot tube in subsonic and supersonic flow. Every figure is computed live from the exact relations.</p>
+
+  <div class="lesson">
+    <nav class="toc" id="toc" aria-label="Lesson contents">
+      <span class="eyebrow">Contents</span>
+      <a href="#basic-equations"><span class="n">8.2</span><span>Basic normal-shock equations</span></a>
+      <a href="#speed-of-sound"><span class="n">8.3</span><span>Speed of sound</span></a>
+      <a href="#energy-forms"><span class="n">8.4</span><span>Special forms of the energy equation</span></a>
+      <a href="#shock-relations"><span class="n">8.6</span><span>Normal-shock relations</span></a>
+      <a href="#entropy"><span class="n">8.6</span><span>Entropy and total pressure</span></a>
+      <a href="#shock-examples"><span class="n">Ex</span><span>Examples 8.11–8.21</span></a>
+      <a href="#pitot"><span class="n">8.7</span><span>Velocity from a Pitot tube</span></a>
+      <a href="#check"><span class="n">?</span><span>Check your understanding</span></a>
+      <a href="#equations"><span class="n">Σ</span><span>Key equations</span></a>
+    </nav>
+
+    <div class="content">
+
+<!-- ================= 8.2 BASIC EQUATIONS ================= -->
+      <section class="sec" id="basic-equations" aria-labelledby="h-be">
+        <div class="sechead"><p class="eyebrow">Section 8.2</p><h2 id="h-be">The basic normal-shock equations</h2></div>
+        <div class="cols2">
+          <div class="prose">
+            <p>A normal shock stands perpendicular to the flow, for example on the stagnation streamline of the bow shock ahead of a blunt body, inside the diverging section of a nozzle (see the <a href="https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/lessons/nozzles-diffusers-wind-tunnels.html#nozzle">Chapter 10 lesson</a>), or at the inlet of a supersonic engine. The problem is simply stated: <b>given the flow ahead of the wave (p<sub>1</sub>, ρ<sub>1</sub>, T<sub>1</sub>, M<sub>1</sub>, u<sub>1</sub>, …), find the flow behind it (p<sub>2</sub>, ρ<sub>2</sub>, T<sub>2</sub>, M<sub>2</sub>, u<sub>2</sub>, …).</b></p>
+            <p>The shock itself is a thin region of highly viscous flow with steep gradients of velocity and temperature, so the flow through it is <b>adiabatic but not isentropic</b>. We avoid its interior entirely by drawing a control volume <i>abcd</i> whose faces <i>ab</i> and <i>cd</i> lie in the uniform flow on either side. The analysis assumes that</p>
+            <ol>
+              <li>the flow is steady, \(\partial/\partial t=0\);</li>
+              <li>the flow is adiabatic, \(\dot q=0\): no heat is added to or taken from the control volume;</li>
+              <li>there are no viscous stresses on the faces <i>ab</i> and <i>cd</i>, which lie outside the shock;</li>
+              <li>there are no body forces, \(\vec f=0\).</li>
+            </ol>
+          </div>
+          <div class="fig narrow"><svg id="be_fig" viewBox="0 0 420 300" role="img" aria-label="Control volume abcd enclosing a stationary normal shock. Region 1 upstream has pressure p1, density rho1, temperature T1, Mach number M1, velocity u1, total pressure p0,1, total enthalpy h0,1 and entropy s1; region 2 downstream has the corresponding unknown quantities. The faces ab and cd of area A are perpendicular to the flow."></svg></div>
+        </div>
+        <div class="prose">
+          <p>Evaluate the steady integral conservation laws over <i>abcd</i>. Only faces <i>ab</i> and <i>cd</i> carry flow; the sides <i>bc</i> and <i>da</i> are parallel to the velocity, and the pressure forces on them have no x component. With uniform properties of area A on each face, the three laws reduce to algebra:</p>
+        </div>
+        <div class="cols2">
+          <div class="prose">
+            <div class="eq">\[ \oint_S \rho\vec V\cdot d\vec S=0\;\Rightarrow\;-\rho_1u_1A+\rho_2u_2A=0 \]</div>
+            <div class="eq">\[ \rho_1u_1=\rho_2u_2 \tag{8.2} \]</div>
+            <div class="eq">\[ \oint_S(\rho\vec V\cdot d\vec S)\,u=-\oint_S(p\,dS)_x \;\Rightarrow\; p_1+\rho_1u_1^2=p_2+\rho_2u_2^2 \tag{8.6} \]</div>
+          </div>
+          <div class="prose">
+            <div class="eq">\[ \oint_S\rho\left(e+\tfrac{V^2}{2}\right)\vec V\cdot d\vec S=-\oint_S p\vec V\cdot d\vec S \]</div>
+            <div class="eq">\[ h_1+\frac{u_1^2}{2}=h_2+\frac{u_2^2}{2}\quad\Longleftrightarrow\quad h_{0,1}=h_{0,2} \tag{8.10} \]</div>
+            <p>The energy result uses \(h=e+p/\rho\) after dividing by continuity, ρ<sub>1</sub>u<sub>1</sub> = ρ<sub>2</sub>u<sub>2</sub>. The total enthalpy, and for a calorically perfect gas the total temperature, is the same on both sides of the shock.</p>
+          </div>
+        </div>
+        <div class="prose">
+          <p><b>Counting equations and unknowns.</b> With region 1 known, continuity, momentum and energy are three equations in four unknowns, ρ<sub>2</sub>, u<sub>2</sub>, p<sub>2</sub> and h<sub>2</sub>. Two thermodynamic relations close the system, each adding one unknown, T<sub>2</sub>:</p>
+        </div>
+        <div class="tblwrap" style="max-width:640px"><table>
+          <thead><tr><th class="l">Equation</th><th class="l">Form</th><th>Equations</th><th class="l">Unknowns</th></tr></thead>
+          <tbody>
+            <tr><td class="l">Continuity</td><td class="rel">ρ<sub>1</sub>u<sub>1</sub> = ρ<sub>2</sub>u<sub>2</sub></td><td>1</td><td class="l">ρ<sub>2</sub>, u<sub>2</sub></td></tr>
+            <tr><td class="l">Momentum</td><td class="rel">p<sub>1</sub> + ρ<sub>1</sub>u<sub>1</sub>² = p<sub>2</sub> + ρ<sub>2</sub>u<sub>2</sub>²</td><td>1</td><td class="l">+ p<sub>2</sub></td></tr>
+            <tr><td class="l">Energy</td><td class="rel">h<sub>1</sub> + u<sub>1</sub>²/2 = h<sub>2</sub> + u<sub>2</sub>²/2</td><td>1</td><td class="l">+ h<sub>2</sub></td></tr>
+            <tr><td class="l">Enthalpy</td><td class="rel">h<sub>2</sub> = c<sub>p</sub>T<sub>2</sub></td><td>1</td><td class="l">+ T<sub>2</sub></td></tr>
+            <tr><td class="l">Equation of state</td><td class="rel">p<sub>2</sub> = ρ<sub>2</sub>RT<sub>2</sub></td><td>1</td><td class="l">—</td></tr>
+          </tbody>
+          <tfoot><tr><td class="l">Total</td><td></td><td>5</td><td class="l">5 unknowns</td></tr></tfoot>
+        </table></div>
+        <div class="key"><b>Next.</b> Before solving the five equations, Sections 8.3 and 8.4 build three tools the solution needs: the speed of sound, the alternative forms of the energy equation, and the reference conditions they define.</div>
+      </section>
+
+<!-- ================= 8.3 SPEED OF SOUND ================= -->
+      <section class="sec" id="speed-of-sound" aria-labelledby="h-sos">
+        <div class="sechead"><p class="eyebrow">Section 8.3</p><h2 id="h-sos">Speed of sound</h2></div>
+        <div class="cols2">
+          <div class="prose">
+            <p>Ride with a sound wave, so that the wave is stationary and the gas enters it at speed a. Across the wave the properties change by infinitesimal amounts. Gradients are weak, so viscosity and heat conduction are negligible: the flow through a sound wave is adiabatic and reversible, that is, <b>isentropic</b>. Continuity (8.2) and momentum (8.6) across the wave give</p>
+            <div class="eq">\[ \rho a=(\rho+d\rho)(a+da)\;\Rightarrow\;a=-\rho\frac{da}{d\rho} \]</div>
+            <div class="eq">\[ p+\rho a^2=(p+dp)+(\rho+d\rho)(a+da)^2\;\Rightarrow\;da=\frac{dp+a^2d\rho}{-2\rho a} \]</div>
+            <p>Eliminating da leaves a² = dp/dρ, and since the change is isentropic,</p>
+            <div class="eq">\[ a=\sqrt{\left(\frac{\partial p}{\partial\rho}\right)_s} \]</div>
+          </div>
+          <div class="fig narrow"><svg id="sw_fig" viewBox="0 0 420 220" role="img" aria-label="A stationary sound wave in a moving gas. Gas at p, T, rho enters the wave at speed a and leaves at p plus dp, T plus dT, rho plus d rho, a plus da."></svg></div>
+        </div>
+        <div class="cols2">
+          <div class="prose">
+            <p>For a calorically perfect gas the isentropic relation p = cρ<sup>γ</sup> gives (∂p/∂ρ)<sub>s</sub> = γp/ρ, and with p = ρRT,</p>
+            <div class="eq">\[ a=\sqrt{\frac{\gamma p}{\rho}}=\sqrt{\gamma RT} \tag{8.25} \]</div>
+            <p>The speed of sound of a calorically perfect gas depends on <b>temperature only</b>. At standard sea level, T = 288.16 K and a = 340 m/s.</p>
+          </div>
+          <div class="prose">
+            <p>In terms of the isentropic compressibility \(\tau_s=-\frac{1}{v}\left(\frac{\partial v}{\partial p}\right)_s=\frac{1}{\rho}\left(\frac{\partial\rho}{\partial p}\right)_s\),</p>
+            <div class="eq">\[ a=\sqrt{\frac{1}{\rho\,\tau_s}} \tag{8.27} \]</div>
+            <p>The less compressible the gas, the faster sound travels. An incompressible fluid (τ<sub>s</sub> = 0) has an infinite speed of sound, so the incompressible flows of Chapters 3–6 are, in theory, flows at zero Mach number.</p>
+          </div>
+        </div>
+        <div class="prose">
+          <p><b>What the Mach number measures.</b> The ratio of the kinetic energy per unit mass to the internal energy per unit mass, with e = c<sub>v</sub>T and c<sub>v</sub> = R/(γ − 1), is</p>
+          <div class="eq">\[ \frac{V^2/2}{e}=\frac{V^2/2}{c_vT}=\frac{\gamma(\gamma-1)}{2}\,\frac{V^2}{\gamma RT}=\frac{\gamma(\gamma-1)}{2}M^2 \]</div>
+          <p>M² measures the directed (kinetic) motion of the gas against the random thermal motion of its molecules. At M = 2 the two are comparable (ratio 1.12); at M = 20 the kinetic energy is 112 times the internal energy, which is why hypersonic flows heat so strongly when they are brought to rest.</p>
+        </div>
+
+        <div class="lab" id="sa">
+          <div class="labhead"><span class="eyebrow">Interactive 1 · Speed of sound and Mach number in the standard atmosphere</span><span class="note" id="sa_short"></span></div>
+          <aside class="rail" aria-label="Atmosphere inputs">
+            <div id="sa_ctl" style="display:flex;flex-direction:column;gap:14px"></div>
+            <div class="sep"></div>
+            <span class="lbl">Try</span>
+            <div class="presets" id="sa_pre" style="flex-direction:column"></div>
+          </aside>
+          <div class="labmain">
+            <div class="fig"><svg id="sa_fig" viewBox="0 0 760 330" role="img" aria-label="Temperature and speed of sound versus altitude in the standard atmosphere, with the selected altitude marked"></svg></div>
+            <div class="tiles" id="sa_tiles"></div>
+            <div class="readout" id="sa_out"></div>
+            <p class="note">Standard atmosphere of Anderson’s Appendix D: T falls 6.5 K/km to 11 km geopotential altitude, stays at 216.66 K to 25 km, then rises 3 K/km. Geometric altitude is converted to geopotential altitude; the values match Appendix D to within 0.2%.</p>
+          </div>
+        </div>
+
+        <h3>Worked examples 8.1–8.6</h3>
+        <div id="exA">
+          <div class="tabs" role="tablist" aria-label="Speed-of-sound example">
+            <button role="tab" aria-selected="true" data-ex="a1">Ex 8.1 · Flight Mach number</button>
+            <button role="tab" aria-selected="false" data-ex="a2">Ex 8.2 · Local Mach number</button>
+            <button role="tab" aria-selected="false" data-ex="a3">Ex 8.3 · Kinetic vs internal energy</button>
+            <button role="tab" aria-selected="false" data-ex="a4">Ex 8.4 · Compressibility</button>
+            <button role="tab" aria-selected="false" data-ex="a6">Ex 8.6 · Air vs helium</button>
+          </div>
+          <div data-expanel="a1" class="prose" style="max-width:none">
+            <p class="problem">An airplane flies at <input type="number" id="a1_V" value="250" min="1" step="10" aria-label="Flight velocity in m/s"> m/s. Calculate its Mach number at standard altitudes of (a) sea level, (b) 5 km and (c) 10 km.</p>
+            <div class="tblwrap"><table id="a1_tab"></table></div>
+            <p class="exnote">The temperature falls with altitude, so the speed of sound falls and the same airspeed is a higher Mach number. Sea level uses T = 288 K in the notes (288.16 K in Appendix D).</p>
+          </div>
+          <div data-expanel="a2" class="prose" style="max-width:none" hidden>
+            <p class="problem">At a point in the flow of Example 7.3 the temperature is <input type="number" id="a2_T" value="320" min="1" step="10" aria-label="Temperature in K"> K and the velocity is <input type="number" id="a2_V" value="1000" min="0" step="50" aria-label="Velocity in m/s"> m/s. Calculate the Mach number at this point.</p>
+            <div class="tblwrap"><table id="a2_tab"></table></div>
+            <p class="exnote">This is a <b>local</b> Mach number: it varies from point to point in the flow, unlike the freestream Mach number of Example 8.1.</p>
+          </div>
+          <div data-expanel="a3" class="prose" style="max-width:none" hidden>
+            <p class="problem">Calculate the ratio of kinetic energy to internal energy at a point in an airflow where the Mach number is (a) <input type="number" id="a3_Ma" value="2" min="0" step="0.5" aria-label="Mach number, case a"> and (b) <input type="number" id="a3_Mb" value="20" min="0" step="1" aria-label="Mach number, case b">.</p>
+            <div class="tblwrap"><table id="a3_tab"></table></div>
+          </div>
+          <div data-expanel="a4" class="prose" style="max-width:none" hidden>
+            <p class="problem">At a point in a flow of air the pressure and density are <input type="number" id="a4_p" value="0.7" min="0.001" step="0.1" aria-label="Pressure in atm"> atm and <input type="number" id="a4_r" value="0.79" min="0.001" step="0.01" aria-label="Density in kg per cubic meter"> kg/m³. (a) Calculate the isentropic compressibility. (b) From it, calculate the speed of sound.</p>
+            <div class="tblwrap"><table id="a4_tab"></table></div>
+            <p class="exnote">For an isentropic process p/ρ<sup>γ</sup> = c, and differentiating v = 1/ρ = (p/c)<sup>−1/γ</sup> gives τ<sub>s</sub> = 1/(γp). The notes convert 1 atm as 1.01 × 10<sup>5</sup> N/m² (exact: 1.01325 × 10<sup>5</sup>), hence τ<sub>s</sub> = 1.0103 × 10<sup>−5</sup> m²/N there. The density appears as 0.978 kg/m³ in the statement and 0.784 kg/m³ in the check; the numbers in the solution correspond to about 0.79 kg/m³, the value used here.</p>
+          </div>
+          <div data-expanel="a6" class="prose" style="max-width:none" hidden>
+            <p class="problem">A tube <input type="number" id="a6_L" value="300" min="1" step="10" aria-label="Tube length in m"> m long is filled with gas at <input type="number" id="a6_T" value="320" min="1" step="10" aria-label="Temperature in K"> K. A sound wave is generated at one end. How long does it take to reach the other end if the tube is filled with (a) air, (b) helium (γ = 1.67, R = 2078.5 J/(kg·K))?</p>
+            <div class="tblwrap"><table id="a6_tab"></table></div>
+            <p class="exnote">At the same temperature, sound travels faster in helium because its gas constant is 7.2 times larger (its molecules are lighter) and its γ is higher. Example 8.5 is left as an exercise in the notes.</p>
+          </div>
+        </div>
+      </section>
+
+<!-- ================= 8.4 ENERGY EQUATION FORMS ================= -->
+      <section class="sec" id="energy-forms" aria-labelledby="h-ef">
+        <div class="sechead"><p class="eyebrow">Section 8.4</p><h2 id="h-ef">Special forms of the energy equation</h2></div>
+        <div class="cols2">
+          <div class="prose">
+            <p>For steady, adiabatic, inviscid flow, h + u²/2 is constant along a streamline (8.29). For a calorically perfect gas, h = c<sub>p</sub>T and c<sub>p</sub> = γR/(γ − 1), so</p>
+            <div class="eq">\[ c_pT_1+\frac{u_1^2}{2}=c_pT_2+\frac{u_2^2}{2} \tag{8.30} \]</div>
+            <div class="eq">\[ \frac{a_1^2}{\gamma-1}+\frac{u_1^2}{2}=\frac{a_2^2}{\gamma-1}+\frac{u_2^2}{2} \tag{8.32} \]</div>
+            <p>Two reference states turn (8.32) into a constant. Bring the flow to rest (u = 0, a = a<sub>0</sub>), or accelerate or decelerate it to sonic speed (u = a = a*):</p>
+            <div class="eq">\[ \frac{a^2}{\gamma-1}+\frac{u^2}{2}=\frac{a_0^2}{\gamma-1} \tag{8.33} \]</div>
+            <div class="eq">\[ \frac{a^2}{\gamma-1}+\frac{u^2}{2}=\frac{\gamma+1}{2(\gamma-1)}\,a^{*2} \tag{8.35} \]</div>
+            <p>so that \(\frac{\gamma+1}{2(\gamma-1)}a^{*2}=\frac{a_0^2}{\gamma-1}\) (8.37). Both a<sub>0</sub> and a* are constant along a streamline of a steady, adiabatic, inviscid flow, and throughout the flow if every streamline comes from the same uniform freestream.</p>
+          </div>
+          <div class="prose">
+            <p><b>Total conditions.</b> With u<sub>2</sub> = 0 in (8.30), c<sub>p</sub>T + u²/2 = c<sub>p</sub>T<sub>0</sub> (8.38), and dividing by c<sub>p</sub>T:</p>
+            <div class="eq">\[ \frac{T_0}{T}=1+\frac{\gamma-1}{2}M^2 \tag{8.40} \]</div>
+            <p>Total pressure and density are defined by an <b>isentropic</b> compression to rest, \(p_0/p=(\rho_0/\rho)^\gamma=(T_0/T)^{\gamma/(\gamma-1)}\) (8.41), so</p>
+            <div class="eq">\[ \frac{p_0}{p}=\left(1+\frac{\gamma-1}{2}M^2\right)^{\frac{\gamma}{\gamma-1}} \tag{8.42} \]</div>
+            <div class="eq">\[ \frac{\rho_0}{\rho}=\left(1+\frac{\gamma-1}{2}M^2\right)^{\frac{1}{\gamma-1}} \tag{8.43} \]</div>
+            <p>For a given gas these ratios depend on the Mach number only; Appendix A tabulates them for γ = 1.4.</p>
+          </div>
+        </div>
+        <div class="cols2">
+          <div class="prose">
+            <p><b>Sonic conditions.</b> Setting M = 1 in (8.40), (8.42) and (8.43):</p>
+            <div class="eq">\[ \frac{T^*}{T_0}=\frac{2}{\gamma+1} \tag{8.44} \]</div>
+            <div class="eq">\[ \frac{p^*}{p_0}=\left(\frac{2}{\gamma+1}\right)^{\frac{\gamma}{\gamma-1}} \tag{8.45} \]</div>
+            <div class="eq">\[ \frac{\rho^*}{\rho_0}=\left(\frac{2}{\gamma+1}\right)^{\frac{1}{\gamma-1}} \tag{8.46} \]</div>
+            <p>For air (γ = 1.4) these are 0.833, 0.528 and 0.634: numbers worth remembering.</p>
+          </div>
+          <div class="prose">
+            <p><b>Characteristic Mach number.</b> Define M* = u/a*, the velocity measured against the sonic speed of sound a* = √(γRT*) rather than the local one. Dividing (8.35) by u² and solving:</p>
+            <div class="eq">\[ M^2=\frac{2}{\dfrac{\gamma+1}{M^{*2}}-(\gamma-1)} \tag{8.47} \]</div>
+            <div class="eq">\[ M^{*2}=\frac{(\gamma+1)M^2}{2+(\gamma-1)M^2} \tag{8.48} \]</div>
+            <p>M* &lt; 1 when M &lt; 1, M* = 1 when M = 1 and M* &gt; 1 when M &gt; 1, so M* behaves like M qualitatively. But as M → ∞, M* tends to a finite limit, \(\sqrt{(\gamma+1)/(\gamma-1)}=2.449\) for air.</p>
+          </div>
+        </div>
+
+        <div class="lab" id="ir">
+          <div class="labhead"><span class="eyebrow">Interactive 2 · Total-to-static ratios and M* (Appendix A in one line)</span><span class="note" id="ir_short"></span></div>
+          <aside class="rail" aria-label="Isentropic ratio inputs">
+            <div id="ir_ctl" style="display:flex;flex-direction:column;gap:14px"></div>
+            <div class="sep"></div>
+            <div id="ir_known"></div>
+            <div class="sep"></div>
+            <span class="lbl">Try</span>
+            <div class="presets" id="ir_pre" style="flex-direction:column"></div>
+          </aside>
+          <div class="labmain">
+            <div class="fig"><svg id="ir_fig" viewBox="0 0 760 330" role="img" aria-label="Total-to-static pressure, density and temperature ratios versus Mach number on a logarithmic scale, and the characteristic Mach number M star versus Mach number, with the selected Mach number marked" style="touch-action:none;cursor:crosshair"></svg></div>
+            <div class="legend"><span><i class="sw" style="border-color:var(--comp)"></i>p<sub>0</sub>/p</span><span><i class="sw" style="border-color:var(--stream)"></i>ρ<sub>0</sub>/ρ</span><span><i class="sw" style="border-color:var(--warn)"></i>T<sub>0</sub>/T</span><span><i class="sw" style="border-color:var(--exp)"></i>M*</span><span><i class="sw" style="border-color:var(--mach);border-top-style:dashed"></i>M* limit, M → ∞</span></div>
+            <div class="tblwrap"><table id="ir_tab"></table></div>
+            <p class="note" id="ir_comp"></p>
+          </div>
+        </div>
+
+        <h3>Worked examples 8.8–8.10</h3>
+        <div id="exB">
+          <div class="tabs" role="tablist" aria-label="Energy-equation example">
+            <button role="tab" aria-selected="true" data-ex="b8">Ex 8.8 · Total and sonic conditions</button>
+            <button role="tab" aria-selected="false" data-ex="b9">Ex 8.9–8.10 · Point on an airfoil</button>
+          </div>
+          <div data-expanel="b8" class="prose" style="max-width:none">
+            <p class="problem">At a point in an airflow the local Mach number, static pressure and static temperature are <input type="number" id="b8_M" value="3.5" min="0.01" step="0.1" aria-label="Mach number">, <input type="number" id="b8_p" value="0.3" min="0.0001" step="0.1" aria-label="Static pressure in atm"> atm and <input type="number" id="b8_T" value="180" min="1" step="10" aria-label="Static temperature in K"> K. Calculate the local p<sub>0</sub>, T<sub>0</sub>, T*, a* and M*.</p>
+            <div class="tblwrap"><table id="b8_tab"></table></div>
+            <p class="exnote">p<sub>0</sub> and T<sub>0</sub> are the conditions the gas would reach if brought to rest isentropically; T* and a* those it would reach if brought isentropically to M = 1. M* follows either from u/a* or directly from (8.48).</p>
+          </div>
+          <div data-expanel="b9" class="prose" style="max-width:none" hidden>
+            <p class="problem">An airfoil is in a freestream with M<sub>∞</sub> = <input type="number" id="b9_M" value="0.6" min="0.01" max="0.99" step="0.05" aria-label="Freestream Mach number">, p<sub>∞</sub> = <input type="number" id="b9_p" value="1" min="0.001" step="0.1" aria-label="Freestream pressure in atm"> atm and T<sub>∞</sub> = <input type="number" id="b9_T" value="288" min="1" step="1" aria-label="Freestream temperature in K"> K. At point 1 on the airfoil the pressure is p<sub>1</sub> = <input type="number" id="b9_p1" value="0.7545" min="0.001" step="0.01" aria-label="Pressure at point 1 in atm"> atm. Assuming isentropic flow, calculate the local Mach number (Ex 8.9) and velocity (Ex 8.10) at point 1.</p>
+            <div id="b9_ban"></div>
+            <div class="tblwrap"><table id="b9_tab"></table></div>
+            <p class="exnote">The flow outside the boundary layer is isentropic, so p<sub>0</sub> is the same at every point: p<sub>0,1</sub> = p<sub>0,∞</sub>. The local p<sub>0</sub>/p then fixes the local Mach number. The temperature at point 1 follows from the isentropic relation T<sub>1</sub>/T<sub>∞</sub> = (p<sub>1</sub>/p<sub>∞</sub>)<sup>(γ−1)/γ</sup>.</p>
+          </div>
+        </div>
+      </section>
+
+<!-- ================= 8.6 NORMAL-SHOCK RELATIONS ================= -->
+      <section class="sec" id="shock-relations" aria-labelledby="h-sr">
+        <div class="sechead"><p class="eyebrow">Section 8.6</p><h2 id="h-sr">Calculation of normal-shock properties</h2></div>
+        <div class="prose">
+          <p>Return to the five equations of Section 8.2. Divide momentum (8.6) by continuity (8.2) and use a² = γp/ρ:</p>
+          <div class="eq">\[ \frac{a_1^2}{\gamma u_1}-\frac{a_2^2}{\gamma u_2}=u_2-u_1 \tag{8.52} \]</div>
+          <p>The energy equation in the form (8.35) holds on both sides with the <i>same</i> a*, because h<sub>0</sub> is unchanged across the shock: \(a_1^2=\frac{\gamma+1}{2}a^{*2}-\frac{\gamma-1}{2}u_1^2\), and likewise for a<sub>2</sub>. Substituting and dividing by u<sub>2</sub> − u<sub>1</sub> gives a remarkably simple result, the <b>Prandtl relation</b>:</p>
+          <div class="eq">\[ a^{*2}=u_1u_2 \tag{8.55} \]</div>
+          <details class="deriv"><summary>Derivation of the Prandtl relation <span>(three lines)</span></summary><div class="inner">
+            <div class="eq">\[ \frac{\gamma+1}{2\gamma u_1u_2}\,(u_2-u_1)\,a^{*2}+\frac{\gamma-1}{2\gamma}\,(u_2-u_1)=u_2-u_1 \]</div>
+            <div class="eq">\[ \frac{\gamma+1}{2\gamma u_1u_2}\,a^{*2}+\frac{\gamma-1}{2\gamma}=1 \]</div>
+            <div class="eq">\[ a^{*2}=\left(1-\frac{\gamma-1}{2\gamma}\right)\frac{2\gamma u_1u_2}{\gamma+1}=u_1u_2 \]</div>
+          </div></details>
+        </div>
+        <div class="cols2">
+          <div class="prose">
+            <p>Dividing (8.55) by a*² gives \(M_2^*=1/M_1^*\) (8.57). With (8.48) for M<sub>1</sub>* and M<sub>2</sub>*, solve for M<sub>2</sub>:</p>
+            <div class="eq">\[ M_2^2=\frac{1+\frac{\gamma-1}{2}M_1^2}{\gamma M_1^2-\frac{\gamma-1}{2}} \tag{8.59} \]</div>
+            <p>Continuity and the Prandtl relation give the density ratio, \(\rho_2/\rho_1=u_1/u_2=u_1^2/a^{*2}=M_1^{*2}\):</p>
+            <div class="eq">\[ \frac{\rho_2}{\rho_1}=\frac{u_1}{u_2}=\frac{(\gamma+1)M_1^2}{2+(\gamma-1)M_1^2} \tag{8.61} \]</div>
+          </div>
+          <div class="prose">
+            <p>Momentum and continuity give \(p_2-p_1=\rho_1u_1^2(1-u_2/u_1)\) (8.62); divide by p<sub>1</sub> and use (8.61):</p>
+            <div class="eq">\[ \frac{p_2}{p_1}=1+\frac{2\gamma}{\gamma+1}\left(M_1^2-1\right) \tag{8.65} \]</div>
+            <p>The equation of state then gives the temperature ratio, and h = c<sub>p</sub>T the enthalpy ratio:</p>
+            <div class="eq">\[ \frac{T_2}{T_1}=\frac{h_2}{h_1}=\left[1+\frac{2\gamma}{\gamma+1}\left(M_1^2-1\right)\right]\frac{2+(\gamma-1)M_1^2}{(\gamma+1)M_1^2} \tag{8.67} \]</div>
+          </div>
+        </div>
+        <div class="key"><b>One parameter.</b> M<sub>2</sub>, ρ<sub>2</sub>/ρ<sub>1</sub>, p<sub>2</sub>/p<sub>1</sub> and T<sub>2</sub>/T<sub>1</sub> depend only on the upstream Mach number M<sub>1</sub> (and γ). This is a striking example of the Mach number as the governing parameter of compressible flow. Appendix B tabulates the ratios for γ = 1.4.</div>
+        <div class="cols2">
+          <div class="prose">
+            <p><b>Limits.</b> With M<sub>1</sub> = 1 all ratios equal 1 and M<sub>2</sub> = 1: a normal shock of vanishing strength is a Mach wave. As M<sub>1</sub> increases the shock strengthens and M<sub>2</sub> falls below 1, so the flow behind a normal shock is always <b>subsonic</b>. As M<sub>1</sub> → ∞ (γ = 1.4):</p>
+          </div>
+          <div class="prose">
+            <div class="eq">\[ M_2\to\sqrt{\frac{\gamma-1}{2\gamma}}=0.378,\qquad \frac{\rho_2}{\rho_1}\to\frac{\gamma+1}{\gamma-1}=6,\qquad \frac{p_2}{p_1},\ \frac{T_2}{T_1}\to\infty \]</div>
+          </div>
+        </div>
+
+        <div class="lab" id="ns">
+          <div class="labhead"><span class="eyebrow">Interactive 3 · Normal-shock explorer (Appendix B and Figure 8.8)</span><span class="note" id="ns_short"></span></div>
+          <aside class="rail" aria-label="Normal-shock inputs">
+            <div id="ns_ctl" style="display:flex;flex-direction:column;gap:14px"></div>
+            <div class="sep"></div>
+            <div id="ns_known"></div>
+            <div class="sep"></div>
+            <span class="lbl">Try</span>
+            <div class="presets" id="ns_pre" style="flex-direction:column"></div>
+          </aside>
+          <div class="labmain">
+            <div id="ns_msg"></div>
+            <div class="fig"><svg id="ns_sch" viewBox="0 0 760 150" role="img" aria-label="Stationary normal shock with the upstream and downstream states; arrow lengths are proportional to the velocities u1 and u2"></svg></div>
+            <div class="fig"><svg id="ns_fig" viewBox="0 0 760 420" role="img" aria-label="Normal-shock property ratios versus upstream Mach number: pressure, temperature and density ratios on a logarithmic scale above, downstream Mach number and total-pressure ratio below, with the selected Mach number marked" style="touch-action:none;cursor:crosshair"></svg></div>
+            <div class="legend"><span><i class="sw" style="border-color:var(--comp)"></i>p<sub>2</sub>/p<sub>1</sub></span><span><i class="sw" style="border-color:var(--warn)"></i>T<sub>2</sub>/T<sub>1</sub></span><span><i class="sw" style="border-color:var(--stream)"></i>ρ<sub>2</sub>/ρ<sub>1</sub></span><span><i class="sw" style="border-color:var(--exp)"></i>M<sub>2</sub></span><span><i class="sw" style="border-color:var(--ink)"></i>p<sub>0,2</sub>/p<sub>0,1</sub></span><span><i class="sw" style="border-color:var(--mach);border-top-style:dashed"></i>limits as M<sub>1</sub> → ∞</span></div>
+            <div class="tblwrap"><table id="ns_tab"></table></div>
+          </div>
+        </div>
+      </section>
+
+<!-- ================= 8.6 ENTROPY ================= -->
+      <section class="sec" id="entropy" aria-labelledby="h-en">
+        <div class="sechead"><p class="eyebrow">Section 8.6 · The second law</p><h2 id="h-en">Entropy and total pressure across the shock</h2></div>
+        <div class="cols2">
+          <div class="prose">
+            <p>The relations above embody only continuity, momentum and energy, which do not care whether M<sub>1</sub> is subsonic or supersonic. Mathematically they also return a “shock” for M<sub>1</sub> &lt; 1, an expansion in which the pressure <i>drops</i>. Only the second law of thermodynamics decides which direction the process can take. The entropy change of a calorically perfect gas, with (8.65) and (8.67), is</p>
+            <div class="eq">\[ s_2-s_1=c_p\ln\frac{T_2}{T_1}-R\ln\frac{p_2}{p_1} \]</div>
+            <div class="eq">\[ s_2-s_1=c_p\ln\left\{\left[1+\frac{2\gamma}{\gamma+1}(M_1^2-1)\right]\frac{2+(\gamma-1)M_1^2}{(\gamma+1)M_1^2}\right\}-R\ln\left[1+\frac{2\gamma}{\gamma+1}(M_1^2-1)\right] \tag{8.68} \]</div>
+            <p>For M<sub>1</sub> = 1 the change is zero; for M<sub>1</sub> &gt; 1 it is positive; for M<sub>1</sub> &lt; 1 it is <b>negative</b>, which the second law forbids. <b>Normal shocks occur only in supersonic flow</b>; an expansion shock is impossible.</p>
+            <p>Nature produces the entropy rise inside the wave. The shock is a region roughly 10<sup>−5</sup> cm thick (a few mean free paths at sea-level density), and across it the large gradients of velocity and temperature make friction and heat conduction strong. Both are dissipative, irreversible mechanisms that always increase entropy.</p>
+          </div>
+          <div class="prose">
+            <p><b>Total conditions on each side.</b> Imagine bringing a fluid element ahead of the shock to rest isentropically (state 1a: p<sub>0,1</sub>, T<sub>0,1</sub>, s<sub>1</sub>), and an element behind the shock likewise (state 2a: p<sub>0,2</sub>, T<sub>0,2</sub>, s<sub>2</sub>). The flow through the shock is adiabatic, so the energy equation gives</p>
+            <div class="eq">\[ T_{0,1}=T_{0,2} \tag{8.69} \]</div>
+            <p>Writing the entropy change between the two rest states, the temperature term vanishes:</p>
+            <div class="eq">\[ s_2-s_1=c_p\ln\frac{T_{0,2}}{T_{0,1}}-R\ln\frac{p_{0,2}}{p_{0,1}}=-R\ln\frac{p_{0,2}}{p_{0,1}} \]</div>
+            <div class="eq">\[ \frac{p_{0,2}}{p_{0,1}}=e^{-(s_2-s_1)/R} \tag{8.73} \]</div>
+            <p>Since s<sub>2</sub> &gt; s<sub>1</sub>, <b>total pressure always falls across a shock</b>, while total temperature stays constant. The loss of p<sub>0</sub> is the measure of the shock’s irreversibility; Appendix B lists p<sub>0,2</sub>/p<sub>0,1</sub>.</p>
+          </div>
+        </div>
+
+        <div class="lab" id="tsd">
+          <div class="labhead"><span class="eyebrow">Interactive 4 · The shock on a T–s diagram</span><span class="note" id="tsd_short"></span></div>
+          <aside class="rail" aria-label="T-s diagram inputs">
+            <div id="tsd_ctl" style="display:flex;flex-direction:column;gap:14px"></div>
+            <p class="note">Values of M<sub>1</sub> below 1 are allowed here on purpose: they show the expansion “shock” that the conservation laws permit and the second law rules out.</p>
+            <div class="sep"></div>
+            <span class="lbl">Try</span>
+            <div class="presets" id="tsd_pre" style="flex-direction:column"></div>
+          </aside>
+          <div class="labmain">
+            <div id="tsd_msg"></div>
+            <div class="fig"><svg id="tsd_fig" viewBox="0 0 760 340" role="img" aria-label="Temperature-entropy diagram with isobars through the static and total states ahead of and behind the shock, and the entropy change versus upstream Mach number"></svg></div>
+            <div class="legend"><span><i class="sw" style="border-color:var(--ink)"></i>Shock, 1 → 2 (irreversible)</span><span><i class="sw" style="border-color:var(--mach);border-top-style:dashed"></i>Isentropic compression to rest</span><span><i class="sw" style="border-color:var(--exp)"></i>Isobars p<sub>1</sub>, p<sub>0,1</sub></span><span><i class="sw" style="border-color:var(--comp)"></i>Isobars p<sub>2</sub>, p<sub>0,2</sub></span></div>
+            <div class="readout" id="tsd_out"></div>
+          </div>
+        </div>
+      </section>
+
+<!-- ================= EXAMPLES 8.11–8.21 ================= -->
+      <section class="sec" id="shock-examples" aria-labelledby="h-sx">
+        <div class="sechead"><p class="eyebrow">Worked examples</p><h2 id="h-sx">Normal shocks: Examples 8.11–8.21</h2></div>
+        <p class="lede" style="font-size:15.5px">The <b>Exact</b> column comes from the relations above; the <b>Notes</b> column is the hand solution from Appendices A and B. Change any given value and the exact solution updates. The notes column applies to the original values only.</p>
+        <div id="exC">
+          <div class="tabs" role="tablist" aria-label="Normal-shock example">
+            <button role="tab" aria-selected="true" data-ex="c11">Ex 8.11 · State behind a shock</button>
+            <button role="tab" aria-selected="false" data-ex="c12">Ex 8.12 · Total-pressure loss</button>
+            <button role="tab" aria-selected="false" data-ex="c13">Ex 8.13–8.14 · Ramjet inlet</button>
+            <button role="tab" aria-selected="false" data-ex="c15">Ex 8.15–8.17 · One ratio fixes the shock</button>
+            <button role="tab" aria-selected="false" data-ex="c18">Ex 8.18–8.20 · Velocity and temperature</button>
+            <button role="tab" aria-selected="false" data-ex="c21">Ex 8.21 · Tables or exact?</button>
+          </div>
+          <div data-expanel="c11" class="prose" style="max-width:none">
+            <p class="problem">A normal shock wave stands in air where the upstream properties are u<sub>1</sub> = <input type="number" id="c11_u" value="680" min="1" step="10" aria-label="Upstream velocity in m/s"> m/s, T<sub>1</sub> = <input type="number" id="c11_T" value="288" min="1" step="1" aria-label="Upstream temperature in K"> K and p<sub>1</sub> = <input type="number" id="c11_p" value="1" min="0.001" step="0.1" aria-label="Upstream pressure in atm"> atm. Calculate the velocity, temperature and pressure downstream of the shock.</p>
+            <div id="c11_ban"></div>
+            <div class="tblwrap"><table id="c11_tab"></table></div>
+            <p class="exnote">u<sub>1</sub> = 680 m/s gives M<sub>1</sub> = 1.999, which the notes round to 2 before entering Appendix B. The velocity behind the shock also follows directly from continuity: u<sub>2</sub> = u<sub>1</sub>/(ρ<sub>2</sub>/ρ<sub>1</sub>).</p>
+          </div>
+          <div data-expanel="c12" class="prose" style="max-width:none" hidden>
+            <p class="problem">A normal shock stands in a supersonic airstream where the pressure upstream of the shock is <input type="number" id="c12_p" value="1" min="0.001" step="0.1" aria-label="Upstream pressure in atm"> atm. Calculate the loss of total pressure across the shock when the upstream Mach number is (a) M<sub>1</sub> = <input type="number" id="c12_Ma" value="2" min="1" step="0.1" aria-label="Upstream Mach number, case a"> and (b) M<sub>1</sub> = <input type="number" id="c12_Mb" value="4" min="1" step="0.1" aria-label="Upstream Mach number, case b">. Compare the two results.</p>
+            <div class="tblwrap"><table id="c12_tab"></table></div>
+            <p class="exnote" id="c12_note"></p>
+          </div>
+          <div data-expanel="c13" class="prose" style="max-width:none" hidden>
+            <p class="problem">A ramjet flies at M<sub>∞</sub> = <input type="number" id="c13_M" value="2" min="1.01" step="0.5" aria-label="Freestream Mach number"> at 10 km, where p<sub>∞</sub> = <input type="number" id="c13_p" value="26500" min="1" step="100" aria-label="Freestream pressure in N per square meter"> N/m² and T<sub>∞</sub> = <input type="number" id="c13_T" value="223.3" min="1" step="1" aria-label="Freestream temperature in K"> K. A normal shock stands at the inlet (point 1); the inlet then slows the flow isentropically to M<sub>2</sub> = <input type="number" id="c13_M2" value="0.2" min="0.01" max="0.99" step="0.05" aria-label="Mach number at the combustor entrance"> at the combustor entrance (point 2). Calculate p<sub>2</sub> and T<sub>2</sub>. Example 8.14 repeats the calculation for M<sub>∞</sub> = 10, with the inlet redesigned so that M<sub>2</sub> stays 0.2.</p>
+            <div class="row" style="flex-wrap:wrap;gap:6px"><button type="button" class="mini" id="c13_m2">Ex 8.13: M<sub>∞</sub> = 2</button><button type="button" class="mini" id="c13_m10">Ex 8.14: M<sub>∞</sub> = 10</button></div>
+            <div class="tblwrap"><table id="c13_tab"></table></div>
+            <p class="exnote">Total pressure is lost across the shock and then stays constant through the isentropic inlet; total temperature stays constant throughout. At Mach 10 the air would enter the combustor at about 33 atm and 4650 K, far beyond what any combustor or structure tolerates. This is why hypersonic air-breathing engines keep the flow supersonic through the combustor: the scramjet (supersonic-combustion ramjet), demonstrated near Mach 10 by NASA’s X-43A.</p>
+          </div>
+          <div data-expanel="c15" class="prose" style="max-width:none" hidden>
+            <p class="problem">(8.15) The pressure ratio across a normal shock in air is 4.5. (8.16) The temperature ratio across a normal shock in air is 5.8. (8.17) The Mach number behind a normal shock is 0.4752. In each case, find the Mach numbers ahead of and behind the shock and the remaining property ratios.</p>
+            <div class="tblwrap"><table id="c15_tab"></table></div>
+            <div class="row" style="flex-wrap:wrap;gap:6px"><button type="button" class="mini" data-ns="p21:4.5">Open Ex 8.15 in Interactive 3</button><button type="button" class="mini" data-ns="T21:5.8">Open Ex 8.16 in Interactive 3</button><button type="button" class="mini" data-ns="M2:0.4752">Open Ex 8.17 in Interactive 3</button></div>
+            <p class="exnote">For a normal shock, any one of p<sub>2</sub>/p<sub>1</sub>, T<sub>2</sub>/T<sub>1</sub>, ρ<sub>2</sub>/ρ<sub>1</sub>, M<sub>2</sub> or p<sub>0,2</sub>/p<sub>0,1</sub> fixes M<sub>1</sub>, and with it every other ratio. Use the “Known quantity” box of Interactive 3 to invert any of them.</p>
+          </div>
+          <div data-expanel="c18" class="prose" style="max-width:none" hidden>
+            <p class="problem">(8.18) The velocity and temperature ahead of a normal shock are u<sub>1</sub> = <input type="number" id="c18_u" value="1215" min="1" step="10" aria-label="Upstream velocity in m/s"> m/s and T<sub>1</sub> = <input type="number" id="c18_T" value="300" min="1" step="1" aria-label="Upstream temperature in K"> K. Calculate the velocity behind the shock. (8.19) The velocity and temperature behind a normal shock are u<sub>2</sub> = <input type="number" id="c19_u" value="329" min="1" step="10" aria-label="Downstream velocity in m/s"> m/s and T<sub>2</sub> = <input type="number" id="c19_T" value="1500" min="1" step="10" aria-label="Downstream temperature in K"> K. Calculate the velocity ahead of the shock. (8.20) Repeat 8.19 using the nearest table entry instead of interpolation.</p>
+            <div id="c18_ban"></div>
+            <div class="tblwrap"><table id="c18_tab"></table></div>
+            <p class="exnote">Unlike Examples 8.15–8.17, neither the velocity nor the temperature alone defines a normal shock: both are needed to find the Mach number. In Example 8.19, M<sub>2</sub> = 0.4238 falls between the Appendix B entries M<sub>1</sub> = 4.45 (M<sub>2</sub> = 0.4245) and 4.50 (0.4236); the notes interpolate linearly. Using the nearest entry instead (Ex 8.20) changes u<sub>1</sub> by less than 0.1%.</p>
+          </div>
+          <div data-expanel="c21" class="prose" style="max-width:none" hidden>
+            <p class="problem">A normal shock has an upstream Mach number of M<sub>1</sub> = <input type="number" id="c21_M" value="3.53" min="2" max="4.99" step="0.01" aria-label="Upstream Mach number"> (enter a value between 2 and 5). Obtain the downstream Mach number by (a) the nearest entry in Appendix B, (b) linear interpolation between entries and (c) the exact relation (8.59). Compare the three.</p>
+            <div class="tblwrap"><table id="c21_tab"></table></div>
+            <p class="exnote">Between M<sub>1</sub> = 2 and 5, Appendix B steps M<sub>1</sub> by 0.05, and the table entries here are those values rounded to four decimals. For practical purposes the three approaches agree; the notes adopt the nearest-entry method for the rest of the course.</p>
+          </div>
+        </div>
+      </section>
+
+<!-- ================= 8.7 PITOT ================= -->
+      <section class="sec" id="pitot" aria-labelledby="h-pt">
+        <div class="sechead"><p class="eyebrow">Section 8.7</p><h2 id="h-pt">Measurement of velocity in a compressible flow</h2></div>
+        <div class="cols2">
+          <div class="prose">
+            <p>In low-speed flow, the total pressure from a Pitot tube and the static pressure from a wall orifice give the velocity through Bernoulli’s equation. In compressible flow the same two pressures still give the <b>Mach number</b>, but the formula depends on the Mach-number regime.</p>
+            <h3>Subsonic compressible flow</h3>
+            <p>The mouth of the tube (point b) is a stagnation point, and the gas along streamline <i>ab</i> is brought to rest isentropically. The tube therefore reads the freestream total pressure p<sub>0,1</sub>, and (8.42) inverts to</p>
+            <div class="eq">\[ M_1^2=\frac{2}{\gamma-1}\left[\left(\frac{p_{0,1}}{p_1}\right)^{\frac{\gamma-1}{\gamma}}-1\right] \tag{8.74} \]</div>
+            <div class="eq">\[ u_1^2=\frac{2a_1^2}{\gamma-1}\left[\left(\frac{p_{0,1}}{p_1}\right)^{\frac{\gamma-1}{\gamma}}-1\right] \tag{8.75} \]</div>
+            <p>Unlike incompressible flow, p<sub>0,1</sub> and p<sub>1</sub> alone do not give u<sub>1</sub>: the freestream speed of sound, that is T<sub>1</sub>, is also needed.</p>
+          </div>
+          <div class="prose">
+            <h3>Supersonic flow</h3>
+            <p>Ahead of the tube stands a detached bow shock. A fluid element on the stagnation streamline <i>cde</i> first crosses the normal part of the shock, decelerating non-isentropically to a subsonic speed at d, then is compressed isentropically to rest at e. The tube therefore reads p<sub>0,2</sub>, the total pressure <b>behind a normal shock</b>, which is less than p<sub>0,1</sub>. Writing p<sub>0,2</sub>/p<sub>1</sub> = (p<sub>0,2</sub>/p<sub>2</sub>)(p<sub>2</sub>/p<sub>1</sub>) with the isentropic relation for the first factor, (8.59) for M<sub>2</sub> and (8.65) for the second factor gives the <b>Rayleigh Pitot-tube formula</b>:</p>
+            <div class="eq">\[ \frac{p_{0,2}}{p_1}=\left[\frac{(\gamma+1)^2M_1^2}{4\gamma M_1^2-2(\gamma-1)}\right]^{\frac{\gamma}{\gamma-1}}\frac{1-\gamma+2\gamma M_1^2}{\gamma+1} \tag{8.80} \]</div>
+            <p>Appendix B tabulates p<sub>0,2</sub>/p<sub>1</sub> against M<sub>1</sub>. At M<sub>1</sub> = 1 both formulas give 1.893 for air: a reading above 1.893 p<sub>1</sub> means the flow is supersonic.</p>
+          </div>
+        </div>
+
+        <div class="lab" id="pt">
+          <div class="labhead"><span class="eyebrow">Interactive 5 · Reading a Pitot tube</span><span class="note" id="pt_short"></span></div>
+          <aside class="rail" aria-label="Pitot tube inputs">
+            <div id="pt_ctl" style="display:flex;flex-direction:column;gap:14px"></div>
+            <div class="sep"></div>
+            <div id="pt_known"></div>
+            <div class="sep"></div>
+            <span class="lbl">Try</span>
+            <div class="presets" id="pt_pre" style="flex-direction:column"></div>
+          </aside>
+          <div class="labmain">
+            <div class="fig"><svg id="pt_sch" viewBox="0 0 760 190" role="img" aria-label="Pitot tube in the flow. In supersonic flow a detached bow shock stands ahead of the tube and the stagnation streamline crosses its normal part."></svg></div>
+            <div class="fig"><svg id="pt_fig" viewBox="0 0 760 320" role="img" aria-label="Pitot pressure ratio versus freestream Mach number: the isentropic total-pressure ratio and the Rayleigh Pitot formula, with the measured reading and the resulting Mach number marked" style="touch-action:none;cursor:crosshair"></svg></div>
+            <div class="legend"><span><i class="sw" style="border-color:var(--exp)"></i>Isentropic, p<sub>0,1</sub>/p<sub>1</sub> (8.42)</span><span><i class="sw" style="border-color:var(--comp)"></i>Rayleigh Pitot formula, p<sub>0,2</sub>/p<sub>1</sub> (8.80)</span><span><i class="sw" style="border-color:var(--exp);border-top-style:dashed"></i>Isentropic beyond M = 1 (not what the tube reads)</span><span><i class="sw" style="border-color:var(--accent);border-top-style:dashed"></i>Measured reading</span></div>
+            <div class="readout" id="pt_out"></div>
+          </div>
+        </div>
+
+        <h3>Worked examples 8.22–8.24</h3>
+        <div id="exD">
+          <div class="tabs" role="tablist" aria-label="Pitot-tube example">
+            <button role="tab" aria-selected="true" data-ex="d22">Ex 8.22 · Subsonic or supersonic?</button>
+            <button role="tab" aria-selected="false" data-ex="d23">Ex 8.23 · Hypersonic missile</button>
+            <button role="tab" aria-selected="false" data-ex="d24">Ex 8.24 · SR-71 airspeed</button>
+          </div>
+          <div data-expanel="d22" class="prose" style="max-width:none">
+            <p class="problem">A Pitot tube is inserted into an airflow where the static pressure is <input type="number" id="d22_p" value="1" min="0.001" step="0.1" aria-label="Static pressure in atm"> atm. Calculate the flow Mach number when the tube measures (a) <input type="number" id="d22_a" value="1.276" min="0.001" step="0.01" aria-label="Pitot reading a in atm"> atm, (b) <input type="number" id="d22_b" value="2.714" min="0.001" step="0.01" aria-label="Pitot reading b in atm"> atm and (c) <input type="number" id="d22_c" value="12.06" min="0.001" step="0.1" aria-label="Pitot reading c in atm"> atm.</p>
+            <div class="tblwrap"><table id="d22_tab"></table></div>
+            <p class="exnote">First decide the regime: at M<sub>1</sub> = 1 the tube reads 1.893 p<sub>1</sub>. Below that, the tube senses the freestream total pressure (Appendix A); above it, the total pressure behind the bow shock (p<sub>0,2</sub>/p<sub>1</sub>, Appendix B). The last column shows the Mach number you would get by wrongly applying the isentropic formula to a supersonic reading.</p>
+          </div>
+          <div data-expanel="d23" class="prose" style="max-width:none" hidden>
+            <p class="problem">A hypersonic missile flies at Mach <input type="number" id="d23_M" value="8" min="1" step="0.5" aria-label="Flight Mach number"> at an altitude where the pressure is <input type="number" id="d23_p" value="46620" min="1" step="100" aria-label="Freestream pressure in N per square meter"> N/m². Its nose is blunt. Calculate the pressure at the stagnation point on the nose.</p>
+            <div class="tblwrap"><table id="d23_tab"></table></div>
+            <p class="exnote">The stagnation point lies behind the normal part of the bow shock, so its pressure is p<sub>0,2</sub>, not the freestream total pressure. The notes state the altitude as 6 km; 4.662 × 10<sup>4</sup> N/m² is the standard pressure at 20,000 ft (6.1 km), the altitude in Anderson’s original statement. The notes convert with 1 atm = 1.01 × 10<sup>5</sup> N/m², hence 38.2 atm.</p>
+          </div>
+          <div data-expanel="d24" class="prose" style="max-width:none" hidden>
+            <p class="problem">A Lockheed SR-71 Blackbird flies at a standard altitude of 25 km, where Appendix D gives T<sub>1</sub> = <input type="number" id="d24_T" value="216.66" min="1" step="1" aria-label="Freestream temperature in K"> K and p<sub>1</sub> = <input type="number" id="d24_p" value="2527.3" min="1" step="10" aria-label="Freestream pressure in N per square meter"> N/m². The Pitot tube on the airplane measures <input type="number" id="d24_pp" value="38800" min="1" step="100" aria-label="Pitot pressure in N per square meter"> N/m². Calculate the velocity of the airplane.</p>
+            <div id="d24_ban"></div>
+            <div class="tblwrap"><table id="d24_tab"></table></div>
+            <p class="exnote">Invert the Rayleigh Pitot formula for M<sub>1</sub>, then u<sub>1</sub> = M<sub>1</sub>a<sub>1</sub>. As in subsonic flow, the temperature is needed to turn a Mach number into a velocity.</p>
+          </div>
+        </div>
+      </section>
+
+<!-- ================= QUIZ ================= -->
+      <section class="sec" id="check" aria-labelledby="h-q">
+        <div class="sechead"><p class="eyebrow">Self-check</p><h2 id="h-q">Check your understanding</h2></div>
+        <p class="lede" style="font-size:15.5px">Pick an answer to see whether it is right and why. Use the normal-shock explorer to test your reasoning. <span class="score" id="q_score"></span></p>
+        <div class="quiz" id="quiz"></div>
+      </section>
+
+<!-- ================= KEY EQUATIONS ================= -->
+      <section class="sec" id="equations" aria-labelledby="h-eqs">
+        <div class="sechead"><p class="eyebrow">Summary</p><h2 id="h-eqs">Key equations</h2></div>
+        <div class="cols2">
+          <div class="prose">
+            <h3>Speed of sound and reference conditions</h3>
+            <div class="eq">\[ a=\sqrt{\left(\frac{\partial p}{\partial\rho}\right)_s}=\sqrt{\frac{\gamma p}{\rho}}=\sqrt{\gamma RT},\qquad a=\sqrt{\frac{1}{\rho\tau_s}} \]</div>
+            <div class="eq">\[ \frac{T_0}{T}=1+\frac{\gamma-1}{2}M^2,\quad \frac{p_0}{p}=\left(\frac{T_0}{T}\right)^{\frac{\gamma}{\gamma-1}},\quad \frac{\rho_0}{\rho}=\left(\frac{T_0}{T}\right)^{\frac{1}{\gamma-1}} \]</div>
+            <div class="eq">\[ \frac{T^*}{T_0}=\frac{2}{\gamma+1},\qquad \frac{a^2}{\gamma-1}+\frac{u^2}{2}=\frac{a_0^2}{\gamma-1}=\frac{\gamma+1}{2(\gamma-1)}a^{*2} \]</div>
+            <div class="eq">\[ M^{*2}=\frac{(\gamma+1)M^2}{2+(\gamma-1)M^2} \]</div>
+          </div>
+          <div class="prose">
+            <h3>Normal shock and Pitot tube</h3>
+            <div class="eq">\[ a^{*2}=u_1u_2,\qquad M_2^2=\frac{1+\frac{\gamma-1}{2}M_1^2}{\gamma M_1^2-\frac{\gamma-1}{2}} \]</div>
+            <div class="eq">\[ \frac{\rho_2}{\rho_1}=\frac{u_1}{u_2}=\frac{(\gamma+1)M_1^2}{2+(\gamma-1)M_1^2},\qquad \frac{p_2}{p_1}=1+\frac{2\gamma}{\gamma+1}\left(M_1^2-1\right) \]</div>
+            <div class="eq">\[ \frac{T_2}{T_1}=\frac{p_2}{p_1}\frac{\rho_1}{\rho_2},\qquad T_{0,2}=T_{0,1},\qquad \frac{p_{0,2}}{p_{0,1}}=e^{-(s_2-s_1)/R} \]</div>
+            <div class="eq">\[ \frac{p_{0,2}}{p_1}=\left[\frac{(\gamma+1)^2M_1^2}{4\gamma M_1^2-2(\gamma-1)}\right]^{\frac{\gamma}{\gamma-1}}\frac{1-\gamma+2\gamma M_1^2}{\gamma+1} \]</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+

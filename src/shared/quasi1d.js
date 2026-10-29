@@ -12,6 +12,9 @@ const rr0=(M,g)=>Math.pow(1+(g-1)/2*M*M,-1/(g-1));
 const Mfromp=(r,g)=>Math.sqrt(Math.max(0,2/(g-1)*(Math.pow(r,-(g-1)/g)-1))); // r=p/p0
 /* normal shock at Mach M */
 function NS(M,g){const n=nsFromMn(M,g);return {M2:n.Mn2,p21:n.p21,T21:n.T21,r21:n.r21,p0r:n.p0r};}
+/* Pitot reading p_Pitot/p1: isentropic below M = 1, Rayleigh Pitot formula (Anderson Eq. 8.80) above */
+function pitot(M,g){if(M<=1)return 1/pp0(M,g);const s=M*M;return Math.pow((g+1)*(g+1)*s/(4*g*s-2*(g-1)),g/(g-1))*(1-g+2*g*s)/(g+1);}
+const Mstar=(M,g)=>Math.sqrt((g+1)*M*M/(2+(g-1)*M*M));
 /* critical back pressures for a CD nozzle with exit/throat area ratio Ae (A_t = A*) */
 function critical(Ae,g){
   const Msub=Mfromarea(Ae,g,false), Msup=Mfromarea(Ae,g,true);
@@ -45,4 +48,4 @@ function nozzle(Ae,pb,g){
   r.regime='underexpanded';
   const Mj=Mfromp(pb,g); r.ex={Mj,dnu:nu(Mj,g)-nu(c.Msup,g),mu1:Math.asin(1/c.Msup),mu2:Math.asin(1/Mj)}; return r;
 }
-if(typeof module!=='undefined') module.exports={AoAs,Mfromarea,pp0,TT0,rr0,Mfromp,NS,critical,nozzle};
+if(typeof module!=='undefined') module.exports={AoAs,Mfromarea,pp0,TT0,rr0,Mfromp,NS,critical,nozzle,pitot,Mstar};

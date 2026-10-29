@@ -8,6 +8,7 @@ Each lesson pairs the derivations with figures computed live from the exact rela
 
 | Chapter | Lesson |
 |---|---|
+| 8 | [Normal Shock Waves](https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/lessons/normal-shock-waves.html): the speed of sound, total and sonic conditions, the characteristic Mach number, the normal-shock relations, entropy and total-pressure loss across a shock, and the Pitot tube in subsonic and supersonic flow |
 | 9 | [Oblique Shock and Expansion Waves](https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/lessons/oblique-shock-expansion-waves.html): Mach waves, the θ–β–M relation, shock reflection and intersection, Prandtl–Meyer expansion and isentropic compression, and shock-expansion theory for flat-plate, wedge, and diamond airfoils |
 | 10 | [Nozzles, Diffusers, and Wind Tunnels](https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/lessons/nozzles-diffusers-wind-tunnels.html): quasi-one-dimensional flow, the area–velocity and area–Mach relations, choked flow, converging-diverging nozzles with normal shocks inside or at the exit, rocket thrust, diffusers, and supersonic wind-tunnel start-up |
 
@@ -22,7 +23,8 @@ src/course.json                course manifest: base URL and the ordered list of
 src/templates/                 page head, header, footer, course home
 src/shared/                    style.css, theme.js, lesson.js, helpers.js (controls and SVG
                                helpers), core.js (oblique shocks, Prandtl-Meyer), quasi1d.js
-                               (isentropic quasi-1D flow, normal shocks, nozzle regimes)
+                               (isentropic quasi-1D flow, normal shocks, Pitot formula,
+                               nozzle regimes), atmosphere.js (standard atmosphere, App. D)
 src/lessons/<slug>/            body.html (the lesson text) and modules.js (its interactives)
 tools/                         build, numerical checks, browser audit, preview images
 ```
