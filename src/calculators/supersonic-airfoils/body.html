@@ -1,0 +1,221 @@
+  <div class="pagehead">
+    <p class="lede">Shock-expansion theory for three airfoils of increasing complexity. Pick a case, then change the freestream Mach number, the angle of attack, or the geometry. Every step below updates: the wave on each surface, the surface pressures, the force on each face, and finally <i>c<sub>l</sub></i>, <i>c<sub>d</sub></i> and <i>c<sub>m</sub></i>.</p>
+  </div>
+
+  <div class="cases" role="tablist" aria-label="Airfoil case">
+    <button class="case" role="tab" id="tab-flat" data-case="flat" aria-selected="true">
+      <svg viewBox="0 0 74 30" aria-hidden="true"><line x1="6" y1="15" x2="68" y2="15" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+      <span class="t"><b>1 · Flat plate</b><small>Lift and drag due to lift</small></span>
+    </button>
+    <button class="case" role="tab" id="tab-wedge" data-case="wedge" aria-selected="false">
+      <svg viewBox="0 0 74 30" aria-hidden="true"><polygon points="6,15 68,5 68,25" fill="currentColor" fill-opacity=".15" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+      <span class="t"><b>2 · Wedge</b><small>Adds thickness drag and a base</small></span>
+    </button>
+    <button class="case" role="tab" id="tab-diamond" data-case="diamond" aria-selected="false">
+      <svg viewBox="0 0 74 30" aria-hidden="true"><polygon points="6,15 37,5 68,15 37,25" fill="currentColor" fill-opacity=".15" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+      <span class="t"><b>3 · Diamond</b><small>Closed body, shoulder expansions</small></span>
+    </button>
+  </div>
+
+  <div class="grid">
+    <!-- ============ CONTROL RAIL ============ -->
+    <aside class="card rail" aria-label="Inputs">
+      <h2>Inputs</h2>
+      <div class="ctl">
+        <label for="M">Freestream Mach, M<sub>∞</sub></label>
+        <div class="row"><input type="range" id="M_r" min="1.05" max="6" step="0.01" aria-label="Mach slider"><input type="number" id="M" min="1.01" max="20" step="0.01"></div>
+      </div>
+      <div class="ctl">
+        <label for="alpha">Angle of attack, α <small>deg</small></label>
+        <div class="row"><input type="range" id="alpha_r" min="-20" max="25" step="0.1" aria-label="Angle of attack slider"><input type="number" id="alpha" min="-45" max="45" step="0.1"></div>
+      </div>
+      <div class="sep"></div>
+
+      <p class="note" id="flatNote">A flat plate has zero thickness, so α is the only geometric input. Both surfaces have length c.</p>
+
+      <div id="geomBox" style="display:flex;flex-direction:column;gap:14px">
+        <div class="ctl">
+          <span class="lbl">Specify thickness by</span>
+          <div class="seg" role="group" aria-label="Geometry input mode">
+            <button id="mode_ang" aria-pressed="true">Half-angle</button>
+            <button id="mode_tc" aria-pressed="false">Thickness t/c</button>
+          </div>
+        </div>
+        <div class="ctl" id="box_ang">
+          <label for="ang" id="angLabel">Half-angle <small>deg</small></label>
+          <div class="row"><input type="range" id="ang_r" min="0.5" max="25" step="0.1" aria-label="Half-angle slider"><input type="number" id="ang" min="0.1" max="40" step="0.1"></div>
+        </div>
+        <div class="ctl" id="box_tc" hidden>
+          <label for="tc">Thickness ratio, t/c</label>
+          <div class="row"><input type="range" id="tc_r" min="0.01" max="0.4" step="0.001" aria-label="Thickness slider"><input type="number" id="tc" min="0.001" max="0.8" step="0.001"></div>
+        </div>
+        <div class="ctl" id="box_xm">
+          <label for="xm">Max-thickness location, x<sub>m</sub>/c <small>0.5 = symmetric</small></label>
+          <div class="row"><input type="range" id="xm_r" min="0.15" max="0.85" step="0.01" aria-label="Max thickness location slider"><input type="number" id="xm" min="0.05" max="0.95" step="0.01"></div>
+        </div>
+        <div class="derived" id="geomDerived"></div>
+        <details class="more" id="baseBox">
+          <summary>Advanced: base pressure</summary>
+          <div class="inner">
+            <div class="ctl">
+              <label for="pb">Base pressure, p<sub>b</sub>/p<sub>∞</sub> <small>default 1</small></label>
+              <div class="row"><input type="range" id="pb_r" min="0" max="1.5" step="0.01" aria-label="Base pressure slider"><input type="number" id="pb" min="0" max="5" step="0.01"></div>
+            </div>
+            <p class="note">The blunt base sits in separated flow, so shock-expansion theory cannot predict its pressure. The default p<sub>b</sub> = p<sub>∞</sub> means the base adds no force. In a real flow p<sub>b</sub> &lt; p<sub>∞</sub>, which adds base drag; p<sub>b</sub> = 0 is the vacuum limit.</p>
+            <button class="mini" id="pbReset" type="button">Reset to p<sub>b</sub> = p<sub>∞</sub></button>
+          </div>
+        </details>
+      </div>
+
+      <details class="more">
+        <summary>Dimensional inputs</summary>
+        <div class="inner">
+          <p class="note">γ is set in the top bar and applies to the whole page.</p>
+          <div class="ctl">
+            <label for="pinf">Freestream pressure, p<sub>∞</sub> <small>Pa</small></label>
+            <div class="row"><input type="number" id="pinf" min="1" step="100" style="width:100%"></div>
+          </div>
+          <div class="ctl">
+            <label for="chord">Chord, c <small>m</small></label>
+            <div class="row"><input type="number" id="chord" min="0.001" step="0.1" style="width:100%"></div>
+          </div>
+        </div>
+      </details>
+      <div class="sep"></div>
+      <div class="ctl">
+        <span class="lbl">Examples</span>
+        <div class="presets" id="presets"></div>
+      </div>
+    </aside>
+
+    <!-- ============ MAIN COLUMN ============ -->
+    <main class="main">
+      <div id="banners" style="display:flex;flex-direction:column;gap:8px"></div>
+
+      <section class="card" aria-labelledby="h-fig">
+        <div class="headrow"><h2 id="h-fig">Wave pattern and surface pressures</h2><span class="legend">Drawn to scale, freestream horizontal</span></div>
+        <div class="fig"><svg id="fig" viewBox="0 0 820 430" role="img" aria-label="Airfoil with shocks, expansion fans and pressure arrows"></svg></div>
+        <div class="legend">
+          <span><i class="sw" style="border-color:var(--comp)"></i>Oblique shock</span>
+          <span><i class="sw" style="border-color:var(--exp)"></i>Prandtl–Meyer fan</span>
+          <span><i class="sw" style="border-color:var(--mach);border-top-style:dashed"></i>Mach wave (no turning)</span>
+          <span><i style="font-style:normal">Arrows: pressure pushing on each face, length ∝ p/p<sub>∞</sub>; red p &gt; p<sub>∞</sub>, blue p &lt; p<sub>∞</sub></i></span>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="h-res">
+        <h2 id="h-res">Result</h2>
+        <div class="tiles" id="tiles"></div>
+        <p class="note">Second line in each tile: linear (Ackeret) theory for the same case and its difference from shock-expansion theory.</p>
+      </section>
+
+      <section class="card" aria-labelledby="h-cmp">
+        <div class="headrow"><h2 id="h-cmp">The three cases side by side</h2><span class="legend"><i style="font-style:normal">Same M<sub>∞</sub>, α and γ; each case keeps its own geometry. Click a row to switch.</i></span></div>
+        <div class="tblwrap"><table id="cmpTable"></table></div>
+      </section>
+
+      <section class="card" aria-labelledby="h-tab">
+        <h2 id="h-tab">Surface-by-surface summary</h2>
+        <div class="tblwrap"><table id="surfTable"></table></div>
+        <p class="note">F<sub>i</sub> = p<sub>i</sub> ℓ<sub>i</sub> is the absolute-pressure force per unit span on face <i>i</i>, acting normal to the face and into the body. ΔL′ and ΔD′ are its components perpendicular and parallel to the freestream. The p<sub>∞</sub> parts cancel around the closed contour, so summing absolute forces and summing gauge forces give the same L′ and D′.</p>
+      </section>
+
+      <section class="card" aria-labelledby="h-steps">
+        <div><div class="eyebrow">Worked solution</div><h2 id="h-steps">March the flow over each face</h2></div>
+        <p class="lede" style="font-size:15px" id="stepsIntro"></p>
+        <div class="steps" id="steps"></div>
+      </section>
+
+      <section class="card" aria-labelledby="h-forces">
+        <div><div class="eyebrow">Worked solution</div><h2 id="h-forces">Pressures → forces → coefficients</h2></div>
+        <div class="cols2">
+          <div class="prose">
+            <p>Resolve the pressure forces in body axes first: N′ normal to the chord, A′ along it.</p>
+            <div data-case="flat">
+              <p>Both surfaces have length c and are parallel to the chord, so the plate carries no axial force:</p>
+              <div class="eq">\[ N' = (p_2-p_1)\,c,\qquad A' = 0 \]</div>
+            </div>
+            <div data-case="wedge">
+              <p>Each face has length ℓ = c/cos δ, with ℓ cos δ = c and ℓ sin δ = t/2. The base of height t carries p<sub>b</sub>:</p>
+              <div class="eq">\[ N' = (p_2-p_1)\,c,\qquad A' = (p_1+p_2)\,\frac{t}{2} - p_b\,t \]</div>
+            </div>
+            <div data-case="diamond">
+              <p>With face lengths ℓ<sub>f</sub> (front) and ℓ<sub>r</sub> (rear), ℓ<sub>f</sub>cos ε<sub>1</sub> = x<sub>m</sub> and ℓ<sub>f</sub>sin ε<sub>1</sub> = ℓ<sub>r</sub>sin ε<sub>2</sub> = t/2:</p>
+              <div class="eq">\[ N' = (p_3-p_1)\,x_m + (p_4-p_2)\,(c-x_m) \]</div>
+              <div class="eq">\[ A' = (p_1+p_3-p_2-p_4)\,\frac{t}{2} \]</div>
+            </div>
+            <p>Then rotate by α into the wind axes and divide by \(q_\infty c\), with \(q_\infty=\tfrac12\rho_\infty V_\infty^2=\tfrac{\gamma}{2}p_\infty M_\infty^2\):</p>
+            <div class="eq">\[ L' = N'\cos\alpha - A'\sin\alpha,\qquad D' = N'\sin\alpha + A'\cos\alpha \]</div>
+            <div class="eq">\[ c_l=\frac{L'}{q_\infty c},\qquad c_d=\frac{D'}{q_\infty c},\qquad c_{m,\mathrm{LE}}=\frac{M'_{\mathrm{LE}}}{q_\infty c^2} \]</div>
+          </div>
+          <div class="calc" id="forceCalc"></div>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="h-chart">
+        <div class="headrow">
+          <h2 id="h-chart">Sweep in angle of attack</h2>
+          <div class="seg" role="group" aria-label="Chart quantity">
+            <button data-c="cl" aria-pressed="true">c<sub>l</sub></button>
+            <button data-c="cd" aria-pressed="false">c<sub>d</sub></button>
+            <button data-c="ld" aria-pressed="false">L/D</button>
+            <button data-c="cm" aria-pressed="false">c<sub>m,c/4</sub></button>
+          </div>
+        </div>
+        <div class="fig"><svg id="chart" viewBox="0 0 820 340" role="img" aria-label="Coefficient versus angle of attack"></svg></div>
+        <div class="legend">
+          <span><i class="sw" style="border-color:var(--accent)"></i>Shock-expansion theory</span>
+          <span><i class="sw" style="border-color:var(--muted);border-top-style:dashed"></i>Linear (Ackeret) theory</span>
+          <span>Shaded: no valid shock-expansion solution (shock detached or flow behind a front shock subsonic)</span>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="h-th">
+        <div><div class="eyebrow">Reference</div><h2 id="h-th">Relations used</h2></div>
+        <div class="cols2">
+          <div class="prose">
+            <h3>Turning toward the flow: oblique shock</h3>
+            <p>For a compression of θ, find the weak-shock angle β from the θ–β–M relation, then use normal-shock relations on the normal component.</p>
+            <div class="eq">\[ \tan\theta = 2\cot\beta\,\frac{M_1^2\sin^2\beta-1}{M_1^2(\gamma+\cos2\beta)+2} \]</div>
+            <div class="eq">\[ M_{n,1}=M_1\sin\beta,\qquad \frac{p_2}{p_1}=1+\frac{2\gamma}{\gamma+1}\left(M_{n,1}^2-1\right) \]</div>
+            <div class="eq">\[ M_{n,2}^2=\frac{1+\frac{\gamma-1}{2}M_{n,1}^2}{\gamma M_{n,1}^2-\frac{\gamma-1}{2}},\qquad M_2=\frac{M_{n,2}}{\sin(\beta-\theta)} \]</div>
+            <p>If θ exceeds θ<sub>max</sub>(M<sub>1</sub>, γ), no attached solution exists. The shock stands off the nose and this method no longer applies.</p>
+          </div>
+          <div class="prose">
+            <h3>Turning away from the flow: Prandtl–Meyer expansion</h3>
+            <p>An expansion is isentropic. Add the turning angle to the Prandtl–Meyer function and invert for M<sub>2</sub>.</p>
+            <div class="eq">\[ \nu(M)=\sqrt{\tfrac{\gamma+1}{\gamma-1}}\tan^{-1}\!\sqrt{\tfrac{\gamma-1}{\gamma+1}(M^2-1)}-\tan^{-1}\!\sqrt{M^2-1} \]</div>
+            <div class="eq">\[ \nu(M_2)=\nu(M_1)+\theta,\qquad \frac{p_2}{p_1}=\left(\frac{1+\frac{\gamma-1}{2}M_1^2}{1+\frac{\gamma-1}{2}M_2^2}\right)^{\frac{\gamma}{\gamma-1}} \]</div>
+            <p>Fan edges sit at the local Mach angle, μ = sin<sup>−1</sup>(1/M), measured from the local flow direction.</p>
+            <h3>Pressure coefficient</h3>
+            <div class="eq">\[ C_p=\frac{p-p_\infty}{q_\infty}=\frac{2}{\gamma M_\infty^2}\left(\frac{p}{p_\infty}-1\right) \]</div>
+          </div>
+        </div>
+        <div class="sep"></div>
+        <div class="cols2">
+          <div class="prose">
+            <h3>Linear (Ackeret) theory check</h3>
+            <p>For small angles every surface obeys \(C_p = 2\theta/\sqrt{M_\infty^2-1}\), with θ positive for compression. Integrating over the surfaces gives</p>
+            <div data-case="flat"><div class="eq">\[ c_l=\frac{4\alpha}{\sqrt{M_\infty^2-1}},\qquad c_d=\frac{4\alpha^2}{\sqrt{M_\infty^2-1}} \]</div></div>
+            <div data-case="wedge"><div class="eq">\[ c_l=\frac{4\alpha}{\sqrt{M_\infty^2-1}},\qquad c_d=\frac{4}{\sqrt{M_\infty^2-1}}\left[\alpha^2+\left(\frac{t}{2c}\right)^2\right] - C_{p,b}\,\frac{t}{c} \]</div>
+              <p>The base term uses the same prescribed base pressure as shock-expansion theory; it is zero for p<sub>b</sub> = p<sub>∞</sub>.</p></div>
+            <div data-case="diamond"><div class="eq">\[ c_l=\frac{4\alpha}{\sqrt{M_\infty^2-1}},\qquad c_d=\frac{4}{\sqrt{M_\infty^2-1}}\left[\alpha^2+\frac{(t/c)^2}{4}\left(\frac{c}{x_m}+\frac{c}{c-x_m}\right)\right] \]</div>
+              <p>For the symmetric diamond (x<sub>m</sub> = c/2) the bracket becomes α² + (t/c)².</p></div>
+            <p>Thickness adds drag but no lift in linear theory. The center of pressure of the lift sits at mid-chord, so \(c_{m,c/4}=-\alpha/\sqrt{M_\infty^2-1}\) for all three cases.</p>
+          </div>
+          <div class="prose">
+            <h3>Assumptions and limits</h3>
+            <ul>
+              <li>Two-dimensional, inviscid, calorically perfect gas: no skin friction, so c<sub>d</sub> here is wave drag (plus base drag if p<sub>b</sub> ≠ p<sub>∞</sub>).</li>
+              <li>The leading-edge shocks must be attached. A detached bow shock invalidates the method.</li>
+              <li>Each face has uniform pressure. On the diamond, the flow on each front face must stay supersonic so the shoulder turn is a Prandtl–Meyer fan.</li>
+              <li>The wedge base pressure is an input, not a prediction.</li>
+              <li>Trailing-edge waves and the slip line form downstream of the body. They do not change any surface pressure and are not needed for the forces.</li>
+              <li>α is positive nose-up. c<sub>m</sub> is positive nose-up.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <p class="note">Face numbers: flat plate and wedge 1 = upper, 2 = lower, b = base; diamond 1 = upper front, 2 = upper rear, 3 = lower front, 4 = lower rear; ∞ = freestream.</p>
+    </main>
+  </div>
