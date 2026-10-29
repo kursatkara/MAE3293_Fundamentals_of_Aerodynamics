@@ -57,8 +57,15 @@
     {
       "slug": "normal-shock",
       "title": "Normal Shock",
-      "legacy": "https://kursatkara.github.io/MAE3293-Compressible-Aerodynamics-Calculator/#normal-shock",
-      "summary": "Downstream Mach number and the pressure, density, temperature and total-pressure ratios across a normal shock, including the Pitot ratio (Appendix B)."
+      "scripts": ["core.js", "quasi1d.js", "helpers.js", "kit.js"],
+      "summary": "Downstream Mach number and the pressure, density, temperature and total-pressure ratios across a normal shock, including the Pitot ratio (Appendix B).",
+      "description": "Normal-shock calculator for a calorically perfect gas: enter the upstream or downstream Mach number, the pressure, density, temperature or total-pressure ratio, or the Pitot ratio and read the rest, in place of Anderson's Appendix B. MAE 3293, Oklahoma State University.",
+      "image_alt": "Stationary normal shock with the upstream and downstream Mach numbers and velocity arrows scaled by the density ratio",
+      "lessons": [
+        ["normal-shock-waves", "shock-relations", "Chapter 8, calculation of normal-shock properties"],
+        ["normal-shock-waves", "entropy", "Chapter 8, entropy and total pressure across the shock"],
+        ["normal-shock-waves", "pitot", "Chapter 8, measurement of velocity with a Pitot tube"]
+      ]
     },
     {
       "slug": "oblique-shock",
