@@ -16,7 +16,7 @@ Instructions for people and AI agents (Claude Code, Codex) editing this reposito
 3. `npm run build`, then `npm run check`: both must pass (the build fails on any TeX error; the checks fail on
    any table mismatch, duplicate id, unlabeled input, NaN in a figure, heading skip, horizontal overflow at 390 px,
    network request, script error, or link to a missing course page or asset).
-4. After a change to a figure used in a preview, or a title, run `npm run previews`.
+4. After a change to a figure used in a preview or a course-home sketch, or a title, run `npm run previews`.
 5. Work on a branch and open a pull request; merging to `master` publishes.
 
 ## Adding a chapter
@@ -36,7 +36,9 @@ Instructions for people and AI agents (Claude Code, Codex) editing this reposito
    (Appendix tables)", which `src/shared/lesson.js` adds above every table with a hand column; pass `def` true only for
    the original inputs. Set `differs` on rows where the notes and the result disagree, and explain why in the
    `.exnote` under the table (the row then carries a †).
-5. Add a card to `CARDS` in `tools/preview-images.js`, then `npm run build && npm run previews && npm run check`.
+5. Add a card to `CARDS` in `tools/preview-images.js` (link preview) and a sketch to `THUMBS` in
+   `tools/thumbnails.js` (course home: one text-free figure from the lesson, saved to `src/thumbs/<slug>.svg` and inlined
+   so it follows the theme), then `npm run build && npm run previews && npm run check`.
 6. The previous and next links, the course home list, and the canonical and Open Graph URLs come from the manifest.
 
 ## Content
