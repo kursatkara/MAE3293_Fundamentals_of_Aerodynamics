@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /*
   Link-preview images (1200 x 630, Open Graph / Twitter) rendered from the built pages
-  with Playwright:  assets/<slug>-preview.png for each lesson, and assets/course-preview.png
+  with Playwright:  assets/<slug>-preview.png for each lesson and calculator, and assets/course-preview.png
   for the course home (made from the lesson previews, so run it after them).
   Run after `npm run build`:  node tools/preview-images.js [slug ...]
   A new lesson needs an entry in CARDS: the figure to show and how to set it up.
@@ -31,6 +31,13 @@ const CARDS = {
     figure: () => { const s = document.getElementById('af_fig').cloneNode(true);
       s.setAttribute('viewBox', '196 60 584 350'); [...s.querySelectorAll('text')].forEach(t => { if (t.textContent.startsWith('slip')) t.remove(); }); return s.outerHTML; }
   },
+  'isentropic-flow': {
+    dir: 'calculators', eyebrow: 'MAE 3293 · Calculator', title: 'Isentropic Flow Calculator',
+    blurb: 'Mach number, p₀/p, ρ₀/ρ, T₀/T and A/A* from any one of them, in place of Appendix A.',
+    cols: '420px 1fr',
+    setup: async p => {},
+    figure: () => document.getElementById('is_fig').outerHTML
+  },
   'nozzles-diffusers-wind-tunnels': {
     blurb: 'Area–Mach relation, choked flow, and normal shocks in a converging-diverging nozzle, computed live.',
     cols: '400px 1fr',
@@ -43,14 +50,14 @@ async function card(b, L) {
   const C = CARDS[L.slug]; if (!C) { console.log('no CARDS entry for', L.slug); return; }
   const p = await b.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleFactor: 1 });
   await p.emulateMedia({ colorScheme: 'light' });
-  await p.goto('file://' + path.join(ROOT, 'lessons', L.slug + '.html')); await p.waitForTimeout(800);
+  await p.goto('file://' + path.join(ROOT, C.dir || 'lessons', L.slug + '.html')); await p.waitForTimeout(800);
   await p.evaluate(() => { try { localStorage.removeItem('theme'); } catch (e) {} document.documentElement.setAttribute('data-theme', 'light'); });
   await C.setup(p); await p.waitForTimeout(400);
   const fig = await p.evaluate(C.figure);
   await p.evaluate(([L, C, fig]) => {
     document.body.innerHTML = `<div style="width:1200px;height:630px;box-sizing:border-box;padding:40px 52px;display:grid;grid-template-columns:${C.cols};gap:28px;align-items:center;background:var(--bg);border-top:10px solid var(--accent)">
       <div style="display:flex;flex-direction:column;gap:18px">
-        <p class="eyebrow" style="font-size:17px">MAE 3293 · Interactive lesson</p>
+        <p class="eyebrow" style="font-size:17px">${C.eyebrow}</p>
         <h1 style="font-size:52px;line-height:1.05">${L.title}</h1>
         <p style="font-size:21px;color:var(--muted);line-height:1.4">${C.blurb}</p>
         <p style="font-size:16px;color:var(--muted)">Kursat Kara · Oklahoma State University</p>
@@ -58,7 +65,7 @@ async function card(b, L) {
       <div style="display:flex;flex-direction:column;gap:6px">${fig}</div></div>`;
     document.querySelectorAll('svg').forEach(s => { s.style.width = '100%'; s.style.height = 'auto'; s.style.minWidth = '0'; });
     document.body.style.padding = '0'; document.body.style.margin = '0';
-  }, [{ title: L.title }, { cols: C.cols, blurb: C.blurb }, fig]);
+  }, [{ title: C.title || L.title }, { cols: C.cols, blurb: C.blurb, eyebrow: C.eyebrow || 'MAE 3293 · Interactive lesson' }, fig]);
   await p.waitForTimeout(300);
   await p.screenshot({ path: path.join(ROOT, 'assets', L.slug + '-preview.png') });
   console.log('assets/' + L.slug + '-preview.png'); await p.close();
@@ -89,7 +96,7 @@ async function home(b) {
 (async () => {
   const only = process.argv.slice(2);
   const b = await chromium.launch();
-  for (const L of course.lessons) if (!only.length || only.includes(L.slug)) await card(b, L);
+  for (const L of [...course.lessons, ...course.calculators.filter(C => !C.legacy)]) if (!only.length || only.includes(L.slug)) await card(b, L);
   await home(b);
   await b.close();
 })();

@@ -5,9 +5,9 @@ Instructions for people and AI agents (Claude Code, Codex) editing this reposito
 ## What this is
 - A static site on GitHub Pages, served from the `master` branch (repository root):
   https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/. `.nojekyll` makes Pages serve files as they are.
-- `index.html` (course home) and `lessons/<slug>.html` are **built files**. Edit `src/`, run `npm run build`, and
+- `index.html` (course home), `lessons/<slug>.html` and `calculators/<slug>.html` are **built files**. Edit `src/`, run `npm run build`, and
   commit the sources and the built pages together.
-- Each lesson must stay a single self-contained file: no network requests (fonts embedded, equations pre-rendered to
+- Each lesson and calculator must stay a single self-contained file: no network requests (fonts embedded, equations pre-rendered to
   SVG by the build). Students download lessons from Canvas and use them offline.
 
 ## Workflow
@@ -41,6 +41,18 @@ Instructions for people and AI agents (Claude Code, Codex) editing this reposito
    colors from the figure tokens, `aria-hidden="true"`, and marker ids unique on the page. Then
    `npm run build && npm run previews && npm run check`.
 6. The previous and next links, the course home list, and the canonical and Open Graph URLs come from the manifest.
+
+## Adding or porting a calculator
+The calculators are moving here from the old site (`MAE3293-Compressible-Aerodynamics-Calculator`) one at a time.
+1. In `src/course.json`, `calculators` lists every calculator in display order. An entry with `legacy` (a URL) is not
+   ported yet: the course home and the calculator menu link to the old page. Porting one means removing `legacy` and
+   adding `scripts`, `description`, `image_alt`, and `lessons` (`[lesson slug, section id, label]` for the
+   "Where these relations come from" list).
+2. Create `src/calculators/<slug>/body.html` (lede and sections) and `modules.js`. Use the shared, table-checked
+   functions in `src/shared/`; do not copy formulas from the old calculator.
+3. Before switching over, run the old and new calculators on the same inputs over several γ and compare every output
+   (they must agree to display rounding). Then draw `src/thumbs/<slug>.svg` (as for lessons; the sketch shows what
+   the calculator takes as input) and add its `CARDS` entry (`dir: 'calculators'`) in `tools/preview-images.js`.
 
 ## Content
 - Facts, worked examples, and numbering follow Kursat Kara’s lecture notes and J. D. Anderson, *Fundamentals of

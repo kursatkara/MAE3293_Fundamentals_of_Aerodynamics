@@ -29,7 +29,7 @@ const head = o => fill(rd('src/templates/head.html'), {
   title: o.title, description: esc(o.description), url: o.url, image: o.image,
   image_alt: esc(o.image_alt), favicon: FAVICON, style: STYLE });
 const header = o => fill(rd('src/templates/header.html'), {
-  calculator: course.calculator, gamma: '', home_label: 'Course home', ...o });
+  calculators: course.base + '#calculators', gamma: '', home_label: 'Course home', ...o });
 const footer = () => fill(rd('src/templates/footer.html'), { repo: course.repo });
 const stripNode = js => js.split('\n').filter(l => !/module\.exports/.test(l)).join('\n');
 const GAMMA = '<div class="gamma-box"><label for="gamma">γ</label><input type="number" id="gamma" value="1.4" min="1.05" max="1.67" step="0.01" aria-describedby="gammaHelp"><span id="gammaHelp" class="note">all figures</span></div>\n      ';
@@ -70,6 +70,39 @@ function lessonPage(L, i) {
   return html + pageScript(js);
 }
 
+/* ---------- calculators ---------- */
+const ported = C => !C.legacy;
+const calcURL = C => ported(C) ? course.base + 'calculators/' + C.slug + '.html' : C.legacy;
+function calcNav(cur) {
+  return `  <nav class="calcnav" aria-label="Calculators">
+${course.calculators.map(C => `    <a href="${calcURL(C)}"${C.slug === cur.slug ? ' aria-current="page"' : ''}>${C.title}</a>`).join('\n')}
+  </nav>
+`;
+}
+function calcPage(C) {
+  const url = calcURL(C), dir = 'src/calculators/' + C.slug + '/';
+  let html = head({ title: `${C.title} Calculator · MAE 3293`, description: C.description, url,
+                    image: course.base + 'assets/' + C.slug + '-preview.png', image_alt: C.image_alt });
+  html += header({ eyebrow: 'MAE 3293 · Fundamentals of Aerodynamics · Calculator', h1: C.title + ' Calculator',
+                   gamma: GAMMA, home: course.base });
+  html += calcNav(C) + rd(dir + 'body.html');
+  if (C.lessons && C.lessons.length) {
+    const L = slug => course.lessons.find(x => x.slug === slug);
+    html += `
+      <section class="sec" id="lessons" aria-labelledby="h-lessons">
+        <div class="sechead"><p class="eyebrow">Background</p><h2 id="h-lessons">Where these relations come from</h2></div>
+        <ul class="related">
+${C.lessons.map(([slug, sec, label]) => `          <li><a href="${course.base}lessons/${slug}.html#${sec}">${label}</a><span>${L(slug).title}</span></li>`).join('\n')}
+        </ul>
+      </section>
+`;
+  }
+  html += footer();
+  const js = C.scripts.map(s => stripNode(rd('src/shared/' + s))).join('\n')
+    + '\n' + rd(dir + 'modules.js') + '\n' + rd('src/shared/theme.js') + '\n' + rd('src/shared/lesson.js');
+  return html + pageScript(js);
+}
+
 /* ---------- course home ---------- */
 function homePage() {
   // Course-home thumbnails: one simple sketch per chapter (src/thumbs/<slug>.svg), inlined so it follows the theme.
@@ -82,7 +115,11 @@ function homePage() {
     image_alt: 'Course home for MAE 3293 Fundamentals of Aerodynamics with previews of the interactive lessons' });
   html += header({ eyebrow: 'MAE 3293 · Oklahoma State University', h1: 'Fundamentals of Aerodynamics',
                    home: 'https://www.kursatkara.com/#teaching', home_label: 'Course instructor' });
-  html += fill(rd('src/templates/home.html'), { chapters, calculator: course.calculator, repo: course.repo }) + footer();
+  // Calculators: one card per tool, each with its own sketch (src/thumbs/<slug>.svg)
+  const calculators = course.calculators.map(C => fill(rd('src/templates/calc-card.html'),
+    { slug: C.slug, title: C.title, summary: C.summary, url: calcURL(C).replace(course.base, ''),
+      thumb: rd('src/thumbs/' + C.slug + '.svg').trim() }).trimEnd()).join('\n');
+  html += fill(rd('src/templates/home.html'), { chapters, calculators, repo: course.repo }) + footer();
   return html + pageScript(rd('src/shared/theme.js'));
 }
 
@@ -111,7 +148,9 @@ function fontFaces() {
 async function main() {
   const pages = [['index.html', homePage(), false]];
   course.lessons.forEach((L, i) => pages.push(['lessons/' + L.slug + '.html', lessonPage(L, i), true]));
+  course.calculators.filter(ported).forEach(C => pages.push(['calculators/' + C.slug + '.html', calcPage(C), true]));
   fs.mkdirSync(path.join(ROOT, 'lessons'), { recursive: true });
+  fs.mkdirSync(path.join(ROOT, 'calculators'), { recursive: true });
   if (DEV) {
     for (const [out, html, math] of pages) {
       fs.writeFileSync(path.join(ROOT, out), html.replace('<style>', CDN + (math ? MJ_CDN : '') + '<style>'));

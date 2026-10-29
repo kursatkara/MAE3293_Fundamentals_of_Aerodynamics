@@ -39,5 +39,44 @@
       "description": "Interactive lesson on quasi-one-dimensional compressible flow: the area–velocity and area–Mach relations, choked flow, converging-diverging nozzles with normal shocks inside or at the exit, overexpanded and underexpanded jets, rocket thrust, diffusers, and supersonic wind tunnels. MAE 3293, Oklahoma State University.",
       "image_alt": "Converging-diverging nozzle with a normal shock in the diverging section, with the pressure and Mach number distributions along the nozzle"
     }
+  ],
+  "calculators": [
+    {
+      "slug": "isentropic-flow",
+      "title": "Isentropic Flow",
+      "scripts": ["core.js", "quasi1d.js", "helpers.js", "kit.js"],
+      "summary": "Mach number, the total-to-static ratios p<sub>0</sub>/p, ρ<sub>0</sub>/ρ and T<sub>0</sub>/T, and the area ratio A/A*, from any one of them (Appendix A).",
+      "description": "Isentropic-flow calculator for a calorically perfect gas: enter the Mach number, a total-to-static pressure, density or temperature ratio, or the area ratio A/A* (subsonic or supersonic branch) and read the rest, in place of Anderson's Appendix A. MAE 3293, Oklahoma State University.",
+      "image_alt": "Isentropic-flow ratios p/p0, rho/rho0, T/T0 and A*/A versus Mach number, with the selected Mach number marked",
+      "lessons": [
+        ["compressible-flow-preliminaries", "total", "Chapter 7, total conditions"],
+        ["normal-shock-waves", "energy-forms", "Chapter 8, special forms of the energy equation"],
+        ["nozzles-diffusers-wind-tunnels", "area-mach", "Chapter 10, the area–Mach number relation"]
+      ]
+    },
+    {
+      "slug": "normal-shock",
+      "title": "Normal Shock",
+      "legacy": "https://kursatkara.github.io/MAE3293-Compressible-Aerodynamics-Calculator/#normal-shock",
+      "summary": "Downstream Mach number and the pressure, density, temperature and total-pressure ratios across a normal shock, including the Pitot ratio (Appendix B)."
+    },
+    {
+      "slug": "oblique-shock",
+      "title": "Oblique Shock",
+      "legacy": "https://kursatkara.github.io/MAE3293-Compressible-Aerodynamics-Calculator/#oblique-shock",
+      "summary": "The θ–β–M relation: any two of Mach number, deflection angle and wave angle give the third, with the property ratios across the shock."
+    },
+    {
+      "slug": "prandtl-meyer-expansion",
+      "title": "Prandtl–Meyer Expansion",
+      "legacy": "https://kursatkara.github.io/MAE3293-Compressible-Aerodynamics-Calculator/#prandtl-meyer",
+      "summary": "Prandtl–Meyer function, Mach angle, and the flow downstream of an expansion fan turning through a given angle (Appendix C)."
+    },
+    {
+      "slug": "supersonic-airfoils",
+      "title": "Supersonic Airfoils",
+      "legacy": "https://kursatkara.github.io/MAE3293-Compressible-Aerodynamics-Calculator/supersonic-airfoils.html",
+      "summary": "Shock-expansion theory for flat-plate, wedge and diamond airfoils, compared with linear theory: surface pressures, lift, wave drag and moment."
+    }
   ]
 }
