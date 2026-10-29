@@ -105,3 +105,22 @@ tr.pick:hover td{background:var(--soft)}
 svg text{font-variant-numeric:lining-nums tabular-nums}
 .axlab{fill:var(--muted);font:13px var(--f-body)}
 .main{gap:36px!important}
+
+/* the airfoil chooser: a numbered first step with bordered cards */
+.chooser{display:flex;flex-direction:column;gap:8px}
+.chooser-h{font-family:var(--f-display);font-size:20px;font-weight:600;display:flex;align-items:center;gap:10px}
+.stepn{display:inline-flex;flex:none;width:26px;height:26px;align-items:center;justify-content:center;background:var(--accent);color:var(--bg);font:600 14px var(--f-body);margin-right:8px;vertical-align:2px}
+.chooser-h .stepn{margin-right:0}
+.rail h2{display:flex;align-items:center}
+.railcase{margin-top:-6px}
+.cases{gap:12px;margin-top:4px}
+.case{border:1px solid var(--line);padding:12px 14px;background:transparent;box-shadow:none;position:relative}
+.case svg{width:96px;height:38px}
+.case .t b{font-size:18px}
+.case .sel{margin-left:auto;align-self:flex-start;font:600 12px var(--f-body);color:var(--accent);visibility:hidden}
+.case:hover{border-color:var(--accent)}
+.case[aria-selected=true]{border:2px solid var(--accent);padding:11px 13px;box-shadow:none;background:color-mix(in srgb,var(--accent) 7%,transparent)}
+.case[aria-selected=true] .sel{visibility:visible}
+@media (max-width:640px){.case svg{width:72px;height:30px}}
+/* an empty banner area must not add the column gap, so the first card lines up with the Inputs panel */
+#banners:empty{display:none!important}   /* beats the inline display:flex */

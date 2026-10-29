@@ -67,6 +67,7 @@ p{margin:0}
 a{color:var(--accent)}
 sub,sup{font-size:.72em;line-height:0}
 .eyebrow{font-family:var(--f-body);text-transform:uppercase;letter-spacing:.1em;font-size:12.5px;color:var(--accent);font-weight:600}
+.eyebrow .gk{text-transform:none}   /* uppercase Greek reads wrong: θ–β–M would become Θ–Β–M */
 .lede{color:var(--muted);max-width:74ch;font-size:16.5px}
 .muted{color:var(--muted)}
 .num{font-family:var(--f-num);font-variant-numeric:lining-nums tabular-nums}
@@ -274,16 +275,6 @@ footer.site a{color:var(--accent)}
 .chapter p{font-size:16.5px;max-width:70ch}
 .chapter .go{font-size:15px;font-weight:600}
 @media (max-width:700px){.chapter{grid-template-columns:minmax(0,1fr);gap:14px}}
-.calcs{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 28px}
-.calccard{display:flex;flex-direction:column;gap:8px;min-width:0}
-.calccard .thumb{display:block;border:1px solid var(--line);margin-bottom:4px}
-.calccard .thumb svg{display:block;width:100%;height:auto;aspect-ratio:400/210;background:var(--bg)}
-.calccard h3{font-size:19px}
-.calccard h3 a{color:var(--ink);text-decoration:none}
-.calccard h3 a:hover{color:var(--accent)}
-.calccard p{color:var(--muted);font-size:15.5px}
-@media (max-width:900px){.calcs{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:560px){.calcs{grid-template-columns:minmax(0,1fr)}}
 
 /* calculator pages */
 .calcnav{display:flex;flex-wrap:wrap;gap:6px 22px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 0}
@@ -431,8 +422,8 @@ td.hand .mk{font-family:var(--f-body)}
     <section class="sec" id="calculators" aria-labelledby="h-calcs">
       <div class="sechead"><p class="eyebrow">For homework and exams</p><h2 id="h-calcs">Calculators</h2></div>
       <p class="lede">Enter one known quantity and read the rest, in place of the tables in Anderson’s appendices. Each calculator uses the same relations as the lessons, checked against those tables.</p>
-      <ul class="calcs">
-        <li class="calccard">
+      <ul class="chapters">
+        <li class="chapter">
           <a class="thumb" href="calculators/isentropic-flow.html" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
   <defs><marker id="tc1a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 1L9 5L0 9Z" style="fill:var(--ink)"/></marker><marker id="tc1s" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 1L9 5L0 9Z" style="fill:var(--stream)"/></marker></defs>
   <path d="M118 88 L118 45 L18 45 L18 165 L118 165 L118 122" style="fill:var(--soft);stroke:var(--body);stroke-width:2.2"/>
@@ -444,10 +435,13 @@ td.hand .mk{font-family:var(--f-body)}
   <text x="306" y="84" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">p</tspan>, <tspan font-style="italic">T</tspan>, <tspan font-style="italic">M</tspan></text>
   <text x="190" y="150" style="font-family:var(--f-num);font-size:15px;fill:var(--muted)"><tspan font-style="italic">s</tspan> = const</text>
 </svg></a>
-          <h3><a href="calculators/isentropic-flow.html">Isentropic Flow</a></h3>
-          <p>Mach number, the total-to-static ratios p<sub>0</sub>/p, ρ<sub>0</sub>/ρ and T<sub>0</sub>/T, and the area ratio A/A*, from any one of them (Appendix A).</p>
+          <div class="txt">
+            <p class="eyebrow">Appendix A · Isentropic flow</p>
+            <h3><a href="calculators/isentropic-flow.html">Isentropic Flow</a></h3>
+            <p>Mach number, the total-to-static ratios p<sub>0</sub>/p, ρ<sub>0</sub>/ρ and T<sub>0</sub>/T, and the area ratio A/A*, from any one of them.</p>
+          </div>
         </li>
-        <li class="calccard">
+        <li class="chapter">
           <a class="thumb" href="calculators/normal-shock.html" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
   <defs><marker id="tc2a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 1L9 5L0 9Z" style="fill:var(--ink)"/></marker></defs>
   <path d="M410 100 L265 100 A10 10 0 0 0 265 120 L410 120" style="fill:var(--soft);stroke:var(--body);stroke-width:2.2"/>
@@ -457,10 +451,13 @@ td.hand .mk{font-family:var(--f-body)}
   <text x="292" y="90" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">p</tspan><tspan font-size="12" dy="4">0,2</tspan></text>
   <text x="262" y="156" style="font-family:var(--f-num);font-size:15px;fill:var(--muted)"><tspan font-style="italic">M</tspan><tspan font-size="12" dy="4">2</tspan><tspan dy="-4"> &lt; 1</tspan></text>
 </svg></a>
-          <h3><a href="calculators/normal-shock.html">Normal Shock</a></h3>
-          <p>Downstream Mach number and the pressure, density, temperature and total-pressure ratios across a normal shock, including the Pitot ratio (Appendix B).</p>
+          <div class="txt">
+            <p class="eyebrow">Appendix B · Normal shock</p>
+            <h3><a href="calculators/normal-shock.html">Normal Shock</a></h3>
+            <p>Downstream Mach number and the pressure, density, temperature and total-pressure ratios across a normal shock, including the Pitot ratio.</p>
+          </div>
         </li>
-        <li class="calccard">
+        <li class="chapter">
           <a class="thumb" href="calculators/oblique-shock.html" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
   <defs><marker id="tc3a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 1L9 5L0 9Z" style="fill:var(--ink)"/></marker></defs>
   <path d="M0 165 L130 165 L400.5 92.5 L410 92.5 L410 215 L0 215 Z" style="fill:var(--soft)"/>
@@ -474,10 +471,13 @@ td.hand .mk{font-family:var(--f-body)}
   <text x="213.4" y="159.8" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)" font-style="italic">θ</text>
   <text x="243.3" y="119.6" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)" font-style="italic">β</text>
 </svg></a>
-          <h3><a href="calculators/oblique-shock.html">Oblique Shock</a></h3>
-          <p>The θ–β–M relation: any two of Mach number, deflection angle and wave angle give the third, with the property ratios across the shock.</p>
+          <div class="txt">
+            <p class="eyebrow">Chapter 9 · Oblique shocks</p>
+            <h3><a href="calculators/oblique-shock.html">Oblique Shock</a></h3>
+            <p>The θ–β–M relation: any two of Mach number, deflection angle and wave angle give the third, with the property ratios across the shock.</p>
+          </div>
         </li>
-        <li class="calccard">
+        <li class="chapter">
           <a class="thumb" href="calculators/prandtl-meyer-expansion.html" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
   <defs><marker id="tc4a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 1L9 5L0 9Z" style="fill:var(--ink)"/></marker></defs>
   <path d="M0 110 L170 110 L400.2 193.8 L410 215 L0 215 Z" style="fill:var(--soft)"/>
@@ -490,10 +490,13 @@ td.hand .mk{font-family:var(--f-body)}
   <text x="356" y="160" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">M</tspan><tspan font-size="12" dy="4">2</tspan><tspan dy="-4"></tspan></text>
   <text x="252.7" y="130.6" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)" font-style="italic">θ</text>
 </svg></a>
-          <h3><a href="calculators/prandtl-meyer-expansion.html">Prandtl–Meyer Expansion</a></h3>
-          <p>Prandtl–Meyer function, Mach angle, and the flow downstream of an expansion fan turning through a given angle (Appendix C).</p>
+          <div class="txt">
+            <p class="eyebrow">Appendix C · Prandtl–Meyer function</p>
+            <h3><a href="calculators/prandtl-meyer-expansion.html">Prandtl–Meyer Function</a></h3>
+            <p>The Prandtl–Meyer function and Mach angle for one Mach number, and the flow after an expansion around a convex corner or a gradual isentropic compression.</p>
+          </div>
         </li>
-        <li class="calccard">
+        <li class="chapter">
           <a class="thumb" href="calculators/supersonic-airfoils.html" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
   <defs><marker id="tc5a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 1L9 5L0 9Z" style="fill:var(--ink)"/></marker></defs>
   <line x1="96.1" y1="89.7" x2="231.4" y2="154.5" style="stroke:var(--comp);stroke-width:2.2"/><line x1="313.9" y1="120.3" x2="410.6" y2="94.6" style="stroke:var(--comp);stroke-width:2.2"/>
@@ -502,8 +505,11 @@ td.hand .mk{font-family:var(--f-body)}
   <line x1="12" y1="112" x2="72" y2="112" style="stroke:var(--ink);stroke-width:2.2" marker-end="url(#tc5a)"/>
   <text x="12" y="97" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">M</tspan><tspan font-size="12" dy="4">∞</tspan><tspan dy="-4"> &gt; 1</tspan></text>
 </svg></a>
-          <h3><a href="calculators/supersonic-airfoils.html">Supersonic Airfoils</a></h3>
-          <p>Shock-expansion theory for flat-plate, wedge and diamond airfoils, compared with linear theory: surface pressures, lift, wave drag and moment.</p>
+          <div class="txt">
+            <p class="eyebrow">Chapter 9 · Shock-expansion theory</p>
+            <h3><a href="calculators/supersonic-airfoils.html">Supersonic Airfoils</a></h3>
+            <p>Shock-expansion theory for flat-plate, wedge and diamond airfoils, compared with linear theory: surface pressures, lift, wave drag and moment.</p>
+          </div>
         </li>
       </ul>
     </section>

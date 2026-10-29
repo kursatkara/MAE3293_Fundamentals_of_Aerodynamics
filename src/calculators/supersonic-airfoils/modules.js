@@ -102,7 +102,7 @@ function eng(x){if(!isFinite(x))return '—';const a=Math.abs(x);const d=a>=1000
 const deg=r=>f(r*R,2)+'°';
 
 /* ---------------- state + controls ---------------- */
-const S={cs:'flat',M:3,alpha:15,pinf:101325,chord:1,
+const S={cs:'diamond',M:3,alpha:15,pinf:101325,chord:1,
   wedge:{mode:'ang',ang:5,tc:0.175,pb:1},
   diamond:{mode:'ang',ang:10,tc:0.1763,xm:0.5}};
 const caseNames={flat:'Flat plate',wedge:'Wedge',diamond:'Diamond'};
@@ -117,6 +117,10 @@ function syncInputs(){
   $('pinf').value=S.pinf; $('chord').value=S.chord;
   const cs=S.cs, P=GP();
   document.querySelectorAll('.case').forEach(b=>b.setAttribute('aria-selected',b.dataset.case===cs));
+  /* name the chosen airfoil where the reader looks next: the inputs and the figure heading */
+  const longName={flat:'flat plate',wedge:'wedge',diamond:'diamond airfoil'}[cs];
+  $('railCase').textContent=`For the ${longName}`;
+  $('h-fig').textContent=`Wave pattern and surface pressures: ${longName}`;
   document.querySelectorAll('[data-case]:not(.case)').forEach(el=>el.hidden=el.dataset.case!==cs);
   $('flatNote').hidden=cs!=='flat'; $('geomBox').hidden=cs==='flat';
   if(P){
@@ -174,6 +178,7 @@ function geomText(cs,G){
 function render(){
   if(!(S.M>1)){ $('banners').innerHTML=`<div class="banner bad"><b>M<sub>∞</sub> must be greater than 1.</b><span>Shock-expansion theory needs supersonic freestream flow.</span></div>`; return; }
   const cs=S.cs, P=GP(), G=geom(cs,P);
+  if(cs==='flat') $('geomDerived').innerHTML='';   /* no geometry: leave nothing from the last case */
   if(cs==='wedge') $('geomDerived').innerHTML=`<span>Half-angle δ</span><b>${deg(G.e1)}</b><span>t/c (base height)</span><b>${f(G.tc,4)}</b><span>Base pressure p<sub>b</sub>/p<sub>∞</sub></span><b>${f(G.pb,3)}</b>`;
   if(cs==='diamond') $('geomDerived').innerHTML=`<span>t/c</span><b>${f(G.tc,4)}</b><span>ε<sub>1</sub> (front)</span><b>${deg(G.e1)}</b><span>ε<sub>2</sub> (rear)</span><b>${deg(G.e2)}</b><span>Shoulder turn ε<sub>1</sub>+ε<sub>2</sub></span><b>${deg(G.e1+G.e2)}</b>`;
   const sol=solve(cs,P,S.alpha,S.M,GAM()), lin=linear(cs,P,S.alpha,S.M,GAM());
@@ -418,7 +423,7 @@ function renderChart(){
 }
 function niceStep(x){const p=Math.pow(10,Math.floor(Math.log10(x)));const n=x/p;return (n<1.5?1:n<3?2:n<7?5:10)*p;}
 
-const initial=caseOfHash[location.hash.slice(1)]||'flat';
+const initial=caseOfHash[location.hash.slice(1)]||'diamond';
 S.cs=initial; syncInputs(); render();
 renderers.push(schedule);
 })();

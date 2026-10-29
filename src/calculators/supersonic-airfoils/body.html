@@ -1,26 +1,33 @@
   <div class="pagehead">
-    <p class="lede">Shock-expansion theory for three airfoils of increasing complexity. Pick a case, then change the freestream Mach number, the angle of attack, or the geometry. Every step below updates: the wave on each surface, the surface pressures, the force on each face, and finally <i>c<sub>l</sub></i>, <i>c<sub>d</sub></i> and <i>c<sub>m</sub></i>.</p>
+    <p class="lede">Shock-expansion theory for three airfoils of increasing complexity. Choose an airfoil, then change the freestream Mach number, the angle of attack, or the geometry. Everything below updates: the wave on each surface, the surface pressures, the forces on each face, and finally c<sub>l</sub>, c<sub>d</sub> and c<sub>m</sub>.</p>
   </div>
 
-  <div class="cases" role="tablist" aria-label="Airfoil case">
-    <button class="case" role="tab" id="tab-flat" data-case="flat" aria-selected="true">
-      <svg viewBox="0 0 74 30" aria-hidden="true"><line x1="6" y1="15" x2="68" y2="15" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
-      <span class="t"><b>1 · Flat plate</b><small>Lift and drag due to lift</small></span>
-    </button>
-    <button class="case" role="tab" id="tab-wedge" data-case="wedge" aria-selected="false">
-      <svg viewBox="0 0 74 30" aria-hidden="true"><polygon points="6,15 68,5 68,25" fill="currentColor" fill-opacity=".15" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
-      <span class="t"><b>2 · Wedge</b><small>Adds thickness drag and a base</small></span>
-    </button>
-    <button class="case" role="tab" id="tab-diamond" data-case="diamond" aria-selected="false">
-      <svg viewBox="0 0 74 30" aria-hidden="true"><polygon points="6,15 37,5 68,15 37,25" fill="currentColor" fill-opacity=".15" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
-      <span class="t"><b>3 · Diamond</b><small>Closed body, shoulder expansions</small></span>
-    </button>
-  </div>
+      <section class="sec" id="calc" aria-labelledby="h-calc">
+        <div class="sechead"><p class="eyebrow">Section 9.7 · Shock-expansion theory</p><h2 id="h-calc">Calculator</h2></div>
+        <div class="chooser">
+          <p class="chooser-h" id="choose-h"><span class="stepn" aria-hidden="true">1</span>Choose an airfoil</p>
+          <p class="note">Three shapes of increasing complexity. Everything on this page, from the wave pattern to the coefficients, is for the shape you choose.</p>
+          <div class="cases" role="tablist" aria-labelledby="choose-h">
+            <button class="case" role="tab" id="tab-flat" data-case="flat" aria-selected="false">
+              <svg viewBox="0 0 74 30" aria-hidden="true"><line x1="6" y1="15" x2="68" y2="15" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+              <span class="t"><b>Flat plate</b><small>Lift and drag due to lift</small></span><span class="sel">Selected</span>
+            </button>
+            <button class="case" role="tab" id="tab-wedge" data-case="wedge" aria-selected="false">
+              <svg viewBox="0 0 74 30" aria-hidden="true"><polygon points="6,15 68,5 68,25" fill="currentColor" fill-opacity=".15" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+              <span class="t"><b>Wedge</b><small>Adds thickness drag and a base</small></span><span class="sel">Selected</span>
+            </button>
+            <button class="case" role="tab" id="tab-diamond" data-case="diamond" aria-selected="true">
+              <svg viewBox="0 0 74 30" aria-hidden="true"><polygon points="6,15 37,5 68,15 37,25" fill="currentColor" fill-opacity=".15" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+              <span class="t"><b>Diamond</b><small>Closed body, shoulder expansions</small></span><span class="sel">Selected</span>
+            </button>
+          </div>
+        </div>
 
   <div class="grid">
     <!-- ============ CONTROL RAIL ============ -->
     <aside class="card rail" aria-label="Inputs">
-      <h2>Inputs</h2>
+      <h2><span class="stepn" aria-hidden="true">2</span>Inputs</h2>
+      <p class="note railcase" id="railCase"></p>
       <div class="ctl">
         <label for="M">Freestream Mach, M<sub>∞</sub></label>
         <div class="row"><input type="range" id="M_r" min="1.05" max="6" step="0.01" aria-label="Mach slider"><input type="number" id="M" min="1.01" max="20" step="0.01"></div>
@@ -219,3 +226,4 @@
       <p class="note">Face numbers: flat plate and wedge 1 = upper, 2 = lower, b = base; diamond 1 = upper front, 2 = upper rear, 3 = lower front, 4 = lower rear; ∞ = freestream.</p>
     </main>
   </div>
+      </section>
