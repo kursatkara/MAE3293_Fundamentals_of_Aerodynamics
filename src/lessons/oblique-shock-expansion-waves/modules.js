@@ -670,6 +670,7 @@
     // right panel
     s+='<g clip-path="url(#cpR)">';
     const Cr=[half+120,wy];
+    s+=ln(Cr,[Cr[0]+200,Cr[1]],'mach',1,'stroke-dasharray="3 4"');
     if(sh.type==='shock'){s+=ln(Cr,ray(Cr,sh.beta,600),'comp',2.6);[24,52,90].forEach(h=>{const P=[Cr[0]+h/Math.tan(sh.beta),wy-h];s+=pl([[half+10,wy-h],P,ray(P,th,600)],'stream',1.5);});
       s+=arc(Cr,70,0,sh.beta,'comp',1.1)+tx(ray(Cr,sh.beta*0.55,84),'β','flab','style="fill:var(--comp)"');}
     s+=wall([[half+10,wy],Cr,ray(Cr,th,600)],1)+arc(Cr,46,0,th,'ink',1.2)+tx(ray(Cr,th/2,58),'θ','flab','dominant-baseline="middle"');
