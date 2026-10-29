@@ -1,0 +1,61 @@
+  <p class="lede">Prandtl–Meyer expansion of a calorically perfect gas around a convex corner. The flow turns through θ isentropically, so ν(M<sub>2</sub>) = ν(M<sub>1</sub>) + θ fixes the downstream Mach number, and the isentropic relations give the pressure, density and temperature ratios. A second calculator below replaces Anderson’s Appendix C for a single Mach number. The γ in the top bar applies to every value on the page.</p>
+
+      <section class="sec" id="calc" aria-labelledby="h-calc">
+        <div class="sechead"><p class="eyebrow">Section 9.6 · Prandtl–Meyer expansion waves</p><h2 id="h-calc">Expansion around a corner</h2></div>
+        <div class="lab" id="pm">
+          <div class="labhead"><span class="eyebrow">Enter two of M<sub>1</sub>, θ and M<sub>2</sub></span><span class="note" id="pm_short"></span></div>
+          <aside class="rail" aria-label="Prandtl–Meyer inputs">
+            <div class="ctl"><label for="pm_mode">Solve for</label><select id="pm_mode">
+              <option value="M2">M₂, from M₁ and θ</option>
+              <option value="th">θ, from M₁ and M₂</option></select></div>
+            <div class="ctl"><label for="pm_M1">Upstream Mach number, M₁</label><div class="row"><input type="number" id="pm_M1" step="any" value="2" style="width:100%"></div></div>
+            <div class="ctl"><label for="pm_th">Turning angle, θ <small>deg</small></label><div class="row"><input type="number" id="pm_th" step="any" value="10" style="width:100%"></div></div>
+            <div class="ctl"><label for="pm_M2">Downstream Mach number, M₂</label><div class="row"><input type="number" id="pm_M2" step="any" value="" style="width:100%"></div></div>
+            <p class="note" id="pm_note"></p>
+            <div class="sep"></div>
+            <span class="lbl">Try</span>
+            <div class="presets" id="pm_pre" style="flex-direction:column"></div>
+          </aside>
+          <div class="labmain">
+            <div id="pm_msg"></div>
+            <div class="fig"><svg id="pm_sch" viewBox="0 0 760 270" role="img" aria-label="Convex corner drawn to scale: the wall turns away from the flow through theta and a centered Prandtl–Meyer fan spreads from the upstream Mach line at mu1 to the downstream Mach line at mu2 measured from the turned flow"></svg></div>
+            <div class="tblwrap"><table id="pm_tab"></table></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec" id="appc" aria-labelledby="h-appc">
+        <div class="sechead"><p class="eyebrow">Appendix C · Prandtl–Meyer function and Mach angle</p><h2 id="h-appc">ν and μ for one Mach number</h2></div>
+        <div class="lab" id="ac">
+          <div class="labhead"><span class="eyebrow">Enter one known quantity</span></div>
+          <aside class="rail" aria-label="Appendix C input">
+            <div class="ctl"><label for="ac_sel">Known quantity</label><select id="ac_sel">
+              <option value="M">Mach number, M</option>
+              <option value="nu">Prandtl–Meyer function, ν (deg)</option>
+              <option value="mu">Mach angle, μ (deg)</option></select></div>
+            <div class="ctl"><label for="ac_val">Its value</label><div class="row"><input type="number" id="ac_val" step="any" value="2" style="width:100%"></div></div>
+            <p class="note" id="ac_note"></p>
+          </aside>
+          <div class="labmain">
+            <div class="tblwrap"><table id="ac_tab"></table></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec" id="relations" aria-labelledby="h-rel">
+        <div class="sechead"><p class="eyebrow">Reference</p><h2 id="h-rel">Relations used</h2></div>
+        <div class="cols2">
+          <div class="prose">
+            <h3>Prandtl–Meyer function</h3>
+            <div class="eq">\[ \nu(M)=\sqrt{\frac{\gamma+1}{\gamma-1}}\tan^{-1}\!\sqrt{\frac{\gamma-1}{\gamma+1}\left(M^2-1\right)}-\tan^{-1}\!\sqrt{M^2-1} \]</div>
+            <div class="eq">\[ \theta=\nu(M_2)-\nu(M_1),\qquad \mu=\sin^{-1}\frac{1}{M} \]</div>
+            <p>ν rises monotonically from 0 at M = 1 toward ν<sub>max</sub> = (π/2)(√((γ+1)/(γ−1)) − 1) as M → ∞ (130.45° for γ = 1.4), so a turn larger than ν<sub>max</sub> − ν(M<sub>1</sub>) would expand the flow to zero pressure. The calculator inverts ν by bisection.</p>
+          </div>
+          <div class="prose">
+            <h3>Across the fan</h3>
+            <div class="eq">\[ p_{0,2}=p_{0,1},\qquad T_{0,2}=T_{0,1} \]</div>
+            <div class="eq">\[ \frac{T_2}{T_1}=\frac{1+\frac{\gamma-1}{2}M_1^2}{1+\frac{\gamma-1}{2}M_2^2},\quad \frac{p_2}{p_1}=\left(\frac{T_2}{T_1}\right)^{\frac{\gamma}{\gamma-1}},\quad \frac{\rho_2}{\rho_1}=\left(\frac{T_2}{T_1}\right)^{\frac{1}{\gamma-1}} \]</div>
+            <p>The expansion is isentropic, so the total conditions are unchanged and the static ratios follow from the isentropic relations at M<sub>1</sub> and M<sub>2</sub>.</p>
+          </div>
+        </div>
+      </section>

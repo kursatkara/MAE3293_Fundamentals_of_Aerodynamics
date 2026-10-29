@@ -83,8 +83,14 @@
     {
       "slug": "prandtl-meyer-expansion",
       "title": "Prandtl–Meyer Expansion",
-      "legacy": "https://kursatkara.github.io/MAE3293-Compressible-Aerodynamics-Calculator/#prandtl-meyer",
-      "summary": "Prandtl–Meyer function, Mach angle, and the flow downstream of an expansion fan turning through a given angle (Appendix C)."
+      "scripts": ["core.js", "helpers.js", "kit.js"],
+      "summary": "Prandtl–Meyer function, Mach angle, and the flow downstream of an expansion fan turning through a given angle (Appendix C).",
+      "description": "Prandtl-Meyer expansion calculator for a calorically perfect gas: the downstream Mach number and pressure, density and temperature ratios for a turn through a given angle, the turn needed to reach a given Mach number, and the Prandtl-Meyer function and Mach angle for one Mach number, in place of Anderson's Appendix C. MAE 3293, Oklahoma State University.",
+      "image_alt": "Convex corner drawn to scale with a centered Prandtl-Meyer expansion fan and a streamline turning through it",
+      "lessons": [
+        ["oblique-shock-expansion-waves", "prandtl-meyer", "Chapter 9, Prandtl–Meyer expansion waves"],
+        ["oblique-shock-expansion-waves", "compression", "Chapter 9, isentropic compression versus a sharp corner"]
+      ]
     },
     {
       "slug": "supersonic-airfoils",
