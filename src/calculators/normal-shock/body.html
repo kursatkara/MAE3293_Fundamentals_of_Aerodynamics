@@ -1,0 +1,39 @@
+  <p class="lede">Normal shock in a calorically perfect gas. Enter any one of the tabulated quantities, the upstream or downstream Mach number, a static or total-pressure ratio, or the Pitot ratio p<sub>0,2</sub>/p<sub>1</sub>, and the others follow from the normal-shock relations, in place of the tables in Anderson’s Appendix B. The γ in the top bar applies to every value on the page.</p>
+
+      <section class="sec" id="calc" aria-labelledby="h-calc">
+        <div class="sechead"><p class="eyebrow">Appendix B · Normal shock properties</p><h2 id="h-calc">Calculator</h2></div>
+        <div class="lab" id="ns">
+          <div class="labhead"><span class="eyebrow">Enter one known quantity</span><span class="note" id="ns_short"></span></div>
+          <aside class="rail" aria-label="Normal-shock input">
+            <div class="ctl"><label for="ns_sel">Known quantity</label><select id="ns_sel"></select></div>
+            <div class="ctl"><label for="ns_val">Its value</label><div class="row"><input type="number" id="ns_val" step="any" value="2" style="width:100%"></div></div>
+            <p class="note" id="ns_note"></p>
+            <div class="sep"></div>
+            <span class="lbl">Try</span>
+            <div class="presets" id="ns_pre" style="flex-direction:column"></div>
+          </aside>
+          <div class="labmain">
+            <div class="fig"><svg id="ns_sch" viewBox="0 0 760 176" role="img" aria-label="Stationary normal shock with the upstream state 1 and downstream state 2; the arrow lengths are proportional to the velocities u1 and u2"></svg></div>
+            <div class="tblwrap"><table id="ns_tab"></table></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec" id="relations" aria-labelledby="h-rel">
+        <div class="sechead"><p class="eyebrow">Reference</p><h2 id="h-rel">Relations used</h2></div>
+        <div class="cols2">
+          <div class="prose">
+            <h3>Across the shock</h3>
+            <div class="eq">\[ M_2^2=\frac{1+\frac{\gamma-1}{2}M_1^2}{\gamma M_1^2-\frac{\gamma-1}{2}} \tag{8.59} \]</div>
+            <div class="eq">\[ \frac{\rho_2}{\rho_1}=\frac{u_1}{u_2}=\frac{(\gamma+1)M_1^2}{2+(\gamma-1)M_1^2} \tag{8.61} \]</div>
+            <div class="eq">\[ \frac{p_2}{p_1}=1+\frac{2\gamma}{\gamma+1}\left(M_1^2-1\right) \tag{8.65} \]</div>
+            <div class="eq">\[ \frac{T_2}{T_1}=\frac{p_2}{p_1}\,\frac{\rho_1}{\rho_2} \tag{8.67} \]</div>
+          </div>
+          <div class="prose">
+            <h3>Total pressure, entropy, and the Pitot tube</h3>
+            <div class="eq">\[ T_{0,2}=T_{0,1},\qquad \frac{p_{0,2}}{p_{0,1}}=e^{-(s_2-s_1)/R} \]</div>
+            <div class="eq">\[ \frac{p_{0,2}}{p_1}=\left[\frac{(\gamma+1)^2M_1^2}{4\gamma M_1^2-2(\gamma-1)}\right]^{\frac{\gamma}{\gamma-1}}\frac{1-\gamma+2\gamma M_1^2}{\gamma+1} \tag{8.80} \]</div>
+            <p>Every ratio is monotonic in M<sub>1</sub> for M<sub>1</sub> ≥ 1, so a known ratio fixes M<sub>1</sub>; the calculator finds it by bisection on 1 ≤ M<sub>1</sub> ≤ 50. The Rayleigh Pitot formula (8.80) gives the pressure at the nose of a Pitot tube in supersonic flow, behind the normal part of its bow shock.</p>
+          </div>
+        </div>
+      </section>

@@ -38,6 +38,13 @@ const CARDS = {
     setup: async p => {},
     figure: () => document.getElementById('is_fig').outerHTML
   },
+  'normal-shock': {
+    dir: 'calculators', eyebrow: 'MAE 3293 · Calculator', title: 'Normal Shock Calculator',
+    blurb: 'M₂, p₂/p₁, ρ₂/ρ₁, T₂/T₁, p₀,₂/p₀,₁ and the Pitot ratio from any one of them, in place of Appendix B.',
+    cols: '420px 1fr',
+    setup: async p => {},
+    figure: () => document.getElementById('ns_sch').outerHTML
+  },
   'nozzles-diffusers-wind-tunnels': {
     blurb: 'Area–Mach relation, choked flow, and normal shocks in a converging-diverging nozzle, computed live.',
     cols: '400px 1fr',

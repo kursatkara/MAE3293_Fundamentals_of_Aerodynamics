@@ -17,11 +17,11 @@
   const sel=$('is_sel'),val=$('is_val'),note=$('is_note');
   sel.innerHTML=Q.map((q,i)=>`<option value="${i}">${q.label}</option>`).join('');
   const q=()=>Q[+sel.value];
-  let M=2;
+  let M=2,bad=false;   /* bad: the input is out of range, so the table shows dashes, not a stale result */
   const go=sched(render);
   function solve(){const v=parseFloat(val.value),m=q().inv(v);
-    if(isFinite(m)&&m<=MMAX){M=m;note.textContent=q().hint;note.style.color='';return true;}
-    note.textContent=(val.value===''?'Enter a value. ':'Out of range. ')+q().hint;note.style.color='var(--bad)';return false;}
+    if(isFinite(m)&&m<=MMAX){M=m;bad=false;note.textContent=q().hint;note.style.color='';return true;}
+    bad=true;note.textContent=(val.value===''?'Enter a value. ':'Out of range. ')+q().hint;note.style.color='var(--bad)';return false;}
   /* switching the known quantity keeps the current state: the box shows that quantity at the current M */
   sel.addEventListener('change',()=>{let m=M;const k=q();if(k.sub&&m>1)m=1;if(k.sup&&m<1)m=1;M=m;val.value=+k.f(M).toFixed(6);solve();go();});
   val.addEventListener('input',()=>{solve();go();});
@@ -34,21 +34,21 @@
   solve();
 
   function render(){
-    const k=q(),A=AoAs(M,G),regime=M<1e-12?'fluid at rest':M<1-1e-9?'subsonic':M>1+1e-9?'supersonic':'sonic';
+    const k=q(),V=x=>bad?NaN:x,A=AoAs(M,G),regime=M<1e-12?'fluid at rest':M<1-1e-9?'subsonic':M>1+1e-9?'supersonic':'sonic';
     $('is_short').textContent=`γ = ${f(G,3)}`;
-    $('is_msg').innerHTML=M>1e-12?'':banner('warn','M = 0: the fluid is at rest.','Every total-to-static ratio is 1, and A/A* is unbounded.');
+    $('is_msg').innerHTML=bad||M>1e-12?'':banner('warn','M = 0: the fluid is at rest.','Every total-to-static ratio is 1, and A/A* is unbounded.');
     const rows=[
-      ['M','Mach number',M,'M'],
-      ['p<sub>0</sub>/p','(8.42)',p0p(M,G),'p0p'],
-      ['ρ<sub>0</sub>/ρ','(8.43)',r0r(M,G),'r0r'],
-      ['T<sub>0</sub>/T','(8.40)',T0T(M,G),'T0T'],
-      ['A/A*','(10.32)',A,'A']];
+      ['M','Mach number',V(M),'M'],
+      ['p<sub>0</sub>/p','(8.42)',V(p0p(M,G)),'p0p'],
+      ['ρ<sub>0</sub>/ρ','(8.43)',V(r0r(M,G)),'r0r'],
+      ['T<sub>0</sub>/T','(8.40)',V(T0T(M,G)),'T0T'],
+      ['A/A*','(10.32)',V(A),'A']];
     const known=k.k==='Asub'||k.k==='Asup'?'A':k.k;
     let h=`<thead><tr><th class="l">Quantity</th><th class="l">Relation used</th><th>Value</th></tr></thead><tbody>`;
     rows.forEach(r=>{h+=`<tr><td class="l">${r[0]}</td><td class="rel">${r[3]===known?'known':r[1]}</td><td class="${r[3]===known?'hl':''}">${f(r[2],4)}</td></tr>`;});
     h+=`<tr><td class="l" colspan="3" style="padding-top:12px;color:var(--ink);font-weight:600">Static-to-total ratios</td></tr>`;
-    [['p/p<sub>0</sub>','1/(p<sub>0</sub>/p)',1/p0p(M,G)],['ρ/ρ<sub>0</sub>','1/(ρ<sub>0</sub>/ρ)',1/r0r(M,G)],['T/T<sub>0</sub>','1/(T<sub>0</sub>/T)',1/T0T(M,G)]].forEach(r=>{h+=`<tr><td class="l">${r[0]}</td><td class="rel">${r[1]}</td><td>${f(r[2],4)}</td></tr>`;});
-    $('is_tab').innerHTML=`<caption style="caption-side:bottom;text-align:left;padding-top:8px;color:var(--muted)">The flow is ${regime}.</caption>`+h+'</tbody>';
+    [['p/p<sub>0</sub>','1/(p<sub>0</sub>/p)',V(1/p0p(M,G))],['ρ/ρ<sub>0</sub>','1/(ρ<sub>0</sub>/ρ)',V(1/r0r(M,G))],['T/T<sub>0</sub>','1/(T<sub>0</sub>/T)',V(1/T0T(M,G))]].forEach(r=>{h+=`<tr><td class="l">${r[0]}</td><td class="rel">${r[1]}</td><td>${f(r[2],4)}</td></tr>`;});
+    $('is_tab').innerHTML=(bad?'':`<caption style="caption-side:bottom;text-align:left;padding-top:8px;color:var(--muted)">The flow is ${regime}.</caption>`)+h+'</tbody>';
     /* figure: Anderson-style property curves on 0 <= M <= 5 */
     const F=frame({...P,xmin:0,xmax:5,ymin:0,ymax:1,xt:[0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5],yt:[0,0.2,0.4,0.6,0.8,1],xlab:'Mach number M',ylab:'Ratio',fy:v=>v.toFixed(1),clip:'isc'});
     let g=`<defs>${F.clipDef}</defs>`+F.svg+`<g clip-path="url(#isc)">`;
@@ -57,7 +57,8 @@
     g+=tx([F.X(1)+6,P.y0+P.h-8],'M = 1','axlab');
     g+=tx([F.X(4.95),F.Y(1/T0T(4.95,G))-7],'T/T₀','flab','text-anchor="end" style="fill:var(--warn)"')+tx([F.X(3.05),F.Y(1/AoAs(3.05,G))-8],'A*/A','flab','style="fill:var(--exp)"')
       +tx([F.X(1.55),F.Y(1/p0p(1.55,G))+16],'p/p₀','flab','style="fill:var(--comp)"')+tx([F.X(1.62)+4,F.Y(1/r0r(1.62,G))-8],'ρ/ρ₀','flab','style="fill:var(--stream)"');
-    if(M<=5){g+=ln([F.X(M),P.y0],[F.X(M),P.y0+P.h],'accent',1.6);
+    if(bad){}
+    else if(M<=5){g+=ln([F.X(M),P.y0],[F.X(M),P.y0+P.h],'accent',1.6);
       g+=dot([F.X(M),F.Y(1/p0p(M,G))],'comp',5)+dot([F.X(M),F.Y(1/r0r(M,G))],'stream',5)+dot([F.X(M),F.Y(1/T0T(M,G))],'warn',5)+(M>0?dot([F.X(M),F.Y(1/A)],'exp',5):'');}
     else g+=tx([P.x0+P.w-8,P.y0+18],`M = ${f(M,2)} is beyond the plotted range`,'axlab','text-anchor="end"');
     $('is_fig').innerHTML=g;
