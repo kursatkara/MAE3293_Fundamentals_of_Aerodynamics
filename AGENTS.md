@@ -28,15 +28,21 @@ Instructions for people and AI agents (Claude Code, Codex) editing this reposito
    eyebrow naming the textbook section, and every interactive registers a draw function in `renderers` so the
    γ input redraws it.
 3. Reuse `src/shared/kit.js` (plot frames, curves, drag-to-set, known-quantity inversion, example tabs and
-   Exact/Notes tables) for new interactives. Put gas-dynamics functions used by more than one lesson in `src/shared/` and give them a check in
-   `tools/check-tables.js` against Anderson's appendix tables.
-4. Add a card to `CARDS` in `tools/preview-images.js`, then `npm run build && npm run previews && npm run check`.
-5. The previous and next links, the course home list, and the canonical and Open Graph URLs come from the manifest.
+   example tables) for new interactives. Put gas-dynamics functions used by more than one lesson in `src/shared/` and give
+   them a check in `tools/check-tables.js` against Anderson's appendix tables.
+4. Worked examples: `exTable(id, rows, def)` shows one **Result** column. Each row is
+   `[quantity, relation used, result, hand value, highlight, differs]`; the hand value is the solution from the notes
+   (Appendix tables, γ = 1.4). It stays hidden until the reader turns on the switch "Compare with the hand solution
+   (Appendix tables)", which `src/shared/lesson.js` adds above every table with a hand column; pass `def` true only for
+   the original inputs. Set `differs` on rows where the notes and the result disagree, and explain why in the
+   `.exnote` under the table (the row then carries a †).
+5. Add a card to `CARDS` in `tools/preview-images.js`, then `npm run build && npm run previews && npm run check`.
+6. The previous and next links, the course home list, and the canonical and Open Graph URLs come from the manifest.
 
 ## Content
 - Facts, worked examples, and numbering follow Kursat Kara’s lecture notes and J. D. Anderson, *Fundamentals of
   Aerodynamics*. Verify every worked number by computation; when the notes and a computed value disagree, show the
-  computed value and say so neutrally on the page.
+  computed value and say so neutrally in the note under the example (and mark the row as differing).
 - Precise terminology, as in a paper: name the flow, the method, and the quantity. Text in the third person or
   "we" for derivations; no marketing phrasing.
 - Footer credit: “Based on Kursat Kara’s lecture notes, following J. D. Anderson, *Fundamentals of Aerodynamics*.”
