@@ -1,0 +1,11 @@
+<svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <defs><marker id="tc1a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 1L9 5L0 9Z" style="fill:var(--ink)"/></marker><marker id="tc1s" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 1L9 5L0 9Z" style="fill:var(--stream)"/></marker></defs>
+  <path d="M118 88 L118 45 L18 45 L18 165 L118 165 L118 122" style="fill:var(--soft);stroke:var(--body);stroke-width:2.2"/>
+  <g style="stroke:var(--stream);stroke-width:1.8;fill:none"><path d="M118 92 C160 92 175 98 215 98 L330 98"/><path d="M118 105 L330 105"/><path d="M118 118 C160 118 175 112 215 112 L330 112"/></g>
+  <g style="stroke:var(--stream);stroke-width:1.8"><line x1="240" y1="98" x2="262" y2="98" marker-end="url(#tc1s)"/><line x1="240" y1="105" x2="262" y2="105" marker-end="url(#tc1s)"/><line x1="240" y1="112" x2="262" y2="112" marker-end="url(#tc1s)"/></g>
+  <circle cx="345" cy="105" r="4.5" style="fill:var(--accent)"/>
+  <text x="32" y="100" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">p</tspan>₀, <tspan font-style="italic">T</tspan>₀</text>
+  <text x="32" y="124" style="font-family:var(--f-num);font-size:15px;fill:var(--muted)"><tspan font-style="italic">V</tspan> = 0</text>
+  <text x="306" y="84" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">p</tspan>, <tspan font-style="italic">T</tspan>, <tspan font-style="italic">M</tspan></text>
+  <text x="190" y="150" style="font-family:var(--f-num);font-size:15px;fill:var(--muted)"><tspan font-style="italic">s</tspan> = const</text>
+</svg>

@@ -246,12 +246,27 @@ footer.site a{color:var(--accent)}
 .chapter p{font-size:16.5px;max-width:70ch}
 .chapter .go{font-size:15px;font-weight:600}
 @media (max-width:700px){.chapter{grid-template-columns:minmax(0,1fr);gap:14px}}
-.tools{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 32px}
-.tools li{display:flex;flex-direction:column;gap:4px}
-.tools a{font-family:var(--f-display);font-size:18.5px;font-weight:600;color:var(--ink);text-decoration:none}
-.tools a:hover{color:var(--accent)}
-.tools p{color:var(--muted);font-size:15.5px;max-width:60ch}
-@media (max-width:700px){.tools{grid-template-columns:minmax(0,1fr)}}
+.calcs{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 28px}
+.calc{display:flex;flex-direction:column;gap:8px;min-width:0}
+.calc .thumb{display:block;border:1px solid var(--line);margin-bottom:4px}
+.calc .thumb svg{display:block;width:100%;height:auto;aspect-ratio:400/210;background:var(--bg)}
+.calc h3{font-size:19px}
+.calc h3 a{color:var(--ink);text-decoration:none}
+.calc h3 a:hover{color:var(--accent)}
+.calc p{color:var(--muted);font-size:15.5px}
+@media (max-width:900px){.calcs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.calcs{grid-template-columns:minmax(0,1fr)}}
+
+/* calculator pages */
+.calcnav{display:flex;flex-wrap:wrap;gap:6px 22px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 0}
+.calcnav a{color:var(--muted);text-decoration:none;font-size:15.5px;font-weight:600}
+.calcnav a:hover{color:var(--ink)}
+.calcnav a[aria-current="page"]{color:var(--ink);box-shadow:inset 0 -2px 0 var(--accent)}
+.related{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.related li{display:flex;flex-direction:column;gap:2px}
+.related a{font-family:var(--f-display);font-size:17.5px;font-weight:600;color:var(--ink);text-decoration:none}
+.related a:hover{color:var(--accent)}
+.related span{color:var(--muted);font-size:15px}
 
 /* select (known-quantity boxes) */
 .ctl select{width:100%;font:14px var(--f-body);padding:5px 6px;border:1px solid var(--line);border-radius:0;background:var(--soft);color:var(--ink)}

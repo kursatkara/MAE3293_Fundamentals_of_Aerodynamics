@@ -274,12 +274,27 @@ footer.site a{color:var(--accent)}
 .chapter p{font-size:16.5px;max-width:70ch}
 .chapter .go{font-size:15px;font-weight:600}
 @media (max-width:700px){.chapter{grid-template-columns:minmax(0,1fr);gap:14px}}
-.tools{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 32px}
-.tools li{display:flex;flex-direction:column;gap:4px}
-.tools a{font-family:var(--f-display);font-size:18.5px;font-weight:600;color:var(--ink);text-decoration:none}
-.tools a:hover{color:var(--accent)}
-.tools p{color:var(--muted);font-size:15.5px;max-width:60ch}
-@media (max-width:700px){.tools{grid-template-columns:minmax(0,1fr)}}
+.calcs{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 28px}
+.calc{display:flex;flex-direction:column;gap:8px;min-width:0}
+.calc .thumb{display:block;border:1px solid var(--line);margin-bottom:4px}
+.calc .thumb svg{display:block;width:100%;height:auto;aspect-ratio:400/210;background:var(--bg)}
+.calc h3{font-size:19px}
+.calc h3 a{color:var(--ink);text-decoration:none}
+.calc h3 a:hover{color:var(--accent)}
+.calc p{color:var(--muted);font-size:15.5px}
+@media (max-width:900px){.calcs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.calcs{grid-template-columns:minmax(0,1fr)}}
+
+/* calculator pages */
+.calcnav{display:flex;flex-wrap:wrap;gap:6px 22px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 0}
+.calcnav a{color:var(--muted);text-decoration:none;font-size:15.5px;font-weight:600}
+.calcnav a:hover{color:var(--ink)}
+.calcnav a[aria-current="page"]{color:var(--ink);box-shadow:inset 0 -2px 0 var(--accent)}
+.related{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.related li{display:flex;flex-direction:column;gap:2px}
+.related a{font-family:var(--f-display);font-size:17.5px;font-weight:600;color:var(--ink);text-decoration:none}
+.related a:hover{color:var(--accent)}
+.related span{color:var(--muted);font-size:15px}
 
 /* select (known-quantity boxes) */
 .ctl select{width:100%;font:14px var(--f-body);padding:5px 6px;border:1px solid var(--line);border-radius:0;background:var(--soft);color:var(--ink)}
@@ -318,7 +333,7 @@ td.hand .mk{font-family:var(--f-body)}
     </div>
     <div class="controls-group">
       <a class="lab-link" href="https://www.kursatkara.com/#teaching">Course instructor</a>
-      <a class="lab-link" href="https://kursatkara.github.io/MAE3293-Compressible-Aerodynamics-Calculator/" target="_blank" rel="noopener">Calculator</a>
+      <a class="lab-link" href="https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/#calculators">Calculators</a>
       <a class="lab-link" href="https://www.kursatkara.com" target="_blank" rel="noopener" title="KARA Lab at Oklahoma State University">KARA Lab website</a>
       <div class="font-size-control">
         <button type="button" id="font-decrease" title="Decrease font size" aria-label="Decrease font size">A−</button>
@@ -331,7 +346,7 @@ td.hand .mk{font-family:var(--f-body)}
       </div>
     </div>
   </header>
-  <p class="lede">Interactive lessons for MAE 3293, Fundamentals of Aerodynamics, at Oklahoma State University. Each lesson pairs the derivations with figures computed live from the exact relations for a calorically perfect gas: change the Mach number, the geometry, or the back pressure and the wave pattern, the pressure distribution, and the forces update at once. The lessons follow Kursat Kara’s lecture notes and J. D. Anderson, <i>Fundamentals of Aerodynamics</i>.</p>
+  <p class="lede">Interactive lessons and calculators for MAE 3293, Fundamentals of Aerodynamics, at Oklahoma State University. Each lesson pairs the derivations with figures computed live from the exact relations for a calorically perfect gas: change the Mach number, the geometry, or the back pressure and the wave pattern, the pressure distribution, and the forces update at once. The lessons follow Kursat Kara’s lecture notes and J. D. Anderson, <i>Fundamentals of Aerodynamics</i>.</p>
 
   <div class="home-grid">
     <section class="sec" id="lessons" aria-labelledby="h-lessons">
@@ -412,18 +427,90 @@ td.hand .mk{font-family:var(--f-body)}
       </ol>
     </section>
 
-    <section class="sec" id="tools" aria-labelledby="h-tools">
-      <div class="sechead"><p class="eyebrow">For homework and exams</p><h2 id="h-tools">Calculators</h2></div>
-      <ul class="tools">
-        <li><a href="https://kursatkara.github.io/MAE3293-Compressible-Aerodynamics-Calculator/">Compressible Aerodynamics Calculator</a><p>Isentropic flow, normal and oblique shocks, Prandtl–Meyer expansion, and wedge airfoils: enter one known quantity and read the rest, in place of the tables in Anderson’s appendices.</p></li>
-        <li><a href="https://kursatkara.github.io/MAE3293-Compressible-Aerodynamics-Calculator/supersonic-airfoils.html">Supersonic airfoils</a><p>Shock-expansion theory for flat-plate, wedge, and diamond airfoils, compared with linear (Ackeret) theory, with lift, wave-drag, and moment coefficients over a range of angles of attack.</p></li>
+    <section class="sec" id="calculators" aria-labelledby="h-calcs">
+      <div class="sechead"><p class="eyebrow">For homework and exams</p><h2 id="h-calcs">Calculators</h2></div>
+      <p class="lede">Enter one known quantity and read the rest, in place of the tables in Anderson’s appendices. Each calculator uses the same relations as the lessons, checked against those tables.</p>
+      <ul class="calcs">
+        <li class="calc">
+          <a class="thumb" href="calculators/isentropic-flow.html" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <defs><marker id="tc1a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 1L9 5L0 9Z" style="fill:var(--ink)"/></marker><marker id="tc1s" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 1L9 5L0 9Z" style="fill:var(--stream)"/></marker></defs>
+  <path d="M118 88 L118 45 L18 45 L18 165 L118 165 L118 122" style="fill:var(--soft);stroke:var(--body);stroke-width:2.2"/>
+  <g style="stroke:var(--stream);stroke-width:1.8;fill:none"><path d="M118 92 C160 92 175 98 215 98 L330 98"/><path d="M118 105 L330 105"/><path d="M118 118 C160 118 175 112 215 112 L330 112"/></g>
+  <g style="stroke:var(--stream);stroke-width:1.8"><line x1="240" y1="98" x2="262" y2="98" marker-end="url(#tc1s)"/><line x1="240" y1="105" x2="262" y2="105" marker-end="url(#tc1s)"/><line x1="240" y1="112" x2="262" y2="112" marker-end="url(#tc1s)"/></g>
+  <circle cx="345" cy="105" r="4.5" style="fill:var(--accent)"/>
+  <text x="32" y="100" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">p</tspan>₀, <tspan font-style="italic">T</tspan>₀</text>
+  <text x="32" y="124" style="font-family:var(--f-num);font-size:15px;fill:var(--muted)"><tspan font-style="italic">V</tspan> = 0</text>
+  <text x="306" y="84" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">p</tspan>, <tspan font-style="italic">T</tspan>, <tspan font-style="italic">M</tspan></text>
+  <text x="190" y="150" style="font-family:var(--f-num);font-size:15px;fill:var(--muted)"><tspan font-style="italic">s</tspan> = const</text>
+</svg></a>
+          <h3><a href="calculators/isentropic-flow.html">Isentropic Flow</a></h3>
+          <p>Mach number, the total-to-static ratios p<sub>0</sub>/p, ρ<sub>0</sub>/ρ and T<sub>0</sub>/T, and the area ratio A/A*, from any one of them (Appendix A).</p>
+        </li>
+        <li class="calc">
+          <a class="thumb" href="https://kursatkara.github.io/MAE3293-Compressible-Aerodynamics-Calculator/#normal-shock" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <defs><marker id="tc2a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 1L9 5L0 9Z" style="fill:var(--ink)"/></marker></defs>
+  <path d="M410 100 L265 100 A10 10 0 0 0 265 120 L410 120" style="fill:var(--soft);stroke:var(--body);stroke-width:2.2"/>
+  <path d="M330 12 C262 36 236 72 236 110 C236 148 262 184 330 208" style="fill:none;stroke:var(--comp);stroke-width:2.2"/>
+  <line x1="36" y1="70" x2="150" y2="70" style="stroke:var(--ink);stroke-width:2.2" marker-end="url(#tc2a)"/><line x1="36" y1="110" x2="150" y2="110" style="stroke:var(--ink);stroke-width:2.2" marker-end="url(#tc2a)"/><line x1="36" y1="150" x2="150" y2="150" style="stroke:var(--ink);stroke-width:2.2" marker-end="url(#tc2a)"/>
+  <text x="44" y="50" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">M</tspan><tspan font-size="12" dy="4">1</tspan><tspan dy="-4"> &gt; 1</tspan></text>
+  <text x="292" y="90" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">p</tspan><tspan font-size="12" dy="4">0,2</tspan></text>
+  <text x="262" y="156" style="font-family:var(--f-num);font-size:15px;fill:var(--muted)"><tspan font-style="italic">M</tspan><tspan font-size="12" dy="4">2</tspan><tspan dy="-4"> &lt; 1</tspan></text>
+</svg></a>
+          <h3><a href="https://kursatkara.github.io/MAE3293-Compressible-Aerodynamics-Calculator/#normal-shock">Normal Shock</a></h3>
+          <p>Downstream Mach number and the pressure, density, temperature and total-pressure ratios across a normal shock, including the Pitot ratio (Appendix B).</p>
+        </li>
+        <li class="calc">
+          <a class="thumb" href="https://kursatkara.github.io/MAE3293-Compressible-Aerodynamics-Calculator/#oblique-shock" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <defs><marker id="tc3a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 1L9 5L0 9Z" style="fill:var(--ink)"/></marker></defs>
+  <path d="M0 165 L130 165 L400.5 92.5 L410 92.5 L410 215 L0 215 Z" style="fill:var(--soft)"/>
+  <path d="M0 165 L130 165 L400.5 92.5" style="fill:none;stroke:var(--body);stroke-width:2.2"/>
+  <line x1="130" y1="165" x2="262" y2="165" style="stroke:var(--mach);stroke-width:1.2;stroke-dasharray:5 4"/>
+  <path d="M200.0 165.0 A70 70 0 0 0 197.6 146.9" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M242.0 165.0 A112 112 0 0 0 224.7 105.3" style="fill:none;stroke:var(--muted);stroke-width:1.2"/>
+  <line x1="130" y1="165" x2="372.6" y2="12.0" style="stroke:var(--comp);stroke-width:2.2"/>
+  <line x1="18" y1="112" x2="84" y2="112" style="stroke:var(--ink);stroke-width:2.2" marker-end="url(#tc3a)"/><line x1="284" y1="99" x2="336.2" y2="85.0" style="stroke:var(--ink);stroke-width:2.2" marker-end="url(#tc3a)"/>
+  <text x="18" y="97" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">M</tspan><tspan font-size="12" dy="4">1</tspan><tspan dy="-4"></tspan></text>
+  <text x="342" y="74" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">M</tspan><tspan font-size="12" dy="4">2</tspan><tspan dy="-4"></tspan></text>
+  <text x="213.4" y="159.8" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)" font-style="italic">θ</text>
+  <text x="243.3" y="119.6" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)" font-style="italic">β</text>
+</svg></a>
+          <h3><a href="https://kursatkara.github.io/MAE3293-Compressible-Aerodynamics-Calculator/#oblique-shock">Oblique Shock</a></h3>
+          <p>The θ–β–M relation: any two of Mach number, deflection angle and wave angle give the third, with the property ratios across the shock.</p>
+        </li>
+        <li class="calc">
+          <a class="thumb" href="https://kursatkara.github.io/MAE3293-Compressible-Aerodynamics-Calculator/#prandtl-meyer" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <defs><marker id="tc4a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 1L9 5L0 9Z" style="fill:var(--ink)"/></marker></defs>
+  <path d="M0 110 L170 110 L400.2 193.8 L410 215 L0 215 Z" style="fill:var(--soft)"/>
+  <path d="M0 110 L170 110 L400.2 193.8" style="fill:none;stroke:var(--body);stroke-width:2.2"/>
+  <line x1="170" y1="110" x2="292" y2="110" style="stroke:var(--mach);stroke-width:1.2;stroke-dasharray:5 4"/>
+  <g><line x1="170" y1="110" x2="312.9" y2="27.5" style="stroke:var(--exp);stroke-width:1.2"/><line x1="170" y1="110" x2="319.4" y2="40.0" style="stroke:var(--exp);stroke-width:1.2"/><line x1="170" y1="110" x2="324.8" y2="52.9" style="stroke:var(--exp);stroke-width:1.2"/><line x1="170" y1="110" x2="329.1" y2="66.3" style="stroke:var(--exp);stroke-width:1.2"/><line x1="170" y1="110" x2="332.3" y2="80.0" style="stroke:var(--exp);stroke-width:1.2"/><line x1="170" y1="110" x2="334.2" y2="94.0" style="stroke:var(--exp);stroke-width:1.2"/><line x1="170" y1="110" x2="335.0" y2="108.0" style="stroke:var(--exp);stroke-width:1.2"/></g>
+  <path d="M242.0 110.0 A72 72 0 0 1 237.7 134.6" style="fill:none;stroke:var(--muted);stroke-width:1.2"/>
+  <line x1="14" y1="82" x2="80" y2="82" style="stroke:var(--ink);stroke-width:2.2" marker-end="url(#tc4a)"/><line x1="292" y1="128" x2="342.7" y2="146.5" style="stroke:var(--ink);stroke-width:2.2" marker-end="url(#tc4a)"/>
+  <text x="14" y="67" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">M</tspan><tspan font-size="12" dy="4">1</tspan><tspan dy="-4"></tspan></text>
+  <text x="356" y="160" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">M</tspan><tspan font-size="12" dy="4">2</tspan><tspan dy="-4"></tspan></text>
+  <text x="252.7" y="130.6" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)" font-style="italic">θ</text>
+</svg></a>
+          <h3><a href="https://kursatkara.github.io/MAE3293-Compressible-Aerodynamics-Calculator/#prandtl-meyer">Prandtl–Meyer Expansion</a></h3>
+          <p>Prandtl–Meyer function, Mach angle, and the flow downstream of an expansion fan turning through a given angle (Appendix C).</p>
+        </li>
+        <li class="calc">
+          <a class="thumb" href="https://kursatkara.github.io/MAE3293-Compressible-Aerodynamics-Calculator/supersonic-airfoils.html" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <defs><marker id="tc5a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 1L9 5L0 9Z" style="fill:var(--ink)"/></marker></defs>
+  <line x1="96.1" y1="89.7" x2="231.4" y2="154.5" style="stroke:var(--comp);stroke-width:2.2"/><line x1="313.9" y1="120.3" x2="410.6" y2="94.6" style="stroke:var(--comp);stroke-width:2.2"/>
+  <g><line x1="96.1" y1="89.7" x2="218.7" y2="46.4" style="stroke:var(--exp);stroke-width:1.2"/><line x1="96.1" y1="89.7" x2="220.2" y2="50.9" style="stroke:var(--exp);stroke-width:1.2"/><line x1="96.1" y1="89.7" x2="221.5" y2="55.6" style="stroke:var(--exp);stroke-width:1.2"/><line x1="96.1" y1="89.7" x2="222.7" y2="60.3" style="stroke:var(--exp);stroke-width:1.2"/><line x1="96.1" y1="89.7" x2="223.7" y2="65.0" style="stroke:var(--exp);stroke-width:1.2"/><line x1="96.1" y1="89.7" x2="224.6" y2="69.7" style="stroke:var(--exp);stroke-width:1.2"/><line x1="313.9" y1="120.3" x2="400.0" y2="171.2" style="stroke:var(--exp);stroke-width:1.2"/><line x1="313.9" y1="120.3" x2="402.3" y2="167.0" style="stroke:var(--exp);stroke-width:1.2"/><line x1="313.9" y1="120.3" x2="404.5" y2="162.7" style="stroke:var(--exp);stroke-width:1.2"/><line x1="313.9" y1="120.3" x2="406.4" y2="158.3" style="stroke:var(--exp);stroke-width:1.2"/><line x1="313.9" y1="120.3" x2="408.1" y2="153.8" style="stroke:var(--exp);stroke-width:1.2"/></g>
+  <line x1="96.1" y1="89.7" x2="313.9" y2="120.3" style="stroke:var(--body);stroke-width:3.4;stroke-linecap:round"/>
+  <line x1="12" y1="112" x2="72" y2="112" style="stroke:var(--ink);stroke-width:2.2" marker-end="url(#tc5a)"/>
+  <text x="12" y="97" style="font-family:var(--f-num);font-size:17px;fill:var(--ink)"><tspan font-style="italic">M</tspan><tspan font-size="12" dy="4">∞</tspan><tspan dy="-4"> &gt; 1</tspan></text>
+</svg></a>
+          <h3><a href="https://kursatkara.github.io/MAE3293-Compressible-Aerodynamics-Calculator/supersonic-airfoils.html">Supersonic Airfoils</a></h3>
+          <p>Shock-expansion theory for flat-plate, wedge and diamond airfoils, compared with linear theory: surface pressures, lift, wave drag and moment.</p>
+        </li>
       </ul>
     </section>
 
     <section class="sec" id="using" aria-labelledby="h-using">
       <div class="sechead"><p class="eyebrow">Notes</p><h2 id="h-using">Using the lessons</h2></div>
       <div class="prose">
-        <p>The ratio of specific heats, γ, in the top bar of each lesson applies to every figure on that page. The theme and text size follow the setting chosen on the calculator.</p>
+        <p>The ratio of specific heats, γ, in the top bar of each lesson and calculator applies to every figure and value on that page. The theme and text size follow the setting chosen on the calculator.</p>
         <p>Corrections and suggestions are welcome through the <a href="https://github.com/kursatkara/MAE3293_Fundamentals_of_Aerodynamics/issues" target="_blank" rel="noopener">issue tracker</a>.</p>
       </div>
     </section>

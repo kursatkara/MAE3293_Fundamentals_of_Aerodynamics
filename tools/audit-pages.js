@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /*
-  Browser audit of the built pages (index.html and lessons/*.html) with Playwright,
+  Browser audit of the built pages (index.html, lessons/*.html and calculators/*.html) with Playwright,
   at desktop width in the light theme and at phone width in the dark theme:
   duplicate ids, unlabeled inputs, NaN/undefined in figures and readouts, heading
   skips, unlabeled SVG figures, broken in-page anchors, horizontal overflow,
@@ -12,7 +12,8 @@ const fs = require('fs'), path = require('path');
 const { chromium } = require('playwright');
 const ROOT = path.resolve(__dirname, '..');
 const course = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/course.json'), 'utf8'));
-const pages = ['index.html', ...course.lessons.map(L => 'lessons/' + L.slug + '.html')];
+const pages = ['index.html', ...course.lessons.map(L => 'lessons/' + L.slug + '.html'),
+  ...course.calculators.filter(C => !C.legacy).map(C => 'calculators/' + C.slug + '.html')];
 
 (async () => {
   const b = await chromium.launch(); let problems = 0;

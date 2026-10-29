@@ -1,0 +1,40 @@
+  <p class="lede">Isentropic flow of a calorically perfect gas. Enter any one of the tabulated quantities, the Mach number, a total-to-static ratio, or the area ratio on the subsonic or supersonic branch, and the others follow from the closed-form relations, in place of the tables in Anderson’s Appendix A. The γ in the top bar applies to every value on the page.</p>
+
+      <section class="sec" id="calc" aria-labelledby="h-calc">
+        <div class="sechead"><p class="eyebrow">Appendix A · Isentropic flow properties</p><h2 id="h-calc">Calculator</h2></div>
+        <div class="lab" id="is">
+          <div class="labhead"><span class="eyebrow">Enter one known quantity</span><span class="note" id="is_short"></span></div>
+          <aside class="rail" aria-label="Isentropic-flow input">
+            <div class="ctl"><label for="is_sel">Known quantity</label><select id="is_sel"></select></div>
+            <div class="ctl"><label for="is_val">Its value</label><div class="row"><input type="number" id="is_val" step="any" value="2" style="width:100%"></div></div>
+            <p class="note" id="is_note"></p>
+            <div class="sep"></div>
+            <span class="lbl">Try</span>
+            <div class="presets" id="is_pre" style="flex-direction:column"></div>
+          </aside>
+          <div class="labmain">
+            <div id="is_msg"></div>
+            <div class="tblwrap"><table id="is_tab"></table></div>
+            <div class="fig"><svg id="is_fig" viewBox="0 0 760 330" role="img" aria-label="Static-to-total pressure, density and temperature ratios and the inverse area ratio A*/A versus Mach number from 0 to 5, with the current Mach number marked; drag across the plot to set the Mach number" style="touch-action:none;cursor:crosshair"></svg></div>
+            <div class="legend"><span><i class="sw" style="border-color:var(--comp)"></i>p/p<sub>0</sub></span><span><i class="sw" style="border-color:var(--stream)"></i>ρ/ρ<sub>0</sub></span><span><i class="sw" style="border-color:var(--warn)"></i>T/T<sub>0</sub></span><span><i class="sw" style="border-color:var(--exp)"></i>A*/A</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec" id="relations" aria-labelledby="h-rel">
+        <div class="sechead"><p class="eyebrow">Reference</p><h2 id="h-rel">Relations used</h2></div>
+        <div class="cols2">
+          <div class="prose">
+            <h3>Total-to-static ratios</h3>
+            <div class="eq">\[ \frac{T_0}{T}=1+\frac{\gamma-1}{2}M^2 \tag{8.40} \]</div>
+            <div class="eq">\[ \frac{p_0}{p}=\left(1+\frac{\gamma-1}{2}M^2\right)^{\frac{\gamma}{\gamma-1}} \tag{8.42} \]</div>
+            <div class="eq">\[ \frac{\rho_0}{\rho}=\left(1+\frac{\gamma-1}{2}M^2\right)^{\frac{1}{\gamma-1}} \tag{8.43} \]</div>
+            <p>Each ratio increases monotonically with M, so a known ratio gives the Mach number directly by solving the relation for M.</p>
+          </div>
+          <div class="prose">
+            <h3>Area–Mach number relation</h3>
+            <div class="eq">\[ \left(\frac{A}{A^*}\right)^2=\frac{1}{M^2}\left[\frac{2}{\gamma+1}\left(1+\frac{\gamma-1}{2}M^2\right)\right]^{\frac{\gamma+1}{\gamma-1}} \tag{10.32} \]</div>
+            <p>A/A* has its minimum, 1, at M = 1, so every A/A* &gt; 1 has two solutions: one subsonic and one supersonic. The branch must be chosen from the flow; the calculator finds the chosen root by bisection.</p>
+          </div>
+        </div>
+      </section>
