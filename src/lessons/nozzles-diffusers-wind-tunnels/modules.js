@@ -302,9 +302,10 @@ const hooks={};
   tabs.forEach(b=>b.onclick=()=>{tabs.forEach(x=>x.setAttribute('aria-selected',x===b?'true':'false'));document.querySelectorAll('[data-expanel]').forEach(p=>p.hidden=p.dataset.expanel!==b.dataset.ex);});
   const num=id=>parseFloat($(id).value), near=(a,b)=>Math.abs(a-b)<1e-9;
   function table(id,rows,def){
-    let h=`<thead><tr><th class="l">Quantity</th><th class="l">Relation used</th><th>Exact</th><th>Notes${def?' (Appendix A)':' <span style="font-weight:400">(original values only)</span>'}</th></tr></thead><tbody>`;
+    def=def&&Math.abs(G-1.4)<1e-9;  // the notes are hand solutions for gamma = 1.4
+    let h=`<thead><tr><th class="l">Quantity</th><th class="l">Relation used</th><th>Result</th><th class="hand">Tables, γ = 1.4</th></tr></thead><tbody>`;
     rows.forEach(r=>{if(r.sect){h+=`<tr><td class="l" colspan="4" style="padding-top:14px;color:var(--ink);font-weight:600">${r.sect}</td></tr>`;return;}
-      h+=`<tr><td class="l">${r[0]}</td><td class="rel">${r[1]}</td><td class="${r[4]?'hl':''}">${r[2]}</td><td>${def&&r[3]!=null?r[3]:'—'}</td></tr>`;});
+      h+=`<tr><td class="l">${r[0]}</td><td class="rel">${r[1]}</td><td class="${r[4]?'hl':''}">${r[2]}</td>${handCell(def&&r[3]!=null?r[3]:'—',def&&r[5])}</tr>`;});
     $(id).innerHTML=h+'</tbody>';}
   function e1(){
     const A=num('e1_A'),p0=num('e1_p'),T0=num('e1_T'),def=near(A,10.25)&&near(p0,5)&&near(T0,333);
@@ -322,7 +323,7 @@ const hooks={};
     table('e2_tab',[{sect:'Throat (both cases): M<sub>t</sub> = 1'},
       ['p<sub>t</sub> = p* (atm)','(p*/p<sub>0</sub>) p<sub>0</sub>',f(p0*pp0(1,G),4),'0.528 (1/1.893)'],['T<sub>t</sub> = T* (K)','(T*/T<sub>0</sub>) T<sub>0</sub>',f(T0*TT0(1,G),2),'240'],
       {sect:'(a) Supersonic at the exit'},
-      ['M<sub>e</sub>','supersonic root of (10.32)',f(Mp),'2.2 (closest entry)',1],['p<sub>0</sub>/p<sub>e</sub>','App. A',f(1/pp0(Mp,G),3),'10.69'],['p<sub>e</sub> (atm)','(p<sub>e</sub>/p<sub>0</sub>) p<sub>0</sub>',f(p0*pp0(Mp,G),4),'0.0935 (written “10.69 atm”)',1],
+      ['M<sub>e</sub>','supersonic root of (10.32)',f(Mp),'2.2 (closest entry)',1],['p<sub>0</sub>/p<sub>e</sub>','App. A',f(1/pp0(Mp,G),3),'10.69'],['p<sub>e</sub> (atm)','(p<sub>e</sub>/p<sub>0</sub>) p<sub>0</sub>',f(p0*pp0(Mp,G),4),'0.0935 (written “10.69 atm”)',1,1],
       ['T<sub>0</sub>/T<sub>e</sub>','App. A',f(1/TT0(Mp,G)),'1.968'],['T<sub>e</sub> (K)','(T<sub>e</sub>/T<sub>0</sub>) T<sub>0</sub>',f(T0*TT0(Mp,G),2),'146.34',1],
       {sect:'(b) Subsonic everywhere except the throat'},
       ['M<sub>e</sub>','subsonic root of (10.32)',f(Mb),'0.3',1],['p<sub>0</sub>/p<sub>e</sub>','App. A',f(1/pp0(Mb,G)),'1.064'],['p<sub>e</sub> (atm)','(p<sub>e</sub>/p<sub>0</sub>) p<sub>0</sub>',f(p0*pp0(Mb,G),4),'0.9398',1],
@@ -336,8 +337,8 @@ const hooks={};
     $('e3_ban').innerHTML='';
     const Me=Mfromp(pe/p0,G),AeAs=AoAs(Me,G),AtAs=AeAs/A,Mt=Mfromarea(AtAs,G,false);
     table('e3_tab',[['p<sub>e1</sub> (atm)','exit pressure when the throat is just sonic',f(p0*c.p1,4),'0.94'],
-      ['p<sub>0</sub>/p<sub>e</sub>','given',f(p0/pe,4),'1.028'],['M<sub>e</sub>','isentropic, from p<sub>0</sub>/p<sub>e</sub>',f(Me),'0.2',1],['A<sub>e</sub>/A*','(10.32) at M<sub>e</sub>',f(AeAs),'2.964'],
-      ['A<sub>t</sub>/A*','(A<sub>t</sub>/A<sub>e</sub>)(A<sub>e</sub>/A*)',f(AtAs),'1.482'],['M<sub>t</sub>','subsonic root of (10.32)',f(Mt),'0.44',1]],def);
+      ['p<sub>0</sub>/p<sub>e</sub>','given',f(p0/pe,4),'1.028'],['M<sub>e</sub>','isentropic, from p<sub>0</sub>/p<sub>e</sub>',f(Me),'0.2',1,1],['A<sub>e</sub>/A*','(10.32) at M<sub>e</sub>',f(AeAs),'2.964'],
+      ['A<sub>t</sub>/A*','(A<sub>t</sub>/A<sub>e</sub>)(A<sub>e</sub>/A*)',f(AtAs),'1.482'],['M<sub>t</sub>','subsonic root of (10.32)',f(Mt),'0.44',1,1]],def);
   }
   function e5(){
     const A=num('e5_A'),p0=num('e5_p0'),pe=num('e5_pe');

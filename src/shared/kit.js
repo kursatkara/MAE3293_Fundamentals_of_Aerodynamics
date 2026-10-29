@@ -39,11 +39,13 @@ function known(boxId,list,getM,setM){
   hint();
   return {sync,set:(k,v)=>{const i=list.findIndex(x=>x.k===k);if(i<0)return;sel.value=i;val.value=v;hint();const M=list[i].inv(v);if(isFinite(M))setM(M);}};}
 function tabset(id){const c=$(id),tabs=c.querySelectorAll('.tabs button');tabs.forEach(b=>b.onclick=()=>{tabs.forEach(x=>x.setAttribute('aria-selected',x===b?'true':'false'));c.querySelectorAll('[data-expanel]').forEach(p=>p.hidden=p.dataset.expanel!==b.dataset.ex);});}
-/* worked-example table: Quantity | Relation used | Exact | Notes */
+/* worked-example table: Quantity | Relation used | Result | Tables (hand solution, hidden unless the switch is on).
+   Row: [quantity, relation, result, hand value, highlight?, differs?] */
 function exTable(id,rows,def,src){
-  let h=`<thead><tr><th class="l">Quantity</th><th class="l">Relation used</th><th>Exact</th><th>Notes${def?(src?` (${src})`:''):' <span style="font-weight:400">(original values only)</span>'}</th></tr></thead><tbody>`;
+  def=def&&Math.abs(G-1.4)<1e-9;  // the notes are hand solutions for gamma = 1.4
+  let h=`<thead><tr><th class="l">Quantity</th><th class="l">Relation used</th><th>Result</th><th class="hand">Tables, γ = 1.4</th></tr></thead><tbody>`;
   rows.forEach(r=>{if(r.sect){h+=`<tr><td class="l" colspan="4" style="padding-top:14px;color:var(--ink);font-weight:600">${r.sect}</td></tr>`;return;}
-    h+=`<tr><td class="l">${r[0]}</td><td class="rel">${r[1]}</td><td class="${r[4]?'hl':''}">${r[2]}</td><td>${def&&r[3]!=null?r[3]:'—'}</td></tr>`;});
+    h+=`<tr><td class="l">${r[0]}</td><td class="rel">${r[1]}</td><td class="${r[4]?'hl':''}">${r[2]}</td>${handCell(def&&r[3]!=null?r[3]:'—',def&&r[5])}</tr>`;});
   $(id).innerHTML=h+'</tbody>';}
 const num=id=>parseFloat($(id).value), near=(a,b)=>Math.abs(a-b)<1e-9;
 function watch(ids,fn){const g=sched(fn);ids.forEach(id=>$(id).addEventListener('input',g));renderers.push(g);}

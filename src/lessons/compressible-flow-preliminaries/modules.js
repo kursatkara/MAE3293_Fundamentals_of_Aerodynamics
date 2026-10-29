@@ -50,8 +50,8 @@ const cpG=()=>G*RAIR/(G-1), cvG=()=>RAIR/(G-1);
   watch(['a2_V','a2_m','a2_T','a2_p1','a2_p2'],()=>{const V=num('a2_V'),md=num('a2_m'),T=num('a2_T'),p1=num('a2_p1'),p2=num('a2_p2'),def=near(V,30)&&near(md,1)&&near(T,300)&&near(p1,10)&&near(p2,20);
     if(!(V>0&&md>0&&T>0)){$('a2_tab').innerHTML='';return;}
     const dp=RAIR*T/V*md;
-    exTable('a2_tab',[{sect:'Example 7.2'},['dρ/dt (kg/(m³·s))','(1/V) dM/dt',f(md/V,4),'0.0333'],['dp/dt (N/(m²·s))','(RT/V) dM/dt',f(dp,2),'2867.13',1],
-      {sect:'Example 7.3'},['Δp (N/m²)','(p<sub>2</sub> − p<sub>1</sub>), 1 atm = 101 325 N/m²',f((p2-p1)*ATM,0),'10 × 1.01 × 10<sup>5</sup>'],['Δt (s)','Δp/(dp/dt)',f((p2-p1)*ATM/dp,1),'352.3',1]],def);});
+    exTable('a2_tab',[{sect:'Example 7.2'},['dρ/dt (kg/(m³·s))','(1/V) dM/dt',f(md/V,4),'0.0333'],['dp/dt (N/(m²·s))','(RT/V) dM/dt',f(dp,2),'2867.13',1,1],
+      {sect:'Example 7.3'},['Δp (N/m²)','(p<sub>2</sub> − p<sub>1</sub>), 1 atm = 101 325 N/m²',f((p2-p1)*ATM,0),'10 × 1.01 × 10<sup>5</sup>'],['Δt (s)','Δp/(dp/dt)',f((p2-p1)*ATM/dp,1),'352.3',1,1]],def);});
 })();
 
 /* =====================================================================
@@ -100,7 +100,7 @@ const cpG=()=>G*RAIR/(G-1), cvG=()=>RAIR/(G-1);
   watch(['b4_pi','b4_Ti','b4_p'],()=>{const pi=num('b4_pi'),Ti=num('b4_Ti'),p=num('b4_p'),def=near(pi,23422)&&near(Ti,218.08)&&near(p,19160);
     if(!(pi>0&&Ti>0&&p>0)){$('b4_tab').innerHTML='';return;}
     const r=Math.pow(p/pi,(G-1)/G),A=atm(10800);
-    exTable('b4_tab',[['p/p<sub>∞</sub>','',f(p/pi,5),'1.914/2.3422'],['(p/p<sub>∞</sub>)<sup>(γ−1)/γ</sup>','(7.32)',f(r,5),null],['T (K)','T<sub>∞</sub>(p/p<sub>∞</sub>)<sup>(γ−1)/γ</sup>',f(Ti*r,2),'207.3',1],
+    exTable('b4_tab',[['p/p<sub>∞</sub>','',f(p/pi,5),'1.914/2.3422',0,1],['(p/p<sub>∞</sub>)<sup>(γ−1)/γ</sup>','(7.32)',f(r,5),null],['T (K)','T<sub>∞</sub>(p/p<sub>∞</sub>)<sup>(γ−1)/γ</sup>',f(Ti*r,2),'207.3',1,1],
       {sect:'Standard atmosphere at 10.8 km (this site’s model of Appendix D)'},['T<sub>∞</sub> (K), p<sub>∞</sub> (N/m²)','',`${f(A.T,2)}, ${f(A.p,0)}`,null]],def,'Appendix D');});
   watch(['b5_p1','b5_T1','b5_p2','b5_ds'],()=>{const p1=num('b5_p1'),T1=num('b5_T1'),p2=num('b5_p2'),ds=num('b5_ds'),def=near(p1,20)&&near(T1,300)&&near(p2,1)&&near(ds,320);
     if(!(p1>0&&T1>0&&p2>0&&isFinite(ds))){$('b5_tab').innerHTML='';return;}
@@ -131,7 +131,7 @@ const cpG=()=>G*RAIR/(G-1), cvG=()=>RAIR/(G-1);
     s+=ln([A.X(V),P.y0],[A.X(V),P.y0+P.h],'accent',1.6)+dot([A.X(V),A.Y(air(V))],'comp',5.5)+dot([A.X(V),A.Y(wat(V))],'exp',5.5);
     $('cv_fig').innerHTML=s;
     const q=0.5*rho*V*V;
-    $('cv_tiles').innerHTML=[['Mach number in air',f(M,3),regimeTxt(M)],['Dynamic pressure ½ρV², air',f(q/1000,2)+' kPa',`water: ${f(0.5*RW*V*V/1000,1)} kPa`],['Δρ/ρ, air',f(air(V),3)+' %',`estimate M²/2: ${f(est(V),3)} %`],['Δρ/ρ, water',f(wat(V),5)+' %',`air/water: ${f(air(V)/wat(V),0)}×`]].map(([k,v,d])=>`<div class="tile"><span class="k">${k}</span><span class="v">${v}</span><span class="s">${d}</span></div>`).join('');
+    $('cv_tiles').innerHTML=[['Mach number in air',f(M,3),regimeTxt(M)],['Dynamic pressure ½ρV², air',f(q/1000,2)+' kPa',`water: ${f(0.5*RW*V*V/1000,1)} kPa`],['Δρ/ρ, air',f(air(V),3)+' %',`estimate M²/2: ${f(est(V),3)} %`],['Δρ/ρ, water',f(wat(V),5)+' %',`${f(air(V)/wat(V),0)}× smaller than in air`]].map(([k,v,d])=>`<div class="tile"><span class="k">${k}</span><span class="v">${v}</span><span class="s">${d}</span></div>`).join('');
     $('cv_short').textContent=`M = ${f(M,2)}, Δρ/ρ = ${f(air(V),2)}% in air`;
   }
   function regimeTxt(M){return M<0.3?'incompressible is a good model':M<0.8?'compressible, subsonic':M<1.2?'transonic':'supersonic';}
