@@ -583,7 +583,7 @@ mjx-container[display="true"]{margin:.4em 0!important}
           <div data-expanel="a1" class="prose" style="max-width:none">
             <p class="problem">Find the Mach number of an airplane flying at <input type="number" id="a1_V" value="250" min="1" step="10" aria-label="Flight velocity in m/s"> m/s through the standard atmosphere (a) at sea level, (b) at 5 km and (c) at 10 km.</p>
             <div class="tblwrap"><table id="a1_tab"></table></div>
-            <p class="exnote">The temperature falls with altitude, so the speed of sound falls and the same airspeed is a higher Mach number. Sea level uses T = 288 K in the notes (288.16 K in Appendix D).</p>
+            <p class="exnote">The temperature falls with altitude, so the speed of sound falls and the same airspeed is a higher Mach number. At sea level the notes round the speed of sound to 340 m/s and use T = 288 K (288.16 K in Appendix D); the rounded speed of sound causes most of the difference in M<sub>∞</sub>, since 288 K alone would give 0.7349.</p>
           </div>
           <div data-expanel="a2" class="prose" style="max-width:none" hidden>
             <p class="problem">At one point in the flow of Example 7.3 the temperature is <input type="number" id="a2_T" value="320" min="1" step="10" aria-label="Temperature in K"> K and the velocity is <input type="number" id="a2_V" value="1000" min="0" step="50" aria-label="Velocity in m/s"> m/s. What is the Mach number there?</p>
@@ -965,6 +965,20 @@ function oblique(M,th,g,strong){
   else{lo=bm;hi=Math.PI/2;for(let i=0;i<100;i++){const m=(lo+hi)/2;if(thetaOf(M,m,g)>th)lo=m;else hi=m;}}
   const r=shockFromBeta(M,(lo+hi)/2,g); r.thmax=tm; r.betamax=bm; r.theta=th; r.M2=r.Mn2/Math.sin(r.beta-th); return r;
 }
+/* closed-form solution of the theta-beta-M relation (Rudd & Lewis, J. Aircraft 35(4), 1998): tan(beta) is a root
+   of a cubic, written with c = tan^2(mu); the three roots are n = 0, 1, 2. The physical ones lie between mu and 90 deg:
+   the smaller is the weak solution, the larger the strong one. Undefined at theta = 0 (a = 0). Checked against
+   oblique() in tools/check-tables.js. */
+function obliqueClosed(M,th,g){
+  const mu=Math.asin(1/M),c=Math.tan(mu)**2,t=Math.tan(th);
+  const a=((g-1)/2+(g+1)/2*c)*t,b=((g+1)/2+(g+3)/2*c)*t,k=27*a*a*c+9*a*b-2;
+  const d=Math.sqrt(4*Math.pow(1-3*a*b,3)/(k*k)-1);
+  const roots=[0,1,2].map(n=>{const x=(b+9*a*c)/(2*(1-3*a*b))-d*k/(6*a*(1-3*a*b))*Math.tan(n*Math.PI/3+Math.atan(1/d)/3);
+    let beta=Math.atan(x);if(beta<0)beta+=Math.PI;
+    return {n,tanb:x,beta,physical:isFinite(beta)&&beta>=mu-1e-9&&beta<=Math.PI/2+1e-9};});
+  const ph=roots.filter(r=>r.physical).map(r=>r.beta).sort((u,v)=>u-v);
+  return {mu,c,a,b,d,roots,weak:ph.length===2?ph[0]:NaN,strong:ph.length===2?ph[1]:NaN};
+}
 const T0T=(M,g)=>1+(g-1)/2*M*M;
 const p0p=(M,g)=>Math.pow(T0T(M,g),g/(g-1));
 const Ag=g=>Math.sqrt((g+1)/(g-1));
@@ -1288,7 +1302,7 @@ const dsR=(M,g)=>{const n=NS(M,g);return g/(g-1)*Math.log(n.T21)-Math.log(n.p21)
 (function(){
   tabset('exA');
   watch(['a1_V'],()=>{const V=num('a1_V'),def=near(V,250);const N={0:['288','340','0.7353'],5:['255.69','320.52','0.78'],10:['223.26','299.5','0.835']};
-    const rows=[];[0,5,10].forEach(z=>{const T=atm(z*1000).T,a=Math.sqrt(G*RAIR*T);rows.push({sect:z?`(${z===5?'b':'c'}) z = ${z} km`:'(a) Sea level'},['T∞ (K)','Appendix D',f(T,2),N[z][0]],['a∞ (m/s)','√(γRT∞)',f(a,2),N[z][1]],['M∞','V/a∞',f(V/a,4),N[z][2],1]);});
+    const rows=[];[0,5,10].forEach(z=>{const T=atm(z*1000).T,a=Math.sqrt(G*RAIR*T);rows.push({sect:z?`(${z===5?'b':'c'}) z = ${z} km`:'(a) Sea level'},['T∞ (K)','Appendix D',f(T,2),N[z][0]],['a∞ (m/s)','√(γRT∞)',f(a,2),N[z][1],0,z===0],['M∞','V/a∞',f(V/a,4),N[z][2],1,z===0]);});
     exTable('a1_tab',rows,def,'Appendix D');});
   watch(['a2_T','a2_V'],()=>{const T=num('a2_T'),V=num('a2_V'),def=near(T,320)&&near(V,1000),a=Math.sqrt(G*RAIR*T);
     exTable('a2_tab',[['a (m/s)','√(γRT)',f(a,2),'358.6'],['M','V/a',f(V/a,4),'2.79',1]],def);});

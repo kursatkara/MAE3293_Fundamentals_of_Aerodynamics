@@ -28,13 +28,38 @@
         </div>
       </section>
 
+      <section class="sec" id="methods" aria-labelledby="h-meth">
+        <div class="sechead"><p class="eyebrow">Section 9.2 · Solving the θ–β–M relation for β</p><h2 id="h-meth">How β is found: three methods</h2></div>
+        <div class="prose">
+          <p>Equation (9.23) gives θ directly from M<sub>1</sub> and β, but not β from M<sub>1</sub> and θ. There are three ways to find β, and for the inputs above they are applied side by side. All three must agree, and they do, to within the precision of each method.</p>
+          <p class="note" id="ob_mnote"></p>
+          <div class="tblwrap"><table id="ob_mcmp"></table></div>
+          <h3>1. Reading the chart</h3>
+          <p id="ob_m1"></p>
+          <h3>2. Bisection, used by this calculator</h3>
+          <p>For a given M<sub>1</sub>, θ(β) from (9.23) rises from zero at the Mach angle μ to θ<sub>max</sub> and falls back to zero at 90°. Each branch therefore contains exactly one β for each θ &lt; θ<sub>max</sub>. Bisection keeps an interval known to contain it and halves the interval at every step: the weak solution lies between μ and β at θ<sub>max</sub>, the strong one between β at θ<sub>max</sub> and 90°. It always converges, but it needs many steps.</p>
+          <div class="tblwrap"><table id="ob_m2"></table></div>
+          <p class="note" id="ob_m2n"></p>
+          <h3>3. Closed form (Rudd and Lewis, 1998)</h3>
+          <p>Written in terms of tan β, Equation (9.23) is a cubic, and a cubic can be solved in closed form. With c = tan<sup>2</sup>μ, its three roots follow from</p>
+          <div class="eq">\[ a=\left(\frac{\gamma-1}{2}+\frac{\gamma+1}{2}\,c\right)\tan\theta \]</div>
+          <div class="eq">\[ b=\left(\frac{\gamma+1}{2}+\frac{\gamma+3}{2}\,c\right)\tan\theta \]</div>
+          <div class="eq">\[ k=27a^2c+9ab-2 \]</div>
+          <div class="eq">\[ d=\sqrt{\frac{4\,(1-3ab)^3}{k^2}-1} \]</div>
+          <div class="eq">\[ \tan\beta=\frac{b+9ac}{2\,(1-3ab)}-\frac{d\,k\,\tan\phi_n}{6a\,(1-3ab)} \]</div>
+          <div class="eq">\[ \phi_n=\frac{n\pi}{3}+\frac{1}{3}\tan^{-1}\frac{1}{d},\qquad n=0,1,2 \]</div>
+          <p>Only two of the three roots are physical, with β between μ and 90°: the smaller is the weak solution and the larger the strong one. The third root is not a shock. The formula needs no iteration, but it has edge cases of its own: it is undefined at θ = 0, where a = 0, and as θ → 0 the weak root loses digits to cancellation. This closed form was used by the first version of this calculator in 2025 (L. Rudd and M. J. Lewis, “Comparison of shock calculation methods,” <i>Journal of Aircraft</i>, 35(4), 1998).</p>
+          <div class="tblwrap"><table id="ob_m3"></table></div>
+        </div>
+      </section>
+
       <section class="sec" id="relations" aria-labelledby="h-rel">
         <div class="sechead"><p class="eyebrow">Reference</p><h2 id="h-rel">Relations used</h2></div>
         <div class="cols2">
           <div class="prose">
             <h3>The θ–β–M relation</h3>
             <div class="eq">\[ \tan\theta = 2\cot\beta\;\frac{M_1^2\sin^2\beta-1}{M_1^2\left(\gamma+\cos2\beta\right)+2} \tag{9.23} \]</div>
-            <p>For a given M<sub>1</sub>, θ rises from 0 at the Mach angle μ = sin<sup>−1</sup>(1/M<sub>1</sub>) to a maximum θ<sub>max</sub> and falls back to 0 at β = 90°, the normal shock. Every θ &lt; θ<sub>max</sub> therefore has two solutions: the weak one (smaller β, usually observed on wedges and corners) and the strong one. For θ &gt; θ<sub>max</sub> no attached shock exists and the shock detaches. The calculator finds β, or M<sub>1</sub>, by bisection on (9.23).</p>
+            <p>For a given M<sub>1</sub>, θ rises from 0 at the Mach angle μ = sin<sup>−1</sup>(1/M<sub>1</sub>) to a maximum θ<sub>max</sub> and falls back to 0 at β = 90°, the normal shock. Every θ &lt; θ<sub>max</sub> therefore has two solutions: the weak one (smaller β, usually observed on wedges and corners) and the strong one. For θ &gt; θ<sub>max</sub> no attached shock exists and the shock detaches. The calculator finds β, or M<sub>1</sub>, by bisection on (9.23); the section above compares bisection with reading the chart and with the closed-form solution.</p>
           </div>
           <div class="prose">
             <h3>Across the shock</h3>

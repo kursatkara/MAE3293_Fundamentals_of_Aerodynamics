@@ -1,7 +1,8 @@
 /* =====================================================================
    Oblique-shock calculator: any two of M1, theta, beta -> the third, then the
    normal-shock relations on Mn1 = M1 sin(beta). Uses thetaOf, betaMax, oblique and
-   shockFromBeta (core.js), checked in tools/check-tables.js.
+   shockFromBeta (core.js), checked in tools/check-tables.js; obliqueClosed gives the
+   closed-form solution shown in the methods section.
    ===================================================================== */
 (function(){
   const MMAX=50, F=['M','th','b'], box={M:$('ob_M'),th:$('ob_th'),b:$('ob_b')};
@@ -46,6 +47,38 @@
   renderers.push(update);
   lock();update();
 
+  /* three ways to find beta from M1 and theta: chart, bisection, closed form */
+  function methods(r,ok,m){
+    const hide=t=>{$('ob_mnote').textContent=t;['ob_mcmp','ob_m2','ob_m3'].forEach(id=>$(id).innerHTML='');$('ob_m1').textContent='';$('ob_m2n').textContent='';};
+    if(m!=='b'){hide('This comparison applies when β is solved from M₁ and θ: choose “β, from M₁ and θ” above.');return;}
+    if(!ok){hide('Enter M₁ and an attached-shock deflection θ above.');return;}
+    const M=r.M1,th=r.theta,bm=betaMax(M,G),mu=Math.asin(1/M);
+    if(th<1e-9){hide('At θ = 0 the weak solution is the Mach wave (β = μ) and the strong one the normal shock (β = 90°). The closed form is undefined there, because a = 0.');return;}
+    $('ob_mnote').textContent='';
+    const bw=oblique(M,th,G,false).beta,bs=oblique(M,th,G,true).beta,cf=obliqueClosed(M,th,G),d4=x=>isFinite(x)?f(x*R,6)+'°':'—';
+    const half=x=>(Math.round(x*R*2)/2).toFixed(1)+'°';
+    /* comparison */
+    let h=`<thead><tr><th class="l">Method</th><th>Weak β</th><th>Strong β</th></tr></thead><tbody>`;
+    h+=`<tr><td class="l">1. Chart, read to 0.5°</td><td>${half(bw)}</td><td>${half(bs)}</td></tr>`;
+    h+=`<tr><td class="l">2. Bisection</td><td class="hl">${d4(bw)}</td><td class="hl">${d4(bs)}</td></tr>`;
+    h+=`<tr><td class="l">3. Closed form</td><td>${d4(cf.weak)}</td><td>${d4(cf.strong)}</td></tr>`;
+    h+=`<tr><td class="l">Difference, 3 − 2</td><td>${isFinite(cf.weak)?sci((cf.weak-bw)*R,2)+'°':'—'}</td><td>${isFinite(cf.strong)?sci((cf.strong-bs)*R,2)+'°':'—'}</td></tr></tbody>`;
+    $('ob_mcmp').innerHTML=h;
+    /* 1: chart */
+    $('ob_m1').innerHTML=`On the chart above, the vertical line θ = ${f(th*R,2)}° crosses the curve for M<sub>1</sub> = ${f(M,3)} twice: once on the solid weak branch, near β ≈ ${half(bw)}, and once on the dashed strong branch, near β ≈ ${half(bs)}. A printed chart such as the one in the textbook can be read to about half a degree, which is why hand solutions of oblique-shock problems differ in the second significant figure.`;
+    /* 2: bisection steps, weak branch */
+    let lo=mu,hi=bm,rows='';
+    for(let k=1;k<=6;k++){const mid=(lo+hi)/2,tm=thetaOf(M,mid,G);rows+=`<tr><td>${k}</td><td>${f(lo*R,4)}°</td><td>${f(hi*R,4)}°</td><td>${f(mid*R,4)}°</td><td>${f(tm*R,4)}°</td><td class="l">${tm<th?'θ too small: β is above the midpoint':'θ too large: β is below the midpoint'}</td></tr>`;if(tm<th)lo=mid;else hi=mid;}
+    $('ob_m2').innerHTML=`<thead><tr><th>Step</th><th>Lower β</th><th>Upper β</th><th>Midpoint β</th><th>θ at midpoint</th><th class="l">Result</th></tr></thead><tbody>${rows}</tbody>`;
+    const steps=Math.ceil(Math.log2((bm-mu)*R/1e-10));
+    $('ob_m2n').textContent=`The first six steps for the weak solution are shown. Each step halves the interval, so about ${steps} steps bring it below 10⁻¹⁰ degrees; the strong solution is found the same way between ${f(bm*R,2)}° and 90°.`;
+    /* 3: closed form values */
+    let t=`<thead><tr><th class="l">Quantity</th><th>Value</th></tr></thead><tbody>`;
+    [['c = tan²μ',cf.c],['a',cf.a],['b',cf.b],['k',27*cf.a*cf.a*cf.c+9*cf.a*cf.b-2],['d',cf.d]].forEach(([q,v])=>{t+=`<tr><td class="l">${q}</td><td>${f(v,6)}</td></tr>`;});
+    cf.roots.forEach(z=>{const lab=z.physical?(Math.abs(z.beta-cf.weak)<1e-12?'weak solution':'strong solution'):'not physical (β outside μ to 90°)';
+      t+=`<tr><td class="l">n = ${z.n}: tan β = ${f(z.tanb,6)}</td><td>β = ${f(z.beta*R,4)}°, ${lab}</td></tr>`;});
+    $('ob_m3').innerHTML=t+'</tbody>';
+  }
   function render(){
     const r=st,ok=!r.err,m=mode(),kk=key(),V=x=>ok?x:NaN,deg=x=>ok?f(x*R,4)+'°':'—';
     $('ob_short').textContent=`γ = ${f(G,3)}`;
@@ -84,6 +117,7 @@
     h+=`<tr><td class="l" colspan="3" style="padding-top:12px;color:var(--ink);font-weight:600">Limits for this M<sub>1</sub></td></tr>`;
     h+=`<tr><td class="l">θ<sub>max</sub></td><td class="rel">maximum of (9.23)</td><td>${ok?deg(r.thmax):'—'}</td></tr><tr><td class="l">β at θ<sub>max</sub></td><td class="rel">weak and strong branches meet</td><td>${ok?deg(r.betamax):'—'}</td></tr>`;
     $('ob_tab').innerHTML=h+'</tbody>';
+    methods(r,ok,m);
     /* theta-beta curve for this M1 */
     let M1=ok?r.M1:NaN;if(!ok&&m!=='M'){const v=parseFloat(box.M.value);if(v>1&&v<=MMAX)M1=v;}
     if(!isFinite(M1)){$('ob_fig').innerHTML=tx([380,165],'Enter M₁ to draw the θ–β curve.','axlab','text-anchor="middle"');return;}
