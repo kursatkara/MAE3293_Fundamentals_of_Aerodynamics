@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use these lessons or calculators, please cite them as below."
+title: "MAE 3293 Fundamentals of Aerodynamics: Interactive Lessons"
+type: software
+authors:
+  - family-names: Kara
+    given-names: Kursat
+    orcid: "https://orcid.org/0000-0002-2788-0234"
+    affiliation: "Oklahoma State University"
+repository-code: "https://github.com/kursatkara/MAE3293_Fundamentals_of_Aerodynamics"
+url: "https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/"
+abstract: >-
+  Interactive lessons and calculators for the compressible-flow part of MAE 3293,
+  Fundamentals of Aerodynamics, at Oklahoma State University: compressible flow
+  preliminaries, normal shock waves, oblique shock and expansion waves, and nozzles,
+  diffusers and wind tunnels, with calculators for isentropic flow, normal and oblique
+  shocks, Prandtl-Meyer expansion and supersonic airfoils. Every figure is computed
+  from the compressible-flow relations for a calorically perfect gas, and each page
+  is a single self-contained file that also works offline.
+keywords:
+  - aerodynamics
+  - compressible flow
+  - gas dynamics
+  - shock waves
+  - engineering education
+  - interactive lessons
+  - open educational resources
+license:
+  - MIT
+  - CC-BY-4.0
