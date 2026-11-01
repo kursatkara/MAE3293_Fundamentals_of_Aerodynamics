@@ -74,7 +74,7 @@ const dsR=(M,g)=>{const n=NS(M,g);return g/(g-1)*Math.log(n.T21)-Math.log(n.p21)
 (function(){
   tabset('exA');
   watch(['a1_V'],()=>{const V=num('a1_V'),def=near(V,250);const N={0:['288','340','0.7353'],5:['255.69','320.52','0.78'],10:['223.26','299.5','0.835']};
-    const rows=[];[0,5,10].forEach(z=>{const T=atm(z*1000).T,a=Math.sqrt(G*RAIR*T);rows.push({sect:z?`(${z===5?'b':'c'}) z = ${z} km`:'(a) Sea level'},['T∞ (K)','Appendix D',f(T,2),N[z][0]],['a∞ (m/s)','√(γRT∞)',f(a,2),N[z][1]],['M∞','V/a∞',f(V/a,4),N[z][2],1]);});
+    const rows=[];[0,5,10].forEach(z=>{const T=atm(z*1000).T,a=Math.sqrt(G*RAIR*T);rows.push({sect:z?`(${z===5?'b':'c'}) z = ${z} km`:'(a) Sea level'},['T∞ (K)','Appendix D',f(T,2),N[z][0]],['a∞ (m/s)','√(γRT∞)',f(a,2),N[z][1],0,z===0],['M∞','V/a∞',f(V/a,4),N[z][2],1,z===0]);});
     exTable('a1_tab',rows,def,'Appendix D');});
   watch(['a2_T','a2_V'],()=>{const T=num('a2_T'),V=num('a2_V'),def=near(T,320)&&near(V,1000),a=Math.sqrt(G*RAIR*T);
     exTable('a2_tab',[['a (m/s)','√(γRT)',f(a,2),'358.6'],['M','V/a',f(V/a,4),'2.79',1]],def);});

@@ -31,6 +31,19 @@ chk('T*/T0',N.TT0(1,g),0.8333,0.0001);chk('rho*/rho0',N.rr0(1,g),0.6339,0.0001);
 const At=require('../src/shared/atmosphere.js');
 chk('App D 5 km T',At.atm(5000).T,255.69,0.02);chk('App D 10 km T',At.atm(10000).T,223.26,0.02);chk('App D 25 km T',At.atm(25000).T,216.66,0.01);
 chk('App D 5 km p/1e4',At.atm(5000).p/1e4,5.4048,0.003);chk('App D 25 km p/1e3',At.atm(25000).p/1e3,2.5273,0.006);chk('App D 10 km rho',At.atm(10000).rho,0.41351,0.0005);
+// Oblique shocks (Section 9.2): classical values for air, limits, and two independent solution methods
+const OD=Math.PI/180;
+chk('M=2 theta_max deg',C.thetaMax(2,g)/OD,22.97,0.005);chk('M=2 beta at theta_max deg',C.betaMax(2,g)/OD,64.67,0.005);
+chk('M->inf theta_max deg',C.thetaMax(1e6,g)/OD,45.58,0.005);
+chk('theta->0 weak beta = mu, M=2',C.oblique(2,1e-9,g,false).beta/OD,30,1e-4);chk('theta->0 strong beta = 90, M=2',C.oblique(2,1e-9,g,true).beta/OD,90,1e-4);
+{let worst=0,n=0,miss=0,rt=0;   // closed form (Rudd & Lewis 1998) vs bisection, both branches, and round trip theta(beta)
+ for(const gg of [1.1,1.3,1.4,1.67]) for(let i=0;i<200;i++){const M=1.05+0.05*i,tm=C.thetaMax(M,gg);
+  for(const f of [0.05,0.25,0.5,0.75,0.9,0.99,0.9999]){const th=f*tm,cf=C.obliqueClosed(M,th,gg);
+   for(const strong of [false,true]){const b=C.oblique(M,th,gg,strong).beta,bc=strong?cf.strong:cf.weak;
+    if(!isFinite(bc)){miss++;continue;} worst=Math.max(worst,Math.abs(bc-b)/OD);rt=Math.max(rt,Math.abs(C.thetaOf(M,b,gg)-th)/OD);n++;}}}
+ chk('closed form vs bisection, max deg',worst,0,1e-6);chk('round trip theta(beta), max deg',rt,0,1e-9);
+ if(miss){bad++;console.log('BAD closed form gave no pair of physical roots in',miss,'cases');}
+ console.log('    ('+n+' oblique-shock solutions, gamma 1.1-1.67, M1 1.05-11, theta up to 0.9999 theta_max: largest differences '+worst.toExponential(1)+' and '+rt.toExponential(1)+' deg)');}
 console.log(bad?bad+' table checks FAILED':'all table checks pass');
 // Momentum (Eq. 10.5) balance on nozzle profiles: mdot u_e + p_e A_e - mdot u_i - p_i A_i = int p dA
 function Ax(x,Ae){const XT=0.3,AI=3;return x<=XT?1+(AI-1)*(1-Math.cos(Math.PI*(XT-x)/XT))/2:1+(Ae-1)*(1-Math.cos(Math.PI*(x-XT)/(1-XT)))/2;}
