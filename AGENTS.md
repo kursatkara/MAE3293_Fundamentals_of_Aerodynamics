@@ -58,6 +58,8 @@ here). To add one:
 - Facts, worked examples, and numbering follow Kursat Kara’s lecture notes and J. D. Anderson, *Fundamentals of
   Aerodynamics*. Verify every worked number by computation; when the notes and a computed value disagree, show the
   computed value and say so neutrally in the note under the example (and mark the row as differing).
+- Problem statements of worked examples (`<p class="problem">`) are written in our own words. Keep the textbook's
+  numbering, data and question, but never copy the textbook's wording.
 - Precise terminology, as in a paper: name the flow, the method, and the quantity. Text in the third person or
   "we" for derivations; no marketing phrasing.
 - Footer credit: “Based on Kursat Kara’s lecture notes, following J. D. Anderson, *Fundamentals of Aerodynamics*.”
