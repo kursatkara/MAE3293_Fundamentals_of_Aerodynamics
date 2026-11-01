@@ -30,7 +30,7 @@ const head = o => fill(rd('src/templates/head.html'), {
   image_alt: esc(o.image_alt), favicon: FAVICON, style: o.style || STYLE });
 const header = o => fill(rd('src/templates/header.html'), {
   calculators: course.base + '#calculators', gamma: '', home_label: 'Course home', ...o });
-const footer = () => fill(rd('src/templates/footer.html'), { repo: course.repo });
+const footer = () => fill(rd('src/templates/footer.html'), { repo: course.repo, doi: course.doi });
 const stripNode = js => js.split('\n').filter(l => !/module\.exports/.test(l)).join('\n');
 const GAMMA = '<div class="gamma-box"><label for="gamma">γ</label><input type="number" id="gamma" value="1.4" min="1.05" max="1.67" step="0.01" aria-describedby="gammaHelp"><span id="gammaHelp" class="note">all figures</span></div>\n      ';
 const CDN = `<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -121,7 +121,7 @@ function homePage() {
   const calculators = course.calculators.map(C => fill(rd('src/templates/calc-card.html'),
     { slug: C.slug, title: C.title, summary: C.summary, eyebrow: C.eyebrow, url: calcURL(C).replace(course.base, ''),
       thumb: rd('src/thumbs/' + C.slug + '.svg').trim() }).trimEnd()).join('\n');
-  html += fill(rd('src/templates/home.html'), { chapters, calculators, repo: course.repo }) + footer();
+  html += fill(rd('src/templates/home.html'), { chapters, calculators, repo: course.repo, doi: course.doi }) + footer();
   return html + pageScript(rd('src/shared/theme.js'));
 }
 

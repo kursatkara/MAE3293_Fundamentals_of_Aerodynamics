@@ -1,5 +1,7 @@
 # MAE 3293 Fundamentals of Aerodynamics
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23858924.svg)](https://doi.org/10.5281/zenodo.23858924)
+
 Interactive lessons for MAE 3293 Fundamentals of Aerodynamics at Oklahoma State University, by Kursat Kara.
 
 **Live site:** https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/
@@ -52,9 +54,11 @@ Edit the files in `src/`, never the built pages, then run the build and commit b
 - **Worked examples** follow the example problems of J. D. Anderson, *Fundamentals of Aerodynamics*, the textbook used in MAE 3293, and keep its numbering. Their problem statements are written in our own words; the textbook's text is not reproduced.
 - Embedded fonts: Source Serif 4 and Source Sans 3 (SIL Open Font License 1.1). Equations typeset with MathJax (Apache 2.0).
 
-## Suggested attribution
+## How to cite
 
-Kara, K. *MAE 3293 Fundamentals of Aerodynamics: Interactive Lessons.* Oklahoma State University, 2025–2026. https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/, licensed under CC BY 4.0.
+Kara, K. (2026). *MAE 3293 Fundamentals of Aerodynamics: Interactive Lessons.* Zenodo. https://doi.org/10.5281/zenodo.23858924
+
+That DOI always resolves to the latest archived version. To cite an exact version, use the DOI of its release on Zenodo; for example, v1.0.0 is https://doi.org/10.5281/zenodo.23858925. GitHub's **Cite this repository** button (from `CITATION.cff`) gives the same citation in other formats.
 
 ## Acknowledgment
 
