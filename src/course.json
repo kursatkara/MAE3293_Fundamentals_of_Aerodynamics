@@ -1,6 +1,7 @@
 {
   "base": "https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/",
   "repo": "https://github.com/kursatkara/MAE3293_Fundamentals_of_Aerodynamics",
+  "doi": "10.5281/zenodo.23858924",
   "lessons": [
     {
       "slug": "compressible-flow-preliminaries",
