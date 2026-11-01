@@ -49,6 +49,7 @@ Edit the files in `src/`, never the built pages, then run the build and commit b
 
 - **Code** (HTML, CSS, JavaScript): [MIT License](LICENSE).
 - **Content** (explanatory text, worked solutions, figures and diagrams): [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
+- **Worked examples** follow the example problems of J. D. Anderson, *Fundamentals of Aerodynamics*, the textbook used in MAE 3293, and keep its numbering. Their problem statements are written in our own words; the textbook's text is not reproduced.
 - Embedded fonts: Source Serif 4 and Source Sans 3 (SIL Open Font License 1.1). Equations typeset with MathJax (Apache 2.0).
 
 ## Suggested attribution

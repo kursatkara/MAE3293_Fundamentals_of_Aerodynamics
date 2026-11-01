@@ -70,7 +70,7 @@
         <div class="lab" id="sb">
           <div class="labhead"><span class="eyebrow">Example 9.1 · Sonic boom</span></div>
           <div class="labmain" style="grid-column:1/-1">
-            <p class="problem">A supersonic airplane flies at Mach <input type="number" id="sb_M" value="2" min="1.01" max="10" step="0.1" aria-label="Flight Mach number"> at an altitude of <input type="number" id="sb_z" value="16" min="0.1" max="40" step="0.5" aria-label="Altitude in km"> km. Assume the shock pattern quickly coalesces into a Mach wave that reaches the ground behind the airplane. At the instant a bystander hears the boom, how far ahead of the bystander is the airplane?</p>
+            <p class="problem">An airplane flies supersonically at Mach <input type="number" id="sb_M" value="2" min="1.01" max="10" step="0.1" aria-label="Flight Mach number">, <input type="number" id="sb_z" value="16" min="0.1" max="40" step="0.5" aria-label="Altitude in km"> km above the ground. Assume that its shock system merges quickly into a single Mach wave that sweeps the ground behind it. At the moment a person on the ground hears the boom, how far ahead of that person is the airplane?</p>
             <div class="cols2">
               <div class="fig narrow"><svg id="sb_fig" viewBox="0 0 440 210" role="img" aria-label="Airplane, Mach wave and bystander"></svg></div>
               <div class="readout" id="sb_out"></div>
@@ -191,25 +191,25 @@
           <button role="tab" aria-selected="false" data-ex="e5">Ex 9.5 · Inlets</button>
         </div>
         <div data-expanel="e2" class="prose" style="max-width:none">
-          <p class="problem">A supersonic flow with M<sub>1</sub> = <input type="number" id="e2_M" value="2" min="1.05" step="0.1" aria-label="M1">, p<sub>1</sub> = <input type="number" id="e2_p" value="1" min="0.001" step="0.1" aria-label="p1 in atm"> atm and T<sub>1</sub> = <input type="number" id="e2_T" value="288" min="1" step="1" aria-label="T1 in K"> K is deflected at a compression corner through θ = <input type="number" id="e2_th" value="20" min="0" max="50" step="0.5" aria-label="theta in degrees">°. Find M, p, T, p<sub>0</sub> and T<sub>0</sub> behind the oblique shock.</p>
+          <p class="problem">Air at M<sub>1</sub> = <input type="number" id="e2_M" value="2" min="1.05" step="0.1" aria-label="M1">, p<sub>1</sub> = <input type="number" id="e2_p" value="1" min="0.001" step="0.1" aria-label="p1 in atm"> atm and T<sub>1</sub> = <input type="number" id="e2_T" value="288" min="1" step="1" aria-label="T1 in K"> K is turned through θ = <input type="number" id="e2_th" value="20" min="0" max="50" step="0.5" aria-label="theta in degrees">° by a compression corner. Find M, p, T, p<sub>0</sub> and T<sub>0</sub> behind the resulting oblique shock.</p>
           <div id="e2_ban"></div>
           <div class="tblwrap"><table id="e2_tab"></table></div>
           <p class="exnote"><b>Caution.</b> The p<sub>0,2</sub>/p<sub>1</sub> column in Appendix B cannot be used for an oblique shock. It is computed from Eq. (8.80) with the actual downstream Mach number of a normal shock, not the normal component M<sub>n,2</sub>. Use p<sub>0,2</sub> = (p<sub>0,2</sub>/p<sub>0,1</sub>)(p<sub>0,1</sub>/p<sub>1</sub>)p<sub>1</sub>, as in the table.</p>
         </div>
         <div data-expanel="e3" class="prose" style="max-width:none" hidden>
-          <p class="problem">An oblique shock has a wave angle β = <input type="number" id="e3_b" value="30" min="1" max="90" step="0.5" aria-label="beta in degrees">°. The upstream Mach number is M<sub>1</sub> = <input type="number" id="e3_M" value="2.4" min="1.05" step="0.1" aria-label="M1">. Find the deflection angle, the pressure and temperature ratios, and M<sub>2</sub>.</p>
+          <p class="problem">For an oblique shock with wave angle β = <input type="number" id="e3_b" value="30" min="1" max="90" step="0.5" aria-label="beta in degrees">° in a flow at M<sub>1</sub> = <input type="number" id="e3_M" value="2.4" min="1.05" step="0.1" aria-label="M1">, find the flow deflection angle, the pressure and temperature ratios across the shock, and M<sub>2</sub>.</p>
           <div id="e3_ban"></div>
           <div class="tblwrap"><table id="e3_tab"></table></div>
           <p class="exnote">The chart reading θ ≈ 6.5° is the main source of the difference in M<sub>2</sub>: with the exact θ = 6.72°, sin(β − θ) is smaller and M<sub>2</sub> = 2.13.</p>
         </div>
         <div data-expanel="e4" class="prose" style="max-width:none" hidden>
-          <p class="problem">An oblique shock has β = <input type="number" id="e4_b" value="35" min="1" max="90" step="0.5" aria-label="beta in degrees">° and a pressure ratio p<sub>2</sub>/p<sub>1</sub> = <input type="number" id="e4_p" value="3" min="1.0001" step="0.1" aria-label="pressure ratio">. Find the upstream Mach number.</p>
+          <p class="problem">An oblique shock with β = <input type="number" id="e4_b" value="35" min="1" max="90" step="0.5" aria-label="beta in degrees">° raises the pressure by p<sub>2</sub>/p<sub>1</sub> = <input type="number" id="e4_p" value="3" min="1.0001" step="0.1" aria-label="pressure ratio">. What is the upstream Mach number?</p>
           <div id="e4_ban"></div>
           <div class="tblwrap"><table id="e4_tab"></table></div>
           <p class="exnote">Invert (9.16) directly: \(M_{n,1}^2 = 1+\frac{\gamma+1}{2\gamma}\left(\frac{p_2}{p_1}-1\right)\). No table interpolation is needed.</p>
         </div>
         <div data-expanel="e5" class="prose" style="max-width:none" hidden>
-          <p class="problem">A Mach <input type="number" id="e5_M" value="3" min="1.05" step="0.1" aria-label="M1"> flow must be slowed to subsonic speed. (1) Pass it through a single normal shock. (2) First pass it through an oblique shock with β = <input type="number" id="e5_b" value="40" min="1" max="90" step="0.5" aria-label="beta in degrees">°, then through a normal shock. Compare the final total pressures.</p>
+          <p class="problem">A flow at Mach <input type="number" id="e5_M" value="3" min="1.05" step="0.1" aria-label="M1"> has to be brought to subsonic speed. Compare the final total pressure for two ways of doing it: (1) a single normal shock, and (2) an oblique shock with β = <input type="number" id="e5_b" value="40" min="1" max="90" step="0.5" aria-label="beta in degrees">° followed by a normal shock.</p>
           <div id="e5_ban"></div>
           <div class="tblwrap"><table id="e5_tab"></table></div>
           <div class="cols2">
@@ -308,7 +308,7 @@
         <div class="lab" id="e9">
           <div class="labhead"><span class="eyebrow">Example 9.9 · Expansion around a sharp corner</span></div>
           <div class="labmain" style="grid-column:1/-1">
-            <p class="problem">A flow with M<sub>1</sub> = <input type="number" id="e9_M" value="1.5" min="1" step="0.1" aria-label="M1">, p<sub>1</sub> = <input type="number" id="e9_p" value="1" min="0.001" step="0.1" aria-label="p1 in atm"> atm and T<sub>1</sub> = <input type="number" id="e9_T" value="288" min="1" step="1" aria-label="T1 in K"> K expands around a sharp corner through θ = <input type="number" id="e9_th" value="15" min="0" max="100" step="0.5" aria-label="theta in degrees">°. Find M<sub>2</sub>, p<sub>2</sub>, T<sub>2</sub>, p<sub>0,2</sub>, T<sub>0,2</sub>, and the angles of the forward and rearward Mach lines relative to the upstream flow.</p>
+            <p class="problem">Air at M<sub>1</sub> = <input type="number" id="e9_M" value="1.5" min="1" step="0.1" aria-label="M1">, p<sub>1</sub> = <input type="number" id="e9_p" value="1" min="0.001" step="0.1" aria-label="p1 in atm"> atm and T<sub>1</sub> = <input type="number" id="e9_T" value="288" min="1" step="1" aria-label="T1 in K"> K expands around a sharp convex corner that turns it through θ = <input type="number" id="e9_th" value="15" min="0" max="100" step="0.5" aria-label="theta in degrees">°. Find M<sub>2</sub>, p<sub>2</sub>, T<sub>2</sub>, p<sub>0,2</sub> and T<sub>0,2</sub>, and the angles that the forward and rearward Mach lines make with the upstream flow direction.</p>
             <div id="e9_ban"></div>
             <div class="tblwrap"><table id="e9_tab"></table></div>
             <p class="exnote">The rearward Mach line sits at μ<sub>2</sub> to the downstream flow, which is itself turned θ down, so it makes μ<sub>2</sub> − θ with the upstream direction. The notes list T<sub>0</sub> in atm; the unit is K.</p>
