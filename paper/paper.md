@@ -64,6 +64,6 @@ ChatGPT (OpenAI) and Gemini (Google) were used in 2025 for the first calculators
 
 # Acknowledgements
 
-During his service on the AIAA Applied Aerodynamics Technical Committee and its Education Subcommittee from 2012 to 2021, the author benefited from discussions with colleagues about using animations, scripts, and calculators to make aerodynamics more accessible and interactive for students of all ages. He particularly thanks Brian McGrath (Johns Hopkins University Applied Physics Laboratory) for sharing his ideas and collection of publicly available scripts and animations. The author also thanks Sabit Ekin, Director of the Generative AI Literacy Initiative at the Texas A&M Institute of Data Science, for valuable discussions and helpful suggestions. This work received no external funding.
+The author thanks colleagues on the AIAA Applied Aerodynamics Technical Committee and its Education Subcommittee (2012–2021) for discussions on making aerodynamics more accessible through animations, scripts, and calculators; Brian McGrath (Johns Hopkins University Applied Physics Laboratory) for sharing his ideas and collection of publicly available scripts and animations; and Sabit Ekin (Texas A&M Institute of Data Science) for valuable discussions and helpful suggestions. This work received no external funding.
 
 # References
