@@ -1,0 +1,29 @@
+name: Build and check
+
+# Runs the repository's checks on every pull request and on master:
+# the build, a test that the committed pages match the sources, the
+# numerical checks (tools/check-tables.js) and the browser audit
+# (tools/audit-pages.js).
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Install Playwright and Chromium
+        run: |
+          npm install --no-save playwright@1.63.0
+          npx playwright install --with-deps chromium
+      - run: npm run build
+      - name: Committed pages match the sources
+        run: git diff --exit-code -- index.html lessons calculators
+      - run: npm run check

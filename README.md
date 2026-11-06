@@ -17,6 +17,18 @@ Each lesson pairs the derivations with figures computed live from the exact rela
 
 The [calculators](https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/#calculators) on the same site replace the tables in Anderson’s appendices: [isentropic flow](https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/calculators/isentropic-flow.html), [normal shock](https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/calculators/normal-shock.html), [oblique shock](https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/calculators/oblique-shock.html), [Prandtl–Meyer expansion](https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/calculators/prandtl-meyer-expansion.html), and [supersonic airfoils](https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/calculators/supersonic-airfoils.html). They replace the earlier Compressible Aerodynamics Calculator site, whose pages now forward here.
 
+## Using the lessons in a course
+
+Students need only a web browser: no programming, installation, or account.
+
+- **Link** to the lessons and calculators on the live site.
+- **Download** any page (in the browser, *Save Page As…*, or from `lessons/` and `calculators/` in this repository). Each page is one HTML file with its fonts and equations embedded, so it works offline and can be uploaded as a file to a learning management system such as Canvas.
+- **Cite or archive a fixed version** by its Zenodo DOI (see *How to cite*).
+
+The lessons follow J. D. Anderson, *Fundamentals of Aerodynamics*, Chapters 7–10, and keep its section and example numbering, so they can be used alongside that textbook. Each page states the models it uses (calorically perfect gas, inviscid two-dimensional waves, quasi-one-dimensional duct flow) and labels features that are drawn schematically.
+
+To change the content or add a chapter, fork the repository and follow *Building* below and [AGENTS.md](AGENTS.md).
+
 ## Repository layout
 
 ```
@@ -45,7 +57,20 @@ npm run previews       # regenerates assets/*-preview.png
 npm run dev            # quick build that loads MathJax and fonts from CDNs
 ```
 
-Edit the files in `src/`, never the built pages, then run the build and commit both. See [AGENTS.md](AGENTS.md) for conventions and for adding a chapter.
+Edit the files in `src/`, never the built pages, then run the build and commit both.
+
+## What the checks cover
+
+`npm run check` runs two scripts; both exit with an error on any failure. Since November 2026 they also run on every pull request (`.github/workflows/checks.yml`), together with a test that the committed pages match the sources.
+
+- **`tools/check-tables.js`** (numerical checks of `src/shared/`):
+  - 41 reference values for γ = 1.4 from Anderson's Appendices A–D (isentropic flow, normal shocks, Prandtl–Meyer function, standard atmosphere) and from worked examples in Chapters 8 and 10, each within a tolerance close to the printed precision;
+  - the oblique-shock solver against classical values for air: θ_max = 22.97° at β = 64.67° for M₁ = 2, θ_max → 45.58° as M₁ → ∞, and β → μ (weak) and β → 90° (strong) as θ → 0;
+  - the numerical (bisection) oblique-shock solution against the closed-form solution of vonEggers Rudd and Lewis (1998) on both branches, for γ = 1.1, 1.3, 1.4, 1.67, M₁ = 1.05–11 in steps of 0.05, and θ = 0.05–0.9999 θ_max: 11,200 solutions, tolerance 10⁻⁶°, with a round trip θ(β) to 10⁻⁹°;
+  - mass and momentum (Anderson Eq. 10.5) balances on the Chapter 10 nozzle solutions for four exit-area ratios and seven back pressures: mass-flow spread below 10⁻⁶ and momentum residual below 10⁻⁴, relative.
+- **`tools/audit-pages.js`** (browser audit with Playwright): loads every page at its default inputs, at 1300 px in the light theme and 390 px in the dark theme, and fails on script errors, network requests, duplicate ids, unlabeled inputs, `NaN` in a figure, heading skips, horizontal overflow, and links to missing course pages or assets.
+
+These checks show agreement with published values and between two solution methods over the sampled conditions. They do not validate the physical models themselves, test inputs other than the defaults in the browser, or check explanatory text, which is reviewed by the instructor. See [AGENTS.md](AGENTS.md) for conventions and for adding a chapter.
 
 ## License
 
