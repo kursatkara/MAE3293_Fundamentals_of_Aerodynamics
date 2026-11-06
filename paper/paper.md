@@ -31,7 +31,7 @@ A supersonic stream turned away from itself expands through a fan of Mach waves.
 
 Students should be able to (i) decide when a flow must be treated as compressible and apply the isentropic relations; (ii) compute the changes across a normal shock and interpret Pitot-tube measurements; (iii) solve oblique-shock and expansion problems and determine the lift and wave drag of supersonic airfoils; and (iv) predict the flow regime in a converging–diverging nozzle and explain wind-tunnel start-up.
 
-| Chapter | Lesson | Interactive figures | Worked problems |
+| Ch. | Lesson | Interactive figures | Worked problems |
 |:--|:--|:-:|:-:|
 | 7 | Compressible flow: preliminary aspects | 3 | 6 |
 | 8 | Normal shock waves | 5 | 16 |
