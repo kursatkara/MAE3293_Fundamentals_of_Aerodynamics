@@ -91,7 +91,7 @@ These checks show agreement with published values and between two solution metho
 
 Kara, K. (2026). *MAE 3293 Fundamentals of Aerodynamics: Interactive Lessons.* Zenodo. https://doi.org/10.5281/zenodo.23858924
 
-That DOI always resolves to the latest archived version. To cite an exact version, use the DOI of its release on Zenodo; for example, v1.0.0 is https://doi.org/10.5281/zenodo.23858925. GitHub's **Cite this repository** button (from `CITATION.cff`) gives the same citation in other formats.
+That DOI always resolves to the latest archived version. To cite an exact version, use the DOI of its release on Zenodo; for example, v1.1.0 is https://doi.org/10.5281/zenodo.24021064 and v1.0.0 is https://doi.org/10.5281/zenodo.23858925. GitHub's **Cite this repository** button (from `CITATION.cff`) gives the same citation in other formats.
 
 ## Acknowledgment
 
