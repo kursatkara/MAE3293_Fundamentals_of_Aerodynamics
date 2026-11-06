@@ -15,7 +15,7 @@ Each lesson pairs the derivations with figures computed live from the exact rela
 | 9 | [Oblique Shock and Expansion Waves](https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/lessons/oblique-shock-expansion-waves.html): Mach waves, the θ–β–M relation, shock reflection and intersection, Prandtl–Meyer expansion and isentropic compression, and shock-expansion theory for flat-plate, wedge, and diamond airfoils |
 | 10 | [Nozzles, Diffusers, and Wind Tunnels](https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/lessons/nozzles-diffusers-wind-tunnels.html): quasi-one-dimensional flow, the area–velocity and area–Mach relations, choked flow, converging-diverging nozzles with normal shocks inside or at the exit, rocket thrust, diffusers, and supersonic wind-tunnel start-up |
 
-The [calculators](https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/#calculators) on the same site replace the tables in Anderson’s appendices: [isentropic flow](https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/calculators/isentropic-flow.html), [normal shock](https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/calculators/normal-shock.html), [oblique shock](https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/calculators/oblique-shock.html), [Prandtl–Meyer expansion](https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/calculators/prandtl-meyer-expansion.html), and [supersonic airfoils](https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/calculators/supersonic-airfoils.html). They replace the earlier Compressible Aerodynamics Calculator site, whose pages now forward here.
+The [calculators](https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/#calculators) on the same site evaluate the isentropic, normal-shock and Prandtl–Meyer relations that Anderson tabulates in Appendices A–C, solve the oblique-shock θ–β–M relation that the textbook gives as a chart, and apply shock-expansion theory to supersonic airfoils: [isentropic flow](https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/calculators/isentropic-flow.html), [normal shock](https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/calculators/normal-shock.html), [oblique shock](https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/calculators/oblique-shock.html), [Prandtl–Meyer expansion](https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/calculators/prandtl-meyer-expansion.html), and [supersonic airfoils](https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/calculators/supersonic-airfoils.html). They replace the earlier Compressible Aerodynamics Calculator site, whose pages now forward here.
 
 ## Using the lessons in a course
 
@@ -51,6 +51,8 @@ Requires Node.js 18 or later; the audit and preview scripts also need Playwright
 
 ```
 npm install            # MathJax and the two font packages
+npm install --no-save playwright@1.63.0   # for the browser audit and previews
+npx playwright install --with-deps chromium
 npm run build          # writes index.html and lessons/*.html
 npm run check          # table and conservation checks, then the browser audit
 npm run previews       # regenerates assets/*-preview.png
@@ -71,6 +73,12 @@ Edit the files in `src/`, never the built pages, then run the build and commit b
 - **`tools/audit-pages.js`** (browser audit with Playwright): loads every page at its default inputs, at 1300 px in the light theme and 390 px in the dark theme, and fails on script errors, network requests, duplicate ids, unlabeled inputs, `NaN` in a figure, heading skips, horizontal overflow, and links to missing course pages or assets.
 
 These checks show agreement with published values and between two solution methods over the sampled conditions. They do not validate the physical models themselves, test inputs other than the defaults in the browser, or check explanatory text, which is reviewed by the instructor. See [AGENTS.md](AGENTS.md) for conventions and for adding a chapter.
+
+## Contributing, reporting problems, and getting help
+
+- **Report a problem or ask a question:** open an [issue](https://github.com/kursatkara/MAE3293_Fundamentals_of_Aerodynamics/issues). For an error in a lesson or calculator, give the page, the inputs, what you expected, and what you saw (a screenshot helps).
+- **Contribute a correction or a new chapter:** fork the repository, make the change in `src/` following [AGENTS.md](AGENTS.md), run `npm run build` and `npm run check`, and open a pull request. The same checks run automatically on every pull request.
+- **Adapt it for your own course:** see *Using the lessons in a course* above; questions about adapting it are welcome as issues.
 
 ## License
 
