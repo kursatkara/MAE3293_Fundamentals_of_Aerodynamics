@@ -17,6 +17,18 @@ Each lesson pairs the derivations with figures computed live from the exact rela
 
 The [calculators](https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/#calculators) on the same site replace the tables in Anderson’s appendices: [isentropic flow](https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/calculators/isentropic-flow.html), [normal shock](https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/calculators/normal-shock.html), [oblique shock](https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/calculators/oblique-shock.html), [Prandtl–Meyer expansion](https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/calculators/prandtl-meyer-expansion.html), and [supersonic airfoils](https://kursatkara.github.io/MAE3293_Fundamentals_of_Aerodynamics/calculators/supersonic-airfoils.html). They replace the earlier Compressible Aerodynamics Calculator site, whose pages now forward here.
 
+## Using the lessons in a course
+
+Students need only a web browser: no programming, installation, or account.
+
+- **Link** to the lessons and calculators on the live site.
+- **Download** any page (in the browser, *Save Page As…*, or from `lessons/` and `calculators/` in this repository). Each page is one HTML file with its fonts and equations embedded, so it works offline and can be uploaded as a file to a learning management system such as Canvas.
+- **Cite or archive a fixed version** by its Zenodo DOI (see *How to cite*).
+
+The lessons follow J. D. Anderson, *Fundamentals of Aerodynamics*, Chapters 7–10, and keep its section and example numbering, so they can be used alongside that textbook. Each page states the models it uses (calorically perfect gas, inviscid two-dimensional waves, quasi-one-dimensional duct flow) and labels features that are drawn schematically.
+
+To change the content or add a chapter, fork the repository and follow *Building* below and [AGENTS.md](AGENTS.md).
+
 ## Repository layout
 
 ```

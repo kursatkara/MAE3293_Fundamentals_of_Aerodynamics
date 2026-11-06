@@ -1,0 +1,29 @@
+name: JOSE paper draft
+
+# Builds the JOSE paper (paper/paper.md) with the Open Journals tools and
+# uploads the PDF as an artifact of the workflow run.
+on:
+  push:
+    paths:
+      - paper/**
+      - .github/workflows/draft-pdf.yml
+  pull_request:
+    paths:
+      - paper/**
+      - .github/workflows/draft-pdf.yml
+
+jobs:
+  paper:
+    runs-on: ubuntu-latest
+    name: Paper draft
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build draft PDF
+        uses: openjournals/openjournals-draft-action@master
+        with:
+          journal: jose
+          paper-path: paper/paper.md
+      - uses: actions/upload-artifact@v4
+        with:
+          name: paper
+          path: paper/paper.pdf
