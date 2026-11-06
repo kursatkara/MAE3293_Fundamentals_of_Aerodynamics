@@ -57,7 +57,20 @@ npm run previews       # regenerates assets/*-preview.png
 npm run dev            # quick build that loads MathJax and fonts from CDNs
 ```
 
-Edit the files in `src/`, never the built pages, then run the build and commit both. See [AGENTS.md](AGENTS.md) for conventions and for adding a chapter.
+Edit the files in `src/`, never the built pages, then run the build and commit both.
+
+## What the checks cover
+
+`npm run check` runs two scripts; both exit with an error on any failure. Since November 2026 they also run on every pull request (`.github/workflows/checks.yml`), together with a test that the committed pages match the sources.
+
+- **`tools/check-tables.js`** (numerical checks of `src/shared/`):
+  - 41 reference values for γ = 1.4 from Anderson's Appendices A–D (isentropic flow, normal shocks, Prandtl–Meyer function, standard atmosphere) and from worked examples in Chapters 8 and 10, each within a tolerance close to the printed precision;
+  - the oblique-shock solver against classical values for air: θ_max = 22.97° at β = 64.67° for M₁ = 2, θ_max → 45.58° as M₁ → ∞, and β → μ (weak) and β → 90° (strong) as θ → 0;
+  - the numerical (bisection) oblique-shock solution against the closed-form solution of vonEggers Rudd and Lewis (1998) on both branches, for γ = 1.1, 1.3, 1.4, 1.67, M₁ = 1.05–11 in steps of 0.05, and θ = 0.05–0.9999 θ_max: 11,200 solutions, tolerance 10⁻⁶°, with a round trip θ(β) to 10⁻⁹°;
+  - mass and momentum (Anderson Eq. 10.5) balances on the Chapter 10 nozzle solutions for four exit-area ratios and seven back pressures: mass-flow spread below 10⁻⁶ and momentum residual below 10⁻⁴, relative.
+- **`tools/audit-pages.js`** (browser audit with Playwright): loads every page at its default inputs, at 1300 px in the light theme and 390 px in the dark theme, and fails on script errors, network requests, duplicate ids, unlabeled inputs, `NaN` in a figure, heading skips, horizontal overflow, and links to missing course pages or assets.
+
+These checks show agreement with published values and between two solution methods over the sampled conditions. They do not validate the physical models themselves, test inputs other than the defaults in the browser, or check explanatory text, which is reviewed by the instructor. See [AGENTS.md](AGENTS.md) for conventions and for adding a chapter.
 
 ## License
 
