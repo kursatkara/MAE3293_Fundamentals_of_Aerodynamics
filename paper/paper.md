@@ -38,7 +38,7 @@ Students should be able to (i) decide when a flow must be treated as compressibl
 | 9 | Oblique shock and expansion waves | 8 | 6 |
 | 10 | Nozzles, diffusers and wind tunnels | 5 | 5 |
 
-: Content of the lessons. Chapter numbers are those of the sixth edition of Anderson [@Anderson2017].
+: Content of the lessons. Chapter numbers are those of the sixth edition of Anderson's textbook [@Anderson2017].
 
 The isentropic, normal-shock, and Prandtl–Meyer calculators evaluate directly the relations that the textbook tabulates in Appendices A–C. The oblique-shock calculator solves the $\theta$–$\beta$–$M$ relation, which the textbook presents as a chart, and shows three ways of finding the shock angle: reading the chart, bisection, and a closed-form solution [@voneggers1998comparison]. The airfoil calculator applies shock-expansion theory to flat-plate, wedge, and diamond airfoils.
 
